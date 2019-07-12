@@ -1,17 +1,16 @@
 package com.tennetcn.free.authority.mapper;
 
-import com.tennetcn.free.authority.model.Department;
-import com.tennetcn.free.authority.model.Menu;
+import com.tennetcn.free.authority.model.RoleMenu;
 import com.tennetcn.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author chfree
  * @email chfree001@gmail.com
- * @create 2019-07-11 12:42
+ * @create 2019-07-11 22:49
  * @comment
  */
 
 @Mapper
-public interface IMenuMapper extends IMapper<Menu> {
+public interface IRoleMenuMapper  extends IMapper<RoleMenu> {
 }

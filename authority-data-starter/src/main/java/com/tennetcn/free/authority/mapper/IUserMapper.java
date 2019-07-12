@@ -4,6 +4,8 @@ import com.tennetcn.free.authority.model.User;
 import com.tennetcn.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -13,4 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IUserMapper extends IMapper<User> {
+    List<User> queryListMPByIds(List<String> ids);
+
+    String getLoginUserNamesByIds(List<String> ids);
 }

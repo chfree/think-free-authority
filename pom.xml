@@ -10,6 +10,8 @@
     <version>0.0.1</version>
     <modules>
         <module>authority-data-starter</module>
+        <module>authority-web-starter</module>
+        <module>authority-web-starter-run</module>
     </modules>
 
     <parent>

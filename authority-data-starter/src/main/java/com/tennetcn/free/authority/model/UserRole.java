@@ -1,10 +1,7 @@
 package com.tennetcn.free.authority.model;
 
 import com.tennetcn.free.data.message.ModelBase;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
@@ -24,6 +21,7 @@ public class UserRole extends ModelBase {
     //主键
     @Id
     @Column(name="id")
+    @NonNull
     private String id;
 
     //创建时间

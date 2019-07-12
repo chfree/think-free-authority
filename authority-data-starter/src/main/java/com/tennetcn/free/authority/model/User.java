@@ -4,6 +4,7 @@ import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.apache.ibatis.type.Alias;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Accessors
 @Entity
+@Alias("user")
 @Table(name="base_authority_user")
 public class User  extends ModelBase {
     @Id
@@ -25,9 +27,12 @@ public class User  extends ModelBase {
     @NonNull
     private String name;
 
-    @Column(name="login_code")
+    @Column(name="account")
     @NonNull
-    private String loginCode;
+    private String account;
+
+    @Column(name="password")
+    private String password;
 
     @Column(name="mark_code")
     private String markCode;
@@ -71,4 +76,14 @@ public class User  extends ModelBase {
 
     @Column(name="business_id")
     private String businessId;
+
+    @Column(name="unique_mark")
+    private String uniqueMark;
+
+    @Column(name="is_login")
+    private String isLogin;
+
+    @Column(name="is_locked")
+    private String isLocked;
+
 }

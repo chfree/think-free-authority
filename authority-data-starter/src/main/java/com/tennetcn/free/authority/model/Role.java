@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.model;
 
+import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -14,7 +15,7 @@ import java.util.Date;
 @Accessors
 @Entity
 @Table(name="base_authority_role")
-public class Role {
+public class Role extends ModelBase {
     //角色id
     @Id
     @Column(name="roleId")

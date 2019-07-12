@@ -1,10 +1,7 @@
 package com.tennetcn.free.authority.model;
 
 import com.tennetcn.free.data.message.ModelBase;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
@@ -31,6 +28,7 @@ public class Department extends ModelBase {
     //部门id
     @Id
     @Column(name="id")
+    @NonNull
     private String id;
 
     //部门全称
