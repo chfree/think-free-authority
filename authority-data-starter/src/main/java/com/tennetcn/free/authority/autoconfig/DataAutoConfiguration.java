@@ -1,7 +1,11 @@
 package com.tennetcn.free.authority.autoconfig;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.Alias;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.annotation.TypeAlias;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -11,9 +15,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @comment
  */
 
-@MapperScan(value = "com.tennetcn.free.authority")
-@Alias("com.tennetcn.free.authority.model")
+@MapperScan(value = "com.tennetcn.free.authority.mapper")
 @ImportResource(locations={"data-starter-config.xml"})
 public class DataAutoConfiguration {
-
 }
