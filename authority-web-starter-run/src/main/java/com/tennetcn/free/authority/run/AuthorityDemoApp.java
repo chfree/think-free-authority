@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.run;
 
+import com.tennetcn.free.swagger.annotations.EnableThinkSwagger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author chfree
@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 
 @SpringBootApplication
-@EnableSwagger2
+@EnableThinkSwagger
 public class AuthorityDemoApp {
     public static void main(String[] args) {
         SpringApplication.run(AuthorityDemoApp.class,args);

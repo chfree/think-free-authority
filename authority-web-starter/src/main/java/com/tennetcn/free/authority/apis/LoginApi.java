@@ -1,18 +1,20 @@
 package com.tennetcn.free.authority.apis;
 
-import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.digest.MD5;
-import com.tennetcn.free.authority.model.User;
+import com.tennetcn.free.authority.apimodel.login.LoginReq;
 import com.tennetcn.free.authority.service.IUserService;
-import com.tennetcn.free.data.message.DaoBaseException;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import com.tennetcn.free.web.webapi.FirstApi;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,17 +26,25 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping(produces = "application/json;charset=utf-8")
+@Api(tags="登陆模块",value ="登陆相关的操作" )
 public class LoginApi extends FirstApi {
 
     @Autowired
     private IUserService userService;
 
+    @ApiOperation(value = "登陆1")
     @GetMapping("/login")
-    public BaseResponse login(String username, String password){
+    public BaseResponse login(@Valid LoginReq loginReq){
         BaseResponse response = new BaseResponse();
-        response.put("result",userService.queryBylogin(username,password));
+        response.put("result",userService.queryBylogin(loginReq.getUsername(),loginReq.getPassword()));
         response.put("token", IdUtil.simpleUUID());
 
         return response;
+    }
+
+    @GetMapping("/logout")
+    public BaseResponse logout(){
+        return new BaseResponse();
     }
 }
