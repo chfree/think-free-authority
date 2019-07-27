@@ -1,9 +1,7 @@
 package com.tennetcn.free.authority.apimodel.login;
 
-import io.swagger.annotations.ApiParam;
 import lombok.Data;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 /**

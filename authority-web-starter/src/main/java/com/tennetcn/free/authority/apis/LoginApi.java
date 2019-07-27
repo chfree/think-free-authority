@@ -26,15 +26,15 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/api/v1/authority/login/",produces = "application/json;charset=utf-8")
 @Api(tags="登陆模块",value ="登陆相关的操作" )
 public class LoginApi extends FirstApi {
 
     @Autowired
     private IUserService userService;
 
-    @ApiOperation(value = "登陆1")
-    @GetMapping("/login")
+    @ApiOperation(value = "登陆")
+    @GetMapping("login")
     public BaseResponse login(@Valid LoginReq loginReq){
         BaseResponse response = new BaseResponse();
         response.put("result",userService.queryBylogin(loginReq.getUsername(),loginReq.getPassword()));
@@ -43,7 +43,7 @@ public class LoginApi extends FirstApi {
         return response;
     }
 
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public BaseResponse logout(){
         return new BaseResponse();
     }
