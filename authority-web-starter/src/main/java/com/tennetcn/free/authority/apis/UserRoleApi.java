@@ -1,7 +1,9 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.authority.apimodel.user.SaveUserReq;
-import com.tennetcn.free.authority.apimodel.user.UserListReq;
+import com.tennetcn.free.authority.apimodel.role.RoleListReq;
+import com.tennetcn.free.authority.apimodel.role.SaveRoleReq;
+import com.tennetcn.free.authority.apimodel.userrole.SaveUserRoleReq;
+import com.tennetcn.free.authority.apimodel.userrole.UserRoleListReq;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
@@ -16,36 +18,34 @@ import javax.validation.Valid;
 /**
  * @author chfree
  * @email chfree001@gmail.com
- * @create 2019-07-12 00:03
+ * @create 2019-07-29 12:45
  * @comment
  */
-
 @RestController
-@RequestMapping(value = "/api/v1/authority/user/",produces = "application/json;charset=utf-8")
-@Api(tags="用户模块",value ="用户相关的操作" )
-public class UserApi extends FirstApi {
-
-    @ApiOperation(value = "获取用户列表")
+@RequestMapping(value = "/api/v1/authority/userRole/",produces = "application/json;charset=utf-8")
+@Api(tags="用户角色",value ="用户角色相关的操作")
+public class UserRoleApi extends FirstApi {
+    @ApiOperation(value = "获取用户角色列表")
     @GetMapping("list")
-    public BaseResponse list(@Valid UserListReq listReq){
+    public BaseResponse list(@Valid UserRoleListReq listReq){
         return null;
     }
 
-    @ApiOperation(value = "获取指定用户")
+    @ApiOperation(value = "获取指定用户角色")
     @GetMapping("get")
     public BaseResponse get(@Valid String id){
         return null;
     }
 
-    @ApiOperation(value = "删除指定用户")
+    @ApiOperation(value = "删除指定用户角色")
     @PostMapping("delete")
     public BaseResponse delete(@Valid String id){
         return null;
     }
 
-    @ApiOperation(value = "保存一个用户")
+    @ApiOperation(value = "保存一个用户角色")
     @PostMapping("save")
-    public BaseResponse save(SaveUserReq userReq){
+    public BaseResponse save(SaveUserRoleReq saveUserRoleReq){
         return new BaseResponse();
     }
 }
