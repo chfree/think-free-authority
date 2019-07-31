@@ -2,8 +2,8 @@ package com.tennetcn.free.authority.apimodel.user;
 
 import com.tennetcn.free.authority.model.User;
 import lombok.Data;
-import lombok.NonNull;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -15,14 +15,8 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class SaveUserReq extends User {
-    @Override
-    @NotBlank(message = "姓名不能为空")
-    public @NonNull String getName() {
-        return super.getName();
-    }
 
-    @Override
-    public Integer getDeleteMark() {
-        return super.getDeleteMark();
-    }
+    @Valid @NotBlank(message = "姓名不能为空")
+    private String name;
+
 }

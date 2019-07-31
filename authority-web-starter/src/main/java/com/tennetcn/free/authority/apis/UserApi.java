@@ -1,11 +1,14 @@
 package com.tennetcn.free.authority.apis;
 
+import cn.hutool.json.JSONUtil;
 import com.tennetcn.free.authority.apimodel.user.SaveUserReq;
 import com.tennetcn.free.authority.apimodel.user.UserListReq;
+import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +28,16 @@ import javax.validation.Valid;
 @Api(tags="用户模块",value ="用户相关的操作" )
 public class UserApi extends FirstApi {
 
+    @Autowired
+    private IUserService userService;
+
     @ApiOperation(value = "获取用户列表")
     @GetMapping("list")
     public BaseResponse list(@Valid UserListReq listReq){
-        return null;
+        BaseResponse response = new BaseResponse();
+        response.put("users",userService.queryList());
+
+        return response;
     }
 
     @ApiOperation(value = "获取指定用户")
@@ -45,7 +54,9 @@ public class UserApi extends FirstApi {
 
     @ApiOperation(value = "保存一个用户")
     @PostMapping("save")
-    public BaseResponse save(SaveUserReq userReq){
-        return new BaseResponse();
+    public BaseResponse save(@Valid SaveUserReq userReq){
+        BaseResponse response = new BaseResponse();
+        response.put("user",userReq);
+        return response;
     }
 }

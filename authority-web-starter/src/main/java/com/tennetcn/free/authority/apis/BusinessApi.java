@@ -38,7 +38,7 @@ public class BusinessApi extends FirstApi {
     public BusinessListResp list(@Valid BusinessListReq listReq){
         BusinessListResp resp = new BusinessListResp();
         resp.setTotalCount(businessService.queryCount());
-        resp.setBusinessList(businessService.queryList(listReq.getPagerModel()));
+        resp.setBusinessList(businessService.queryList());
 
         return resp;
     }
