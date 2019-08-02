@@ -4,6 +4,9 @@ import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import lombok.Data;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -13,5 +16,6 @@ import lombok.Data;
 
 @Data
 public class PagerReq extends BaseResponse {
-    private PagerModel pagerModel;
+    @NotNull(message = "分页信息不能为空")
+    private PagerModel pager;
 }

@@ -1,20 +1,19 @@
 package com.tennetcn.free.authority.apis;
 
+import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.business.BusinessListReq;
 import com.tennetcn.free.authority.apimodel.business.BusinessListResp;
 import com.tennetcn.free.authority.apimodel.business.SaveBusinessReq;
-import com.tennetcn.free.authority.apimodel.user.SaveUserReq;
-import com.tennetcn.free.authority.apimodel.user.UserListReq;
+import com.tennetcn.free.authority.model.Business;
 import com.tennetcn.free.authority.service.IBusinessService;
+import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,11 +33,11 @@ public class BusinessApi extends FirstApi {
     private IBusinessService businessService;
 
     @ApiOperation(value = "获取企业列表")
-    @GetMapping("list")
-    public BusinessListResp list(@Valid BusinessListReq listReq){
+    @PostMapping("list")
+    public BusinessListResp list(@RequestBody  @Valid BusinessListReq listReq){
         BusinessListResp resp = new BusinessListResp();
         resp.setTotalCount(businessService.queryCount());
-        resp.setBusinessList(businessService.queryList());
+        resp.setBusinessList(businessService.queryList(listReq.getPager()));
 
         return resp;
     }
@@ -46,7 +45,12 @@ public class BusinessApi extends FirstApi {
     @ApiOperation(value = "获取指定企业")
     @GetMapping("get")
     public BaseResponse get(@Valid String id){
-        return null;
+        BaseResponse response=new BaseResponse();
+
+        Business business = businessService.queryModel(id);
+        response.put("business",business);
+
+        return response;
     }
 
     @ApiOperation(value = "删除指定企业")
@@ -57,7 +61,18 @@ public class BusinessApi extends FirstApi {
 
     @ApiOperation(value = "保存一个企业")
     @PostMapping("save")
-    public BaseResponse save(SaveBusinessReq businessReq){
-        return new BaseResponse();
+    public BaseResponse save(@Valid SaveBusinessReq businessReq){
+        BaseResponse response = new BaseResponse();
+        if(StringUtils.isEmpty(businessReq.getId())){
+            businessReq.setId(IdUtil.randomUUID());
+            businessReq.setModelStatus(ModelStatus.add);
+        }else{
+            businessReq.setModelStatus(ModelStatus.update);
+        }
+
+        boolean result = businessService.applyChange(businessReq);
+        response.put("result",result);
+
+        return response;
     }
 }
