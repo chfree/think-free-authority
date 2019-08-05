@@ -6,6 +6,7 @@ import com.tennetcn.free.authority.apimodel.business.BusinessListResp;
 import com.tennetcn.free.authority.apimodel.business.SaveBusinessReq;
 import com.tennetcn.free.authority.model.Business;
 import com.tennetcn.free.authority.service.IBusinessService;
+import com.tennetcn.free.authority.viewmodel.BusinessSearch;
 import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import com.tennetcn.free.web.webapi.FirstApi;
@@ -49,6 +50,17 @@ public class BusinessApi extends FirstApi {
 
         Business business = businessService.queryModel(id);
         response.put("business",business);
+
+        return response;
+    }
+
+    @ApiOperation(value = "搜索企业数量")
+    @PostMapping("countSearch")
+    public BaseResponse get(BusinessSearch search){
+        BaseResponse response=new BaseResponse();
+
+        int count =  businessService.queryCountBySearch(search);
+        response.put("count",count);
 
         return response;
     }
