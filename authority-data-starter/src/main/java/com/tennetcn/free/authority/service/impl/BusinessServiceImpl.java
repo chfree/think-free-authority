@@ -5,9 +5,12 @@ import com.tennetcn.free.authority.service.IBusinessService;
 import com.tennetcn.free.authority.viewmodel.BusinessSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 /**
  * @author chfree
@@ -23,18 +26,29 @@ public class BusinessServiceImpl extends SuperService<Business> implements IBusi
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectCount().from(Business.class);
 
-        if(!StringUtils.isEmpty(search.getId())){
-            sqlExpression.andEq("id",search.getId());
-        }
-
-        if(!StringUtils.isEmpty(search.getName())){
-            sqlExpression.andEq("name",search.getName());
-        }
-
-        if(!StringUtils.isEmpty(search.getNotId())){
-            sqlExpression.andNotEq("id",search.getNotId());
-        }
+        appendExpression(sqlExpression,search);
 
         return queryCount(sqlExpression);
+    }
+
+    @Override
+    public List<Business> queryListBySearch(BusinessSearch search, PagerModel pagerModel) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.select("*")
+                     .from(Business.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryList(sqlExpression,pagerModel);
+    }
+
+    private void appendExpression(ISqlExpression sqlExpression,BusinessSearch search){
+        sqlExpression.andEqNoEmpty("id",search.getId());
+
+        sqlExpression.andEqNoEmpty("name",search.getName());
+
+        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
+
+        sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
     }
 }

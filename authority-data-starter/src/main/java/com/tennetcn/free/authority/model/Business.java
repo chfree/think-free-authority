@@ -5,6 +5,7 @@ import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
+import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class Business extends ModelBase {
     private String nature;
 
     //简称
-    @Column(name="short_name")
+    @ColumnType(column="short_name")
     private String shortName;
 
     //编码

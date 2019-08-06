@@ -16,4 +16,6 @@ public class BusinessSearch {
     private String notId;
 
     private String name;
+
+    private String likeName;
 }

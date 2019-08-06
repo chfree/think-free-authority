@@ -37,8 +37,8 @@ public class BusinessApi extends FirstApi {
     @PostMapping("list")
     public BusinessListResp list(@RequestBody  @Valid BusinessListReq listReq){
         BusinessListResp resp = new BusinessListResp();
-        resp.setTotalCount(businessService.queryCount());
-        resp.setBusinessList(businessService.queryList(listReq.getPager()));
+        resp.setTotalCount(businessService.queryCountBySearch(listReq.getSearch()));
+        resp.setBusinessList(businessService.queryListBySearch(listReq.getSearch(),listReq.getPager()));
 
         return resp;
     }
