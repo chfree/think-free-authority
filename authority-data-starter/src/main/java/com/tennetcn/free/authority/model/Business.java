@@ -5,6 +5,7 @@ import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.*;
@@ -41,7 +42,7 @@ public class Business extends ModelBase {
     private String nature;
 
     //简称
-    @ColumnType(column="short_name")
+    @ColumnType(column="short_name",jdbcType= JdbcType.VARCHAR)
     private String shortName;
 
     //编码
@@ -70,7 +71,7 @@ public class Business extends ModelBase {
     private Integer deleteMark = YesOrNoInteger.NO;
 
     //创建日期
-    @Column(name="create_date")
+    @ColumnType(column="create_date",jdbcType = JdbcType.DATETIMEOFFSET)
     private Date createDate;
 
     //创建者Id
@@ -82,7 +83,7 @@ public class Business extends ModelBase {
     private String createUserName;
 
     //修改日期
-    @Column(name="modify_date")
+    @ColumnType(column="modify_date",jdbcType = JdbcType.DATETIMEOFFSET)
     private Date modifyDate;
 
     //修改者Id

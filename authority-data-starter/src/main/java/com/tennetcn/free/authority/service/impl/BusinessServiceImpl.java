@@ -34,8 +34,7 @@ public class BusinessServiceImpl extends SuperService<Business> implements IBusi
     @Override
     public List<Business> queryListBySearch(BusinessSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("*")
-                     .from(Business.class);
+        sqlExpression.selectAllFrom(Business.class);
 
         appendExpression(sqlExpression,search);
 

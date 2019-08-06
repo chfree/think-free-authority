@@ -31,7 +31,7 @@ public class SaveBusinessReq extends Business {
 
         if(modelStatus==ModelStatus.add){
             setCreateDate(DateUtil.date());
-        }else if(modelStatus==ModelStatus.add){
+        }else if(modelStatus==ModelStatus.update){
             setModifyDate(DateUtil.date());
         }
     }
