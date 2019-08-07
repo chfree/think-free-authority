@@ -1,5 +1,8 @@
 package com.tennetcn.free.authority.model;
 
+import cn.hutool.core.date.DateUtil;
+import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
@@ -41,7 +44,7 @@ public class Role extends ModelBase {
 
     //是否删除
     @Column(name="delete_mark")
-    private Integer deleteMark;
+    private Integer deleteMark = YesOrNoInteger.NO;
 
     //标记
     @Column(name="mark_code")
@@ -50,7 +53,7 @@ public class Role extends ModelBase {
     //排序字段
     @OrderBy(value= OrderByEnum.ASC)
     @Column(name="sort_code")
-    private Integer sortCode;
+    private Integer sortCode = 1;
 
     //创建时间
     @Column(name="create_date")
@@ -83,4 +86,15 @@ public class Role extends ModelBase {
     //公司id
     @Column(name="bu_id")
     private String buId;
+
+    @Override
+    public void setModelStatus(ModelStatus modelStatus) {
+        super.setModelStatus(modelStatus);
+
+        if(modelStatus==ModelStatus.add){
+            setCreateDate(DateUtil.date());
+        }else if(modelStatus==ModelStatus.update){
+            setModifyDate(DateUtil.date());
+        }
+    }
 }

@@ -5,12 +5,12 @@ import lombok.Data;
 /**
  * @author chfree
  * @email chfree001@gmail.com
- * @create 2019-08-07 12:43
+ * @create 2019-08-07 22:30
  * @comment
  */
 
 @Data
-public class ButtonSearch {
+public class DepartmentSearch {
     private String id;
 
     private String name;
@@ -18,6 +18,4 @@ public class ButtonSearch {
     private String notId;
 
     private String likeName;
-
-    private String likeEventName;
 }

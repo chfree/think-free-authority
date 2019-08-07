@@ -1,5 +1,9 @@
 package com.tennetcn.free.authority.apimodel.button;
 
+import com.tennetcn.free.authority.message.PagerReq;
+import com.tennetcn.free.authority.viewmodel.ButtonSearch;
+import lombok.Data;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -7,5 +11,7 @@ package com.tennetcn.free.authority.apimodel.button;
  * @comment
  */
 
-public class ButtonListReq {
+@Data
+public class ButtonListReq extends PagerReq {
+    private ButtonSearch search;
 }

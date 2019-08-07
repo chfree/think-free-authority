@@ -37,7 +37,6 @@ public class LoginApi extends FirstApi {
     @GetMapping("login")
     public BaseResponse login(@Valid LoginReq loginReq){
         BaseResponse response = new BaseResponse();
-        response.put("result",userService.queryBylogin(loginReq.getUsername(),loginReq.getPassword()));
         response.put("token", IdUtil.simpleUUID());
 
         return response;

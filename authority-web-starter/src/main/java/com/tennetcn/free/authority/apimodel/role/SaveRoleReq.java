@@ -1,5 +1,10 @@
 package com.tennetcn.free.authority.apimodel.role;
 
+import com.tennetcn.free.authority.model.Role;
+import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -7,5 +12,9 @@ package com.tennetcn.free.authority.apimodel.role;
  * @comment
  */
 
-public class SaveRoleReq {
+@Data
+public class SaveRoleReq extends Role {
+
+    @NotBlank(message = "角色名称不能为空")
+    private String name;
 }

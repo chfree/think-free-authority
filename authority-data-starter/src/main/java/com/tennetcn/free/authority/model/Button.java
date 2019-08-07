@@ -1,5 +1,8 @@
 package com.tennetcn.free.authority.model;
 
+import cn.hutool.core.date.DateUtil;
+import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
@@ -56,11 +59,11 @@ public class Button extends ModelBase {
     //排序字段
     @OrderBy(value= OrderByEnum.ASC)
     @Column(name="sort_code")
-    private Integer sortCode;
+    private Integer sortCode = 1;
 
     //是否删除
     @Column(name="delete_mark")
-    private Integer deleteMark;
+    private Integer deleteMark = YesOrNoInteger.NO;
 
     //创建日期
     @Column(name="create_date")
@@ -90,5 +93,14 @@ public class Button extends ModelBase {
     @Column(name="comments")
     private String comments;
 
+    @Override
+    public void setModelStatus(ModelStatus modelStatus) {
+        super.setModelStatus(modelStatus);
 
+        if(modelStatus==ModelStatus.add){
+            setCreateDate(DateUtil.date());
+        }else if(modelStatus==ModelStatus.update){
+            setModifyDate(DateUtil.date());
+        }
+    }
 }

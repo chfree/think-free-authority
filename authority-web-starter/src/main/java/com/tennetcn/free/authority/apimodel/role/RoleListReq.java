@@ -1,5 +1,10 @@
 package com.tennetcn.free.authority.apimodel.role;
 
+import com.tennetcn.free.authority.message.PagerReq;
+import com.tennetcn.free.authority.viewmodel.ButtonSearch;
+import com.tennetcn.free.authority.viewmodel.RoleSearch;
+import lombok.Data;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -7,5 +12,7 @@ package com.tennetcn.free.authority.apimodel.role;
  * @comment
  */
 
-public class RoleListReq {
+@Data
+public class RoleListReq extends PagerReq {
+    private RoleSearch search;
 }
