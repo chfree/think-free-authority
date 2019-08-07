@@ -18,17 +18,17 @@ import java.util.Date;
 public class Role extends ModelBase {
     //角色id
     @Id
-    @Column(name="roleId")
+    @Column(name="id")
     @NonNull
-    private String roleId;
+    private String id;
 
     //角色名称
-    @Column(name="roleName")
+    @Column(name="role_name")
     @NonNull
     private String roleName;
 
     //角色与逻辑代码的标记
-    @Column(name="roleMark")
+    @Column(name="role_nark")
     private String roleMark;
 
     //说明
@@ -39,46 +39,41 @@ public class Role extends ModelBase {
     @Column(name="level")
     private Integer level;
 
-    //父代id
-    @Column(name="parentId")
-    private String parentId;
-
-
     //是否删除
-    @Column(name="deleteMark")
+    @Column(name="delete_mark")
     private Integer deleteMark;
 
     //标记
-    @Column(name="markCode")
+    @Column(name="mark_code")
     private String markCode;
 
     //排序字段
     @OrderBy(value= OrderByEnum.ASC)
-    @Column(name="sortCode")
+    @Column(name="sort_code")
     private Integer sortCode;
 
     //创建时间
-    @Column(name="createDate")
+    @Column(name="create_date")
     private Date createDate;
 
     //创建人id
-    @Column(name="createUserId")
+    @Column(name="create_user_id")
     private String createUserId;
 
     //创建人名称
-    @Column(name="createUserName")
+    @Column(name="create_user_name")
     private String createUserName;
 
     //修改时间
-    @Column(name="modifyDate")
+    @Column(name="modify_date")
     private Date modifyDate;
 
     //修改人id
-    @Column(name="modifyUserId")
+    @Column(name="modify_user_id")
     private String modifyUserId;
 
     //修改人名称
-    @Column(name="modifyUserName")
+    @Column(name="modify_user_name")
     private String modifyUserName;
 
     //备注
@@ -86,6 +81,6 @@ public class Role extends ModelBase {
     private String comments;
 
     //公司id
-    @Column(name="buId")
+    @Column(name="bu_id")
     private String buId;
 }

@@ -1,7 +1,11 @@
 package com.tennetcn.free.authority.service;
 
 import com.tennetcn.free.authority.model.Button;
+import com.tennetcn.free.authority.viewmodel.ButtonSearch;
 import com.tennetcn.free.data.dao.base.ISuperService;
+import com.tennetcn.free.data.message.PagerModel;
+
+import java.util.List;
 
 /**
  * @author chfree
@@ -11,4 +15,7 @@ import com.tennetcn.free.data.dao.base.ISuperService;
  */
 
 public interface IButtonService extends ISuperService<Button> {
+    int queryCountBySearch(ButtonSearch search);
+
+    List<Button> queryListBySearch(ButtonSearch search, PagerModel pagerModel);
 }

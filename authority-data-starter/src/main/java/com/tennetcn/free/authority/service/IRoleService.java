@@ -1,7 +1,11 @@
 package com.tennetcn.free.authority.service;
 
 import com.tennetcn.free.authority.model.Role;
+import com.tennetcn.free.authority.viewmodel.RoleSearch;
 import com.tennetcn.free.data.dao.base.ISuperService;
+import com.tennetcn.free.data.message.PagerModel;
+
+import java.util.List;
 
 /**
  * @author chfree
@@ -11,4 +15,7 @@ import com.tennetcn.free.data.dao.base.ISuperService;
  */
 
 public interface IRoleService extends ISuperService<Role> {
+    int queryCountBySearch(RoleSearch search);
+
+    List<Role> queryListBySearch(RoleSearch search, PagerModel pagerModel);
 }

@@ -1,13 +1,12 @@
 package com.tennetcn.free.authority.service.impl;
 
-import cn.hutool.crypto.SecureUtil;
-import com.tennetcn.free.authority.mapper.IUserMapper;
 import com.tennetcn.free.authority.model.User;
 import com.tennetcn.free.authority.service.IUserService;
+import com.tennetcn.free.authority.viewmodel.UserSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,28 +21,33 @@ import java.util.List;
 @Component
 public class UserServiceImpl extends SuperService<User> implements IUserService {
 
-    @Autowired
-    IUserMapper userMapper;
-
     @Override
-    public List<User> queryListMPByIds(List<String> ids) {
-        return userMapper.queryListMPByIds(ids);
+    public int queryCountBySearch(UserSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectCount().from(User.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryCount(sqlExpression);
     }
 
     @Override
-    public String getLoginUserNamesByIds(List<String> ids) {
-        return userMapper.getLoginUserNamesByIds(ids);
+    public List<User> queryListBySearch(UserSearch search, PagerModel pagerModel) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(User.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryList(sqlExpression,pagerModel);
     }
 
-    @Override
-    public Boolean queryBylogin(String username, String password) {
-        String md5Password = SecureUtil.md5(password);
-        ISqlExpression loginSql= SqlExpressionFactory.createExpression();
-        loginSql.selectCount()
-                .from(User.class)
-                .andEq("account",username)
-                .andEq("password",md5Password);
+    private void appendExpression(ISqlExpression sqlExpression, UserSearch search){
+        sqlExpression.andEqNoEmpty("id",search.getId());
 
-        return queryCount(loginSql)>0;
+        sqlExpression.andEqNoEmpty("name",search.getName());
+
+        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
+
+        sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
     }
 }
