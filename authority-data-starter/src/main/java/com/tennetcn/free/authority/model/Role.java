@@ -31,7 +31,7 @@ public class Role extends ModelBase {
     private String roleName;
 
     //角色与逻辑代码的标记
-    @Column(name="role_nark")
+    @Column(name="role_mark")
     private String roleMark;
 
     //说明

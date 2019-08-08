@@ -19,4 +19,7 @@ public class SaveUserReq extends User {
     @Valid @NotBlank(message = "姓名不能为空")
     private String name;
 
+    @Valid @NotBlank(message = "账号不能为空")
+    private String account;
+
 }

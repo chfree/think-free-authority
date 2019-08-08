@@ -34,7 +34,7 @@ public class RoleServiceImpl extends SuperService<Role> implements IRoleService 
     @Override
     public List<Role> queryListBySearch(RoleSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(Business.class);
+        sqlExpression.selectAllFrom(Role.class);
 
         appendExpression(sqlExpression,search);
 
@@ -44,10 +44,10 @@ public class RoleServiceImpl extends SuperService<Role> implements IRoleService 
     private void appendExpression(ISqlExpression sqlExpression, RoleSearch search){
         sqlExpression.andEqNoEmpty("id",search.getId());
 
-        sqlExpression.andEqNoEmpty("name",search.getName());
+        sqlExpression.andEqNoEmpty("role_name",search.getRoleName());
 
         sqlExpression.andNotEqNoEmpty("id",search.getNotId());
 
-        sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
+        sqlExpression.andRightLikeNoEmpty("role_name",search.getLikeRoleName());
     }
 }

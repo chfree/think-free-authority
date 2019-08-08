@@ -13,9 +13,9 @@ import lombok.Data;
 public class RoleSearch {
     private String id;
 
-    private String name;
+    private String roleName;
 
     private String notId;
 
-    private String likeName;
+    private String likeRoleName;
 }

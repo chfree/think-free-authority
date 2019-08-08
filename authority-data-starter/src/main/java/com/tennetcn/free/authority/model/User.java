@@ -1,5 +1,8 @@
 package com.tennetcn.free.authority.model;
 
+import cn.hutool.core.date.DateUtil;
+import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
@@ -50,7 +53,7 @@ public class User  extends ModelBase {
     private String email;
 
     @Column(name="delete_mark")
-    private Integer deleteMark;
+    private Integer deleteMark = YesOrNoInteger.NO;
 
     @OrderBy(value= OrderByEnum.DESC)
     @Column(name="create_date")
@@ -62,7 +65,7 @@ public class User  extends ModelBase {
     @Column(name="create_user_name")
     private String createUserName;
 
-    @Column(name="modify_Date")
+    @Column(name="modify_date")
     private Date modifyDate;
 
     @Column(name="modify_user_id")
@@ -74,8 +77,8 @@ public class User  extends ModelBase {
     @Column(name="user_mark")
     private String userMark;
 
-    @Column(name="business_id")
-    private String businessId;
+    @Column(name="bu_id")
+    private String buId;
 
     @Column(name="unique_mark")
     private String uniqueMark;
@@ -85,5 +88,16 @@ public class User  extends ModelBase {
 
     @Column(name="is_locked")
     private String isLocked;
+
+    @Override
+    public void setModelStatus(ModelStatus modelStatus) {
+        super.setModelStatus(modelStatus);
+
+        if(modelStatus==ModelStatus.add){
+            setCreateDate(DateUtil.date());
+        }else if(modelStatus==ModelStatus.update){
+            setModifyDate(DateUtil.date());
+        }
+    }
 
 }

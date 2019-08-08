@@ -34,7 +34,7 @@ public class RoleApi extends FirstApi {
     private IRoleService roleService;
 
     @ApiOperation(value = "获取角色列表")
-    @GetMapping("list")
+    @PostMapping("list")
     public BaseResponse list(@RequestBody  @Valid RoleListReq listReq){
         RoleListResp resp = new RoleListResp();
         resp.setTotalCount(roleService.queryCountBySearch(listReq.getSearch()));

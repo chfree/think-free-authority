@@ -5,6 +5,8 @@ import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.data.message.DaoBaseRuntimeException;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
@@ -46,8 +48,20 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
 
         sqlExpression.andEqNoEmpty("name",search.getName());
 
+        sqlExpression.andEqNoEmpty("account",search.getAccount());
+
         sqlExpression.andNotEqNoEmpty("id",search.getNotId());
 
         sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
+
+        sqlExpression.andRightLikeNoEmpty("account",search.getLikeAccount());
+    }
+
+    @Override
+    public boolean applyChange(User user) throws DaoBaseRuntimeException {
+        if(ModelStatus.add.equals(user.getModelStatus())){
+            user.setPassword("000000");
+        }
+        return super.applyChange(user);
     }
 }
