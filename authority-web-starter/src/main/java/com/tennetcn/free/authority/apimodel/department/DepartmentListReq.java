@@ -1,5 +1,9 @@
 package com.tennetcn.free.authority.apimodel.department;
 
+import com.tennetcn.free.authority.viewmodel.DepartmentSearch;
+import com.tennetcn.free.web.webapi.BaseRequest;
+import lombok.Data;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -7,5 +11,7 @@ package com.tennetcn.free.authority.apimodel.department;
  * @comment
  */
 
-public class DepartmentListReq {
+@Data
+public class DepartmentListReq extends BaseRequest {
+    private DepartmentSearch search;
 }

@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.model;
 
+import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -75,7 +76,7 @@ public class Department extends ModelBase {
     @Column(name="description")
     private String description;
 
-    //等级
+    //层级
     @Column(name="hierarchy_code")
     private String hierarchyCode;
 
@@ -93,11 +94,11 @@ public class Department extends ModelBase {
 
     //排序
     @Column(name="sort_code")
-    private Integer sortCode;
+    private Integer sortCode = 1;
 
     //是否删除
     @Column(name="delete_mark")
-    private Integer deleteMark;
+    private Integer deleteMark = YesOrNoInteger.NO;
 
     //创建日期
     @Column(name="create_date")

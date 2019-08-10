@@ -7,5 +7,5 @@ package com.tennetcn.free.authority.apimodel.department;
  * @comment
  */
 
-public class SaveDepartmentReq {
+public class SaveDepartmentReq{
 }
