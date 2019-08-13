@@ -20,7 +20,7 @@ public interface IDepartmentService  extends ISuperService<Department> {
 
     List<Department> queryListBySearch(DepartmentSearch search, PagerModel pagerModel);
 
-    List<DepartmentTree> queryListTree(DepartmentSearch search);
+    List<DepartmentTree> queryListTreeBySearch(DepartmentSearch search);
 
     List<DepartmentTree> queryListTreeFormat(DepartmentSearch search);
 

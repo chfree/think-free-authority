@@ -1,5 +1,7 @@
 package com.tennetcn.free.authority.model;
 
+import cn.hutool.core.date.DateUtil;
+import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import lombok.*;
@@ -127,4 +129,15 @@ public class Department extends ModelBase {
     //备注
     @Column(name="comments")
     private String comments;
+
+    @Override
+    public void setModelStatus(ModelStatus modelStatus) {
+        super.setModelStatus(modelStatus);
+
+        if(modelStatus==ModelStatus.add){
+            setCreateDate(DateUtil.date());
+        }else if(modelStatus==ModelStatus.update){
+            setModifyDate(DateUtil.date());
+        }
+    }
 }

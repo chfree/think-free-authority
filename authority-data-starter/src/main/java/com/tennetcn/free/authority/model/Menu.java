@@ -1,5 +1,7 @@
 package com.tennetcn.free.authority.model;
 
+import cn.hutool.core.date.DateUtil;
+import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.message.ModelBase;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -73,6 +75,10 @@ public class Menu  extends ModelBase {
     @Column(name="sort_code")
     private Integer sortCode;
 
+    //级别
+    @Column(name="level")
+    private Integer level;
+
     //是否删除
     @Column(name="delete_mark")
     private Integer deleteMark;
@@ -104,4 +110,15 @@ public class Menu  extends ModelBase {
     //备注
     @Column(name="comments")
     private String comments;
+
+    @Override
+    public void setModelStatus(ModelStatus modelStatus) {
+        super.setModelStatus(modelStatus);
+
+        if(modelStatus==ModelStatus.add){
+            setCreateDate(DateUtil.date());
+        }else if(modelStatus==ModelStatus.update){
+            setModifyDate(DateUtil.date());
+        }
+    }
 }

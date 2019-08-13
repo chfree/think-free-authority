@@ -1,7 +1,11 @@
 package com.tennetcn.free.authority.service;
 
 import com.tennetcn.free.authority.model.Menu;
+import com.tennetcn.free.authority.viewmodel.MenuSearch;
+import com.tennetcn.free.authority.viewmodel.MenuTree;
 import com.tennetcn.free.data.dao.base.ISuperService;
+
+import java.util.List;
 
 /**
  * @author chfree
@@ -11,4 +15,12 @@ import com.tennetcn.free.data.dao.base.ISuperService;
  */
 
 public interface IMenuService extends ISuperService<Menu> {
+
+    int queryCountBySearch(MenuSearch search);
+
+    List<MenuTree> queryListTreeBySearch(MenuSearch search);
+
+    List<MenuTree> queryListTreeFormat(MenuSearch search);
+
+    MenuTree queryModelTree(String id);
 }

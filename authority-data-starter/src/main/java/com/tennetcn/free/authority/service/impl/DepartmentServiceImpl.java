@@ -48,7 +48,7 @@ public class DepartmentServiceImpl extends SuperService<Department> implements I
     }
 
     @Override
-    public List<DepartmentTree> queryListTree(DepartmentSearch search) {
+    public List<DepartmentTree> queryListTreeBySearch(DepartmentSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(Department.class);
 
@@ -59,9 +59,10 @@ public class DepartmentServiceImpl extends SuperService<Department> implements I
 
     @Override
     public List<DepartmentTree> queryListTreeFormat(DepartmentSearch search) {
-        List<DepartmentTree> allDeptTrees = queryListTree(search);
+        List<DepartmentTree> allDeptTrees = queryListTreeBySearch(search);
 
         // 求出最顶级的level是多少
+        // 默认顶级是0，考虑到搜索的情况，这里在求一下
         Integer minLevel = allDeptTrees.stream().min(Comparator.comparing(Department::getLevel)).get().getLevel();
 
         // 在求出顶级所有的顶级部门
