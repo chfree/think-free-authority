@@ -2,14 +2,13 @@ package com.tennetcn.free.authority.model;
 
 import cn.hutool.core.date.DateUtil;
 import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
+import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -72,8 +71,9 @@ public class Menu  extends ModelBase {
     private String menuMark;
 
     //排序字段
+    @OrderBy(OrderByEnum.ASC)
     @Column(name="sort_code")
-    private Integer sortCode;
+    private Integer sortCode = 1;
 
     //级别
     @Column(name="level")
@@ -81,7 +81,7 @@ public class Menu  extends ModelBase {
 
     //是否删除
     @Column(name="delete_mark")
-    private Integer deleteMark;
+    private Integer deleteMark = YesOrNoInteger.NO;
 
     //创建时间
     @Column(name="create_date")

@@ -18,4 +18,8 @@ public class MenuSearch {
     private String name;
 
     private String likeName;
+
+    private  String title;
+
+    private String likeTitle;
 }

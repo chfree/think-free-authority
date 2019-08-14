@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import cn.hutool.core.util.ArrayUtil;
 import com.tennetcn.free.authority.model.Department;
 import com.tennetcn.free.authority.model.Menu;
 import com.tennetcn.free.authority.service.IMenuService;
@@ -7,6 +8,8 @@ import com.tennetcn.free.authority.viewmodel.MenuSearch;
 import com.tennetcn.free.authority.viewmodel.MenuTree;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.enums.OrderEnum;
+import com.tennetcn.free.data.message.OrderByEnum;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import lombok.var;
 import org.springframework.stereotype.Component;
@@ -38,7 +41,8 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
     @Override
     public List<MenuTree> queryListTreeBySearch(MenuSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(Menu.class);
+        sqlExpression.selectAllFrom(Menu.class)
+                     .addOrder("sort_code", OrderEnum.asc);
 
         appendExpression(sqlExpression,search);
 
@@ -48,7 +52,9 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
     @Override
     public List<MenuTree> queryListTreeFormat(MenuSearch search) {
         List<MenuTree> allMenuTrees = queryListTreeBySearch(search);
-
+        if(allMenuTrees==null||allMenuTrees.size()<=0){
+            return null;
+        }
         // 求出最顶级的level是多少
         // 默认顶级是0，考虑到搜索的情况，这里在求一下
         Integer minLevel = allMenuTrees.stream().min(Comparator.comparing(Menu::getLevel)).get().getLevel();
@@ -79,7 +85,7 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
     public MenuTree queryModelTree(String id) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(Menu.class,"menu")
-                .appendSelect("parent.name as parentName")
+                .appendSelect("parent.title as parentName")
                 .leftJoin(Menu.class,"parent")
                 .on("menu.parent_id","parent.id")
                 .andEq("menu.id",id);
@@ -95,5 +101,9 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
         sqlExpression.andNotEqNoEmpty("id",search.getNotId());
 
         sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
+
+        sqlExpression.andEqNoEmpty("title",search.getTitle());
+
+        sqlExpression.andRightLikeNoEmpty("title",search.getLikeTitle());
     }
 }

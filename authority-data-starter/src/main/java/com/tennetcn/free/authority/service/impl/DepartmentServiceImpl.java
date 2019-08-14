@@ -1,6 +1,7 @@
 package com.tennetcn.free.authority.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ArrayUtil;
 import com.tennetcn.free.authority.model.Button;
 import com.tennetcn.free.authority.model.Department;
 import com.tennetcn.free.authority.service.IDepartmentService;
@@ -60,7 +61,9 @@ public class DepartmentServiceImpl extends SuperService<Department> implements I
     @Override
     public List<DepartmentTree> queryListTreeFormat(DepartmentSearch search) {
         List<DepartmentTree> allDeptTrees = queryListTreeBySearch(search);
-
+        if(allDeptTrees==null||allDeptTrees.size()<=0){
+            return null;
+        }
         // 求出最顶级的level是多少
         // 默认顶级是0，考虑到搜索的情况，这里在求一下
         Integer minLevel = allDeptTrees.stream().min(Comparator.comparing(Department::getLevel)).get().getLevel();

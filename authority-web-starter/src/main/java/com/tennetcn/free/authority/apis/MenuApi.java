@@ -15,10 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -38,8 +35,8 @@ public class MenuApi extends FirstApi {
     private IMenuService menuService;
 
     @ApiOperation(value = "获取菜单列表")
-    @GetMapping("list")
-    public BaseResponse list(@Valid MenuListReq listReq){
+    @PostMapping("list")
+    public BaseResponse list(@RequestBody @Valid MenuListReq listReq){
         MenuListResp resp=new MenuListResp();
         resp.setMenuTrees(menuService.queryListTreeFormat(listReq.getSearch()));
 
@@ -50,8 +47,8 @@ public class MenuApi extends FirstApi {
     @GetMapping("get")
     public BaseResponse get(@Valid @NotBlank(message = "菜单id不能为空") String id){
         BaseResponse response=new BaseResponse();
-        response.put("menu",menuService.queryModelTree(id));
-        return null;
+        response.put("menuTree",menuService.queryModelTree(id));
+        return response;
     }
 
     @ApiOperation(value = "搜索部门数量")
