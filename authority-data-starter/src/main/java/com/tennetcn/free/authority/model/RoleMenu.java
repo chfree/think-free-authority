@@ -14,7 +14,6 @@ import java.util.Date;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors
 @Entity
 @Table(name="base_authority_role_menu")
 public class RoleMenu extends ModelBase {

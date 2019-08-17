@@ -6,7 +6,6 @@ import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
-import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +14,6 @@ import java.util.Date;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors
 @Entity
 @Table(name="base_authority_role")
 public class Role extends ModelBase {

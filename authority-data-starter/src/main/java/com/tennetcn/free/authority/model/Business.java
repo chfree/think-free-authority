@@ -6,7 +6,6 @@ import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
-import lombok.experimental.Accessors;
 import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 
@@ -24,7 +23,6 @@ import java.util.Date;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors
 @Entity
 @Table(name="base_authority_business")
 public class Business extends ModelBase {

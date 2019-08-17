@@ -6,7 +6,6 @@ import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
 import lombok.*;
-import lombok.experimental.Accessors;
 import org.apache.ibatis.type.Alias;
 
 import javax.persistence.*;
@@ -16,7 +15,6 @@ import java.util.Date;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors
 @Entity
 @Alias("user")
 @Table(name="base_authority_user")

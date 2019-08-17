@@ -5,7 +5,6 @@ import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import lombok.*;
-import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +23,6 @@ import java.util.Date;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors
 @Entity
 @Table(name="base_authority_department")
 public class Department extends ModelBase {
