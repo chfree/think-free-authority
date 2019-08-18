@@ -60,10 +60,6 @@ public class Menu  extends ModelBase {
     @Column(name="theme")
     private String theme;
 
-    //按钮类型
-    @Column(name="button_type")
-    private String buttonType;
-
     //菜单标识
     @Column(name="menu_mark")
     private String menuMark;

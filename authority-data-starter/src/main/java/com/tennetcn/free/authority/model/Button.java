@@ -30,10 +30,6 @@ public class Button extends ModelBase {
     @NonNull
     private String id;
 
-    //事件名称
-    @Column(name="event_name")
-    private String eventName;
-
     //按钮名称
     @Column(name="name")
     private String name;
