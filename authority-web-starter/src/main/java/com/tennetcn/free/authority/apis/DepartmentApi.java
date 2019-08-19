@@ -57,7 +57,7 @@ public class DepartmentApi extends FirstApi {
 
     @ApiOperation(value = "搜索部门数量")
     @PostMapping("countSearch")
-    public BaseResponse get(DepartmentSearch search){
+    public BaseResponse countSearch(DepartmentSearch search){
         BaseResponse response=new BaseResponse();
 
         int count =  departmentService.queryCountBySearch(search);

@@ -10,9 +10,6 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity
 @Table(name="base_authority_user_role")
@@ -20,7 +17,6 @@ public class UserRole extends ModelBase {
     //主键
     @Id
     @Column(name="id")
-    @NonNull
     private String id;
 
     //创建时间

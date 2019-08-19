@@ -50,6 +50,8 @@ public class ButtonServiceImpl extends SuperService<Button> implements IButtonSe
 
         sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
 
-        sqlExpression.andRightLikeNoEmpty("event_name",search.getLikeEventName());
+        sqlExpression.andEqNoEmpty("title",search.getTitle());
+
+        sqlExpression.andRightLikeNoEmpty("title", search.getLikeTitle());
     }
 }

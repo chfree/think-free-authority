@@ -21,7 +21,7 @@ import java.util.List;
 @Component
 public class UserRoleServiceImpl extends SuperService<UserRole> implements IUserRoleService {
     @Override
-    public boolean saveUserRole(String userId,List<UserRole> userRoleList) {
+    public boolean saveUserRoles(String userId,List<UserRole> userRoleList) {
         if(!deleteByUserId(userId)){
             return false;
         }

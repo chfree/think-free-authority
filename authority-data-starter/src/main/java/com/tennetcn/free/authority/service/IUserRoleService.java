@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public interface IUserRoleService extends ISuperService<UserRole> {
-    boolean saveUserRole(String userId,List<UserRole> userRoleList);
+    boolean saveUserRoles(String userId,List<UserRole> userRoleList);
 
     boolean deleteByUserId(String userId);
 

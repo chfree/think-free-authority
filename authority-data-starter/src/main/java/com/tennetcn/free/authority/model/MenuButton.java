@@ -1,14 +1,9 @@
 package com.tennetcn.free.authority.model;
 
-import cn.hutool.core.date.DateUtil;
-import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,13 +16,18 @@ import java.util.Date;
  */
 
 @Data
+@Builder
 @Entity
-@Table(name="base_authority_button")
-public class Button extends ModelBase {
+@Table(name="base_authority_menu_button")
+public class MenuButton extends ModelBase {
     //主键
     @Id
     @Column(name="id")
     private String id;
+
+    //菜单id
+    @Column(name="menu_id")
+    private String menuId;
 
     //按钮名称
     @Column(name="name")
@@ -70,30 +70,8 @@ public class Button extends ModelBase {
     @Column(name="create_user_name")
     private String createUserName;
 
-    //修改日期
-    @Column(name="modify_date")
-    private Date modifyDate;
-
-    //修改者Id
-    @Column(name="modify_user_id")
-    private String modifyUserId;
-
-    //修改者名称
-    @Column(name="modify_user_name")
-    private String modifyUserName;
-
     //备注
     @Column(name="comments")
     private String comments;
 
-    @Override
-    public void setModelStatus(ModelStatus modelStatus) {
-        super.setModelStatus(modelStatus);
-
-        if(modelStatus==ModelStatus.add){
-            setCreateDate(DateUtil.date());
-        }else if(modelStatus==ModelStatus.update){
-            setModifyDate(DateUtil.date());
-        }
-    }
 }

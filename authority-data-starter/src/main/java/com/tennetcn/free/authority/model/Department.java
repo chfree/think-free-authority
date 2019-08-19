@@ -4,7 +4,10 @@ import cn.hutool.core.date.DateUtil;
 import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,16 +23,12 @@ import java.util.Date;
  */
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="base_authority_department")
 public class Department extends ModelBase {
     //部门id
     @Id
     @Column(name="id")
-    @NonNull
     private String id;
 
     //部门全称

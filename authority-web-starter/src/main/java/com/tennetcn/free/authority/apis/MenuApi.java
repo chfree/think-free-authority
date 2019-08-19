@@ -53,7 +53,7 @@ public class MenuApi extends FirstApi {
 
     @ApiOperation(value = "搜索部门数量")
     @PostMapping("countSearch")
-    public BaseResponse get(MenuSearch search){
+    public BaseResponse countSearch(MenuSearch search){
         BaseResponse response=new BaseResponse();
 
         int count =  menuService.queryCountBySearch(search);

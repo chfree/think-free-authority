@@ -11,21 +11,16 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="base_authority_menu")
 public class Menu  extends ModelBase {
     //主键
     @Id
     @Column(name="id")
-    @NonNull
     private String id;
 
     //名称
     @Column(name="name")
-    @NonNull
     private String name;
 
     //标题

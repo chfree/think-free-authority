@@ -57,7 +57,7 @@ public class UserApi extends FirstApi {
 
     @ApiOperation(value = "搜索角色数量")
     @PostMapping("countSearch")
-    public BaseResponse get(UserSearch search){
+    public BaseResponse countSearch(UserSearch search){
         BaseResponse response=new BaseResponse();
 
         int count =  userService.queryCountBySearch(search);

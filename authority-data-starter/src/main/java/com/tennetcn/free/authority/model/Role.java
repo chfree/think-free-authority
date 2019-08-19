@@ -11,21 +11,16 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="base_authority_role")
 public class Role extends ModelBase {
     //角色id
     @Id
     @Column(name="id")
-    @NonNull
     private String id;
 
     //角色名称
     @Column(name="role_name")
-    @NonNull
     private String roleName;
 
     //角色与逻辑代码的标记

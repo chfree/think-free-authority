@@ -1,8 +1,10 @@
 package com.tennetcn.free.authority.model;
 
 import com.tennetcn.free.data.message.ModelBase;
-import lombok.*;
-import lombok.experimental.Accessors;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,24 +13,18 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name="base_authority_role_menu")
 public class RoleMenu extends ModelBase {
     @Id
     @Column(name="id")
-    @NonNull
     private String id;
 
     //菜单id
-    @NonNull
     @Column(name="menu_id")
     private String menuId;
 
     //角色Id
-    @NonNull
     @Column(name="role_id")
     private String roleId;
 

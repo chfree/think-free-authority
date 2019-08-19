@@ -60,7 +60,7 @@ public class ButtonApi extends FirstApi {
 
     @ApiOperation(value = "搜索按钮数量")
     @PostMapping("countSearch")
-    public BaseResponse get(ButtonSearch search){
+    public BaseResponse countSearch(ButtonSearch search){
         BaseResponse response=new BaseResponse();
 
         int count =  buttonService.queryCountBySearch(search);

@@ -56,7 +56,7 @@ public class RoleApi extends FirstApi {
 
     @ApiOperation(value = "搜索角色数量")
     @PostMapping("countSearch")
-    public BaseResponse get(RoleSearch search){
+    public BaseResponse countSearch(RoleSearch search){
         BaseResponse response=new BaseResponse();
 
         int count =  roleService.queryCountBySearch(search);

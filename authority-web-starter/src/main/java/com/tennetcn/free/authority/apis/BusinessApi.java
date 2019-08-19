@@ -56,7 +56,7 @@ public class BusinessApi extends FirstApi {
 
     @ApiOperation(value = "搜索企业数量")
     @PostMapping("countSearch")
-    public BaseResponse get(BusinessSearch search){
+    public BaseResponse countSearch(BusinessSearch search){
         BaseResponse response=new BaseResponse();
 
         int count =  businessService.queryCountBySearch(search);

@@ -12,24 +12,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@RequiredArgsConstructor
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Alias("user")
 @Table(name="base_authority_user")
 public class User  extends ModelBase {
     @Id
     @Column(name="id")
-    @NonNull
     private String id;
 
     @Column(name="name")
-    @NonNull
     private String name;
 
     @Column(name="account")
-    @NonNull
     private String account;
 
     @Column(name="password")

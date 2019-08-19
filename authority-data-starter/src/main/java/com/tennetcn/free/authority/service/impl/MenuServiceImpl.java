@@ -1,7 +1,5 @@
 package com.tennetcn.free.authority.service.impl;
 
-import cn.hutool.core.util.ArrayUtil;
-import com.tennetcn.free.authority.model.Department;
 import com.tennetcn.free.authority.model.Menu;
 import com.tennetcn.free.authority.service.IMenuService;
 import com.tennetcn.free.authority.viewmodel.MenuSearch;
@@ -9,7 +7,6 @@ import com.tennetcn.free.authority.viewmodel.MenuTree;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.enums.OrderEnum;
-import com.tennetcn.free.data.message.OrderByEnum;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import lombok.var;
 import org.springframework.stereotype.Component;
@@ -31,7 +28,7 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
     @Override
     public int queryCountBySearch(MenuSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(Department.class);
+        sqlExpression.selectCount().from(Menu.class);
 
         appendExpression(sqlExpression,search);
 

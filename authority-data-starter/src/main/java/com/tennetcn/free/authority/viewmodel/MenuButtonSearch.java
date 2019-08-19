@@ -10,7 +10,7 @@ import lombok.Data;
  */
 
 @Data
-public class ButtonSearch {
+public class MenuButtonSearch {
     private String id;
 
     private String name;
@@ -22,4 +22,6 @@ public class ButtonSearch {
     private String title;
 
     private String likeTitle;
+
+    private String menuId;
 }

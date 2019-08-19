@@ -41,11 +41,11 @@ public class UserRoleApi extends FirstApi {
         return response;
     }
 
-    @ApiOperation(value = "保存一个用户角色")
+    @ApiOperation(value = "保存用户角色")
     @PostMapping("save")
     public BaseResponse save(@RequestBody @Valid SaveUserRoleReq saveUserRoleReq){
         BaseResponse response = new BaseResponse();
-        boolean result = userRoleService.saveUserRole(saveUserRoleReq.getUserId(),getUserRoleFormat(saveUserRoleReq));
+        boolean result = userRoleService.saveUserRoles(saveUserRoleReq.getUserId(),getUserRoleFormat(saveUserRoleReq));
         response.put("result", result);
 
         return response;
