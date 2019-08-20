@@ -14,8 +14,8 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name="base_authority_role_menu")
-public class RoleMenu extends ModelBase {
+@Table(name="base_authority_role_func")
+public class RoleFunc extends ModelBase {
     @Id
     @Column(name="id")
     private String id;

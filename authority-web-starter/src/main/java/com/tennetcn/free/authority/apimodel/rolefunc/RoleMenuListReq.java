@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.apimodel.rolemenu;
+package com.tennetcn.free.authority.apimodel.rolefunc;
 
 /**
  * @author chfree
@@ -7,5 +7,5 @@ package com.tennetcn.free.authority.apimodel.rolemenu;
  * @comment
  */
 
-public class SaveRoleMenuReq {
+public class RoleMenuListReq {
 }

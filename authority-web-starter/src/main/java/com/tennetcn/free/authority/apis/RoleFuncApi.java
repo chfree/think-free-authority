@@ -1,9 +1,7 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.authority.apimodel.role.RoleListReq;
-import com.tennetcn.free.authority.apimodel.role.SaveRoleReq;
-import com.tennetcn.free.authority.apimodel.rolemenu.RoleMenuListReq;
-import com.tennetcn.free.authority.apimodel.rolemenu.SaveRoleMenuReq;
+import com.tennetcn.free.authority.apimodel.rolefunc.RoleMenuListReq;
+import com.tennetcn.free.authority.apimodel.rolefunc.SaveRoleMenuReq;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
@@ -24,7 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/api/v1/authority/roleMenu/",produces = "application/json;charset=utf-8")
 @Api(tags="角色菜单",value ="角色菜单相关的操作")
-public class RoleMenuApi extends FirstApi {
+public class RoleFuncApi extends FirstApi {
     @ApiOperation(value = "获取角色菜单列表")
     @GetMapping("list")
     public BaseResponse list(@Valid RoleMenuListReq listReq){

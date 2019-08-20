@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.service;
 
-import com.tennetcn.free.authority.model.RoleMenu;
+import com.tennetcn.free.authority.model.RoleFunc;
 import com.tennetcn.free.data.dao.base.ISuperService;
 
 /**
@@ -10,5 +10,5 @@ import com.tennetcn.free.data.dao.base.ISuperService;
  * @comment
  */
 
-public interface IRoleMenuService extends ISuperService<RoleMenu> {
+public interface IRoleFuncService extends ISuperService<RoleFunc> {
 }

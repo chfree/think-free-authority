@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.service.impl;
 
-import com.tennetcn.free.authority.model.RoleMenu;
-import com.tennetcn.free.authority.service.IRoleMenuService;
+import com.tennetcn.free.authority.model.RoleFunc;
+import com.tennetcn.free.authority.service.IRoleFuncService;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import org.springframework.stereotype.Component;
 
@@ -13,5 +13,5 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class RoleMenuServiceImpl extends SuperService<RoleMenu> implements IRoleMenuService {
+public class RoleFuncServiceImpl extends SuperService<RoleFunc> implements IRoleFuncService {
 }

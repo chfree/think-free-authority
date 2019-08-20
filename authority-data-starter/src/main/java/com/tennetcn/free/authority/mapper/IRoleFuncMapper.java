@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.mapper;
 
-import com.tennetcn.free.authority.model.RoleMenu;
+import com.tennetcn.free.authority.model.RoleFunc;
 import com.tennetcn.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,5 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 
 @Mapper
-public interface IRoleMenuMapper  extends IMapper<RoleMenu> {
+public interface IRoleFuncMapper extends IMapper<RoleFunc> {
 }
