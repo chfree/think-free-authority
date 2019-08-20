@@ -20,9 +20,13 @@ public class RoleFunc extends ModelBase {
     @Column(name="id")
     private String id;
 
-    //菜单id
-    @Column(name="menu_id")
+    //功能id
+    @Column(name="func_id")
     private String menuId;
+
+    //功能类型
+    @Column(name="func_type")
+    private String funcType;
 
     //角色Id
     @Column(name="role_id")

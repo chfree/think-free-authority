@@ -33,7 +33,7 @@ public class Role extends ModelBase {
 
     //级别
     @Column(name="level")
-    private Integer level;
+    private Integer level = 1;
 
     //是否删除
     @Column(name="delete_mark")

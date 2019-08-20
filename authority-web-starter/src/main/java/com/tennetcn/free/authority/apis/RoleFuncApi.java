@@ -1,17 +1,17 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.authority.apimodel.rolefunc.RoleMenuListReq;
-import com.tennetcn.free.authority.apimodel.rolefunc.SaveRoleMenuReq;
+import com.tennetcn.free.authority.apimodel.rolefunc.RoleFuncListReq;
+import com.tennetcn.free.authority.apimodel.rolefunc.SaveRoleFuncReq;
+import com.tennetcn.free.authority.model.RoleFunc;
+import com.tennetcn.free.authority.service.IRoleFuncService;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author chfree
@@ -20,30 +20,32 @@ import javax.validation.Valid;
  * @comment
  */
 @RestController
-@RequestMapping(value = "/api/v1/authority/roleMenu/",produces = "application/json;charset=utf-8")
-@Api(tags="角色菜单",value ="角色菜单相关的操作")
+@RequestMapping(value = "/api/v1/authority/roleFunc/",produces = "application/json;charset=utf-8")
+@Api(tags="角色功能",value ="角色功能相关的操作")
 public class RoleFuncApi extends FirstApi {
+
+    private IRoleFuncService roleFuncService;
+
     @ApiOperation(value = "获取角色菜单列表")
     @GetMapping("list")
-    public BaseResponse list(@Valid RoleMenuListReq listReq){
-        return null;
+    public BaseResponse list(@RequestBody  @Valid RoleFuncListReq listReq){
+        BaseResponse response = new BaseResponse();
+
+        List<RoleFunc> roleFuncs = roleFuncService.queryListBySearch(listReq.getSearch());
+        response.put("roleFuncs",roleFuncs);
+
+        return response;
     }
 
-    @ApiOperation(value = "获取指定角色菜单")
-    @GetMapping("get")
-    public BaseResponse get(@Valid String id){
-        return null;
-    }
-
-    @ApiOperation(value = "删除指定角色菜单")
-    @PostMapping("delete")
-    public BaseResponse delete(@Valid String id){
-        return null;
-    }
 
     @ApiOperation(value = "保存一个角色菜单")
     @PostMapping("save")
-    public BaseResponse save(SaveRoleMenuReq saveRoleMenuReq){
-        return new BaseResponse();
+    public BaseResponse save(@RequestBody  @Valid SaveRoleFuncReq saveRoleFuncReq){
+        BaseResponse response = new BaseResponse();
+
+        boolean result = roleFuncService.saveRoleFuncs(saveRoleFuncReq.getUserId(),saveRoleFuncReq.getRoleFuncs());
+        response.put("result",result);
+
+        return response;
     }
 }
