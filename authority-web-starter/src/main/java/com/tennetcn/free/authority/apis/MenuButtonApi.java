@@ -39,16 +39,24 @@ public class MenuButtonApi extends FirstApi {
     @Autowired
     private IMenuButtonService menuButtonService;
 
-    @ApiOperation(value = "根据用户id获取角色信息")
+    @ApiOperation(value = "获取菜单按钮的格式化数据")
+    @GetMapping("listMenuButton")
+    public BaseResponse listFormat(){
+        BaseResponse response = new BaseResponse();
+
+        response.put("menuButtons",menuButtonService.queryListTreeFormat());
+
+        return response;
+    }
+
+    @ApiOperation(value = "根据菜单id获取按钮信息")
     @GetMapping("listButton")
-    public BaseResponse listRole(@Valid @NotBlank(message = "菜单id不能为空") String menuId){
+    public BaseResponse listButton(@Valid @NotBlank(message = "菜单id不能为空") String menuId){
         BaseResponse response = new BaseResponse();
         MenuButtonSearch mbSearch=new MenuButtonSearch();
         mbSearch.setMenuId(menuId);
 
-        PagerModel pager=new PagerModel(100,1);
-
-        response.put("buttons",menuButtonService.queryListBySearch(mbSearch,pager));
+        response.put("buttons",menuButtonService.queryListBySearch(mbSearch,null));
 
         return response;
     }

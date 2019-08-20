@@ -8,6 +8,7 @@ import com.tennetcn.free.web.webapi.BaseResponse;
 import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ import java.util.List;
 @Api(tags="角色功能",value ="角色功能相关的操作")
 public class RoleFuncApi extends FirstApi {
 
+    @Autowired
     private IRoleFuncService roleFuncService;
 
     @ApiOperation(value = "获取角色菜单列表")
@@ -36,6 +38,8 @@ public class RoleFuncApi extends FirstApi {
 
         return response;
     }
+
+
 
 
     @ApiOperation(value = "保存一个角色菜单")

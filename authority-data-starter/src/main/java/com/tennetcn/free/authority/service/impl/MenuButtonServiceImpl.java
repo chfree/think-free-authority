@@ -1,16 +1,20 @@
 package com.tennetcn.free.authority.service.impl;
 
-import com.tennetcn.free.authority.model.Button;
+import com.tennetcn.free.authority.model.Menu;
 import com.tennetcn.free.authority.model.MenuButton;
 import com.tennetcn.free.authority.service.IMenuButtonService;
 import com.tennetcn.free.authority.viewmodel.MenuButtonSearch;
+import com.tennetcn.free.authority.viewmodel.MenuButtonTree;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import lombok.var;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -38,8 +42,10 @@ public class MenuButtonServiceImpl extends SuperService<MenuButton> implements I
         sqlExpression.selectAllFrom(MenuButton.class);
 
         appendExpression(sqlExpression,search);
-
-        return queryList(sqlExpression,pagerModel);
+        if(pagerModel!=null){
+            return queryList(sqlExpression,pagerModel);
+        }
+        return queryList(sqlExpression);
     }
 
     @Override
@@ -76,5 +82,51 @@ public class MenuButtonServiceImpl extends SuperService<MenuButton> implements I
         sqlExpression.andRightLikeNoEmpty("title", search.getLikeTitle());
 
         sqlExpression.andEqNoEmpty("menu_id",search.getMenuId());
+    }
+
+    @Override
+    public List<MenuButtonTree> queryMenuButtonTreeList() {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(Menu.class)
+                .addOrder("sort_code", OrderEnum.asc);
+
+        return queryList(sqlExpression, MenuButtonTree.class);
+    }
+
+    @Override
+    public List<MenuButtonTree> queryListTreeFormat() {
+        List<MenuButtonTree> allMenuButtonTrees = queryMenuButtonTreeList();
+
+        List<MenuButton> allMenuButtons = this.queryList();
+
+        if(allMenuButtonTrees==null||allMenuButtonTrees.size()<=0){
+            return null;
+        }
+        // 默认顶级是0
+        Integer minLevel = 0;
+
+        // 在求出顶级所有的顶级部门
+        var minMenuTrees = allMenuButtonTrees.stream().filter(menu -> menu.getLevel() == minLevel).collect(Collectors.toList());
+
+        // 进行递归循环
+        for (MenuButtonTree menuButtonTree: minMenuTrees) {
+            menuTreeLoop(menuButtonTree,allMenuButtonTrees,allMenuButtons);
+        }
+
+        return minMenuTrees;
+    }
+
+    private void menuTreeLoop(MenuButtonTree currentMenuButtonTree,List<MenuButtonTree> allMenuTrees,List<MenuButton> allMenuButtons){
+
+        var childrenMenuButtonTree = allMenuTrees.stream().filter(menu-> currentMenuButtonTree.getId().equals(menu.getParentId())).collect(Collectors.toList());
+        currentMenuButtonTree.setChildren(childrenMenuButtonTree);
+
+        var currentMenuButtons = allMenuButtons.stream().filter(menuButton -> currentMenuButtonTree.getId().equals(menuButton.getMenuId())).collect(Collectors.toList());
+        currentMenuButtonTree.setMenuButtons(currentMenuButtons);
+
+        for (MenuButtonTree menuButtonTree:childrenMenuButtonTree) {
+            menuTreeLoop(menuButtonTree,allMenuTrees,allMenuButtons);
+        }
+
     }
 }

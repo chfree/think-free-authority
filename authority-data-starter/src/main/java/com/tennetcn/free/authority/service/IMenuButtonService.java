@@ -4,6 +4,7 @@ import com.tennetcn.free.authority.model.Button;
 import com.tennetcn.free.authority.model.MenuButton;
 import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.viewmodel.MenuButtonSearch;
+import com.tennetcn.free.authority.viewmodel.MenuButtonTree;
 import com.tennetcn.free.data.dao.base.ISuperService;
 import com.tennetcn.free.data.message.PagerModel;
 
@@ -24,4 +25,8 @@ public interface IMenuButtonService extends ISuperService<MenuButton> {
     boolean saveMenuButtons(String menuId,List<MenuButton> menuButtons);
 
     boolean deleteByMenuId(String menuId);
+
+    List<MenuButtonTree> queryMenuButtonTreeList();
+
+    List<MenuButtonTree> queryListTreeFormat();
 }

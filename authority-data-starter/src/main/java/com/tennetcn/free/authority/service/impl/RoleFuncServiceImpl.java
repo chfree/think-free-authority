@@ -1,14 +1,25 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.model.Menu;
+import com.tennetcn.free.authority.model.MenuButton;
 import com.tennetcn.free.authority.model.RoleFunc;
+import com.tennetcn.free.authority.service.IMenuButtonService;
 import com.tennetcn.free.authority.service.IRoleFuncService;
+import com.tennetcn.free.authority.viewmodel.MenuButtonTree;
+import com.tennetcn.free.authority.viewmodel.MenuSearch;
+import com.tennetcn.free.authority.viewmodel.MenuTree;
 import com.tennetcn.free.authority.viewmodel.RoleFuncSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import lombok.var;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -19,6 +30,7 @@ import java.util.List;
 
 @Component
 public class RoleFuncServiceImpl extends SuperService<RoleFunc> implements IRoleFuncService {
+
     @Override
     public boolean saveRoleFuncs(String userId, List<RoleFunc> roleFuncs) {
         if(!deleteByUserId(userId)){
