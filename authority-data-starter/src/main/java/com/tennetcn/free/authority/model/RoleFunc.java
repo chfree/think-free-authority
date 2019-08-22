@@ -1,10 +1,8 @@
 package com.tennetcn.free.authority.model;
 
+import cn.hutool.core.date.DateUtil;
 import com.tennetcn.free.data.message.ModelBase;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +20,7 @@ public class RoleFunc extends ModelBase {
 
     //功能id
     @Column(name="func_id")
-    private String menuId;
+    private String funcId;
 
     //功能类型
     @Column(name="func_type")
@@ -34,7 +32,7 @@ public class RoleFunc extends ModelBase {
 
     //创建时间
     @Column(name="create_date")
-    private Date createDate;
+    private Date createDate = DateUtil.date();
 
     //创建者id
     @Column(name="create_user_id")

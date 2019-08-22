@@ -29,7 +29,7 @@ public class RoleFuncApi extends FirstApi {
     private IRoleFuncService roleFuncService;
 
     @ApiOperation(value = "获取角色菜单列表")
-    @GetMapping("list")
+    @PostMapping("listRoleFunc")
     public BaseResponse list(@RequestBody  @Valid RoleFuncListReq listReq){
         BaseResponse response = new BaseResponse();
 
@@ -47,7 +47,7 @@ public class RoleFuncApi extends FirstApi {
     public BaseResponse save(@RequestBody  @Valid SaveRoleFuncReq saveRoleFuncReq){
         BaseResponse response = new BaseResponse();
 
-        boolean result = roleFuncService.saveRoleFuncs(saveRoleFuncReq.getUserId(),saveRoleFuncReq.getRoleFuncs());
+        boolean result = roleFuncService.saveRoleFuncs(saveRoleFuncReq.getRoleId(),saveRoleFuncReq.getRoleFuncs());
         response.put("result",result);
 
         return response;

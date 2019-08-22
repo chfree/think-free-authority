@@ -16,8 +16,8 @@ import java.util.List;
 @Data
 public class SaveRoleFuncReq {
 
-    @NotBlank(message = "用户id不能为空")
-    private String userId;
+    @NotBlank(message = "角色id不能为空")
+    private String roleId;
 
     private List<RoleFunc> roleFuncs;
 }

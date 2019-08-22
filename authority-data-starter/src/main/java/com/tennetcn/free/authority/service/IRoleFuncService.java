@@ -1,8 +1,6 @@
 package com.tennetcn.free.authority.service;
 
 import com.tennetcn.free.authority.model.RoleFunc;
-import com.tennetcn.free.authority.model.UserRole;
-import com.tennetcn.free.authority.viewmodel.MenuButtonTree;
 import com.tennetcn.free.authority.viewmodel.RoleFuncSearch;
 import com.tennetcn.free.data.dao.base.ISuperService;
 
@@ -16,9 +14,9 @@ import java.util.List;
  */
 
 public interface IRoleFuncService extends ISuperService<RoleFunc> {
-    boolean saveRoleFuncs(String userId, List<RoleFunc> roleFuncs);
+    boolean saveRoleFuncs(String roleId, List<RoleFunc> roleFuncs);
 
-    boolean deleteByUserId(String userId);
+    boolean deleteByRoleId(String roleId);
 
     List<RoleFunc> queryListBySearch(RoleFuncSearch search);
 }
