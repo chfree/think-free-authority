@@ -12,6 +12,7 @@
         <module>authority-data-starter</module>
         <module>authority-web-starter</module>
         <module>authority-web-starter-run</module>
+        <module>authority-security</module>
     </modules>
 
     <parent>
