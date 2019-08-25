@@ -5,6 +5,7 @@ import com.tennetcn.free.authority.apimodel.menu.MenuListReq;
 import com.tennetcn.free.authority.apimodel.menu.MenuListResp;
 import com.tennetcn.free.authority.apimodel.menu.SaveMenuReq;
 import com.tennetcn.free.authority.service.IMenuService;
+import com.tennetcn.free.authority.service.IRoleService;
 import com.tennetcn.free.authority.viewmodel.MenuSearch;
 import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.security.webapi.AuthorityApi;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author chfree
@@ -32,11 +35,33 @@ public class MenuApi extends AuthorityApi {
     @Autowired
     private IMenuService menuService;
 
+    @Autowired
+    private IRoleService roleService;
+
     @ApiOperation(value = "获取菜单列表")
     @PostMapping("list")
     public BaseResponse list(@RequestBody @Valid MenuListReq listReq){
         MenuListResp resp=new MenuListResp();
         resp.setMenuTrees(menuService.queryListTreeFormat(listReq.getSearch()));
+
+        return resp;
+    }
+
+    @ApiOperation(value = "根据登陆信息获取route菜单列表")
+    @PostMapping("listRouteByLogin")
+    public BaseResponse listRouteByLogin(){
+        BaseResponse resp=new BaseResponse();
+        List<String> roleIds=roleService.queryListByUserId(getLoginId());
+        resp.put("menuRoutes",menuService.queryMenuRouteFormatByRoleIds(roleIds));
+
+        return resp;
+    }
+
+    @ApiOperation(value = "获取route菜单列表")
+    @PostMapping("listRoute")
+    public BaseResponse listRoute(){
+        BaseResponse resp=new BaseResponse();
+        resp.put("menuRoutes",menuService.queryMenuRouteFormatByRoleIds(null));
 
         return resp;
     }

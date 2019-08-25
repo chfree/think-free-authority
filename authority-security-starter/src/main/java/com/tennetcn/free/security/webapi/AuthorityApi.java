@@ -1,6 +1,8 @@
 package com.tennetcn.free.security.webapi;
 
+import com.tennetcn.free.core.exception.BizException;
 import com.tennetcn.free.security.message.LoginModel;
+import com.tennetcn.free.web.message.WebResponseStatus;
 import com.tennetcn.free.web.webapi.FirstApi;
 
 /**
@@ -15,5 +17,13 @@ public class AuthorityApi extends FirstApi {
 
     public LoginModel getCurrentLogin() {
         return (LoginModel)servletRequest.getAttribute(LOGIN_KEY);
+    }
+
+    public String getLoginId(){
+        LoginModel loginModel = getCurrentLogin();
+        if(loginModel==null){
+            throw new BizException(WebResponseStatus.AUTHORIZE_ERROR,"登陆超时，无法获取登陆用户的id");
+        }
+        return loginModel.getId();
     }
 }

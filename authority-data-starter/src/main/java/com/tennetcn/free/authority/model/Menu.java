@@ -35,9 +35,12 @@ public class Menu  extends ModelBase {
     @Column(name="hidden")
     private Integer hidden;
 
-    //url
-    @Column(name="url")
-    private String url;
+    //path
+    @Column(name="path")
+    private String path;
+
+    @Column(name="page_path")
+    private String pagePath;
 
     //类型
     @Column(name="type")

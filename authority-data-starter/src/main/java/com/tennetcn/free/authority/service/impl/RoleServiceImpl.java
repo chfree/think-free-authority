@@ -2,6 +2,7 @@ package com.tennetcn.free.authority.service.impl;
 
 import com.tennetcn.free.authority.model.Business;
 import com.tennetcn.free.authority.model.Role;
+import com.tennetcn.free.authority.model.UserRole;
 import com.tennetcn.free.authority.service.IRoleService;
 import com.tennetcn.free.authority.viewmodel.RoleSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
@@ -39,6 +40,16 @@ public class RoleServiceImpl extends SuperService<Role> implements IRoleService 
         appendExpression(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
+    }
+
+    @Override
+    public List<String> queryListByUserId(String userId) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.select("role_id")
+                .from(UserRole.class)
+                .andEq("user_id",userId);
+
+        return  queryList(sqlExpression,String.class);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, RoleSearch search){

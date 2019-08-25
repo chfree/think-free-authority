@@ -1,7 +1,10 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.enums.RoleFuncType;
 import com.tennetcn.free.authority.model.Menu;
+import com.tennetcn.free.authority.model.RoleFunc;
 import com.tennetcn.free.authority.service.IMenuService;
+import com.tennetcn.free.authority.viewmodel.MenuRoute;
 import com.tennetcn.free.authority.viewmodel.MenuSearch;
 import com.tennetcn.free.authority.viewmodel.MenuTree;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
@@ -88,6 +91,55 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
                 .andEq("menu.id",id);
 
         return queryModel(sqlExpression, MenuTree.class);
+    }
+
+    @Override
+    public List<MenuRoute> queryMenuRouteByRoleIds(List<String> roleIds) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+
+        if(roleIds!=null&&roleIds.size()>0){
+            sqlExpression.select("menu.id,menu.name,menu.title,menu.icon,menu.hidden,menu.path,menu.page_path,menu.type,menu.use_type,menu.parent_id,menu.theme,menu.sort_code,menu.delete_mark,menu.comments,menu.menu_mark,menu.level")
+                     .from(RoleFunc.class,"roleFunc")
+                     .leftJoin(Menu.class,"menu").on("roleFunc.func_id","menu.id")
+                     .andWhereInString("role_id",roleIds)
+                     .andEq("func_type", RoleFuncType.MENU);
+        }else{
+            sqlExpression.selectAllFrom(Menu.class)
+            .addOrder("sort_code",OrderEnum.asc);
+        }
+
+        return queryList(sqlExpression,MenuRoute.class);
+    }
+
+    @Override
+    public List<MenuRoute> queryMenuRouteFormatByRoleIds(List<String> roleIds) {
+        List<MenuRoute> allMenuRoutes = queryMenuRouteByRoleIds(roleIds);
+
+        if(allMenuRoutes==null||allMenuRoutes.size()<=0){
+            return null;
+        }
+
+        int minLevel = 0;
+        // 在求出顶级所有的顶级部门
+        var minMenuRoutes = allMenuRoutes.stream().filter(menu -> menu.getLevel() == minLevel).collect(Collectors.toList());
+
+        // 进行递归循环
+        for (MenuRoute menuRoute: minMenuRoutes) {
+            menuRouteLoop(menuRoute,allMenuRoutes);
+        }
+
+        return minMenuRoutes;
+    }
+
+    private void menuRouteLoop(MenuRoute currentMenuRoute,List<MenuRoute> allMenuRoutes){
+
+        var childrenMenuRoute = allMenuRoutes.stream().filter(menu-> currentMenuRoute.getId().equals(menu.getParentId())).collect(Collectors.toList());
+
+        currentMenuRoute.setChildren(childrenMenuRoute);
+        for (MenuRoute menuRoute:childrenMenuRoute) {
+            menuRouteLoop(menuRoute,allMenuRoutes);
+        }
+
     }
 
     private void appendExpression(ISqlExpression sqlExpression, MenuSearch search){

@@ -18,4 +18,6 @@ public interface IRoleService extends ISuperService<Role> {
     int queryCountBySearch(RoleSearch search);
 
     List<Role> queryListBySearch(RoleSearch search, PagerModel pagerModel);
+
+    List<String> queryListByUserId(String userId);
 }
