@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import cn.hutool.crypto.SecureUtil;
 import com.tennetcn.free.authority.model.User;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
@@ -41,6 +42,29 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
         appendExpression(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
+    }
+
+    @Override
+    public User queryModelByLogin(String account, String password) {
+        ISqlExpression sqlExpression=SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(User.class)
+                     .andEq("account",account)
+                     .andEq("password",passwordFormat(password));
+
+        return queryModel(sqlExpression);
+    }
+
+    private String passwordFormat(String password){
+        return SecureUtil.md5(password);
+    }
+
+    @Override
+    public User queryModelByAccount(String account) {
+        ISqlExpression sqlExpression=SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(User.class)
+                .andEq("account",account);
+
+        return queryModel(sqlExpression);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, UserSearch search){

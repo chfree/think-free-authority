@@ -8,8 +8,8 @@ import com.tennetcn.free.authority.model.User;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
 import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
-import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/authority/user/",produces = "application/json;charset=utf-8")
 @Api(tags="用户模块",value ="用户相关的操作" )
-public class UserApi extends FirstApi {
+public class UserApi extends AuthorityApi {
 
     @Autowired
     private IUserService userService;

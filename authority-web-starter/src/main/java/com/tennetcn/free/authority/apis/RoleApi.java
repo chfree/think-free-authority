@@ -8,8 +8,8 @@ import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.service.IRoleService;
 import com.tennetcn.free.authority.viewmodel.RoleSearch;
 import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
-import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/authority/role/",produces = "application/json;charset=utf-8")
 @Api(tags="角色管理",value ="角色相关的操作")
-public class RoleApi extends FirstApi {
+public class RoleApi extends AuthorityApi {
 
     @Autowired
     private IRoleService roleService;

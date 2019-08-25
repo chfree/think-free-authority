@@ -1,16 +1,14 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.department.DepartmentListResp;
 import com.tennetcn.free.authority.apimodel.menu.MenuListReq;
 import com.tennetcn.free.authority.apimodel.menu.MenuListResp;
 import com.tennetcn.free.authority.apimodel.menu.SaveMenuReq;
 import com.tennetcn.free.authority.service.IMenuService;
-import com.tennetcn.free.authority.viewmodel.DepartmentSearch;
 import com.tennetcn.free.authority.viewmodel.MenuSearch;
 import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
-import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +27,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/authority/menu/",produces = "application/json;charset=utf-8")
 @Api(tags="菜单管理",value ="菜单相关的操作")
-public class MenuApi extends FirstApi {
+public class MenuApi extends AuthorityApi {
 
     @Autowired
     private IMenuService menuService;

@@ -4,12 +4,15 @@ import com.tennetcn.free.authority.apimodel.rolefunc.RoleFuncListReq;
 import com.tennetcn.free.authority.apimodel.rolefunc.SaveRoleFuncReq;
 import com.tennetcn.free.authority.model.RoleFunc;
 import com.tennetcn.free.authority.service.IRoleFuncService;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
-import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,7 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/authority/roleFunc/",produces = "application/json;charset=utf-8")
 @Api(tags="角色功能",value ="角色功能相关的操作")
-public class RoleFuncApi extends FirstApi {
+public class RoleFuncApi extends AuthorityApi {
 
     @Autowired
     private IRoleFuncService roleFuncService;

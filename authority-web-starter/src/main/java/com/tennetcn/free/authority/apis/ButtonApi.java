@@ -1,18 +1,15 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.business.BusinessListResp;
 import com.tennetcn.free.authority.apimodel.button.ButtonListReq;
 import com.tennetcn.free.authority.apimodel.button.ButtonListResp;
 import com.tennetcn.free.authority.apimodel.button.SaveButtonReq;
-import com.tennetcn.free.authority.model.Business;
 import com.tennetcn.free.authority.model.Button;
 import com.tennetcn.free.authority.service.IButtonService;
-import com.tennetcn.free.authority.viewmodel.BusinessSearch;
 import com.tennetcn.free.authority.viewmodel.ButtonSearch;
 import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
-import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +29,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/authority/button/",produces = "application/json;charset=utf-8")
 @Api(tags="按钮管理",value ="按钮相关的操作")
-public class ButtonApi extends FirstApi {
+public class ButtonApi extends AuthorityApi {
 
     @Autowired
     IButtonService buttonService;
@@ -43,6 +40,8 @@ public class ButtonApi extends FirstApi {
         ButtonListResp resp = new ButtonListResp();
         resp.setTotalCount(buttonService.queryCountBySearch(listReq.getSearch()));
         resp.setButtons(buttonService.queryListBySearch(listReq.getSearch(),listReq.getPager()));
+
+        System.out.println(cached.get("test"));
 
         return resp;
     }

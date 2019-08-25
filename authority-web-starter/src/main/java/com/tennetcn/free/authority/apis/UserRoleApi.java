@@ -6,8 +6,8 @@ import com.tennetcn.free.authority.apimodel.userrole.SaveUserRoleReq;
 import com.tennetcn.free.authority.model.UserRole;
 import com.tennetcn.free.authority.service.IUserRoleService;
 import com.tennetcn.free.data.enums.YesOrNoInteger;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
-import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/authority/userRole/",produces = "application/json;charset=utf-8")
 @Api(tags="用户角色",value ="用户角色相关的操作")
-public class UserRoleApi extends FirstApi {
+public class UserRoleApi extends AuthorityApi {
 
     @Autowired
     private IUserRoleService userRoleService;

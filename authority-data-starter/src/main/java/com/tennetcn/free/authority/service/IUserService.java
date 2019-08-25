@@ -20,4 +20,8 @@ public interface IUserService extends ISuperService<User> {
     int queryCountBySearch(UserSearch search);
 
     List<User> queryListBySearch(UserSearch search, PagerModel pagerModel);
+
+    User queryModelByLogin(String account,String password);
+
+    User queryModelByAccount(String account);
 }

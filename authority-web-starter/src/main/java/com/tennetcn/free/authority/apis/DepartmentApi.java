@@ -4,14 +4,12 @@ import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.department.DepartmentListReq;
 import com.tennetcn.free.authority.apimodel.department.DepartmentListResp;
 import com.tennetcn.free.authority.apimodel.department.SaveDepartmentReq;
-import com.tennetcn.free.authority.model.Button;
 import com.tennetcn.free.authority.service.IDepartmentService;
-import com.tennetcn.free.authority.viewmodel.ButtonSearch;
 import com.tennetcn.free.authority.viewmodel.DepartmentSearch;
 import com.tennetcn.free.authority.viewmodel.DepartmentTree;
 import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
-import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +28,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/authority/department/",produces = "application/json;charset=utf-8")
 @Api(tags="部门管理",value ="部门相关的操作")
-public class DepartmentApi extends FirstApi {
+public class DepartmentApi extends AuthorityApi {
 
     @Autowired
     private IDepartmentService departmentService;

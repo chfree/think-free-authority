@@ -1,13 +1,11 @@
 package com.tennetcn.free.security.core;
 
 import io.jsonwebtoken.*;
-import lombok.Builder;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
 
@@ -28,7 +26,27 @@ public class JwtHelper {
         return helper;
     }
 
+    public String createJwt(Claims claims,long ttlMillis){
+        //添加构成JWT的参数
+        JwtBuilder builder = Jwts.builder()
+                .setClaims(claims);
+
+        return createJwt(builder,ttlMillis);
+    }
+
     public String createJwt(String id, Map<String,Object> claims,long ttlMillis){
+        // 此处有一个设置上的隐藏bug
+        // 如果先setId在setClaims,在获取id的时候是null
+        // 所以先设置了claims后在设置id，就可以正常获取了
+        // 添加构成JWT的参数
+        JwtBuilder builder = Jwts.builder()
+                .setClaims(claims)
+                .setId(id);
+
+        return createJwt(builder,ttlMillis);
+    }
+
+    private String createJwt(JwtBuilder builder,long ttlMillis){
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
         long nowMillis = System.currentTimeMillis();
@@ -37,12 +55,9 @@ public class JwtHelper {
         //生成签名密钥
         Key signingKey = generalKey();
 
-        //添加构成JWT的参数
-        JwtBuilder builder = Jwts.builder()
-                .setId(id)
-                .setClaims(claims)
-                .setIssuedAt(now)
+        builder.setIssuedAt(now)
                 .signWith(signatureAlgorithm, signingKey);
+
         //添加Token过期时间
         if (ttlMillis >= 0) {
             long expMillis = nowMillis + ttlMillis;
@@ -54,6 +69,7 @@ public class JwtHelper {
         return builder.compact();
     }
 
+
     public Claims parseJWT(String jwt){
         SecretKey key = generalKey();  //签名秘钥，和生成的签名的秘钥一模一样
         try {
@@ -61,7 +77,7 @@ public class JwtHelper {
                     .setSigningKey(key)         //设置签名的秘钥
                     .parseClaimsJws(jwt).getBody();//设置需要解析的jwt
             return claims;
-        }catch (ExpiredJwtException ex){
+        }catch (Exception ex){
             return null;
         }
     }

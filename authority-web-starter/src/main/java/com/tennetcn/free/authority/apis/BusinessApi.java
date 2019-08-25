@@ -8,8 +8,8 @@ import com.tennetcn.free.authority.model.Business;
 import com.tennetcn.free.authority.service.IBusinessService;
 import com.tennetcn.free.authority.viewmodel.BusinessSearch;
 import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
-import com.tennetcn.free.web.webapi.FirstApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/api/v1/authority/business/",produces = "application/json;charset=utf-8")
 @Api(tags="企业管理",value ="企业相关的操作")
-public class BusinessApi extends FirstApi {
+public class BusinessApi extends AuthorityApi {
 
     @Autowired
     private IBusinessService businessService;
@@ -39,6 +39,8 @@ public class BusinessApi extends FirstApi {
         BusinessListResp resp = new BusinessListResp();
         resp.setTotalCount(businessService.queryCountBySearch(listReq.getSearch()));
         resp.setBusinessList(businessService.queryListBySearch(listReq.getSearch(),listReq.getPager()));
+
+        cached.put("test","chenghuan");
 
         return resp;
     }
