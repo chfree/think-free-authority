@@ -7,6 +7,7 @@ import com.tennetcn.free.authority.service.IRoleService;
 import com.tennetcn.free.authority.viewmodel.RoleSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
@@ -50,6 +51,18 @@ public class RoleServiceImpl extends SuperService<Role> implements IRoleService 
                 .andEq("user_id",userId);
 
         return  queryList(sqlExpression,String.class);
+    }
+
+    @Override
+    public List<Role> queryListRoleByUserId(String userId) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.select("role.id,role.comments,role.delete_mark,role.description,role.mark_code,role.role_name,role.sort_code,role.role_mark")
+                .from(UserRole.class,"userRole")
+                .leftJoin(Role.class,"role").on("role.id","userRole.role_id")
+                .andEq("userRole.user_id",userId)
+                .addOrder("role.sort_code", OrderEnum.asc);
+
+        return  queryList(sqlExpression,Role.class);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, RoleSearch search){

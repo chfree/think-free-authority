@@ -20,4 +20,6 @@ public interface IRoleService extends ISuperService<Role> {
     List<Role> queryListBySearch(RoleSearch search, PagerModel pagerModel);
 
     List<String> queryListByUserId(String userId);
+
+    List<Role> queryListRoleByUserId(String userId);
 }

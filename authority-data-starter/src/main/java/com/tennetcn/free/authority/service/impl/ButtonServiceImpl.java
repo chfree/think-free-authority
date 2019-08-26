@@ -1,6 +1,9 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.enums.RoleFuncType;
 import com.tennetcn.free.authority.model.Button;
+import com.tennetcn.free.authority.model.MenuButton;
+import com.tennetcn.free.authority.model.RoleFunc;
 import com.tennetcn.free.authority.service.IButtonService;
 import com.tennetcn.free.authority.viewmodel.ButtonSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
@@ -39,6 +42,18 @@ public class ButtonServiceImpl extends SuperService<Button> implements IButtonSe
         appendExpression(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
+    }
+
+    @Override
+    public List<Button> queryListByRoleIds(List<String> roleIds) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.select("button.id,button.name,button.icon,button.theme,button.title,button.button_type")
+                .from(RoleFunc.class,"roleFunc")
+                .leftJoin(MenuButton.class,"button").on("roleFunc.func_id","button.id")
+                .andWhereInString("role_id",roleIds)
+                .andEq("func_type", RoleFuncType.BUTTON);
+
+        return queryList(sqlExpression,Button.class);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, ButtonSearch search){

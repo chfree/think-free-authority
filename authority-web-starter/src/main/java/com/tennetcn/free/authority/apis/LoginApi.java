@@ -3,8 +3,12 @@ package com.tennetcn.free.authority.apis;
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
+import com.tennetcn.free.authority.model.Button;
+import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.model.User;
+import com.tennetcn.free.authority.service.IButtonService;
 import com.tennetcn.free.authority.service.IMenuService;
+import com.tennetcn.free.authority.service.IRoleService;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
 import com.tennetcn.free.authority.viewmodel.MenuRoute;
@@ -26,6 +30,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -45,6 +50,12 @@ public class LoginApi extends AuthorityApi {
     @Autowired
     private IMenuService menuService;
 
+    @Autowired
+    private IRoleService roleService;
+
+    @Autowired
+    private IButtonService buttonService;
+
     @ApiAuthPassport
     @ApiOperation(value = "登陆")
     @PostMapping("login")
@@ -62,7 +73,9 @@ public class LoginApi extends AuthorityApi {
         Map<String,Object> claims = new HashMap<>();
         claims.put("account",loginModel.getAccount());
         claims.put("name",loginModel.getName());
+
         String token = JwtHelper.instance().createJwt(user.getId(),claims);
+        loginModel.setToken(token);
 
         cached.put(token,loginModel);
         response.put("result",true);
@@ -81,10 +94,23 @@ public class LoginApi extends AuthorityApi {
     public BaseResponse loginLoadData(){
         LoginLoadDataResp resp = new LoginLoadDataResp();
 
-        List<MenuRoute> menuRouteList = menuService.queryMenuRouteFormatByRoleIds(null);
-        resp.setMenuRoutes(menuRouteList);
+        LoginModel loginModel = getCurrentLogin();
+        List<Role> roles = roleService.queryListRoleByUserId(loginModel.getId());
+        loginModel.put("roles", roles);
 
-        resp.setLoginInfo(getCurrentLogin());
+        if(roles!=null&&roles.size()>0){
+            List<String> roleIds = roles.stream().map(role-> role.getId()).collect(Collectors.toList());
+
+            List<MenuRoute> menuRouteList = menuService.queryMenuRouteFormatByRoleIds(roleIds);
+            resp.setMenuRoutes(menuRouteList);
+
+            List<Button> buttons = buttonService.queryListByRoleIds(roleIds);
+            resp.setButtons(buttons);
+        }
+
+        // 重新放入缓存
+        cached.put(loginModel.getToken(),loginModel);
+        resp.setLoginInfo(loginModel);
 
         return resp;
     }

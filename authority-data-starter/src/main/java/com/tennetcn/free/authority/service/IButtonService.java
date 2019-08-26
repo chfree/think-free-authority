@@ -18,4 +18,6 @@ public interface IButtonService extends ISuperService<Button> {
     int queryCountBySearch(ButtonSearch search);
 
     List<Button> queryListBySearch(ButtonSearch search, PagerModel pagerModel);
+
+    List<Button> queryListByRoleIds(List<String> roleIds);
 }

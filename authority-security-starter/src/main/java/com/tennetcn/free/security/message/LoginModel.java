@@ -21,6 +21,8 @@ public class LoginModel {
 
     private String account;
 
+    private String token;
+
     private Map<String,Object> arguments=new HashMap<>();
 
     public void put(String key,Object object){
