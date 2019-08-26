@@ -1,6 +1,12 @@
 package com.tennetcn.free.security.core;
 
-import io.jsonwebtoken.*;
+import cn.hutool.json.JSONUtil;
+import com.tennetcn.free.core.utils.CommonApplicationContextUtil;
+import com.tennetcn.free.security.properties.JwtConfig;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -19,11 +25,27 @@ import java.util.Map;
 public class JwtHelper {
     private static JwtHelper helper = null;
 
+    private JwtConfig jwtConfig;
+
+    public void setJwtConfig(JwtConfig jwtConfig){
+        this.jwtConfig = jwtConfig;
+    }
+
+    public JwtConfig getJwtConfig(){
+        return jwtConfig;
+    }
+
     public static JwtHelper instance(){
         if(helper==null){
             helper = new JwtHelper();
+            JwtConfig jwtConfig = CommonApplicationContextUtil.getCurrentContext().getBean(JwtConfig.class);
+            helper.setJwtConfig(jwtConfig);
         }
         return helper;
+    }
+
+    public String createJwt(Claims claims){
+        return createJwt(claims,jwtConfig.getExpiresSecond()*1000L);
     }
 
     public String createJwt(Claims claims,long ttlMillis){
@@ -32,6 +54,10 @@ public class JwtHelper {
                 .setClaims(claims);
 
         return createJwt(builder,ttlMillis);
+    }
+
+    public String createJwt(String id, Map<String,Object> claims){
+        return createJwt(id,claims,jwtConfig.getExpiresSecond()*1000L);
     }
 
     public String createJwt(String id, Map<String,Object> claims,long ttlMillis){
@@ -83,7 +109,7 @@ public class JwtHelper {
     }
 
     private SecretKey generalKey(){
-        String stringKey = "chenghuan";
+        String stringKey = jwtConfig.getSecretKey();
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
         byte[] encodedKey = DatatypeConverter.parseBase64Binary(stringKey);//本地的密码解码[B@152f6e2

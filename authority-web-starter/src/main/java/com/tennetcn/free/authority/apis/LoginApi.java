@@ -55,7 +55,7 @@ public class LoginApi extends AuthorityApi {
         Map<String,Object> claims = new HashMap<>();
         claims.put("account",loginModel.getAccount());
         claims.put("name",loginModel.getName());
-        String token = JwtHelper.instance().createJwt(user.getId(),claims,1000*60*30);
+        String token = JwtHelper.instance().createJwt(user.getId(),claims);
 
         cached.put(token,loginModel);
         response.put("result",true);
