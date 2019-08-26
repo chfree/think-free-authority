@@ -1,10 +1,13 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
+import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
 import com.tennetcn.free.authority.model.User;
+import com.tennetcn.free.authority.service.IMenuService;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
+import com.tennetcn.free.authority.viewmodel.MenuRoute;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.message.LoginModel;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +41,9 @@ public class LoginApi extends AuthorityApi {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IMenuService menuService;
 
     @ApiAuthPassport
     @ApiOperation(value = "登陆")
@@ -68,5 +75,17 @@ public class LoginApi extends AuthorityApi {
     public BaseResponse logout(){
         cached.remove(AuthorityApi.LOGIN_KEY);
         return new BaseResponse();
+    }
+
+    @PostMapping("loginLoadData")
+    public BaseResponse loginLoadData(){
+        LoginLoadDataResp resp = new LoginLoadDataResp();
+
+        List<MenuRoute> menuRouteList = menuService.queryMenuRouteFormatByRoleIds(null);
+        resp.setMenuRoutes(menuRouteList);
+
+        resp.setLoginInfo(getCurrentLogin());
+
+        return resp;
     }
 }

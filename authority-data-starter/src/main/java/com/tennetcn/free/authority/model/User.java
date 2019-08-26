@@ -1,6 +1,7 @@
 package com.tennetcn.free.authority.model;
 
 import cn.hutool.core.date.DateUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
@@ -26,6 +27,7 @@ public class User  extends ModelBase {
     @Column(name="account")
     private String account;
 
+    @JsonIgnore
     @Column(name="password")
     private String password;
 
