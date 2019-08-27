@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -60,7 +61,7 @@ public class MenuButtonApi extends AuthorityApi {
     @PostMapping("save")
     public BaseResponse save(@RequestBody @Valid SaveMenuButtonReq saveMenuButtonReq){
         BaseResponse response = new BaseResponse();
-        var menuButtons = menuButtonForm(saveMenuButtonReq.getMenuButtons());
+        var menuButtons = menuButtonFormat(saveMenuButtonReq.getMenuButtons());
         boolean result = menuButtonService.saveMenuButtons(saveMenuButtonReq.getMenuId(),menuButtons);
         response.put("result", result);
 
@@ -78,10 +79,12 @@ public class MenuButtonApi extends AuthorityApi {
         return response;
     }
 
-    private List<MenuButton> menuButtonForm(List<MenuButton> menuButtons){
+    private List<MenuButton> menuButtonFormat(List<MenuButton> menuButtons){
         return menuButtons.stream().map(menuButton -> {
+            if(StringUtils.isEmpty(menuButton.getId())){
+                menuButton.setId(IdUtil.randomUUID());
+            }
             menuButton.setCreateDate(DateUtil.date());
-            menuButton.setId(IdUtil.randomUUID());
             menuButton.setCreateUserId(null);
             menuButton.setCreateUserName(null);
             menuButton.setDeleteMark(YesOrNoInteger.NO);
