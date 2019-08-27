@@ -102,7 +102,8 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
                      .from(RoleFunc.class,"roleFunc")
                      .leftJoin(Menu.class,"menu").on("roleFunc.func_id","menu.id")
                      .andWhereInString("role_id",roleIds)
-                     .andEq("func_type", RoleFuncType.MENU);
+                     .andEq("func_type", RoleFuncType.MENU)
+                     .addOrder("menu.sort_code",OrderEnum.asc);;
         }else{
             sqlExpression.selectAllFrom(Menu.class)
             .addOrder("sort_code",OrderEnum.asc);
