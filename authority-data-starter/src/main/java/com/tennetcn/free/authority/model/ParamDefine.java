@@ -33,5 +33,8 @@ public class ParamDefine extends ModelBase {
     @Column(name="create_date")
     private Date createDate;
 
+    @Column(name="comments")
+    private String comments;
+
 
 }

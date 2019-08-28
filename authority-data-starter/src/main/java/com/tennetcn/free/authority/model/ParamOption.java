@@ -37,4 +37,7 @@ public class ParamOption extends ModelBase {
 
     @Column(name="status")
     private String status;
+
+    @Column(name="comments")
+    private String comments;
 }
