@@ -11,6 +11,10 @@ import lombok.Data;
 
 @Data
 public class ParamOptionSearch {
+    private String id;
+
+    private String notId;
+
     private String defineId;
 
     private String value;

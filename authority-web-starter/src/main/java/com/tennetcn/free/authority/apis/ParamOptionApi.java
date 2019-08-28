@@ -56,7 +56,7 @@ public class ParamOptionApi extends AuthorityApi {
         BaseResponse response=new BaseResponse();
 
         ParamOption paramOption = paramOptionService.queryModel(id);
-        response.put("paramDefine",paramOption);
+        response.put("paramOption",paramOption);
 
         return response;
     }

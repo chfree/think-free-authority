@@ -5,6 +5,7 @@ import com.tennetcn.free.authority.service.IParamDefineService;
 import com.tennetcn.free.authority.viewmodel.ParamDefineSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
@@ -34,7 +35,8 @@ public class ParamDefineServiceImpl extends SuperService<ParamDefine> implements
     @Override
     public List<ParamDefine> queryListBySearch(ParamDefineSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(ParamDefine.class);
+        sqlExpression.selectAllFrom(ParamDefine.class)
+                     .addOrder("name", OrderEnum.asc);
 
         appendExpression(sqlExpression,search);
 

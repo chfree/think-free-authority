@@ -5,6 +5,7 @@ import com.tennetcn.free.authority.service.IParamOptionService;
 import com.tennetcn.free.authority.viewmodel.ParamOptionSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
@@ -34,7 +35,8 @@ public class ParamOptionServiceImpl extends SuperService<ParamOption> implements
     @Override
     public List<ParamOption> queryListBySearch(ParamOptionSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(ParamOption.class);
+        sqlExpression.selectAllFrom(ParamOption.class)
+                     .addOrder("sort_code", OrderEnum.asc);
 
         appendExpression(sqlExpression,search);
 
@@ -43,10 +45,14 @@ public class ParamOptionServiceImpl extends SuperService<ParamOption> implements
 
 
     private void appendExpression(ISqlExpression sqlExpression, ParamOptionSearch search){
+        sqlExpression.andEqNoEmpty("id",search.getId());
+
+        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
+
         sqlExpression.andEqNoEmpty("define_id",search.getDefineId());
 
         sqlExpression.andEqNoEmpty("text",search.getText());
 
-        sqlExpression.andNotEqNoEmpty("value",search.getValue());
+        sqlExpression.andEqNoEmpty("value",search.getValue());
     }
 }
