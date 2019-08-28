@@ -41,8 +41,6 @@ public class ButtonApi extends AuthorityApi {
         resp.setTotalCount(buttonService.queryCountBySearch(listReq.getSearch()));
         resp.setButtons(buttonService.queryListBySearch(listReq.getSearch(),listReq.getPager()));
 
-        System.out.println(cached.get("test"));
-
         return resp;
     }
 
