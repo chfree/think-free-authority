@@ -94,4 +94,14 @@ public class ParamOptionApi extends AuthorityApi {
 
         return response;
     }
+
+    @ApiOperation(value = "根据参数名称获取参数选项")
+    @PostMapping("listByDefineName")
+    public BaseResponse listByDefineName(@Valid @NotBlank(message = "参数名称不能为空") String defineName){
+        BaseResponse response=new BaseResponse();
+
+        response.put("paramOptions",paramOptionService.queryListByDefineName(defineName));
+
+        return response;
+    }
 }

@@ -18,4 +18,6 @@ public interface IParamOptionService extends ISuperService<ParamOption> {
     int queryCountBySearch(ParamOptionSearch search);
 
     List<ParamOption> queryListBySearch(ParamOptionSearch search, PagerModel pagerModel);
+
+    List<ParamOption> queryListByDefineName(String defineName);
 }

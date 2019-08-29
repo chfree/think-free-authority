@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.model.ParamDefine;
 import com.tennetcn.free.authority.model.ParamOption;
 import com.tennetcn.free.authority.service.IParamOptionService;
 import com.tennetcn.free.authority.viewmodel.ParamOptionSearch;
@@ -41,6 +42,18 @@ public class ParamOptionServiceImpl extends SuperService<ParamOption> implements
         appendExpression(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
+    }
+
+    @Override
+    public List<ParamOption> queryListByDefineName(String defineName) {
+        ISqlExpression defineIdSql = SqlExpressionFactory.createExpression().select("id").from(ParamDefine.class).andEq("name",defineName);
+
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(ParamOption.class)
+                .andWhereIn("define_id",defineIdSql)
+                .addOrder("sort_code", OrderEnum.asc);
+
+        return queryList(sqlExpression);
     }
 
 
