@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * @author chfree
@@ -101,6 +102,16 @@ public class ParamOptionApi extends AuthorityApi {
         BaseResponse response=new BaseResponse();
 
         response.put("paramOptions",paramOptionService.queryListByDefineName(defineName));
+
+        return response;
+    }
+
+    @ApiOperation(value = "根据参数名称获取参数选项")
+    @PostMapping("listByDefineNames")
+    public BaseResponse listByDefineNames(@RequestBody List<String> defineNames){
+        BaseResponse response=new BaseResponse();
+
+        response.put("paramOptionMap",paramOptionService.queryListGroupByDefineNames(defineNames));
 
         return response;
     }
