@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.enums.MenuType;
 import com.tennetcn.free.authority.enums.RoleFuncType;
 import com.tennetcn.free.authority.model.Menu;
 import com.tennetcn.free.authority.model.RoleFunc;
@@ -103,6 +104,7 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
                      .leftJoin(Menu.class,"menu").on("roleFunc.func_id","menu.id")
                      .andWhereInString("role_id",roleIds)
                      .andEq("func_type", RoleFuncType.MENU)
+                    .andEq("menu.type", MenuType.MENU)
                      .addOrder("menu.sort_code",OrderEnum.asc);;
         }else{
             sqlExpression.selectAllFrom(Menu.class)
