@@ -13,6 +13,8 @@
         <module>authority-web-starter</module>
         <module>authority-web-starter-run</module>
         <module>authority-security-starter</module>
+        <module>develop-data-starter</module>
+        <module>develop-web-starter</module>
     </modules>
 
     <parent>
