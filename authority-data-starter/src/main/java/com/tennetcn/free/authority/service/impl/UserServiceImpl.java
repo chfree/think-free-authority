@@ -1,6 +1,7 @@
 package com.tennetcn.free.authority.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
+import com.tennetcn.free.authority.dao.IUserDao;
 import com.tennetcn.free.authority.model.User;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
@@ -10,6 +11,7 @@ import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.message.DaoBaseRuntimeException;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,34 +26,22 @@ import java.util.List;
 @Component
 public class UserServiceImpl extends SuperService<User> implements IUserService {
 
+    @Autowired
+    IUserDao userDao;
+
     @Override
     public int queryCountBySearch(UserSearch search) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(User.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryCount(sqlExpression);
+        return userDao.queryCountBySearch(search);
     }
 
     @Override
     public List<User> queryListBySearch(UserSearch search, PagerModel pagerModel) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(User.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryList(sqlExpression,pagerModel);
+        return userDao.queryListBySearch(search,pagerModel);
     }
 
     @Override
     public User queryModelByLogin(String account, String password) {
-        ISqlExpression sqlExpression=SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(User.class)
-                     .andEq("account",account)
-                     .andEq("password",passwordFormat(password));
-
-        return queryModel(sqlExpression);
+        return userDao.queryModelByLogin(account,passwordFormat(password));
     }
 
     private String passwordFormat(String password){
@@ -60,25 +50,7 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
 
     @Override
     public User queryModelByAccount(String account) {
-        ISqlExpression sqlExpression=SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(User.class)
-                .andEq("account",account);
-
-        return queryModel(sqlExpression);
-    }
-
-    private void appendExpression(ISqlExpression sqlExpression, UserSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
-
-        sqlExpression.andEqNoEmpty("name",search.getName());
-
-        sqlExpression.andEqNoEmpty("account",search.getAccount());
-
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
-
-        sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
-
-        sqlExpression.andRightLikeNoEmpty("account",search.getLikeAccount());
+        return userDao.queryModelByAccount(account);
     }
 
     @Override

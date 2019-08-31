@@ -2,6 +2,7 @@ package com.tennetcn.free.authority.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ArrayUtil;
+import com.tennetcn.free.authority.dao.IDepartmentDao;
 import com.tennetcn.free.authority.model.Button;
 import com.tennetcn.free.authority.model.Department;
 import com.tennetcn.free.authority.service.IDepartmentService;
@@ -12,6 +13,7 @@ import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import lombok.var;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -28,34 +30,28 @@ import java.util.stream.Collectors;
 
 @Component
 public class DepartmentServiceImpl extends SuperService<Department> implements IDepartmentService {
+
+    @Autowired
+    IDepartmentDao departmentDao;
+
     @Override
     public int queryCountBySearch(DepartmentSearch search) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(Department.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryCount(sqlExpression);
+        return departmentDao.queryCountBySearch(search);
     }
 
     @Override
     public List<Department> queryListBySearch(DepartmentSearch search, PagerModel pagerModel) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(Department.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryList(sqlExpression,pagerModel);
+        return departmentDao.queryListBySearch(search,pagerModel);
     }
 
     @Override
     public List<DepartmentTree> queryListTreeBySearch(DepartmentSearch search) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(Department.class);
+        return departmentDao.queryListTreeBySearch(search);
+    }
 
-        appendExpression(sqlExpression,search);
-
-        return queryList(sqlExpression,DepartmentTree.class);
+    @Override
+    public DepartmentTree queryModelTree(String id) {
+        return departmentDao.queryModelTree(id);
     }
 
     @Override
@@ -79,17 +75,6 @@ public class DepartmentServiceImpl extends SuperService<Department> implements I
         return minDeptTrees;
     }
 
-    @Override
-    public DepartmentTree queryModelTree(String id) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(Department.class,"dept")
-                     .appendSelect("parent.full_name as parentName")
-                     .leftJoin(Department.class,"parent")
-                     .on("dept.parent_id","parent.id")
-                     .andEq("dept.id",id);
-
-        return queryModel(sqlExpression, DepartmentTree.class);
-    }
 
     private void deptTreeLoop(DepartmentTree currentDeptTree,List<DepartmentTree> allDeptTrees){
 
@@ -100,15 +85,5 @@ public class DepartmentServiceImpl extends SuperService<Department> implements I
             deptTreeLoop(deptTree,allDeptTrees);
         }
 
-    }
-
-    private void appendExpression(ISqlExpression sqlExpression, DepartmentSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
-
-        sqlExpression.andEqNoEmpty("full_name",search.getName());
-
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
-
-        sqlExpression.andRightLikeNoEmpty("full_name",search.getLikeName());
     }
 }

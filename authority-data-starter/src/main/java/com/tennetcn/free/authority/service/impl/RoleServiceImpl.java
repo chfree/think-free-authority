@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.dao.IRoleDao;
 import com.tennetcn.free.authority.model.Business;
 import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.model.UserRole;
@@ -10,6 +11,7 @@ import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,55 +25,27 @@ import java.util.List;
 
 @Component
 public class RoleServiceImpl extends SuperService<Role> implements IRoleService {
+
+    @Autowired
+    IRoleDao roleDao;
+
     @Override
     public int queryCountBySearch(RoleSearch search) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(Role.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryCount(sqlExpression);
+        return roleDao.queryCountBySearch(search);
     }
 
     @Override
     public List<Role> queryListBySearch(RoleSearch search, PagerModel pagerModel) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(Role.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryList(sqlExpression,pagerModel);
+        return roleDao.queryListBySearch(search,pagerModel);
     }
 
     @Override
     public List<String> queryListByUserId(String userId) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("role_id")
-                .from(UserRole.class)
-                .andEq("user_id",userId);
-
-        return  queryList(sqlExpression,String.class);
+        return roleDao.queryListByUserId(userId);
     }
 
     @Override
     public List<Role> queryListRoleByUserId(String userId) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("role.id,role.comments,role.delete_mark,role.description,role.mark_code,role.role_name,role.sort_code,role.role_mark")
-                .from(UserRole.class,"userRole")
-                .leftJoin(Role.class,"role").on("role.id","userRole.role_id")
-                .andEq("userRole.user_id",userId)
-                .addOrder("role.sort_code", OrderEnum.asc);
-
-        return  queryList(sqlExpression,Role.class);
-    }
-
-    private void appendExpression(ISqlExpression sqlExpression, RoleSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
-
-        sqlExpression.andEqNoEmpty("role_name",search.getRoleName());
-
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
-
-        sqlExpression.andRightLikeNoEmpty("role_name",search.getLikeRoleName());
+        return roleDao.queryListRoleByUserId(userId);
     }
 }

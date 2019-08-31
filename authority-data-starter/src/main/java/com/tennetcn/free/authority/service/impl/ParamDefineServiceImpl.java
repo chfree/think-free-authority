@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.dao.IParamDefineDao;
 import com.tennetcn.free.authority.model.ParamDefine;
 import com.tennetcn.free.authority.service.IParamDefineService;
 import com.tennetcn.free.authority.viewmodel.ParamDefineSearch;
@@ -8,6 +9,7 @@ import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,39 +24,16 @@ import java.util.List;
 @Component
 public class ParamDefineServiceImpl extends SuperService<ParamDefine> implements IParamDefineService {
 
+    @Autowired
+    IParamDefineDao paramDefineDao;
+
     @Override
     public int queryCountBySearch(ParamDefineSearch search) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(ParamDefine.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryCount(sqlExpression);
+        return paramDefineDao.queryCountBySearch(search);
     }
 
     @Override
     public List<ParamDefine> queryListBySearch(ParamDefineSearch search, PagerModel pagerModel) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(ParamDefine.class)
-                     .addOrder("name", OrderEnum.asc);
-
-        appendExpression(sqlExpression,search);
-
-        return queryList(sqlExpression,pagerModel);
-    }
-
-
-    private void appendExpression(ISqlExpression sqlExpression, ParamDefineSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
-
-        sqlExpression.andEqNoEmpty("name",search.getName());
-
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
-
-        sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
-
-        sqlExpression.andEqNoEmpty("title",search.getTitle());
-
-        sqlExpression.andRightLikeNoEmpty("title", search.getLikeTitle());
+        return paramDefineDao.queryListBySearch(search,pagerModel);
     }
 }

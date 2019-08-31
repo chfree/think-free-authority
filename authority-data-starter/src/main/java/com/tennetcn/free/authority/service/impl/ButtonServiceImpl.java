@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.dao.IButtonDao;
 import com.tennetcn.free.authority.enums.RoleFuncType;
 import com.tennetcn.free.authority.model.Button;
 import com.tennetcn.free.authority.model.MenuButton;
@@ -10,6 +11,7 @@ import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,49 +26,21 @@ import java.util.List;
 @Component
 public class ButtonServiceImpl extends SuperService<Button> implements IButtonService {
 
+    @Autowired
+    IButtonDao buttonDao;
+
     @Override
     public int queryCountBySearch(ButtonSearch search) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(Button.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryCount(sqlExpression);
+        return buttonDao.queryCountBySearch(search);
     }
 
     @Override
     public List<Button> queryListBySearch(ButtonSearch search, PagerModel pagerModel) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(Button.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryList(sqlExpression,pagerModel);
+        return buttonDao.queryListBySearch(search,pagerModel);
     }
 
     @Override
     public List<Button> queryListByRoleIds(List<String> roleIds) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("button.id,button.name,button.icon,button.theme,button.title,button.button_type")
-                .from(RoleFunc.class,"roleFunc")
-                .leftJoin(MenuButton.class,"button").on("roleFunc.func_id","button.id")
-                .andWhereInString("role_id",roleIds)
-                .andEq("func_type", RoleFuncType.BUTTON);
-
-        return queryList(sqlExpression,Button.class);
-    }
-
-    private void appendExpression(ISqlExpression sqlExpression, ButtonSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
-
-        sqlExpression.andEqNoEmpty("name",search.getName());
-
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
-
-        sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
-
-        sqlExpression.andEqNoEmpty("title",search.getTitle());
-
-        sqlExpression.andRightLikeNoEmpty("title", search.getLikeTitle());
+        return buttonDao.queryListByRoleIds(roleIds);
     }
 }

@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import com.tennetcn.free.authority.dao.IMenuButtonDao;
 import com.tennetcn.free.authority.model.Menu;
 import com.tennetcn.free.authority.model.MenuButton;
 import com.tennetcn.free.authority.service.IMenuButtonService;
@@ -11,6 +12,7 @@ import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import lombok.var;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,26 +28,17 @@ import java.util.stream.Collectors;
 @Component
 public class MenuButtonServiceImpl extends SuperService<MenuButton> implements IMenuButtonService {
 
+    @Autowired
+    IMenuButtonDao menuButtonDao;
+
     @Override
     public int queryCountBySearch(MenuButtonSearch search) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(MenuButton.class);
-
-        appendExpression(sqlExpression,search);
-
-        return queryCount(sqlExpression);
+        return menuButtonDao.queryCountBySearch(search);
     }
 
     @Override
     public List<MenuButton> queryListBySearch(MenuButtonSearch search, PagerModel pagerModel) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(MenuButton.class);
-
-        appendExpression(sqlExpression,search);
-        if(pagerModel!=null){
-            return queryList(sqlExpression,pagerModel);
-        }
-        return queryList(sqlExpression);
+        return menuButtonDao.queryListBySearch(search,pagerModel);
     }
 
     @Override
@@ -61,36 +54,12 @@ public class MenuButtonServiceImpl extends SuperService<MenuButton> implements I
 
     @Override
     public boolean deleteByMenuId(String menuId) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.delete().from(MenuButton.class)
-                     .andEq("menu_id",menuId);
-
-        return delete(sqlExpression) >= 0;
-    }
-
-    private void appendExpression(ISqlExpression sqlExpression, MenuButtonSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
-
-        sqlExpression.andEqNoEmpty("name",search.getName());
-
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
-
-        sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
-
-        sqlExpression.andEqNoEmpty("title",search.getTitle());
-
-        sqlExpression.andRightLikeNoEmpty("title", search.getLikeTitle());
-
-        sqlExpression.andEqNoEmpty("menu_id",search.getMenuId());
+        return menuButtonDao.deleteByMenuId(menuId);
     }
 
     @Override
     public List<MenuButtonTree> queryMenuButtonTreeList() {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(Menu.class)
-                .addOrder("sort_code", OrderEnum.asc);
-
-        return queryList(sqlExpression, MenuButtonTree.class);
+        return menuButtonDao.queryMenuButtonTreeList();
     }
 
     @Override
