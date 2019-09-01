@@ -3,8 +3,8 @@ package com.tennetcn.free.authority.service;
 import com.tennetcn.free.authority.model.Department;
 import com.tennetcn.free.authority.viewmodel.DepartmentSearch;
 import com.tennetcn.free.authority.viewmodel.DepartmentTree;
+import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperService;
-import com.tennetcn.free.data.message.PagerModel;
 
 import java.util.List;
 

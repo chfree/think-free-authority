@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.button;
 
-import com.tennetcn.free.authority.message.PagerReq;
 import com.tennetcn.free.authority.viewmodel.ButtonSearch;
+import com.tennetcn.free.web.message.BasePagerReq;
 import lombok.Data;
 
 /**
@@ -12,6 +12,6 @@ import lombok.Data;
  */
 
 @Data
-public class ButtonListReq extends PagerReq {
+public class ButtonListReq extends BasePagerReq {
     private ButtonSearch search;
 }

@@ -1,8 +1,7 @@
 package com.tennetcn.free.authority.apimodel.paramoption;
 
-import com.tennetcn.free.authority.message.PagerReq;
-import com.tennetcn.free.authority.viewmodel.ParamDefineSearch;
 import com.tennetcn.free.authority.viewmodel.ParamOptionSearch;
+import com.tennetcn.free.web.message.BasePagerReq;
 import lombok.Data;
 
 /**
@@ -13,6 +12,6 @@ import lombok.Data;
  */
 
 @Data
-public class ParamOptionListReq extends PagerReq {
+public class ParamOptionListReq extends BasePagerReq {
     private ParamOptionSearch search;
 }

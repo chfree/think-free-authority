@@ -1,16 +1,11 @@
 package com.tennetcn.free.authority.dao.impl;
 
-import cn.hutool.crypto.SecureUtil;
 import com.tennetcn.free.authority.dao.IUserDao;
 import com.tennetcn.free.authority.model.User;
-import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
+import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
-import com.tennetcn.free.data.dao.base.impl.SuperService;
-import com.tennetcn.free.data.enums.ModelStatus;
-import com.tennetcn.free.data.message.DaoBaseRuntimeException;
-import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
 

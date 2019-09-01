@@ -3,8 +3,8 @@ package com.tennetcn.free.authority.dao;
 import com.tennetcn.free.authority.model.MenuButton;
 import com.tennetcn.free.authority.viewmodel.MenuButtonSearch;
 import com.tennetcn.free.authority.viewmodel.MenuButtonTree;
+import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperDao;
-import com.tennetcn.free.data.message.PagerModel;
 
 import java.util.List;
 

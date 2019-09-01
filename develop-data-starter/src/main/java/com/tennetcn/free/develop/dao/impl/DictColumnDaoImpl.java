@@ -4,9 +4,9 @@ import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
-import com.tennetcn.free.develop.dao.IDictTableDao;
-import com.tennetcn.free.develop.model.DictTable;
-import com.tennetcn.free.develop.viewmodel.DictTableSearch;
+import com.tennetcn.free.develop.dao.IDictColumnDao;
+import com.tennetcn.free.develop.model.DictColumn;
+import com.tennetcn.free.develop.viewmodel.DictColumnSearch;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,11 +19,11 @@ import java.util.List;
  */
 
 @Component
-public class DictTableDaoImpl extends SuperDao<DictTable> implements IDictTableDao {
+public class DictColumnDaoImpl extends SuperDao<DictColumn> implements IDictColumnDao {
     @Override
-    public int queryCountBySearch(DictTableSearch search) {
+    public int queryCountBySearch(DictColumnSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(DictTable.class);
+        sqlExpression.selectCount().from(DictColumn.class);
 
         appendExpression(sqlExpression,search);
 
@@ -31,16 +31,16 @@ public class DictTableDaoImpl extends SuperDao<DictTable> implements IDictTableD
     }
 
     @Override
-    public List<DictTable> queryListBySearch(DictTableSearch search, PagerModel pagerModel) {
+    public List<DictColumn> queryListBySearch(DictColumnSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(DictTable.class);
+        sqlExpression.selectAllFrom(DictColumn.class);
 
         appendExpression(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
     }
 
-    private void appendExpression(ISqlExpression sqlExpression, DictTableSearch search){
+    private void appendExpression(ISqlExpression sqlExpression, DictColumnSearch search){
         sqlExpression.andEqNoEmpty("id",search.getId());
 
         sqlExpression.andEqNoEmpty("name",search.getName());
@@ -48,5 +48,7 @@ public class DictTableDaoImpl extends SuperDao<DictTable> implements IDictTableD
         sqlExpression.andNotEqNoEmpty("id",search.getNotId());
 
         sqlExpression.andLikeNoEmpty("name",search.getLikeName());
+
+        sqlExpression.andEqNoEmpty("table_id",search.getTableId());
     }
 }

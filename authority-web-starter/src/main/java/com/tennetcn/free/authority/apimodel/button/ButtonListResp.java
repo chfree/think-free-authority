@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.button;
 
-import com.tennetcn.free.authority.message.PagerResp;
 import com.tennetcn.free.authority.model.Button;
+import com.tennetcn.free.web.message.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;
@@ -14,6 +14,6 @@ import java.util.List;
  */
 
 @Data
-public class ButtonListResp extends PagerResp {
+public class ButtonListResp extends BasePagerResp {
     private List<Button> buttons;
 }

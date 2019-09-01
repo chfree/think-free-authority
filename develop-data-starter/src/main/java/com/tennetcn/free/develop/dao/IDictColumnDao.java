@@ -1,8 +1,11 @@
 package com.tennetcn.free.develop.dao;
 
+import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperDao;
 import com.tennetcn.free.develop.model.DictColumn;
-import com.tennetcn.free.develop.model.DictTable;
+import com.tennetcn.free.develop.viewmodel.DictColumnSearch;
+
+import java.util.List;
 
 /**
  * @author chfree
@@ -12,4 +15,7 @@ import com.tennetcn.free.develop.model.DictTable;
  */
 
 public interface IDictColumnDao extends ISuperDao<DictColumn> {
+    int queryCountBySearch(DictColumnSearch search);
+
+    List<DictColumn> queryListBySearch(DictColumnSearch search, PagerModel pagerModel);
 }

@@ -3,11 +3,10 @@ package com.tennetcn.free.authority.dao;
 import com.tennetcn.free.authority.model.ParamOption;
 import com.tennetcn.free.authority.viewmodel.ParamOptionSearch;
 import com.tennetcn.free.authority.viewmodel.ParamOptionView;
+import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperDao;
-import com.tennetcn.free.data.message.PagerModel;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author chfree

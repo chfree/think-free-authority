@@ -1,8 +1,7 @@
 package com.tennetcn.free.authority.apimodel.paramoption;
 
-import com.tennetcn.free.authority.message.PagerResp;
-import com.tennetcn.free.authority.model.ParamDefine;
 import com.tennetcn.free.authority.model.ParamOption;
+import com.tennetcn.free.web.message.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;
@@ -15,6 +14,6 @@ import java.util.List;
  */
 
 @Data
-public class ParamOptionListResp extends PagerResp {
+public class ParamOptionListResp extends BasePagerResp {
     private List<ParamOption> paramOptions;
 }

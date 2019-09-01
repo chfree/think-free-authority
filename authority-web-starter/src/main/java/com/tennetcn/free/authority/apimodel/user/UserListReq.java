@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.user;
 
-import com.tennetcn.free.authority.message.PagerReq;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
+import com.tennetcn.free.web.message.BasePagerReq;
 import lombok.Data;
 
 /**
@@ -12,6 +12,6 @@ import lombok.Data;
  */
 
 @Data
-public class UserListReq extends PagerReq {
+public class UserListReq extends BasePagerReq {
     private UserSearch search;
 }

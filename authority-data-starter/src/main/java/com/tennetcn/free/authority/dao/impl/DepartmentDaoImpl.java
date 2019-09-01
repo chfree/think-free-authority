@@ -2,20 +2,15 @@ package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IDepartmentDao;
 import com.tennetcn.free.authority.model.Department;
-import com.tennetcn.free.authority.service.IDepartmentService;
 import com.tennetcn.free.authority.viewmodel.DepartmentSearch;
 import com.tennetcn.free.authority.viewmodel.DepartmentTree;
+import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
-import com.tennetcn.free.data.dao.base.impl.SuperService;
-import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
-import lombok.var;
 import org.springframework.stereotype.Component;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author chfree

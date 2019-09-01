@@ -1,7 +1,5 @@
 package com.tennetcn.free.authority.apimodel.department;
 
-import com.tennetcn.free.authority.message.PagerResp;
-import com.tennetcn.free.authority.model.Button;
 import com.tennetcn.free.authority.viewmodel.DepartmentTree;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import lombok.Data;

@@ -1,11 +1,9 @@
 package com.tennetcn.free.authority.service;
 
-import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.model.User;
-import com.tennetcn.free.authority.viewmodel.RoleSearch;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
+import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperService;
-import com.tennetcn.free.data.message.PagerModel;
 
 import java.util.List;
 

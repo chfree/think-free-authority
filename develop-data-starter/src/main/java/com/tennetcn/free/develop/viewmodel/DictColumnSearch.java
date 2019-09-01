@@ -18,4 +18,6 @@ public class DictColumnSearch {
     private String name;
 
     private String likeName;
+
+    private String tableId;
 }

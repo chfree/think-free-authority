@@ -1,8 +1,7 @@
 package com.tennetcn.free.authority.apimodel.user;
 
-import com.tennetcn.free.authority.message.PagerResp;
-import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.model.User;
+import com.tennetcn.free.web.message.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;
@@ -15,6 +14,6 @@ import java.util.List;
  */
 
 @Data
-public class UserListResp extends PagerResp {
+public class UserListResp extends BasePagerResp {
    private List<User> users;
 }

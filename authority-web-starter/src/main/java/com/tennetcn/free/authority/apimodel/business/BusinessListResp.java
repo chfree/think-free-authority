@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.business;
 
-import com.tennetcn.free.authority.message.PagerResp;
 import com.tennetcn.free.authority.model.Business;
+import com.tennetcn.free.web.message.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;
@@ -14,6 +14,6 @@ import java.util.List;
  */
 
 @Data
-public class BusinessListResp extends PagerResp {
+public class BusinessListResp extends BasePagerResp {
     private List<Business> businessList;
 }

@@ -6,9 +6,9 @@ import com.tennetcn.free.authority.model.Button;
 import com.tennetcn.free.authority.model.MenuButton;
 import com.tennetcn.free.authority.model.RoleFunc;
 import com.tennetcn.free.authority.viewmodel.ButtonSearch;
+import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
-import com.tennetcn.free.data.message.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
 
