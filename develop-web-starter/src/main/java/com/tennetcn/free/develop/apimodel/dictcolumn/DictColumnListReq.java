@@ -2,6 +2,7 @@ package com.tennetcn.free.develop.apimodel.dictcolumn;
 
 import com.tennetcn.free.develop.viewmodel.DictColumnSearch;
 import com.tennetcn.free.web.message.BasePagerReq;
+import com.tennetcn.free.web.webapi.BaseRequest;
 import lombok.Data;
 
 /**
@@ -12,6 +13,6 @@ import lombok.Data;
  */
 
 @Data
-public class DictColumnListReq extends BasePagerReq {
+public class DictColumnListReq extends BaseRequest {
     private DictColumnSearch search;
 }

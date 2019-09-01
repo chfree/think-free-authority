@@ -18,4 +18,8 @@ public interface IDictColumnService extends ISuperService<DictColumn> {
     int queryCountBySearch(DictColumnSearch search);
 
     List<DictColumn> queryListBySearch(DictColumnSearch search, PagerModel pagerModel);
+
+    boolean saveDictColumns(String tableId,List<DictColumn> dictColumns);
+
+    boolean deleteByTableId(String tableId);
 }

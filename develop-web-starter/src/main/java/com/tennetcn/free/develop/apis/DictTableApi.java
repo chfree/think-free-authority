@@ -26,7 +26,7 @@ import javax.validation.constraints.NotBlank;
  * @comment
  */
 @RestController
-@RequestMapping(value = "/api/v1/authority/business/")
+@RequestMapping(value = "/api/v1/develop/dictTable/")
 @Api(tags="字典表管理",value ="字典表相关的操作")
 public class DictTableApi extends AuthorityApi {
 

@@ -18,4 +18,6 @@ public interface IDictColumnDao extends ISuperDao<DictColumn> {
     int queryCountBySearch(DictColumnSearch search);
 
     List<DictColumn> queryListBySearch(DictColumnSearch search, PagerModel pagerModel);
+
+    int deleteByTableId(String tableId);
 }

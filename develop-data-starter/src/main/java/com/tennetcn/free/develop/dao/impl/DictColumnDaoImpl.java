@@ -40,6 +40,14 @@ public class DictColumnDaoImpl extends SuperDao<DictColumn> implements IDictColu
         return queryList(sqlExpression,pagerModel);
     }
 
+    @Override
+    public int deleteByTableId(String tableId) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.delete().from(DictColumn.class)
+                     .andEq("table_id",tableId);
+        return delete(sqlExpression);
+    }
+
     private void appendExpression(ISqlExpression sqlExpression, DictColumnSearch search){
         sqlExpression.andEqNoEmpty("id",search.getId());
 

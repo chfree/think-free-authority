@@ -1,5 +1,6 @@
 package com.tennetcn.free.develop.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.develop.dao.IDictColumnDao;
@@ -32,5 +33,27 @@ public class DictColumnServiceImpl extends SuperService<DictColumn> implements I
     @Override
     public List<DictColumn> queryListBySearch(DictColumnSearch search, PagerModel pagerModel) {
         return dictColumnDao.queryListBySearch(search,pagerModel);
+    }
+
+    @Override
+    public boolean saveDictColumns(String tableId, List<DictColumn> dictColumns) {
+        if(!deleteByTableId(tableId)){
+            return false;
+        }
+        if(dictColumns==null||dictColumns.size()<=0){
+            return true;
+        }
+
+        dictColumns.forEach(item->{
+            item.setTableId(tableId);
+            item.setId(IdUtil.randomUUID());
+        });
+
+        return insertListEx(dictColumns) == dictColumns.size();
+    }
+
+    @Override
+    public boolean deleteByTableId(String tableId) {
+        return dictColumnDao.deleteByTableId(tableId)>=0;
     }
 }

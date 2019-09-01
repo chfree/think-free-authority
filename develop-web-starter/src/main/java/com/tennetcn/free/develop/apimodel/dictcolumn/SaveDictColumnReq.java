@@ -5,6 +5,7 @@ import com.tennetcn.free.develop.model.DictTable;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * @author chfree
@@ -13,7 +14,9 @@ import javax.validation.constraints.NotBlank;
  * @comment
  */
 @Data
-public class SaveDictColumnReq extends DictColumn {
-    @NotBlank(message = "字典列名称不能为空")
-    private String columnName;
+public class SaveDictColumnReq {
+    @NotBlank(message = "表信息不能为空")
+    private String tableId;
+
+    private List<DictColumn> dictColumns;
 }
