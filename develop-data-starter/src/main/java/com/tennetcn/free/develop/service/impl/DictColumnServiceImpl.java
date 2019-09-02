@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author chfree
@@ -44,13 +45,20 @@ public class DictColumnServiceImpl extends SuperService<DictColumn> implements I
             return true;
         }
 
-        dictColumns.forEach(item->{
-            item.setTableId(tableId);
-            item.setId(IdUtil.randomUUID());
-        });
+        dictColumnFormat(dictColumns,tableId);
 
         return insertListEx(dictColumns) == dictColumns.size();
     }
+
+    private void dictColumnFormat(List<DictColumn> dictColumns,String tableId){
+        int index = 0;
+        for (DictColumn dictColumn:dictColumns) {
+            dictColumn.setSortCode(++index);
+            dictColumn.setTableId(tableId);
+            dictColumn.setId(IdUtil.randomUUID());
+        }
+    }
+
 
     @Override
     public boolean deleteByTableId(String tableId) {

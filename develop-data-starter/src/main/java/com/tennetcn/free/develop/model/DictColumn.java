@@ -38,8 +38,8 @@ public class DictColumn extends ModelBase {
     @Column(name = "data_length")
     private String dataLength;
 
-    @Column(name = "is_null")
-    private String isNull;
+    @Column(name = "not_null")
+    private String notNull;
 
     @Column(name = "is_key")
     private String isKey;

@@ -48,5 +48,7 @@ public class DictTableDaoImpl extends SuperDao<DictTable> implements IDictTableD
         sqlExpression.andNotEqNoEmpty("id",search.getNotId());
 
         sqlExpression.andLikeNoEmpty("name",search.getLikeName());
+
+        sqlExpression.andEqNoEmpty("dbname",search.getDbname());
     }
 }

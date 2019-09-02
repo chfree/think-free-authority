@@ -18,4 +18,6 @@ public class DictTableSearch {
     private String name;
 
     private String likeName;
+
+    private String dbname;
 }
