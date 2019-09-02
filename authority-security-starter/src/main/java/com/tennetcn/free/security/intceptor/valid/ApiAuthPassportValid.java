@@ -106,6 +106,8 @@ public class ApiAuthPassportValid {
 			if(loginModel==null){
 				return false;
 			}
+			// 在存储一次token
+			cached.put(token,loginModel);
 		}
 		request.setAttribute(AuthorityApi.LOGIN_KEY, loginModel);
 		
