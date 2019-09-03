@@ -3,8 +3,6 @@ package com.tennetcn.free.security.intceptor;
 import com.tennetcn.free.security.intceptor.valid.ApiAuthPassportValid;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;

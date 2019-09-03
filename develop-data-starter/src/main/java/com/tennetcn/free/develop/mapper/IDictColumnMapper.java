@@ -2,7 +2,6 @@ package com.tennetcn.free.develop.mapper;
 
 import com.tennetcn.free.data.dao.base.IMapper;
 import com.tennetcn.free.develop.model.DictColumn;
-import com.tennetcn.free.develop.model.DictTable;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
