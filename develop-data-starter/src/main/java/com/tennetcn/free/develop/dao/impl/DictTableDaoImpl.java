@@ -3,6 +3,7 @@ package com.tennetcn.free.develop.dao.impl;
 import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
+import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import com.tennetcn.free.develop.dao.IDictTableDao;
 import com.tennetcn.free.develop.model.DictTable;
@@ -33,7 +34,8 @@ public class DictTableDaoImpl extends SuperDao<DictTable> implements IDictTableD
     @Override
     public List<DictTable> queryListBySearch(DictTableSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(DictTable.class);
+        sqlExpression.selectAllFrom(DictTable.class)
+        .addOrder("sort_code", OrderEnum.asc);
 
         appendExpression(sqlExpression,search);
 

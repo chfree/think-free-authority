@@ -14,6 +14,7 @@ import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ import javax.validation.constraints.NotBlank;
  * @comment
  */
 @RestController
-@RequestMapping(value = "/api/v1/develop/dictColumn/")
+@RequestMapping(value = "/api/v1/develop/dictColumn/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="字典字段管理",value ="字典字段相关的操作")
 public class DictColumnApi extends AuthorityApi {
 

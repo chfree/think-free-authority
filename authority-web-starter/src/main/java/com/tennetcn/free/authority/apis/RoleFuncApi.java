@@ -9,6 +9,7 @@ import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ import java.util.List;
  * @comment
  */
 @RestController
-@RequestMapping(value = "/api/v1/authority/roleFunc/",produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/api/v1/authority/roleFunc/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="角色功能",value ="角色功能相关的操作")
 public class RoleFuncApi extends AuthorityApi {
 

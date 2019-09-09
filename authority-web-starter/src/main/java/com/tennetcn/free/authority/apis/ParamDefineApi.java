@@ -19,6 +19,7 @@ import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ import javax.validation.constraints.NotBlank;
  */
 
 @RestController
-@RequestMapping(value = "/api/v1/authority/paramDefine/")
+@RequestMapping(value = "/api/v1/authority/paramDefine/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="参数定义",value ="参数定义相关的操作")
 public class ParamDefineApi extends AuthorityApi {
 

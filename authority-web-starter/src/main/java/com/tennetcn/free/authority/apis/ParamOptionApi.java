@@ -19,6 +19,7 @@ import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/api/v1/authority/paramOption/")
+@RequestMapping(value = "/api/v1/authority/paramOption/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="参数选项",value ="参数选项相关的操作")
 public class ParamOptionApi extends AuthorityApi {
 

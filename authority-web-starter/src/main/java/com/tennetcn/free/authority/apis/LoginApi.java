@@ -21,6 +21,7 @@ import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,7 @@ import java.util.stream.Collectors;
  */
 
 @RestController
-@RequestMapping(value = "/api/v1/authority/login/",produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/api/v1/authority/login/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="登陆模块",value ="登陆相关的操作" )
 public class LoginApi extends AuthorityApi {
 

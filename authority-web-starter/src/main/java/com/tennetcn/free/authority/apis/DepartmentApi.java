@@ -13,6 +13,7 @@ import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ import javax.validation.constraints.NotBlank;
  * @comment
  */
 @RestController
-@RequestMapping(value = "/api/v1/authority/department/",produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/api/v1/authority/department/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="部门管理",value ="部门相关的操作")
 public class DepartmentApi extends AuthorityApi {
 
