@@ -23,6 +23,11 @@
             <artifactId>develop-web-starter</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>think-free-activiti</groupId>
+            <artifactId>activiti-web-starter</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
 </project>
