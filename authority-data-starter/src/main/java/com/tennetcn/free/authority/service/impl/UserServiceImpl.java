@@ -24,6 +24,8 @@ import java.util.List;
 @Component
 public class UserServiceImpl extends SuperService<User> implements IUserService {
 
+    private final String defaultPwd = "000000";
+
     @Autowired
     IUserDao userDao;
 
@@ -54,7 +56,7 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
     @Override
     public boolean applyChange(User user) throws DaoBaseRuntimeException {
         if(ModelStatus.add.equals(user.getModelStatus())){
-            user.setPassword("000000");
+            user.setPassword(SecureUtil.md5(defaultPwd));
         }
         return super.applyChange(user);
     }
