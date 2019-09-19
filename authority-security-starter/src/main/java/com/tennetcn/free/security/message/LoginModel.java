@@ -23,6 +23,10 @@ public class LoginModel {
 
     private String token;
 
+    private String departmentId;
+
+    private String departmentName;
+
     private Map<String,Object> arguments=new HashMap<>();
 
     public void put(String key,Object object){

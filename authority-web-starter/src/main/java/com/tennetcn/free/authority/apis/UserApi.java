@@ -7,6 +7,7 @@ import com.tennetcn.free.authority.apimodel.user.UserListResp;
 import com.tennetcn.free.authority.model.User;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
+import com.tennetcn.free.authority.viewmodel.UserView;
 import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
@@ -40,7 +41,7 @@ public class UserApi extends AuthorityApi {
     public BaseResponse list(@RequestBody @Valid UserListReq listReq){
         UserListResp response = new UserListResp();
         response.setTotalCount(userService.queryCountBySearch(listReq.getSearch()));
-        response.setUsers(userService.queryListBySearch(listReq.getSearch(),listReq.getPager()));
+        response.setUsers(userService.queryViewListBySearch(listReq.getSearch(),listReq.getPager()));
 
         return response;
     }
@@ -50,13 +51,13 @@ public class UserApi extends AuthorityApi {
     public BaseResponse get(@Valid @NotBlank(message = "用户id不能为空") String id){
         BaseResponse response=new BaseResponse();
 
-        User user = userService.queryModel(id);
-        response.put("role",user);
+        UserView user = userService.queryViewModelById(id);
+        response.put("user",user);
 
         return response;
     }
 
-    @ApiOperation(value = "搜索角色数量")
+    @ApiOperation(value = "搜索用户数量")
     @PostMapping("countSearch")
     public BaseResponse countSearch(UserSearch search){
         BaseResponse response=new BaseResponse();

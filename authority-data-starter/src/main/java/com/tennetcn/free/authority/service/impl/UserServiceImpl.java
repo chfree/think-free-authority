@@ -5,6 +5,7 @@ import com.tennetcn.free.authority.dao.IUserDao;
 import com.tennetcn.free.authority.model.User;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
+import com.tennetcn.free.authority.viewmodel.UserView;
 import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.enums.ModelStatus;
@@ -51,6 +52,16 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
     @Override
     public User queryModelByAccount(String account) {
         return userDao.queryModelByAccount(account);
+    }
+
+    @Override
+    public List<UserView> queryViewListBySearch(UserSearch search, PagerModel pagerModel) {
+        return userDao.queryViewListBySearch(search,pagerModel);
+    }
+
+    @Override
+    public UserView queryViewModelById(String id) {
+        return userDao.queryViewModelById(id);
     }
 
     @Override

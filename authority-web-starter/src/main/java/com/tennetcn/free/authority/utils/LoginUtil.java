@@ -16,6 +16,7 @@ public class LoginUtil {
         loginModel.setId(user.getId());
         loginModel.setAccount(user.getAccount());
         loginModel.setName(user.getName());
+        loginModel.setDepartmentId(user.getDepartmentId());
 
         loginModel.put("user", user);
 

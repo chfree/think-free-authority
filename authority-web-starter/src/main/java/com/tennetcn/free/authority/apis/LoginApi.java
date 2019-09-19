@@ -4,12 +4,10 @@ import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
 import com.tennetcn.free.authority.model.Button;
+import com.tennetcn.free.authority.model.Department;
 import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.model.User;
-import com.tennetcn.free.authority.service.IButtonService;
-import com.tennetcn.free.authority.service.IMenuService;
-import com.tennetcn.free.authority.service.IRoleService;
-import com.tennetcn.free.authority.service.IUserService;
+import com.tennetcn.free.authority.service.*;
 import com.tennetcn.free.authority.utils.LoginUtil;
 import com.tennetcn.free.authority.viewmodel.MenuRoute;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
@@ -57,6 +55,9 @@ public class LoginApi extends AuthorityApi {
     @Autowired
     private IButtonService buttonService;
 
+    @Autowired
+    private IDepartmentService departmentService;
+
     @ApiAuthPassport
     @ApiOperation(value = "登陆")
     @PostMapping("login")
@@ -98,6 +99,12 @@ public class LoginApi extends AuthorityApi {
         LoginModel loginModel = getCurrentLogin();
         List<Role> roles = roleService.queryListRoleByUserId(loginModel.getId());
         loginModel.put("roles", roles);
+
+        Department department = departmentService.queryModel(loginModel.getDepartmentId());
+        if(department!=null){
+            loginModel.setDepartmentName(department.getFullName());
+            loginModel.put("department",department);
+        }
 
         if(roles!=null&&roles.size()>0){
             List<String> roleIds = roles.stream().map(role-> role.getId()).collect(Collectors.toList());

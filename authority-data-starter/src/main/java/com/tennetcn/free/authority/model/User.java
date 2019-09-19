@@ -83,6 +83,9 @@ public class User  extends ModelBase {
     @Column(name="is_locked")
     private String isLocked;
 
+    @Column(name="department_id")
+    private String departmentId;
+
     @Override
     public void setModelStatus(ModelStatus modelStatus) {
         super.setModelStatus(modelStatus);
