@@ -16,17 +16,18 @@
         <dependency>
             <groupId>com.tennetcn.free.authority</groupId>
             <artifactId>authority-data-starter</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.tennetcn.free.authority</groupId>
             <artifactId>authority-security-starter</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.tennetcn.free</groupId>
             <artifactId>swagger-starter</artifactId>
-            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tennetcn.free.authority</groupId>
+            <artifactId>authority-login-starter</artifactId>
         </dependency>
     </dependencies>
 </project>

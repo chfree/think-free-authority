@@ -9,17 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>authority-security-starter</artifactId>
+    <artifactId>authority-login-starter</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.1</version>
+            <groupId>com.tennetcn.free.authority</groupId>
+            <artifactId>authority-data-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tennetcn.free.authority</groupId>
+            <artifactId>authority-security-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.tennetcn.free</groupId>
-            <artifactId>web-starter</artifactId>
+            <artifactId>swagger-starter</artifactId>
         </dependency>
     </dependencies>
 
