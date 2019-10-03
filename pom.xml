@@ -16,6 +16,7 @@
         <module>develop-data-starter</module>
         <module>develop-web-starter</module>
         <module>authority-login-starter</module>
+        <module>authority-login-data-starter</module>
     </modules>
 
     <parent>

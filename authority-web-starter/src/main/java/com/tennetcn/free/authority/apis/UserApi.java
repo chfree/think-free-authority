@@ -4,7 +4,6 @@ import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.user.SaveUserReq;
 import com.tennetcn.free.authority.apimodel.user.UserListReq;
 import com.tennetcn.free.authority.apimodel.user.UserListResp;
-import com.tennetcn.free.authority.model.User;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
 import com.tennetcn.free.authority.viewmodel.UserView;

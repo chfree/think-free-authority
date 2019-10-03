@@ -13,14 +13,14 @@
 	<bean class="com.tennetcn.free.data.extend.config.TypeAliasBean">
 		<property name="packageNames">
 			<list>
-				<value>com.tennetcn.free.authority.model</value>
+				<value>com.tennetcn.free.authority.com.tennetcn.free.authority.model</value>
 			</list>
 		</property>
 	</bean>
 	<bean class="com.tennetcn.free.data.extend.config.MapperLocationBean">
 		<property name="mapperLocations">
 			<list>
-				<value>classpath*:mapper/authority/**/*.xml</value>
+				<value>classpath*:com.tennetcn.free.authority.mapper/authority/**/*.xml</value>
 			</list>
 		</property>
 	</bean>

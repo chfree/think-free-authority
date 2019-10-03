@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>authority-data-starter</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>authority-login-data-starter</artifactId>
 
     <dependencies>
         <dependency>
@@ -20,11 +19,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
-            <artifactId>authority-login-data-starter</artifactId>
-            <version>0.0.1</version>
         </dependency>
     </dependencies>
 </project>

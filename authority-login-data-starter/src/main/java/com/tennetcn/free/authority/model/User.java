@@ -6,7 +6,7 @@ import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.enums.YesOrNoInteger;
 import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.data.message.OrderByEnum;
-import lombok.*;
+import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 import javax.persistence.*;
