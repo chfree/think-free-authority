@@ -13,7 +13,7 @@
 	<bean class="com.tennetcn.free.data.extend.config.TypeAliasBean">
 		<property name="packageNames">
 			<list>
-				<value>com.tennetcn.free.authority.com.tennetcn.free.authority.model</value>
+				<value>com.tennetcn.free.authority.model</value>
 			</list>
 		</property>
 	</bean>
