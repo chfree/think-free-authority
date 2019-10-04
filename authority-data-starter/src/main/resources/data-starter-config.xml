@@ -20,7 +20,7 @@
 	<bean class="com.tennetcn.free.data.extend.config.MapperLocationBean">
 		<property name="mapperLocations">
 			<list>
-				<value>classpath*:com.tennetcn.free.authority.mapper/authority/**/*.xml</value>
+				<value>classpath*:mapper/authority/**/*.xml</value>
 			</list>
 		</property>
 	</bean>
