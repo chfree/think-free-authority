@@ -2,13 +2,11 @@ package com.tennetcn.free.authority.apis;
 
 import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
-import com.tennetcn.free.authority.model.Button;
-import com.tennetcn.free.authority.model.Department;
-import com.tennetcn.free.authority.model.Role;
-import com.tennetcn.free.authority.model.User;
-import com.tennetcn.free.authority.service.*;
+import com.tennetcn.free.authority.handle.ILoginedInceptor;
+import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.service.ILoginUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
-import com.tennetcn.free.authority.viewmodel.MenuRoute;
+import com.tennetcn.free.core.utils.CommonApplicationContextUtil;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.message.LoginModel;
@@ -26,9 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -43,19 +39,7 @@ import java.util.stream.Collectors;
 public class LoginApi extends AuthorityApi {
 
     @Autowired
-    private IUserService userService;
-
-    @Autowired
-    private IMenuService menuService;
-
-    @Autowired
-    private IRoleService roleService;
-
-    @Autowired
-    private IButtonService buttonService;
-
-    @Autowired
-    private IDepartmentService departmentService;
+    private ILoginUserService userService;
 
     @ApiAuthPassport
     @ApiOperation(value = "登陆")
@@ -63,7 +47,7 @@ public class LoginApi extends AuthorityApi {
     public BaseResponse login(@Valid LoginReq loginReq){
         BaseResponse response = new BaseResponse();
 
-        User user = userService.queryModelByLogin(loginReq.getUsername(),loginReq.getPassword());
+        LoginUser user = userService.queryModelByLogin(loginReq.getUsername(),loginReq.getPassword());
         if(user==null){
             response.setMessage("用户名或密码不正确");
             response.setStatus(WebResponseStatus.DATA_ERROR);
@@ -96,23 +80,10 @@ public class LoginApi extends AuthorityApi {
         LoginLoadDataResp resp = new LoginLoadDataResp();
 
         LoginModel loginModel = getCurrentLogin();
-        List<Role> roles = roleService.queryListRoleByUserId(loginModel.getId());
-        loginModel.put("roles", roles);
 
-        Department department = departmentService.queryModel(loginModel.getDepartmentId());
-        if(department!=null){
-            loginModel.setDepartmentName(department.getFullName());
-            loginModel.put("department",department);
-        }
-
-        if(roles!=null&&roles.size()>0){
-            List<String> roleIds = roles.stream().map(role-> role.getId()).collect(Collectors.toList());
-
-            List<MenuRoute> menuRouteList = menuService.queryMenuRouteFormatByRoleIds(roleIds);
-            resp.setMenuRoutes(menuRouteList);
-
-            List<Button> buttons = buttonService.queryListByRoleIds(roleIds);
-            resp.setButtons(buttons);
+        ILoginedInceptor loginedIntceptor = CommonApplicationContextUtil.getCurrentContext().getBean(ILoginedInceptor.class);
+        if(loginedIntceptor!=null){
+            loginedIntceptor.additionLoginModel(loginModel,resp);
         }
 
         // 重新放入缓存

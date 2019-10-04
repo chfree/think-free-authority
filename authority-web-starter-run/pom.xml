@@ -21,10 +21,10 @@
             <groupId>com.tennetcn.free.authority</groupId>
             <artifactId>develop-web-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>think-free-activiti</groupId>
-            <artifactId>activiti-web-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>think-free-activiti</groupId>-->
+<!--            <artifactId>activiti-web-starter</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>

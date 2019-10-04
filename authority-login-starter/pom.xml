@@ -14,7 +14,8 @@
     <dependencies>
         <dependency>
             <groupId>com.tennetcn.free.authority</groupId>
-            <artifactId>authority-data-starter</artifactId>
+            <artifactId>authority-login-data-starter</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.tennetcn.free.authority</groupId>

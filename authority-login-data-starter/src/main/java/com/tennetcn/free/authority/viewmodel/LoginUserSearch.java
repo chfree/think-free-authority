@@ -10,7 +10,7 @@ import lombok.Data;
  */
 
 @Data
-public class UserSearch {
+public class LoginUserSearch {
     private String id;
 
     private String name;

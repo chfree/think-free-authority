@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.utils;
 
-import com.tennetcn.free.authority.model.User;
+import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.security.message.LoginModel;
 
 /**
@@ -11,12 +11,11 @@ import com.tennetcn.free.security.message.LoginModel;
  */
 
 public class LoginUtil {
-    public static LoginModel user2LoginModel(User user){
+    public static LoginModel user2LoginModel(LoginUser user){
         LoginModel loginModel = new LoginModel();
         loginModel.setId(user.getId());
         loginModel.setAccount(user.getAccount());
         loginModel.setName(user.getName());
-        loginModel.setDepartmentId(user.getDepartmentId());
 
         loginModel.put("user", user);
 

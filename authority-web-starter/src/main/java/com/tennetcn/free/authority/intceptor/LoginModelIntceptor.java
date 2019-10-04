@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.intceptor;
 
-import com.tennetcn.free.authority.model.User;
-import com.tennetcn.free.authority.service.IUserService;
+import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.service.ILoginUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
 import com.tennetcn.free.security.handle.ILoginModelIntceptor;
 import com.tennetcn.free.security.message.LoginModel;
@@ -20,13 +20,13 @@ import org.springframework.stereotype.Component;
 public class LoginModelIntceptor implements ILoginModelIntceptor {
 
     @Autowired
-    IUserService userService;
+    ILoginUserService userService;
 
     @Override
     public LoginModel registerLoginModel(String token, Claims claims) {
         String account = claims.get("account",String.class);
 
-        User user = userService.queryModelByAccount(account);
+        LoginUser user = userService.queryModelByAccount(account);
         if(user==null){
             return null;
         }

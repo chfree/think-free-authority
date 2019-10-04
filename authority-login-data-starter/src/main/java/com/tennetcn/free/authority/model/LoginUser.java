@@ -14,9 +14,9 @@ import java.util.Date;
 
 @Data
 @Entity
-@Alias("user")
+@Alias("loginUser")
 @Table(name="base_authority_user")
-public class User  extends ModelBase {
+public class LoginUser extends ModelBase {
     @Id
     @Column(name="id")
     private String id;
@@ -82,9 +82,6 @@ public class User  extends ModelBase {
 
     @Column(name="is_locked")
     private String isLocked;
-
-    @Column(name="department_id")
-    private String departmentId;
 
     @Override
     public void setModelStatus(ModelStatus modelStatus) {

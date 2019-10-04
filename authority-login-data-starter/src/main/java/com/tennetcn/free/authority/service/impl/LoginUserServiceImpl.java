@@ -1,10 +1,10 @@
 package com.tennetcn.free.authority.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
-import com.tennetcn.free.authority.dao.IUserDao;
-import com.tennetcn.free.authority.model.User;
-import com.tennetcn.free.authority.service.IUserService;
-import com.tennetcn.free.authority.viewmodel.UserSearch;
+import com.tennetcn.free.authority.dao.ILoginUserDao;
+import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.service.ILoginUserService;
+import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
 import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.enums.ModelStatus;
@@ -22,25 +22,15 @@ import java.util.List;
  */
 
 @Component
-public class UserServiceImpl extends SuperService<User> implements IUserService {
+public class LoginUserServiceImpl extends SuperService<LoginUser> implements ILoginUserService {
 
     private final String defaultPwd = "000000";
 
     @Autowired
-    IUserDao userDao;
+    ILoginUserDao userDao;
 
     @Override
-    public int queryCountBySearch(UserSearch search) {
-        return userDao.queryCountBySearch(search);
-    }
-
-    @Override
-    public List<User> queryListBySearch(UserSearch search, PagerModel pagerModel) {
-        return userDao.queryListBySearch(search,pagerModel);
-    }
-
-    @Override
-    public User queryModelByLogin(String account, String password) {
+    public LoginUser queryModelByLogin(String account, String password) {
         return userDao.queryModelByLogin(account,passwordFormat(password));
     }
 
@@ -49,12 +39,12 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
     }
 
     @Override
-    public User queryModelByAccount(String account) {
+    public LoginUser queryModelByAccount(String account) {
         return userDao.queryModelByAccount(account);
     }
 
     @Override
-    public boolean applyChange(User user) throws DaoBaseRuntimeException {
+    public boolean applyChange(LoginUser user) throws DaoBaseRuntimeException {
         if(ModelStatus.add.equals(user.getModelStatus())){
             user.setPassword(SecureUtil.md5(defaultPwd));
         }

@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.mapper;
 
-import com.tennetcn.free.authority.model.User;
+import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,8 +14,8 @@ import java.util.List;
  */
 
 @Mapper
-public interface IUserMapper extends IMapper<User> {
-    List<User> queryListMPByIds(List<String> ids);
+public interface ILoginUserMapper extends IMapper<LoginUser> {
+    List<LoginUser> queryListMPByIds(List<String> ids);
 
     String getLoginUserNamesByIds(List<String> ids);
 }
