@@ -1,13 +1,19 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
+import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
 import com.tennetcn.free.authority.apimodel.user.SaveUserReq;
 import com.tennetcn.free.authority.apimodel.user.UserListReq;
 import com.tennetcn.free.authority.apimodel.user.UserListResp;
-import com.tennetcn.free.authority.service.IUserService;
+import com.tennetcn.free.authority.model.Button;
+import com.tennetcn.free.authority.model.Department;
+import com.tennetcn.free.authority.model.Role;
+import com.tennetcn.free.authority.service.*;
+import com.tennetcn.free.authority.viewmodel.MenuRoute;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
 import com.tennetcn.free.authority.viewmodel.UserView;
 import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
@@ -19,6 +25,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -34,6 +42,18 @@ public class UserApi extends AuthorityApi {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IMenuService menuService;
+
+    @Autowired
+    private IRoleService roleService;
+
+    @Autowired
+    private IButtonService buttonService;
+
+    @Autowired
+    private IDepartmentService departmentService;
 
     @ApiOperation(value = "获取用户列表")
     @PostMapping("list")
@@ -88,5 +108,41 @@ public class UserApi extends AuthorityApi {
         response.put("result",result);
 
         return response;
+    }
+
+    @PostMapping("loginLoadData")
+    public BaseResponse loginLoadData(){
+        LoginLoadDataResp resp = new LoginLoadDataResp();
+
+        LoginModel loginModel = getCurrentLogin();
+
+        additionLoginModel(loginModel,resp);
+
+        // 重新放入缓存
+        cached.put(loginModel.getToken(),loginModel);
+        resp.setLoginInfo(loginModel);
+
+        return resp;
+    }
+
+    public void additionLoginModel(LoginModel loginModel, BaseResponse response) {
+        List<Role> roles = roleService.queryListRoleByUserId(loginModel.getId());
+        loginModel.put("roles", roles);
+
+        Department department = departmentService.queryModel(loginModel.getString("departmentId"));
+        if(department!=null){
+            loginModel.put("departmentName",department.getFullName());
+            loginModel.put("department",department);
+        }
+
+        if(roles!=null&&roles.size()>0){
+            List<String> roleIds = roles.stream().map(role-> role.getId()).collect(Collectors.toList());
+
+            List<MenuRoute> menuRouteList = menuService.queryMenuRouteFormatByRoleIds(roleIds);
+            response.put("menuRoutes", menuRouteList);
+
+            List<Button> buttons = buttonService.queryListByRoleIds(roleIds);
+            response.put("buttons", buttons);
+        }
     }
 }

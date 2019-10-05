@@ -1,12 +1,9 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
-import com.tennetcn.free.authority.handle.ILoginedInceptor;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
-import com.tennetcn.free.core.utils.CommonApplicationContextUtil;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.message.LoginModel;
@@ -73,23 +70,5 @@ public class LoginApi extends AuthorityApi {
     public BaseResponse logout(){
         cached.remove(AuthorityApi.LOGIN_KEY);
         return new BaseResponse();
-    }
-
-    @PostMapping("loginLoadData")
-    public BaseResponse loginLoadData(){
-        LoginLoadDataResp resp = new LoginLoadDataResp();
-
-        LoginModel loginModel = getCurrentLogin();
-
-        ILoginedInceptor loginedIntceptor = CommonApplicationContextUtil.getCurrentContext().getBean(ILoginedInceptor.class);
-        if(loginedIntceptor!=null){
-            loginedIntceptor.additionLoginModel(loginModel,resp);
-        }
-
-        // 重新放入缓存
-        cached.put(loginModel.getToken(),loginModel);
-        resp.setLoginInfo(loginModel);
-
-        return resp;
     }
 }
