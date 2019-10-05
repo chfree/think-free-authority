@@ -14,7 +14,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,9 +65,24 @@ public class LoginApi extends AuthorityApi {
         return response;
     }
 
-    @GetMapping("logout")
+    @PostMapping("loginfo")
+    public BaseResponse loginfo(){
+        BaseResponse resp = new BaseResponse();
+
+        LoginModel loginModel = getCurrentLogin();
+
+        resp.put("loginfo", loginModel);
+        return resp;
+    }
+
+    @PostMapping("logout")
     public BaseResponse logout(){
-        cached.remove(AuthorityApi.LOGIN_KEY);
-        return new BaseResponse();
+        BaseResponse resp = new BaseResponse();
+
+        String token = getCurrentLogin().getToken();
+        cached.remove(token);
+
+        resp.put("result", true);
+        return resp;
     }
 }
