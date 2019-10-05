@@ -71,9 +71,6 @@ public class LoginUser extends ModelBase {
     @Column(name="user_mark")
     private String userMark;
 
-    @Column(name="bu_id")
-    private String buId;
-
     @Column(name="unique_mark")
     private String uniqueMark;
 

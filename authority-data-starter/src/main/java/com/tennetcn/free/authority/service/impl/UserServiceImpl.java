@@ -12,6 +12,7 @@ import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.message.DaoBaseRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -67,7 +68,9 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
     @Override
     public boolean applyChange(User user) throws DaoBaseRuntimeException {
         if(ModelStatus.add.equals(user.getModelStatus())){
-            user.setPassword(SecureUtil.md5(defaultPwd));
+            if(StringUtils.isEmpty(user.getPassword())){
+                user.setPassword(SecureUtil.md5(defaultPwd));
+            }
         }
         return super.applyChange(user);
     }
