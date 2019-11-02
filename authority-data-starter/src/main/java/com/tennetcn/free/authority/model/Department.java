@@ -1,13 +1,10 @@
 package com.tennetcn.free.authority.model;
 
 import cn.hutool.core.date.DateUtil;
-import com.tennetcn.free.data.enums.ModelStatus;
-import com.tennetcn.free.data.enums.YesOrNoInteger;
-import com.tennetcn.free.data.message.ModelBase;
-import lombok.AllArgsConstructor;
+import com.tennetcn.free.core.enums.ModelStatus;
+import com.tennetcn.free.core.enums.YesOrNoInteger;
+import com.tennetcn.free.core.message.ModelBase;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.button;
 
 import com.tennetcn.free.authority.viewmodel.ButtonSearch;
-import com.tennetcn.free.web.message.BasePagerReq;
+import com.tennetcn.free.core.message.web.BasePagerReq;
 import lombok.Data;
 
 /**

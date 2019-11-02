@@ -1,14 +1,11 @@
 package com.tennetcn.free.authority.model;
 
 import cn.hutool.core.date.DateUtil;
-import com.tennetcn.free.data.enums.ModelStatus;
-import com.tennetcn.free.data.enums.YesOrNoInteger;
-import com.tennetcn.free.data.message.ModelBase;
-import com.tennetcn.free.data.message.OrderByEnum;
-import lombok.AllArgsConstructor;
+import com.tennetcn.free.core.enums.ModelStatus;
+import com.tennetcn.free.core.enums.YesOrNoInteger;
+import com.tennetcn.free.core.message.ModelBase;
+import com.tennetcn.free.core.message.OrderByEnum;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 

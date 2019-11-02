@@ -1,21 +1,15 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.paramdefine.ParamDefineListReq;
-import com.tennetcn.free.authority.apimodel.paramdefine.ParamDefineListResp;
-import com.tennetcn.free.authority.apimodel.paramdefine.SaveParamDefineReq;
 import com.tennetcn.free.authority.apimodel.paramoption.ParamOptionListReq;
 import com.tennetcn.free.authority.apimodel.paramoption.ParamOptionListResp;
 import com.tennetcn.free.authority.apimodel.paramoption.SaveParamOptionReq;
-import com.tennetcn.free.authority.model.ParamDefine;
 import com.tennetcn.free.authority.model.ParamOption;
-import com.tennetcn.free.authority.service.IParamDefineService;
 import com.tennetcn.free.authority.service.IParamOptionService;
-import com.tennetcn.free.authority.viewmodel.ParamDefineSearch;
 import com.tennetcn.free.authority.viewmodel.ParamOptionSearch;
-import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.core.enums.ModelStatus;
+import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;
-import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,16 +4,12 @@ import cn.hutool.crypto.SecureUtil;
 import com.tennetcn.free.authority.dao.ILoginUserDao;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginUserService;
-import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
-import com.tennetcn.free.data.enums.ModelStatus;
 import com.tennetcn.free.data.message.DaoBaseRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
-import java.util.List;
 
 /**
  * @author chfree

@@ -1,8 +1,7 @@
 package com.tennetcn.free.authority.apimodel.menu;
 
-import com.tennetcn.free.authority.viewmodel.DepartmentTree;
 import com.tennetcn.free.authority.viewmodel.MenuTree;
-import com.tennetcn.free.web.webapi.BaseResponse;
+import com.tennetcn.free.core.message.web.BaseResponse;
 import lombok.Data;
 
 import java.util.List;

@@ -1,11 +1,7 @@
 package com.tennetcn.free.authority.service;
 
 import com.tennetcn.free.authority.model.LoginUser;
-import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
-import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperService;
-
-import java.util.List;
 
 /**
  * @author chfree

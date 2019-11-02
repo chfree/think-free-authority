@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.paramoption;
 
 import com.tennetcn.free.authority.model.ParamOption;
-import com.tennetcn.free.web.message.BasePagerResp;
+import com.tennetcn.free.core.message.web.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;

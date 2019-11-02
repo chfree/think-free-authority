@@ -1,9 +1,10 @@
 package com.tennetcn.free.authority.model;
 
-import com.tennetcn.free.data.enums.YesOrNoInteger;
-import com.tennetcn.free.data.message.ModelBase;
-import com.tennetcn.free.data.message.OrderByEnum;
-import lombok.*;
+import com.tennetcn.free.core.enums.YesOrNoInteger;
+import com.tennetcn.free.core.message.ModelBase;
+import com.tennetcn.free.core.message.OrderByEnum;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;

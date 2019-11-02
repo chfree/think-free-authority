@@ -1,18 +1,12 @@
 package com.tennetcn.free.authority.service.impl;
 
 import com.tennetcn.free.authority.dao.IMenuDao;
-import com.tennetcn.free.authority.enums.MenuType;
-import com.tennetcn.free.authority.enums.RoleFuncType;
 import com.tennetcn.free.authority.model.Menu;
-import com.tennetcn.free.authority.model.RoleFunc;
 import com.tennetcn.free.authority.service.IMenuService;
 import com.tennetcn.free.authority.viewmodel.MenuRoute;
 import com.tennetcn.free.authority.viewmodel.MenuSearch;
 import com.tennetcn.free.authority.viewmodel.MenuTree;
-import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
-import com.tennetcn.free.data.enums.OrderEnum;
-import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

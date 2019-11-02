@@ -3,13 +3,10 @@ package com.tennetcn.free.authority.dao.impl;
 import com.tennetcn.free.authority.dao.ILoginUserDao;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
-import com.tennetcn.free.core.message.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author chfree

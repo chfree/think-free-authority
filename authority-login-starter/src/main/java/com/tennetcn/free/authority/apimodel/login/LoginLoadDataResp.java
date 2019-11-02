@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.login;
 
+import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.message.LoginModel;
-import com.tennetcn.free.web.webapi.BaseResponse;
 import lombok.Data;
 
 /**

@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.button;
 
 import com.tennetcn.free.authority.model.Button;
-import com.tennetcn.free.web.message.BasePagerResp;
+import com.tennetcn.free.core.message.web.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;

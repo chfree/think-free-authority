@@ -2,10 +2,8 @@ package com.tennetcn.free.authority.apimodel.business;
 
 import cn.hutool.core.date.DateUtil;
 import com.tennetcn.free.authority.model.Business;
-import com.tennetcn.free.data.enums.ModelStatus;
-import com.tennetcn.free.data.enums.YesOrNo;
+import com.tennetcn.free.core.enums.ModelStatus;
 import lombok.Data;
-import org.junit.Test;
 
 import javax.validation.constraints.NotBlank;
 

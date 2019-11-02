@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.department;
 
 import com.tennetcn.free.authority.viewmodel.DepartmentSearch;
-import com.tennetcn.free.web.webapi.BaseRequest;
+import com.tennetcn.free.core.message.web.BaseRequest;
 import lombok.Data;
 
 /**

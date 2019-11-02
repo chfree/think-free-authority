@@ -1,14 +1,16 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.security.handle.IUploadIntceptor;
+import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.core.utils.CommonApplicationContextUtil;
+import com.tennetcn.free.security.handle.IUploadIntceptor;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
-import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
@@ -26,7 +28,7 @@ public class UploadApi extends AuthorityApi {
 
     @ApiOperation(value = "接收上传的文件")
     @PostMapping("accept")
-    public BaseResponse accept(String category,MultipartFile file){
+    public BaseResponse accept(String category, MultipartFile file){
         String type="single";
         return doUloaded(type,category,new MultipartFile[]{file});
     }

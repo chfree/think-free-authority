@@ -7,9 +7,9 @@ import com.tennetcn.free.authority.apimodel.menu.SaveMenuReq;
 import com.tennetcn.free.authority.service.IMenuService;
 import com.tennetcn.free.authority.service.IRoleService;
 import com.tennetcn.free.authority.viewmodel.MenuSearch;
-import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.core.enums.ModelStatus;
+import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;
-import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

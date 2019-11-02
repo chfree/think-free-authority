@@ -5,21 +5,16 @@ import com.tennetcn.free.authority.enums.MenuType;
 import com.tennetcn.free.authority.enums.RoleFuncType;
 import com.tennetcn.free.authority.model.Menu;
 import com.tennetcn.free.authority.model.RoleFunc;
-import com.tennetcn.free.authority.service.IMenuService;
 import com.tennetcn.free.authority.viewmodel.MenuRoute;
 import com.tennetcn.free.authority.viewmodel.MenuSearch;
 import com.tennetcn.free.authority.viewmodel.MenuTree;
+import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
-import com.tennetcn.free.data.dao.base.impl.SuperService;
-import com.tennetcn.free.data.enums.OrderEnum;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
-import lombok.var;
 import org.springframework.stereotype.Component;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -67,14 +62,13 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
     @Override
     public List<MenuRoute> queryMenuRouteByRoleIds(List<String> roleIds) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-
         if(roleIds!=null&&roleIds.size()>0){
             sqlExpression.select("menu.id,menu.name,menu.title,menu.icon,menu.hidden,menu.path,menu.page_path,menu.type,menu.use_type,menu.parent_id,menu.theme,menu.sort_code,menu.delete_mark,menu.comments,menu.menu_mark,menu.level")
                      .from(RoleFunc.class,"roleFunc")
                      .leftJoin(Menu.class,"menu").on("roleFunc.func_id","menu.id")
                      .andWhereInString("role_id",roleIds)
                      .andEq("func_type", RoleFuncType.MENU)
-                    .andEq("menu.type", MenuType.MENU)
+                     .andWhereInString("menu.type", MenuType.MENU,MenuType.ROUTER)
                      .addOrder("menu.sort_code",OrderEnum.asc);;
         }else{
             sqlExpression.selectAllFrom(Menu.class)

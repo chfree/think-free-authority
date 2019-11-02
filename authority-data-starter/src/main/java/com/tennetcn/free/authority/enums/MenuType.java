@@ -11,4 +11,6 @@ public class MenuType {
     public final static String MENU="menu";
 
     public final static String HREF="href";
+
+    public final static String ROUTER="router";
 }
