@@ -1,7 +1,8 @@
 package com.tennetcn.free.develop.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.core.enums.ModelStatus;
+import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.develop.apimodel.dicttable.DictTableListReq;
 import com.tennetcn.free.develop.apimodel.dicttable.DictTableListResp;
 import com.tennetcn.free.develop.apimodel.dicttable.SaveDictTableReq;
@@ -9,7 +10,6 @@ import com.tennetcn.free.develop.model.DictTable;
 import com.tennetcn.free.develop.service.IDictTableService;
 import com.tennetcn.free.develop.viewmodel.DictTableSearch;
 import com.tennetcn.free.security.webapi.AuthorityApi;
-import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

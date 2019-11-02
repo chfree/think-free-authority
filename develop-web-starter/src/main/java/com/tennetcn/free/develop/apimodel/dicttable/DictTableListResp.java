@@ -1,7 +1,7 @@
 package com.tennetcn.free.develop.apimodel.dicttable;
 
+import com.tennetcn.free.core.message.web.BasePagerResp;
 import com.tennetcn.free.develop.model.DictTable;
-import com.tennetcn.free.web.message.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;

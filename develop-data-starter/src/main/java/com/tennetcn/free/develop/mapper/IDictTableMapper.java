@@ -1,9 +1,7 @@
 package com.tennetcn.free.develop.mapper;
 
 import com.tennetcn.free.data.dao.base.IMapper;
-import com.tennetcn.free.data.message.ModelBase;
 import com.tennetcn.free.develop.model.DictTable;
-import lombok.Data;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

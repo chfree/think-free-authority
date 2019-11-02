@@ -1,8 +1,7 @@
 package com.tennetcn.free.develop.apimodel.dictcolumn;
 
+import com.tennetcn.free.core.message.web.BaseRequest;
 import com.tennetcn.free.develop.viewmodel.DictColumnSearch;
-import com.tennetcn.free.web.message.BasePagerReq;
-import com.tennetcn.free.web.webapi.BaseRequest;
 import lombok.Data;
 
 /**

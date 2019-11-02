@@ -1,25 +1,22 @@
 package com.tennetcn.free.develop.apis;
 
-import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.core.message.PagerModel;
-import com.tennetcn.free.data.enums.ModelStatus;
+import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.develop.apimodel.dictcolumn.DictColumnListReq;
 import com.tennetcn.free.develop.apimodel.dictcolumn.DictColumnListResp;
 import com.tennetcn.free.develop.apimodel.dictcolumn.SaveDictColumnReq;
-import com.tennetcn.free.develop.model.DictColumn;
 import com.tennetcn.free.develop.service.IDictColumnService;
-import com.tennetcn.free.develop.viewmodel.DictColumnSearch;
 import com.tennetcn.free.security.webapi.AuthorityApi;
-import com.tennetcn.free.web.webapi.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 /**
  * @author chfree

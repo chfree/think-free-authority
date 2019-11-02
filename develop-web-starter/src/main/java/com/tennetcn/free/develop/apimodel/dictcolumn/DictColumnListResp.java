@@ -1,7 +1,7 @@
 package com.tennetcn.free.develop.apimodel.dictcolumn;
 
+import com.tennetcn.free.core.message.web.BasePagerResp;
 import com.tennetcn.free.develop.model.DictColumn;
-import com.tennetcn.free.web.message.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;

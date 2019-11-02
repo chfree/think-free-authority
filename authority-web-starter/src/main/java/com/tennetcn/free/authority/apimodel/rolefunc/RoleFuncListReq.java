@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apimodel.rolefunc;
 
 import com.tennetcn.free.authority.viewmodel.RoleFuncSearch;
-import com.tennetcn.free.web.webapi.BaseRequest;
+import com.tennetcn.free.core.message.web.BaseRequest;
 import lombok.Data;
 
 /**

@@ -1,7 +1,7 @@
 package com.tennetcn.free.develop.apimodel.dicttable;
 
+import com.tennetcn.free.core.message.web.BasePagerReq;
 import com.tennetcn.free.develop.viewmodel.DictTableSearch;
-import com.tennetcn.free.web.message.BasePagerReq;
 import lombok.Data;
 
 /**
