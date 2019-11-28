@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.model;
 
 import cn.hutool.core.date.DateUtil;
-import com.tennetcn.free.core.message.ModelBase;
+import com.tennetcn.free.core.message.data.ModelBase;
 import lombok.Data;
 
 import javax.persistence.Column;

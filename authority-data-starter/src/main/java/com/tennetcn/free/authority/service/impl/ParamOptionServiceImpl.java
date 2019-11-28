@@ -5,7 +5,7 @@ import com.tennetcn.free.authority.model.ParamOption;
 import com.tennetcn.free.authority.service.IParamOptionService;
 import com.tennetcn.free.authority.viewmodel.ParamOptionSearch;
 import com.tennetcn.free.authority.viewmodel.ParamOptionView;
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

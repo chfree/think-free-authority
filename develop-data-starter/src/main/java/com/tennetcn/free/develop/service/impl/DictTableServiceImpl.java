@@ -1,6 +1,6 @@
 package com.tennetcn.free.develop.service.impl;
 
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.develop.dao.IDictTableDao;
 import com.tennetcn.free.develop.model.DictTable;

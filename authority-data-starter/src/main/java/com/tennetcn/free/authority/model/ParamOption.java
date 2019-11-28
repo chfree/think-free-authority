@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.model;
 
-import com.tennetcn.free.core.message.ModelBase;
+import com.tennetcn.free.core.message.data.ModelBase;
 import lombok.Data;
 
 import javax.persistence.Column;

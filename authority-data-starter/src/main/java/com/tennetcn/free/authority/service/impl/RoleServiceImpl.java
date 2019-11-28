@@ -4,7 +4,7 @@ import com.tennetcn.free.authority.dao.IRoleDao;
 import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.service.IRoleService;
 import com.tennetcn.free.authority.viewmodel.RoleSearch;
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

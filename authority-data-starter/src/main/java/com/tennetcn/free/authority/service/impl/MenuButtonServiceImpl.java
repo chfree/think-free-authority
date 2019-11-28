@@ -5,7 +5,7 @@ import com.tennetcn.free.authority.model.MenuButton;
 import com.tennetcn.free.authority.service.IMenuButtonService;
 import com.tennetcn.free.authority.viewmodel.MenuButtonSearch;
 import com.tennetcn.free.authority.viewmodel.MenuButtonTree;
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;

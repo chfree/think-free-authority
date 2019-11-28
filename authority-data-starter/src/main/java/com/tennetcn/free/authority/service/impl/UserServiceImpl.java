@@ -7,7 +7,7 @@ import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.viewmodel.UserSearch;
 import com.tennetcn.free.authority.viewmodel.UserView;
 import com.tennetcn.free.core.enums.ModelStatus;
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.message.DaoBaseRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;

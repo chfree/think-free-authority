@@ -1,7 +1,7 @@
 package com.tennetcn.free.develop.service.impl;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.develop.dao.IDictColumnDao;
 import com.tennetcn.free.develop.model.DictColumn;

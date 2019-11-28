@@ -5,7 +5,7 @@ import com.tennetcn.free.authority.model.Role;
 import com.tennetcn.free.authority.model.UserRole;
 import com.tennetcn.free.authority.viewmodel.RoleSearch;
 import com.tennetcn.free.core.enums.OrderEnum;
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;

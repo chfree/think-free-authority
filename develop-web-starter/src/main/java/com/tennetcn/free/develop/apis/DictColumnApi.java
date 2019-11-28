@@ -1,6 +1,6 @@
 package com.tennetcn.free.develop.apis;
 
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.develop.apimodel.dictcolumn.DictColumnListReq;
 import com.tennetcn.free.develop.apimodel.dictcolumn.DictColumnListResp;

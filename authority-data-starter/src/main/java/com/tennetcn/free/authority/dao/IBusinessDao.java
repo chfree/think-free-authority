@@ -2,7 +2,7 @@ package com.tennetcn.free.authority.dao;
 
 import com.tennetcn.free.authority.model.Business;
 import com.tennetcn.free.authority.viewmodel.BusinessSearch;
-import com.tennetcn.free.core.message.PagerModel;
+import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperDao;
 
 import java.util.List;

@@ -3,8 +3,8 @@ package com.tennetcn.free.authority.model;
 import cn.hutool.core.date.DateUtil;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.enums.YesOrNoInteger;
-import com.tennetcn.free.core.message.ModelBase;
-import com.tennetcn.free.core.message.OrderByEnum;
+import com.tennetcn.free.core.message.data.ModelBase;
+import com.tennetcn.free.core.message.data.OrderByEnum;
 import lombok.Data;
 
 import javax.persistence.*;
