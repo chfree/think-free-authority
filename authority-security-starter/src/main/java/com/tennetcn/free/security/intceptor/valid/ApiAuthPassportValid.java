@@ -27,9 +27,9 @@ public class ApiAuthPassportValid {
 	@Autowired
 	private ICached cached;
 	
-	public boolean valid(HttpServletRequest request,HttpServletResponse response, Object handler) throws IOException, Exception{
+	public boolean valid(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception{
 		if(checkAppAuthorizeRule(handler)){
-			BaseResponse rm=new BaseResponse(WebResponseStatus.AUTHORIZE_ERROR);
+			BaseResponse rm=new BaseResponse(WebResponseStatus.AUTHORIZE_ERROR,"授权错误");
 
 			boolean authorizeResult=checkAuthorizeJwt(request);
 
