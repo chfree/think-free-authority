@@ -33,4 +33,12 @@ public class CodeTmpServiceImpl extends SuperService<CodeTmp> implements ICodeTm
         return codeTmpDao.queryListBySearch(search,pagerModel);
     }
 
+    @Override
+    public boolean updatePub(String id, String pub) {
+        CodeTmp codeTmp = queryModel(id);
+        codeTmp.setPub(pub);
+
+        return updateModel(codeTmp);
+    }
+
 }

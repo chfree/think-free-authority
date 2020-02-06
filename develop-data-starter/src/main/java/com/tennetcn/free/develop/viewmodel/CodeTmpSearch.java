@@ -27,6 +27,11 @@ public class CodeTmpSearch{
     private String name;
 
     /**
+     * 模板名称模糊搜索
+     */
+    private String likeName;
+
+    /**
      * 模板描述
      */
     private String comment;
@@ -47,8 +52,18 @@ public class CodeTmpSearch{
     private String type;
 
     /**
+     * 类型模糊搜索
+     */
+    private String likeType;
+
+    /**
      * 创建人id
      */
     private String createUserId;
+
+    /**
+     * 创建人名称
+     */
+    private String createUserName;
 
 }

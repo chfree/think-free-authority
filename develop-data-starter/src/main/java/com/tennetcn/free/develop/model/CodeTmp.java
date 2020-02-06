@@ -61,4 +61,9 @@ public class CodeTmp extends ModelBase{
     @Column(name="create_user_id")
     private String createUserId;
 
+    /**
+     * 创建人名称
+     */
+    @Column(name="create_user_name")
+    private String createUserName;
 }

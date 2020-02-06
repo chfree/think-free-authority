@@ -39,8 +39,12 @@ public class CodeTmpApi extends AuthorityApi {
     @PostMapping("list")
     public BaseResponse list(@RequestBody @Valid CodeTmpListReq listReq){
         CodeTmpListResp resp = new CodeTmpListResp();
-        resp.setTotalCount(codeTmpService.queryCountBySearch(listReq.getSearch()));
-        resp.setCodeTmps(codeTmpService.queryListBySearch(listReq.getSearch(),listReq.getPager()));
+
+        CodeTmpSearch search = listReq.getSearch();
+        search.setCreateUserId(getLoginId());
+
+        resp.setTotalCount(codeTmpService.queryCountBySearch(search));
+        resp.setCodeTmps(codeTmpService.queryListBySearch(search,listReq.getPager()));
 
         return resp;
     }
@@ -67,6 +71,16 @@ public class CodeTmpApi extends AuthorityApi {
         return response;
     }
 
+    @ApiOperation(value = "更新公开状态")
+    @PostMapping("updatePub")
+    public BaseResponse updatePub(String id,String pub){
+        BaseResponse response=new BaseResponse();
+
+        response.put("result",codeTmpService.updatePub(id,pub));
+
+        return response;
+    }
+
     @ApiOperation(value = "保存一个代码模板")
     @PostMapping("save")
     public BaseResponse save(@Valid SaveCodeTmpReq saveCodeTmpReq){
@@ -74,6 +88,7 @@ public class CodeTmpApi extends AuthorityApi {
         if(StringUtils.isEmpty(saveCodeTmpReq.getId())){
             saveCodeTmpReq.setId(IdUtil.randomUUID());
             saveCodeTmpReq.setCreateUserId(getLoginId());
+            saveCodeTmpReq.setCreateUserName(getLoginName());
             saveCodeTmpReq.setModelStatus(ModelStatus.add);
         }else{
             saveCodeTmpReq.setModelStatus(ModelStatus.update);

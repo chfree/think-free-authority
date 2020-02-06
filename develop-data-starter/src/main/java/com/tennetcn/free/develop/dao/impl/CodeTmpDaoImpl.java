@@ -26,6 +26,7 @@ public class CodeTmpDaoImpl extends SuperDao<CodeTmp> implements ICodeTmpDao{
         sqlExpression.selectCount().from(CodeTmp.class);
 
         appendExpression(sqlExpression,search);
+        appendSqlByCreateUserId(sqlExpression,search);
 
         return queryCount(sqlExpression);
     }
@@ -36,8 +37,14 @@ public class CodeTmpDaoImpl extends SuperDao<CodeTmp> implements ICodeTmpDao{
         sqlExpression.selectAllFrom(CodeTmp.class);
 
         appendExpression(sqlExpression,search);
+        appendSqlByCreateUserId(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
+    }
+
+    private void appendSqlByCreateUserId(ISqlExpression sqlExpression,CodeTmpSearch search){
+        sqlExpression.andWhere("(create_user_id=#{createUserId} or pub='02')");
+        sqlExpression.setParam("createUserId",search.getCreateUserId());
     }
 
     private void appendExpression(ISqlExpression sqlExpression, CodeTmpSearch search){
@@ -47,15 +54,12 @@ public class CodeTmpDaoImpl extends SuperDao<CodeTmp> implements ICodeTmpDao{
 
         sqlExpression.andEqNoEmpty("name",search.getName());
 
-        sqlExpression.andEqNoEmpty("comment",search.getComment());
-
-        sqlExpression.andEqNoEmpty("content",search.getContent());
-
         sqlExpression.andEqNoEmpty("pub",search.getPub());
 
         sqlExpression.andEqNoEmpty("type",search.getType());
 
-        sqlExpression.andEqNoEmpty("create_user_id",search.getCreateUserId());
+        sqlExpression.andLikeNoEmpty("name",search.getLikeName());
 
+        sqlExpression.andLikeNoEmpty("type",search.getLikeType());
     }
 }

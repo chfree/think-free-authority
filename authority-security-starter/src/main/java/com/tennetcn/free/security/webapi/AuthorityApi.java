@@ -16,14 +16,18 @@ public class AuthorityApi extends FirstApi {
     public final static String LOGIN_KEY="loginModel";
 
     public LoginModel getCurrentLogin() {
-        return (LoginModel)servletRequest.getAttribute(LOGIN_KEY);
-    }
-
-    public String getLoginId(){
-        LoginModel loginModel = getCurrentLogin();
+        LoginModel loginModel = (LoginModel)servletRequest.getAttribute(LOGIN_KEY);
         if(loginModel==null){
             throw new BizException(WebResponseStatus.AUTHORIZE_ERROR,"登陆超时，无法获取登陆用户的id");
         }
-        return loginModel.getId();
+        return loginModel;
+    }
+
+    public String getLoginId(){
+        return getCurrentLogin().getId();
+    }
+
+    public String getLoginName(){
+        return getCurrentLogin().getName();
     }
 }

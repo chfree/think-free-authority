@@ -18,4 +18,6 @@ public interface ICodeTmpService extends ISuperService<CodeTmp>{
     int queryCountBySearch(CodeTmpSearch search);
 
     List<CodeTmp> queryListBySearch(CodeTmpSearch search, PagerModel pagerModel);
+
+    boolean updatePub(String id,String pub);
 }
