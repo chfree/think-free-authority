@@ -56,6 +56,12 @@ public class CodeTmp extends ModelBase{
     private String type;
 
     /**
+     * 分组名称
+     */
+    @Column(name="group_name")
+    private String groupName;
+
+    /**
      * 创建人id
      */
     @Column(name="create_user_id")

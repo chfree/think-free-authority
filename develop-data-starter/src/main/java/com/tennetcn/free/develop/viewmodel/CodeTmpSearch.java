@@ -57,6 +57,16 @@ public class CodeTmpSearch{
     private String likeType;
 
     /**
+     * 分组名称
+     */
+    private String groupName;
+
+    /**
+     * 分组名称模糊搜索
+     */
+    private String likeGroupName;
+
+    /**
      * 创建人id
      */
     private String createUserId;

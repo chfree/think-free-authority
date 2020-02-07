@@ -58,8 +58,12 @@ public class CodeTmpDaoImpl extends SuperDao<CodeTmp> implements ICodeTmpDao{
 
         sqlExpression.andEqNoEmpty("type",search.getType());
 
+        sqlExpression.andEqNoEmpty("group_name",search.getGroupName());
+
         sqlExpression.andLikeNoEmpty("name",search.getLikeName());
 
         sqlExpression.andLikeNoEmpty("type",search.getLikeType());
+
+        sqlExpression.andLikeNoEmpty("group_name",search.getLikeGroupName());
     }
 }

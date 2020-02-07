@@ -6,6 +6,7 @@ create table base_develop_code_tmp (
     content text NULL COMMENT '模板内容',
     pub varchar(10) NULL COMMENT '是否公开',
     type varchar(10) NULL COMMENT '类型',
+    group_name varchar(50) NULL COMMENT '分组名称',
     create_user_id varchar(50) NULL COMMENT '创建人id',
     create_user_name varchar(150) NULL COMMENT '创建人名称',
     PRIMARY KEY (id)
