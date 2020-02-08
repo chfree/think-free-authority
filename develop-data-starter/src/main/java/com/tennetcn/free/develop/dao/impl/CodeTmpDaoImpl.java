@@ -1,5 +1,6 @@
 package com.tennetcn.free.develop.dao.impl;
 
+import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
@@ -50,6 +51,10 @@ public class CodeTmpDaoImpl extends SuperDao<CodeTmp> implements ICodeTmpDao{
 
         appendExpression(sqlExpression,search);
         appendSqlByCreateUserId(sqlExpression,search);
+
+        sqlExpression.addOrder("pub", OrderEnum.asc)
+                     .addOrder("name",OrderEnum.asc)
+                     .addOrder("group_name",OrderEnum.asc);
 
         return queryList(sqlExpression,pagerModel);
     }
