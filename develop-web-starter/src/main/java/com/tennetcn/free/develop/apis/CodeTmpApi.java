@@ -65,7 +65,9 @@ public class CodeTmpApi extends AuthorityApi {
     public BaseResponse countSearch(CodeTmpSearch search){
         BaseResponse response=new BaseResponse();
 
-        int count =  codeTmpService.queryCountBySearch(search);
+        search.setCreateUserId(getLoginId());
+
+        int count =  codeTmpService.queryCountByCheck(search);
         response.put("count",count);
 
         return response;

@@ -29,6 +29,11 @@ public class CodeTmpServiceImpl extends SuperService<CodeTmp> implements ICodeTm
     }
 
     @Override
+    public int queryCountByCheck(CodeTmpSearch search) {
+        return codeTmpDao.queryCountByCheck(search);
+    }
+
+    @Override
     public List<CodeTmp> queryListBySearch(CodeTmpSearch search, PagerModel pagerModel) {
         return codeTmpDao.queryListBySearch(search,pagerModel);
     }

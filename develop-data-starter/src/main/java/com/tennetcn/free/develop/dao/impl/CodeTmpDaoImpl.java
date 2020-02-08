@@ -32,6 +32,18 @@ public class CodeTmpDaoImpl extends SuperDao<CodeTmp> implements ICodeTmpDao{
     }
 
     @Override
+    public int queryCountByCheck(CodeTmpSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectCount().from(CodeTmp.class);
+
+        appendExpression(sqlExpression,search);
+
+        sqlExpression.andEq("create_user_id",search.getCreateUserId());
+
+        return queryCount(sqlExpression);
+    }
+
+    @Override
     public List<CodeTmp> queryListBySearch(CodeTmpSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(CodeTmp.class);

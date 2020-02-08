@@ -17,5 +17,7 @@ import java.util.List;
 public interface ICodeTmpDao extends ISuperDao<CodeTmp>{
     int queryCountBySearch(CodeTmpSearch search);
 
+    int queryCountByCheck(CodeTmpSearch search);
+
     List<CodeTmp> queryListBySearch(CodeTmpSearch search, PagerModel pagerModel);
 }
