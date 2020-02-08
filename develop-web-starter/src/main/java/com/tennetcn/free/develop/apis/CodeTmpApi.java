@@ -73,10 +73,20 @@ public class CodeTmpApi extends AuthorityApi {
 
     @ApiOperation(value = "更新公开状态")
     @PostMapping("updatePub")
-    public BaseResponse updatePub(String id,String pub){
+    public BaseResponse updatePub(@Valid @NotBlank(message = "代码模板id不能为空")String id,@Valid @NotBlank(message = "模板状态不能为空")String pub){
         BaseResponse response=new BaseResponse();
 
         response.put("result",codeTmpService.updatePub(id,pub));
+
+        return response;
+    }
+
+    @ApiOperation(value = "删除一个模板")
+    @PostMapping("delete")
+    public BaseResponse delete(@Valid @NotBlank(message = "代码模板id不能为空")String id){
+        BaseResponse response=new BaseResponse();
+
+        response.put("result",codeTmpService.deleteModel(id));
 
         return response;
     }
