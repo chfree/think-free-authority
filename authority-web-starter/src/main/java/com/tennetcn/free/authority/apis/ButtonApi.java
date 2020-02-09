@@ -1,12 +1,12 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.button.ButtonListReq;
-import com.tennetcn.free.authority.apimodel.button.ButtonListResp;
-import com.tennetcn.free.authority.apimodel.button.SaveButtonReq;
-import com.tennetcn.free.authority.model.Button;
+import com.tennetcn.free.authority.data.apimodel.button.ButtonListReq;
+import com.tennetcn.free.authority.data.apimodel.button.ButtonListResp;
+import com.tennetcn.free.authority.data.apimodel.button.SaveButtonReq;
+import com.tennetcn.free.authority.data.model.Button;
 import com.tennetcn.free.authority.service.IButtonService;
-import com.tennetcn.free.authority.viewmodel.ButtonSearch;
+import com.tennetcn.free.authority.data.viewmodel.ButtonSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;

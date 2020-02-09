@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>0.0.1</version>
     <modules>
-        <module>authority-data-starter</module>
+        <module>authority-data-entity</module>
+        <module>authority-data-service-starter</module>
         <module>authority-web-starter</module>
         <module>authority-web-starter-run</module>
         <module>authority-security-starter</module>

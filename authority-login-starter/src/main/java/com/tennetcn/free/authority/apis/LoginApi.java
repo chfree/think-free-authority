@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apis;
 
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
-import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.data.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
 import com.tennetcn.free.core.message.web.BaseResponse;

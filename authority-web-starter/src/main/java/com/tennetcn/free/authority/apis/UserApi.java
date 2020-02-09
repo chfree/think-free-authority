@@ -2,16 +2,16 @@ package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
-import com.tennetcn.free.authority.apimodel.user.SaveUserReq;
-import com.tennetcn.free.authority.apimodel.user.UserListReq;
-import com.tennetcn.free.authority.apimodel.user.UserListResp;
-import com.tennetcn.free.authority.model.Button;
-import com.tennetcn.free.authority.model.Department;
-import com.tennetcn.free.authority.model.Role;
+import com.tennetcn.free.authority.data.apimodel.user.SaveUserReq;
+import com.tennetcn.free.authority.data.apimodel.user.UserListReq;
+import com.tennetcn.free.authority.data.apimodel.user.UserListResp;
+import com.tennetcn.free.authority.data.model.Button;
+import com.tennetcn.free.authority.data.model.Department;
+import com.tennetcn.free.authority.data.model.Role;
+import com.tennetcn.free.authority.data.viewmodel.MenuRoute;
+import com.tennetcn.free.authority.data.viewmodel.UserSearch;
+import com.tennetcn.free.authority.data.viewmodel.UserView;
 import com.tennetcn.free.authority.service.*;
-import com.tennetcn.free.authority.viewmodel.MenuRoute;
-import com.tennetcn.free.authority.viewmodel.UserSearch;
-import com.tennetcn.free.authority.viewmodel.UserView;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.message.LoginModel;
@@ -54,6 +54,9 @@ public class UserApi extends AuthorityApi {
 
     @Autowired
     private IDepartmentService departmentService;
+
+    public UserApi() {
+    }
 
     @ApiOperation(value = "获取用户列表")
     @PostMapping("list")

@@ -1,12 +1,12 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.menu.MenuListReq;
-import com.tennetcn.free.authority.apimodel.menu.MenuListResp;
-import com.tennetcn.free.authority.apimodel.menu.SaveMenuReq;
+import com.tennetcn.free.authority.data.apimodel.menu.MenuListReq;
+import com.tennetcn.free.authority.data.apimodel.menu.MenuListResp;
+import com.tennetcn.free.authority.data.apimodel.menu.SaveMenuReq;
 import com.tennetcn.free.authority.service.IMenuService;
 import com.tennetcn.free.authority.service.IRoleService;
-import com.tennetcn.free.authority.viewmodel.MenuSearch;
+import com.tennetcn.free.authority.data.viewmodel.MenuSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;

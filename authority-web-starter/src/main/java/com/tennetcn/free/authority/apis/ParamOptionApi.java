@@ -1,12 +1,12 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.paramoption.ParamOptionListReq;
-import com.tennetcn.free.authority.apimodel.paramoption.ParamOptionListResp;
-import com.tennetcn.free.authority.apimodel.paramoption.SaveParamOptionReq;
-import com.tennetcn.free.authority.model.ParamOption;
+import com.tennetcn.free.authority.data.apimodel.paramoption.ParamOptionListReq;
+import com.tennetcn.free.authority.data.apimodel.paramoption.ParamOptionListResp;
+import com.tennetcn.free.authority.data.apimodel.paramoption.SaveParamOptionReq;
+import com.tennetcn.free.authority.data.model.ParamOption;
 import com.tennetcn.free.authority.service.IParamOptionService;
-import com.tennetcn.free.authority.viewmodel.ParamOptionSearch;
+import com.tennetcn.free.authority.data.viewmodel.ParamOptionSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;

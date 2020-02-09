@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.authority.apimodel.rolefunc.RoleFuncListReq;
-import com.tennetcn.free.authority.apimodel.rolefunc.SaveRoleFuncReq;
-import com.tennetcn.free.authority.model.RoleFunc;
+import com.tennetcn.free.authority.data.apimodel.rolefunc.RoleFuncListReq;
+import com.tennetcn.free.authority.data.apimodel.rolefunc.SaveRoleFuncReq;
+import com.tennetcn.free.authority.data.model.RoleFunc;
 import com.tennetcn.free.authority.service.IRoleFuncService;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;

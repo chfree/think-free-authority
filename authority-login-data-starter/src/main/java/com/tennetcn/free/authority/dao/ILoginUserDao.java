@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.dao;
 
-import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.data.model.LoginUser;
 import com.tennetcn.free.data.dao.base.ISuperDao;
 
 /**

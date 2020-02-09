@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.ILoginUserDao;
-import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.data.model.LoginUser;
 import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;

@@ -1,12 +1,12 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.department.DepartmentListReq;
-import com.tennetcn.free.authority.apimodel.department.DepartmentListResp;
-import com.tennetcn.free.authority.apimodel.department.SaveDepartmentReq;
+import com.tennetcn.free.authority.data.apimodel.department.DepartmentListReq;
+import com.tennetcn.free.authority.data.apimodel.department.DepartmentListResp;
+import com.tennetcn.free.authority.data.apimodel.department.SaveDepartmentReq;
 import com.tennetcn.free.authority.service.IDepartmentService;
-import com.tennetcn.free.authority.viewmodel.DepartmentSearch;
-import com.tennetcn.free.authority.viewmodel.DepartmentTree;
+import com.tennetcn.free.authority.data.viewmodel.DepartmentSearch;
+import com.tennetcn.free.authority.data.viewmodel.DepartmentTree;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;

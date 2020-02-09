@@ -1,12 +1,12 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.business.BusinessListReq;
-import com.tennetcn.free.authority.apimodel.business.BusinessListResp;
-import com.tennetcn.free.authority.apimodel.business.SaveBusinessReq;
-import com.tennetcn.free.authority.model.Business;
+import com.tennetcn.free.authority.data.apimodel.business.BusinessListReq;
+import com.tennetcn.free.authority.data.apimodel.business.BusinessListResp;
+import com.tennetcn.free.authority.data.apimodel.business.SaveBusinessReq;
+import com.tennetcn.free.authority.data.model.Business;
 import com.tennetcn.free.authority.service.IBusinessService;
-import com.tennetcn.free.authority.viewmodel.BusinessSearch;
+import com.tennetcn.free.authority.data.viewmodel.BusinessSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;

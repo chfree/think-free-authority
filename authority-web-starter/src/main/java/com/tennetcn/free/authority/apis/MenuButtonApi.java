@@ -2,10 +2,10 @@ package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.menubutton.SaveMenuButtonReq;
-import com.tennetcn.free.authority.model.MenuButton;
+import com.tennetcn.free.authority.data.apimodel.menubutton.SaveMenuButtonReq;
+import com.tennetcn.free.authority.data.model.MenuButton;
 import com.tennetcn.free.authority.service.IMenuButtonService;
-import com.tennetcn.free.authority.viewmodel.MenuButtonSearch;
+import com.tennetcn.free.authority.data.viewmodel.MenuButtonSearch;
 import com.tennetcn.free.core.enums.YesOrNoInteger;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;
