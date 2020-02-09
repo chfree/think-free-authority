@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.mapper;
 
-import com.tennetcn.free.authority.data.model.Business;
+import com.tennetcn.free.authority.data.entity.model.Business;
 import com.tennetcn.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
 

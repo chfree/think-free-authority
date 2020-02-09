@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.service.impl;
 
 import com.tennetcn.free.authority.dao.IUserRoleDao;
-import com.tennetcn.free.authority.data.model.Role;
-import com.tennetcn.free.authority.data.model.UserRole;
+import com.tennetcn.free.authority.data.entity.model.Role;
+import com.tennetcn.free.authority.data.entity.model.UserRole;
 import com.tennetcn.free.authority.service.IUserRoleService;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;

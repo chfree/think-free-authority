@@ -1,10 +1,10 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IParamOptionDao;
-import com.tennetcn.free.authority.data.model.ParamDefine;
-import com.tennetcn.free.authority.data.model.ParamOption;
-import com.tennetcn.free.authority.data.viewmodel.ParamOptionSearch;
-import com.tennetcn.free.authority.data.viewmodel.ParamOptionView;
+import com.tennetcn.free.authority.data.entity.model.ParamDefine;
+import com.tennetcn.free.authority.data.entity.model.ParamOption;
+import com.tennetcn.free.authority.data.entity.viewmodel.ParamOptionSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.ParamOptionView;
 import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;

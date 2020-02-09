@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.service;
 
-import com.tennetcn.free.authority.data.model.RoleFunc;
-import com.tennetcn.free.authority.data.viewmodel.RoleFuncSearch;
+import com.tennetcn.free.authority.data.entity.model.RoleFunc;
+import com.tennetcn.free.authority.data.entity.viewmodel.RoleFuncSearch;
 import com.tennetcn.free.data.dao.base.ISuperService;
 
 import java.util.List;

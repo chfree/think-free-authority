@@ -2,9 +2,9 @@ package com.tennetcn.free.authority.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.dao.IRoleFuncDao;
-import com.tennetcn.free.authority.data.model.RoleFunc;
+import com.tennetcn.free.authority.data.entity.model.RoleFunc;
 import com.tennetcn.free.authority.service.IRoleFuncService;
-import com.tennetcn.free.authority.data.viewmodel.RoleFuncSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.RoleFuncSearch;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

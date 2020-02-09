@@ -1,9 +1,9 @@
 package com.tennetcn.free.authority.service.impl;
 
 import com.tennetcn.free.authority.dao.IRoleDao;
-import com.tennetcn.free.authority.data.model.Role;
+import com.tennetcn.free.authority.data.entity.model.Role;
 import com.tennetcn.free.authority.service.IRoleService;
-import com.tennetcn.free.authority.data.viewmodel.RoleSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.RoleSearch;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;

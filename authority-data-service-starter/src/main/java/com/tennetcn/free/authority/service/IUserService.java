@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.service;
 
-import com.tennetcn.free.authority.data.model.User;
-import com.tennetcn.free.authority.data.viewmodel.UserSearch;
-import com.tennetcn.free.authority.data.viewmodel.UserView;
+import com.tennetcn.free.authority.data.entity.model.User;
+import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperService;
 

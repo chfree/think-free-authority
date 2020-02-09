@@ -1,9 +1,9 @@
 package com.tennetcn.free.authority.service.impl;
 
 import com.tennetcn.free.authority.dao.IParamOptionDao;
-import com.tennetcn.free.authority.data.model.ParamOption;
-import com.tennetcn.free.authority.data.viewmodel.ParamOptionSearch;
-import com.tennetcn.free.authority.data.viewmodel.ParamOptionView;
+import com.tennetcn.free.authority.data.entity.model.ParamOption;
+import com.tennetcn.free.authority.data.entity.viewmodel.ParamOptionSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.ParamOptionView;
 import com.tennetcn.free.authority.service.IParamOptionService;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;

@@ -2,10 +2,10 @@ package com.tennetcn.free.authority.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
 import com.tennetcn.free.authority.dao.IUserDao;
-import com.tennetcn.free.authority.data.model.User;
+import com.tennetcn.free.authority.data.entity.model.User;
 import com.tennetcn.free.authority.service.IUserService;
-import com.tennetcn.free.authority.data.viewmodel.UserSearch;
-import com.tennetcn.free.authority.data.viewmodel.UserView;
+import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;

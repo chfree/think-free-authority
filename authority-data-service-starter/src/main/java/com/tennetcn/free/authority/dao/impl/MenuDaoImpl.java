@@ -1,13 +1,13 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IMenuDao;
-import com.tennetcn.free.authority.enums.MenuType;
-import com.tennetcn.free.authority.enums.RoleFuncType;
-import com.tennetcn.free.authority.data.model.Menu;
-import com.tennetcn.free.authority.data.model.RoleFunc;
-import com.tennetcn.free.authority.data.viewmodel.MenuRoute;
-import com.tennetcn.free.authority.data.viewmodel.MenuSearch;
-import com.tennetcn.free.authority.data.viewmodel.MenuTree;
+import com.tennetcn.free.authority.data.enums.MenuType;
+import com.tennetcn.free.authority.data.enums.RoleFuncType;
+import com.tennetcn.free.authority.data.entity.model.Menu;
+import com.tennetcn.free.authority.data.entity.model.RoleFunc;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuRoute;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuTree;
 import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;

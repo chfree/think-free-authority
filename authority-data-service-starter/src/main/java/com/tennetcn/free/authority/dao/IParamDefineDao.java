@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.dao;
 
-import com.tennetcn.free.authority.data.model.ParamDefine;
-import com.tennetcn.free.authority.data.viewmodel.ParamDefineSearch;
+import com.tennetcn.free.authority.data.entity.model.ParamDefine;
+import com.tennetcn.free.authority.data.entity.viewmodel.ParamDefineSearch;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperDao;
 

@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.service;
 
-import com.tennetcn.free.authority.data.model.MenuButton;
-import com.tennetcn.free.authority.data.viewmodel.MenuButtonSearch;
-import com.tennetcn.free.authority.data.viewmodel.MenuButtonTree;
+import com.tennetcn.free.authority.data.entity.model.MenuButton;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuButtonSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuButtonTree;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperService;
 

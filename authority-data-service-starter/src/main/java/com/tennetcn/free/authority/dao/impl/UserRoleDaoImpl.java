@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IUserRoleDao;
-import com.tennetcn.free.authority.data.model.Role;
-import com.tennetcn.free.authority.data.model.UserRole;
+import com.tennetcn.free.authority.data.entity.model.Role;
+import com.tennetcn.free.authority.data.entity.model.UserRole;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;

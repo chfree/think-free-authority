@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.service;
 
-import com.tennetcn.free.authority.data.model.Department;
-import com.tennetcn.free.authority.data.viewmodel.DepartmentSearch;
-import com.tennetcn.free.authority.data.viewmodel.DepartmentTree;
+import com.tennetcn.free.authority.data.entity.model.Department;
+import com.tennetcn.free.authority.data.entity.viewmodel.DepartmentSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.DepartmentTree;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISuperService;
 

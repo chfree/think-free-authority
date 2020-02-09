@@ -2,8 +2,8 @@ package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.data.apimodel.userrole.SaveUserRoleReq;
-import com.tennetcn.free.authority.data.model.UserRole;
+import com.tennetcn.free.authority.data.entity.apimodel.userrole.SaveUserRoleReq;
+import com.tennetcn.free.authority.data.entity.model.UserRole;
 import com.tennetcn.free.authority.service.IUserRoleService;
 import com.tennetcn.free.core.enums.YesOrNoInteger;
 import com.tennetcn.free.core.message.web.BaseResponse;

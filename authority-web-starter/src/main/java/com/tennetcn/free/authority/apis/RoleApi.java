@@ -1,12 +1,12 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.data.apimodel.role.RoleListReq;
-import com.tennetcn.free.authority.data.apimodel.role.RoleListResp;
-import com.tennetcn.free.authority.data.apimodel.role.SaveRoleReq;
-import com.tennetcn.free.authority.data.model.Role;
+import com.tennetcn.free.authority.data.entity.apimodel.role.RoleListReq;
+import com.tennetcn.free.authority.data.entity.apimodel.role.RoleListResp;
+import com.tennetcn.free.authority.data.entity.apimodel.role.SaveRoleReq;
+import com.tennetcn.free.authority.data.entity.model.Role;
 import com.tennetcn.free.authority.service.IRoleService;
-import com.tennetcn.free.authority.data.viewmodel.RoleSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.RoleSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;

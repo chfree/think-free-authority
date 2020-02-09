@@ -1,11 +1,11 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IButtonDao;
-import com.tennetcn.free.authority.enums.RoleFuncType;
-import com.tennetcn.free.authority.data.model.Button;
-import com.tennetcn.free.authority.data.model.MenuButton;
-import com.tennetcn.free.authority.data.model.RoleFunc;
-import com.tennetcn.free.authority.data.viewmodel.ButtonSearch;
+import com.tennetcn.free.authority.data.enums.RoleFuncType;
+import com.tennetcn.free.authority.data.entity.model.Button;
+import com.tennetcn.free.authority.data.entity.model.MenuButton;
+import com.tennetcn.free.authority.data.entity.model.RoleFunc;
+import com.tennetcn.free.authority.data.entity.viewmodel.ButtonSearch;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;

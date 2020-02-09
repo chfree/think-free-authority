@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IBusinessDao;
-import com.tennetcn.free.authority.data.model.Business;
-import com.tennetcn.free.authority.data.viewmodel.BusinessSearch;
+import com.tennetcn.free.authority.data.entity.model.Business;
+import com.tennetcn.free.authority.data.entity.viewmodel.BusinessSearch;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;

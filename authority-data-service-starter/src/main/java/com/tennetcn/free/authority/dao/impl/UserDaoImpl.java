@@ -1,10 +1,10 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IUserDao;
-import com.tennetcn.free.authority.data.model.Department;
-import com.tennetcn.free.authority.data.model.User;
-import com.tennetcn.free.authority.data.viewmodel.UserSearch;
-import com.tennetcn.free.authority.data.viewmodel.UserView;
+import com.tennetcn.free.authority.data.entity.model.Department;
+import com.tennetcn.free.authority.data.entity.model.User;
+import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;

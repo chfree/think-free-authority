@@ -1,9 +1,9 @@
 package com.tennetcn.free.authority.service;
 
-import com.tennetcn.free.authority.data.model.Menu;
-import com.tennetcn.free.authority.data.viewmodel.MenuRoute;
-import com.tennetcn.free.authority.data.viewmodel.MenuSearch;
-import com.tennetcn.free.authority.data.viewmodel.MenuTree;
+import com.tennetcn.free.authority.data.entity.model.Menu;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuRoute;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuTree;
 import com.tennetcn.free.data.dao.base.ISuperService;
 
 import java.util.List;

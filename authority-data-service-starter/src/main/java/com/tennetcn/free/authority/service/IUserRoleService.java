@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.service;
 
-import com.tennetcn.free.authority.data.model.Role;
-import com.tennetcn.free.authority.data.model.UserRole;
+import com.tennetcn.free.authority.data.entity.model.Role;
+import com.tennetcn.free.authority.data.entity.model.UserRole;
 import com.tennetcn.free.data.dao.base.ISuperService;
 
 import java.util.List;

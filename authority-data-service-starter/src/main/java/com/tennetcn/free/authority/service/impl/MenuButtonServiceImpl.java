@@ -1,10 +1,10 @@
 package com.tennetcn.free.authority.service.impl;
 
 import com.tennetcn.free.authority.dao.IMenuButtonDao;
-import com.tennetcn.free.authority.data.model.MenuButton;
+import com.tennetcn.free.authority.data.entity.model.MenuButton;
 import com.tennetcn.free.authority.service.IMenuButtonService;
-import com.tennetcn.free.authority.data.viewmodel.MenuButtonSearch;
-import com.tennetcn.free.authority.data.viewmodel.MenuButtonTree;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuButtonSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.MenuButtonTree;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import lombok.var;
