@@ -3,11 +3,13 @@ package com.tennetcn.free.authority.apis;
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
 import com.tennetcn.free.authority.data.entity.apimodel.user.SaveUserReq;
+import com.tennetcn.free.authority.data.entity.apimodel.user.UpdatePwd;
 import com.tennetcn.free.authority.data.entity.apimodel.user.UserListReq;
 import com.tennetcn.free.authority.data.entity.apimodel.user.UserListResp;
 import com.tennetcn.free.authority.data.entity.model.Button;
 import com.tennetcn.free.authority.data.entity.model.Department;
 import com.tennetcn.free.authority.data.entity.model.Role;
+import com.tennetcn.free.authority.data.entity.model.User;
 import com.tennetcn.free.authority.data.entity.viewmodel.MenuRoute;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
@@ -16,6 +18,7 @@ import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.security.webapi.AuthorityApi;
+import com.tennetcn.free.web.message.WebResponseStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +112,60 @@ public class UserApi extends AuthorityApi {
 
         boolean result = userService.applyChange(userReq);
         response.put("result",result);
+
+        return response;
+    }
+
+    @ApiOperation(value = "更改密码")
+    @PostMapping("updatePwd")
+    public BaseResponse updatePwd(@Valid UpdatePwd updatePwd){
+        BaseResponse response = new BaseResponse();
+        if(!updatePwd.getNewPwd().equals(updatePwd.getConfirmNewPwd())){
+            response.setMessage("两次密码输入不一致");
+            response.setStatus(WebResponseStatus.DATA_ERROR);
+
+            return response;
+        }
+        User user = userService.queryModelByLogin(updatePwd.getAccount(),updatePwd.getOldPwd());
+        if(user==null){
+            response.setMessage("账号或密码输入不正确");
+            response.setStatus(WebResponseStatus.DATA_ERROR);
+
+            return response;
+        }
+        user.setPassword(userService.passwordFormat(updatePwd.getNewPwd()));
+
+        response.put("result",userService.updateModel(user));
+
+        return response;
+    }
+
+    @ApiOperation(value = "验证用户名密码")
+    @PostMapping("checkAccountAndPwd")
+    public BaseResponse checkAccountAndPwd(@Valid @NotBlank(message = "用户账号不能为空") String account,@Valid @NotBlank(message = "密码不能为空") String pwd){
+        BaseResponse response = new BaseResponse();
+
+        User user = userService.queryModelByLogin(account,pwd);
+        response.put("result", user !=null);
+
+        return response;
+    }
+
+    @ApiOperation(value = "强制更改密码")
+    @PostMapping("forceUpdatePwd")
+    public BaseResponse forceUpdatePwd(@Valid @NotBlank(message = "用户id不能为空") String id,@Valid @NotBlank(message = "密码不能为空") String pwd){
+        BaseResponse response = new BaseResponse();
+        User user = userService.queryModel(id);
+
+        if(user==null){
+            response.setMessage("用户不存在，更改密码失败");
+            response.setStatus(WebResponseStatus.DATA_ERROR);
+
+            return response;
+        }
+        user.setPassword(userService.passwordFormat(pwd));
+
+        response.put("result",userService.updateModel(user));
 
         return response;
     }

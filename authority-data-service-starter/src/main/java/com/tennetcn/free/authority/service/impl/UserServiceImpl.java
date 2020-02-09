@@ -2,6 +2,7 @@ package com.tennetcn.free.authority.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
 import com.tennetcn.free.authority.dao.IUserDao;
+import com.tennetcn.free.authority.data.entity.apimodel.user.UpdatePwd;
 import com.tennetcn.free.authority.data.entity.model.User;
 import com.tennetcn.free.authority.service.IUserService;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
@@ -46,7 +47,8 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
         return userDao.queryModelByLogin(account,passwordFormat(password));
     }
 
-    private String passwordFormat(String password){
+    @Override
+    public String passwordFormat(String password){
         return SecureUtil.md5(password);
     }
 

@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service;
 
+import com.tennetcn.free.authority.data.entity.apimodel.user.UpdatePwd;
 import com.tennetcn.free.authority.data.entity.model.User;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
@@ -27,4 +28,6 @@ public interface IUserService extends ISuperService<User> {
     List<UserView> queryViewListBySearch(UserSearch search, PagerModel pagerModel);
 
     UserView queryViewModelById(String id);
+
+    String passwordFormat(String password);
 }
