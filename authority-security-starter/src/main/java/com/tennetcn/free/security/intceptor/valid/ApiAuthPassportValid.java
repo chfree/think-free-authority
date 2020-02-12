@@ -81,7 +81,7 @@ public class ApiAuthPassportValid {
 	private boolean checkAuthorizeJwt(HttpServletRequest request) throws Exception{
 		String token=request.getHeader("Authorization");
 		if(StringUtils.isEmpty(token)){
-			token=request.getParameter("signCode");
+			token=request.getParameter("token");
 
 			if(StringUtils.isEmpty(token)){
 			     return false;

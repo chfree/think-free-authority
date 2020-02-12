@@ -13,6 +13,7 @@ import com.tennetcn.free.authority.data.entity.model.User;
 import com.tennetcn.free.authority.data.entity.viewmodel.MenuRoute;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
+import com.tennetcn.free.authority.exception.AuthorityBizException;
 import com.tennetcn.free.authority.service.*;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
@@ -161,7 +162,7 @@ public class UserApi extends AuthorityApi {
             response.setMessage("用户不存在，更改密码失败");
             response.setStatus(WebResponseStatus.DATA_ERROR);
 
-            return response;
+            throw new AuthorityBizException("用户不存在，更改密码失败");
         }
         user.setPassword(userService.passwordFormat(pwd));
 
