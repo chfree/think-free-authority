@@ -13,17 +13,32 @@
     <property name="maxFileSize" value="1MB" />
 
     <!--输出到控制台 -->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="COMMON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/common/authority-common.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_HOME}/common/authority-common.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
             <maxFileSize>${maxFileSize}</maxFileSize>
         </rollingPolicy>
-　　　　　<encoder>
+　　　　　
+        <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
 　　　　　</encoder>
 　　　</appender>
+
+    <appender name="MSG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/msg/authority-msg.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/msg/authority-msg.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <maxFileSize>${maxFileSize}</maxFileSize>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        　　　
+    </appender>
 
     <!--输出到控制台 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -35,11 +50,22 @@
     </appender>
 
     <root level="DEBUG">
-        <appender-ref ref="FILE" />
+        <appender-ref ref="COMMON_FILE" />
     </root>
 
-    <logger name="com.tennetcn" additivity="false">
+    <logger name="com.tennetcn.free.web.aspect.LogInfo" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="MSG_FILE" />
+    </logger>
+
+    <logger name="com.tennetcn.free.web.init.BaseServletContextInitializer" additivity="false">
         <level value="DEBUG" />
         <appender-ref ref="CONSOLE" />
+        <appender-ref ref="COMMON_FILE" />
+    </logger>
+    <logger name="com.tennetcn.free.web.listener.BaseApplicationListener" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="COMMON_FILE" />
     </logger>
 </configuration>
