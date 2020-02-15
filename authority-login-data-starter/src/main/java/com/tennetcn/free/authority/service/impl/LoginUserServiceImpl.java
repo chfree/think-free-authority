@@ -2,7 +2,7 @@ package com.tennetcn.free.authority.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
 import com.tennetcn.free.authority.dao.ILoginUserDao;
-import com.tennetcn.free.authority.data.model.LoginUser;
+import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginUserService;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.data.dao.base.impl.SuperService;

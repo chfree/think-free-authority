@@ -29,7 +29,7 @@ import javax.validation.constraints.NotBlank;
  * @comment     登陆授权表
  */
 @RestController
-@RequestMapping(value = "/api/v1/xxxx/loginAuth/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/authority/loginAuth/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="登陆授权表管理",value ="登陆授权表相关的操作")
 public class LoginAuthApi extends AuthorityApi {
     @Autowired
