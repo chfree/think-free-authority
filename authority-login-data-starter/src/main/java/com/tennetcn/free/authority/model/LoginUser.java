@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.data.model;
+package com.tennetcn.free.authority.model;
 
 import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;

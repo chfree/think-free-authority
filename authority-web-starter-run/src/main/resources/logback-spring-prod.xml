@@ -49,10 +49,6 @@
         </encoder>
     </appender>
 
-    <root level="DEBUG">
-        <appender-ref ref="COMMON_FILE" />
-    </root>
-
     <logger name="com.tennetcn.free.web.aspect.LogInfo" additivity="false">
         <level value="debug" />
         <appender-ref ref="MSG_FILE" />
@@ -68,4 +64,8 @@
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="COMMON_FILE" />
     </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="COMMON_FILE" />
+    </root>
 </configuration>
