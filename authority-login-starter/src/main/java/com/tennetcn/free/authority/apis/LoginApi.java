@@ -1,7 +1,11 @@
 package com.tennetcn.free.authority.apis;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
+import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.service.ILoginAuthService;
 import com.tennetcn.free.authority.service.ILoginUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
 import com.tennetcn.free.core.message.web.BaseResponse;
@@ -10,6 +14,7 @@ import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
+import io.jsonwebtoken.Claims;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +42,9 @@ public class LoginApi extends AuthorityApi {
     @Autowired
     private ILoginUserService userService;
 
+    @Autowired
+    private ILoginAuthService loginAuthService;
+
     @ApiAuthPassport
     @ApiOperation(value = "登陆")
     @PostMapping("login")
@@ -58,11 +66,29 @@ public class LoginApi extends AuthorityApi {
         String token = JwtHelper.instance().createJwt(user.getId(),claims);
         loginModel.setToken(token);
 
+        addLoginAuth(loginModel,token);
+
         cached.put(token,loginModel);
         response.put("result",true);
         response.put("token",token);
 
         return response;
+    }
+
+    private void addLoginAuth(LoginModel loginModel,String token){
+        LoginAuth loginAuth = new LoginAuth();
+
+        Claims claims = JwtHelper.instance().parseJWT(token);
+
+        loginAuth.setId(IdUtil.randomUUID());
+        loginAuth.setExpTm(claims.getExpiration());
+        loginAuth.setToken(token);
+        loginAuth.setUserId(loginModel.getId());
+        loginAuth.setType("login");
+        loginAuth.setStatus("01");
+        loginAuth.setAuthTm(DateUtil.date());
+
+        loginAuthService.addModel(loginAuth);
     }
 
     @PostMapping("loginfo")

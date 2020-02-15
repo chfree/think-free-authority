@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.dao;
 
+import com.tennetcn.free.authority.viewmodel.LoginAuthView;
 import com.tennetcn.free.data.dao.base.ISuperDao;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.authority.viewmodel.LoginAuthSearch;
@@ -17,5 +18,5 @@ import java.util.List;
 public interface ILoginAuthDao extends ISuperDao<LoginAuth>{
     int queryCountBySearch(LoginAuthSearch search);
 
-    List<LoginAuth> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel);
+    List<LoginAuthView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel);
 }

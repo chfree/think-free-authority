@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.apimodel.auth;
 
-import com.tennetcn.free.authority.model.LoginAuth;
+import com.tennetcn.free.authority.viewmodel.LoginAuthView;
 import com.tennetcn.free.core.message.web.BasePagerResp;
 import lombok.Data;
 
@@ -15,5 +15,5 @@ import java.util.List;
 
 @Data
 public class LoginAuthListResp extends BasePagerResp {
-    private List<LoginAuth> loginAuths;
+    private List<LoginAuthView> loginAuths;
 }

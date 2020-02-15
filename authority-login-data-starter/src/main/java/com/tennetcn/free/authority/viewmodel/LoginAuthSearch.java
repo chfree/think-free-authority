@@ -52,4 +52,14 @@ public class LoginAuthSearch{
      */
     private String status;
 
+    /**
+     * 账号
+     */
+    private String account;
+
+    /**
+     * 姓名
+     */
+    private String name;
+
 }

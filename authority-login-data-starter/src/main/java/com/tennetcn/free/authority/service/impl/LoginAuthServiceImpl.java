@@ -1,13 +1,15 @@
 package com.tennetcn.free.authority.service.impl;
 
-import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.authority.dao.ILoginAuthDao;
 import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.service.ILoginAuthService;
-import com.tennetcn.free.authority.dao.ILoginAuthDao;
 import com.tennetcn.free.authority.viewmodel.LoginAuthSearch;
+import com.tennetcn.free.authority.viewmodel.LoginAuthView;
 import com.tennetcn.free.core.message.data.PagerModel;
+import com.tennetcn.free.data.dao.base.impl.SuperService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 
@@ -29,7 +31,7 @@ public class LoginAuthServiceImpl extends SuperService<LoginAuth> implements ILo
     }
 
     @Override
-    public List<LoginAuth> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel) {
+    public List<LoginAuthView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel) {
         return loginAuthDao.queryListBySearch(search,pagerModel);
     }
 
