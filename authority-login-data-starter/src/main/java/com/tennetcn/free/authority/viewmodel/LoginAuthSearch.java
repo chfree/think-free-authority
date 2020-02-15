@@ -38,6 +38,11 @@ public class LoginAuthSearch{
     private Date authTm;
 
     /**
+     * 过期时间
+     */
+    private Date expTm;
+
+    /**
      * 授权方式
      */
     private String type;

@@ -45,6 +45,12 @@ public class LoginAuth extends ModelBase{
     private Date authTm;
 
     /**
+     * 过期时间
+     */
+    @Column(name="exp_tm")
+    private Date expTm;
+
+    /**
      * 授权方式
      */
     @Column(name="type")
