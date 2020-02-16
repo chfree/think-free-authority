@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.auth.LoginAuthListReq;
 import com.tennetcn.free.authority.apimodel.auth.LoginAuthListResp;
 import com.tennetcn.free.authority.apimodel.auth.SaveLoginAuthReq;
+import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.viewmodel.LoginAuthSearch;
 import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.service.ILoginAuthService;
@@ -14,6 +15,7 @@ import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +65,19 @@ public class LoginAuthApi extends AuthorityApi {
 
         int count =  loginAuthService.queryCountBySearch(search);
         response.put("count",count);
+
+        return response;
+    }
+
+    @ApiOperation(value = "设置为无效")
+    @PostMapping("setInvalid")
+    public BaseResponse setInvalid(@Valid @NotBlank(message = "授权id不能为空") String id){
+        BaseResponse response=new BaseResponse();
+
+        LoginAuth loginAuth = loginAuthService.queryModel(id);
+        loginAuth.setStatus(LoginAuthStatus.INVALID.getKey());
+
+        response.put("result",loginAuthService.updateModel(loginAuth));
 
         return response;
     }

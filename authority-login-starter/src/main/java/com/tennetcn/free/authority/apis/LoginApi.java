@@ -3,6 +3,8 @@ package com.tennetcn.free.authority.apis;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
+import com.tennetcn.free.authority.enums.LoginAuthStatus;
+import com.tennetcn.free.authority.enums.LoginAuthType;
 import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginAuthService;
@@ -19,6 +21,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +51,7 @@ public class LoginApi extends AuthorityApi {
     @ApiAuthPassport
     @ApiOperation(value = "登陆")
     @PostMapping("login")
+    @Transactional
     public BaseResponse login(@Valid LoginReq loginReq){
         BaseResponse response = new BaseResponse();
 
@@ -84,11 +88,11 @@ public class LoginApi extends AuthorityApi {
         loginAuth.setExpTm(claims.getExpiration());
         loginAuth.setToken(token);
         loginAuth.setUserId(loginModel.getId());
-        loginAuth.setType("login");
-        loginAuth.setStatus("01");
+        loginAuth.setType(LoginAuthType.LOGIN.getKey());
+        loginAuth.setStatus(LoginAuthStatus.VALID.getKey());
         loginAuth.setAuthTm(DateUtil.date());
 
-        loginAuthService.addModel(loginAuth);
+        loginAuthService.saveLoginAuth(loginAuth);
     }
 
     @PostMapping("loginfo")

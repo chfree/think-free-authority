@@ -31,6 +31,9 @@ public class LoginModelIntceptor implements ILoginModelIntceptor {
             return null;
         }
 
-        return LoginUtil.user2LoginModel(user);
+        LoginModel loginModel = LoginUtil.user2LoginModel(user);
+        loginModel.setToken(token);
+
+        return loginModel;
     }
 }

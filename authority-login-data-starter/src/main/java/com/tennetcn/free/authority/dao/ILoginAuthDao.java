@@ -19,4 +19,8 @@ public interface ILoginAuthDao extends ISuperDao<LoginAuth>{
     int queryCountBySearch(LoginAuthSearch search);
 
     List<LoginAuthView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel);
+
+    boolean updateStatusByUserId(String userId,String status);
+
+    boolean checkTokenIsValid(String token);
 }

@@ -20,4 +20,8 @@ public interface ILoginAuthService extends ISuperService<LoginAuth>{
     int queryCountBySearch(LoginAuthSearch search);
 
     List<LoginAuthView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel);
+
+    boolean saveLoginAuth(LoginAuth loginAuth);
+
+    boolean checkTokenIsValid(String token);
 }

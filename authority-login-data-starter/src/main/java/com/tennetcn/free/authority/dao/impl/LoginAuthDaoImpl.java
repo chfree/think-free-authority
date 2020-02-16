@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.dao.impl;
 
+import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.viewmodel.LoginAuthView;
 import com.tennetcn.free.core.enums.OrderEnum;
@@ -54,6 +55,28 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
         appendUserWhere(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel,LoginAuthView.class);
+    }
+
+    @Override
+    public boolean updateStatusByUserId(String userId,String status) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.update(LoginAuth.class)
+                     .setColumn("status",status)
+                     .andEq("user_id",userId);
+
+        return update(sqlExpression)>=0;
+    }
+
+    @Override
+    public boolean checkTokenIsValid(String token) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectCount()
+                .from(LoginAuth.class)
+                .andEq("token",token)
+                .andEq("status", LoginAuthStatus.VALID.getKey())
+                .andWhere("exp_tm>now()");
+
+        return queryCount(sqlExpression)>0;
     }
 
     private void appendUserWhere(ISqlExpression sqlExpression,LoginAuthSearch search){

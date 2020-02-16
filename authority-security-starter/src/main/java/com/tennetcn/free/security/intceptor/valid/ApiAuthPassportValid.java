@@ -7,10 +7,12 @@ import com.tennetcn.free.core.utils.CommonApplicationContextUtil;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.handle.ILoginModelIntceptor;
+import com.tennetcn.free.security.handle.ITokenCheckIntceptor;
 import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
 import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
+@Slf4j
 @Component
 public class ApiAuthPassportValid {
 
@@ -93,9 +96,11 @@ public class ApiAuthPassportValid {
 			cached.remove(token);
 			return false;
 		}
-		
+
+
 		LoginModel loginModel=(LoginModel)cached.get(token);
 		if(loginModel==null) {
+			log.info("取cache为空");
 			// 如果cache为空，则由loginModelIntceptor进行注册一次
 			ILoginModelIntceptor loginModelIntceptor = CommonApplicationContextUtil.getCurrentContext().getBean(ILoginModelIntceptor.class);
 			if(loginModelIntceptor==null){
@@ -106,11 +111,32 @@ public class ApiAuthPassportValid {
 			if(loginModel==null){
 				return false;
 			}
+			if(StringUtils.isEmpty(loginModel.getToken())){
+				loginModel.setToken(token);
+			}
+
 			// 在存储一次token
 			cached.put(token,loginModel);
 		}
+
+		// 在Jwt验证通过的情况下
+		// 在进行自定义的处理方案
+		boolean customTokenCheck = customTokenCheck(loginModel);
+		if(!customTokenCheck){
+			cached.remove(token);
+			return false;
+		}
+
 		request.setAttribute(AuthorityApi.LOGIN_KEY, loginModel);
 		
 		return true;
+	}
+
+	private boolean customTokenCheck(LoginModel loginModel){
+		ITokenCheckIntceptor tokenCheckIntceptor = CommonApplicationContextUtil.getCurrentContext().getBean(ITokenCheckIntceptor.class);
+		if(tokenCheckIntceptor==null){
+			return true;
+		}
+		return tokenCheckIntceptor.checkToken(loginModel);
 	}
 }
