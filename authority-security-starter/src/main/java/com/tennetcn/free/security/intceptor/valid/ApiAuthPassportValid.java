@@ -3,7 +3,7 @@ package com.tennetcn.free.security.intceptor.valid;
 import cn.hutool.json.JSONUtil;
 import com.tennetcn.free.core.cache.ICached;
 import com.tennetcn.free.core.message.web.BaseResponse;
-import com.tennetcn.free.core.utils.CommonApplicationContextUtil;
+import com.tennetcn.free.core.utils.SpringContextUtils;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.handle.ILoginModelIntceptor;
@@ -102,7 +102,7 @@ public class ApiAuthPassportValid {
 		if(loginModel==null) {
 			log.info("取cache为空");
 			// 如果cache为空，则由loginModelIntceptor进行注册一次
-			ILoginModelIntceptor loginModelIntceptor = CommonApplicationContextUtil.getCurrentContext().getBean(ILoginModelIntceptor.class);
+			ILoginModelIntceptor loginModelIntceptor = SpringContextUtils.getCurrentContext().getBean(ILoginModelIntceptor.class);
 			if(loginModelIntceptor==null){
 				return false;
 			}
@@ -133,7 +133,7 @@ public class ApiAuthPassportValid {
 	}
 
 	private boolean customTokenCheck(LoginModel loginModel){
-		ITokenCheckIntceptor tokenCheckIntceptor = CommonApplicationContextUtil.getCurrentContext().getBean(ITokenCheckIntceptor.class);
+		ITokenCheckIntceptor tokenCheckIntceptor = SpringContextUtils.getCurrentContext().getBean(ITokenCheckIntceptor.class);
 		if(tokenCheckIntceptor==null){
 			return true;
 		}

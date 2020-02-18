@@ -1,7 +1,7 @@
 package com.tennetcn.free.security.core;
 
 import cn.hutool.json.JSONUtil;
-import com.tennetcn.free.core.utils.CommonApplicationContextUtil;
+import com.tennetcn.free.core.utils.SpringContextUtils;
 import com.tennetcn.free.security.properties.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -38,7 +38,7 @@ public class JwtHelper {
     public static JwtHelper instance(){
         if(helper==null){
             helper = new JwtHelper();
-            JwtConfig jwtConfig = CommonApplicationContextUtil.getCurrentContext().getBean(JwtConfig.class);
+            JwtConfig jwtConfig = SpringContextUtils.getCurrentContext().getBean(JwtConfig.class);
             helper.setJwtConfig(jwtConfig);
         }
         return helper;

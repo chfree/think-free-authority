@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apis;
 
 import com.tennetcn.free.core.message.web.BaseResponse;
-import com.tennetcn.free.core.utils.CommonApplicationContextUtil;
+import com.tennetcn.free.core.utils.SpringContextUtils;
 import com.tennetcn.free.security.handle.IUploadIntceptor;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
@@ -47,7 +47,7 @@ public class UploadApi extends AuthorityApi {
         resp.setStatus(WebResponseStatus.DATA_ERROR);
 
         // 如何处理上传文件由具体的intceptor进行处理
-        Map<String,IUploadIntceptor> uploadIntceptors = CommonApplicationContextUtil.getCurrentContext().getBeansOfType(IUploadIntceptor.class);
+        Map<String,IUploadIntceptor> uploadIntceptors = SpringContextUtils.getCurrentContext().getBeansOfType(IUploadIntceptor.class);
         if(uploadIntceptors!=null&&uploadIntceptors.values()!=null&&uploadIntceptors.values().size()>0){
             IUploadIntceptor execUploadIntceptor = uploadIntceptors.values().stream().filter(uploadIntceptor -> category.equals(uploadIntceptor.category())).findFirst().get();
 
