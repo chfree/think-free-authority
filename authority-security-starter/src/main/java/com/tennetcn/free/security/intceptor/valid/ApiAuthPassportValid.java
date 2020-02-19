@@ -3,7 +3,7 @@ package com.tennetcn.free.security.intceptor.valid;
 import cn.hutool.json.JSONUtil;
 import com.tennetcn.free.core.cache.ICached;
 import com.tennetcn.free.core.message.web.BaseResponse;
-import com.tennetcn.free.core.utils.SpringContextUtils;
+import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.handle.ILoginModelIntceptor;

@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.apis;
 
 import com.tennetcn.free.core.message.web.BaseResponse;
-import com.tennetcn.free.core.utils.SpringContextUtils;
+import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.security.handle.IUploadIntceptor;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
