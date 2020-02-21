@@ -59,10 +59,13 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
 
     @Override
     public boolean updateStatusByUserId(String userId,String status) {
+        String notStatus = LoginAuthStatus.VALID.getKey().equals(status)?LoginAuthStatus.INVALID.getKey():LoginAuthStatus.VALID.getKey();
+
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.update(LoginAuth.class)
                      .setColumn("status",status)
-                     .andEq("user_id",userId);
+                     .andEq("user_id",userId)
+                     .andEq("status",notStatus);
 
         return update(sqlExpression)>=0;
     }
