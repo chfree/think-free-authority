@@ -5,5 +5,5 @@ import com.tennetcn.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface IButtonMapper  extends IMapper<Button> {
+public interface IButtonMapper extends IMapper<Button> {
 }

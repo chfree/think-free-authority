@@ -45,9 +45,9 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
     public List<LoginAuthView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
 
-        sqlExpression.selectAllFrom(LoginAuth.class,mainTableAlias)
-                .appendSelect("user.account as account","user.name as name")
-                .leftJoin(LoginUser.class,"user").on(mainTableAlias+".user_id","user.id")
+        sqlExpression.selectAllFrom(LoginAuth.class, mainTableAlias)
+                .appendSelect("user.account as account", "user.name as name")
+                .leftJoin(LoginUser.class, "user").on(mainTableAlias + ".user_id", "user.id")
                 .addOrder("auth_tm", OrderEnum.desc);
 
 
@@ -66,40 +66,41 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
                      .setColumn("status",status)
                      .andEq("user_id",userId)
                      .andEq("status",notStatus);
-
+        
         return update(sqlExpression)>=0;
     }
 
     @Override
     public boolean checkTokenIsValid(String token) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+
         sqlExpression.selectCount()
                 .from(LoginAuth.class)
-                .andEq("token",token)
+                .andEq("token", token)
                 .andEq("status", LoginAuthStatus.VALID.getKey())
                 .andWhere("exp_tm>now()");
 
-        return queryCount(sqlExpression)>0;
+        return queryCount(sqlExpression) > 0;
     }
 
     private void appendUserWhere(ISqlExpression sqlExpression,LoginAuthSearch search){
-        sqlExpression.andLikeNoEmpty("user.account",search.getAccount());
+        sqlExpression.andLikeNoEmpty("user.account", search.getAccount());
 
-        sqlExpression.andLikeNoEmpty("user.name",search.getName());
+        sqlExpression.andLikeNoEmpty("user.name", search.getName());
     }
 
     private void appendExpression(ISqlExpression sqlExpression, LoginAuthSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
+        sqlExpression.andEqNoEmpty("id", search.getId());
 
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
+        sqlExpression.andNotEqNoEmpty("id", search.getNotId());
 
-        sqlExpression.andEqNoEmpty("user_id",search.getUserId());
+        sqlExpression.andEqNoEmpty("user_id", search.getUserId());
 
-        sqlExpression.andEqNoEmpty("token",search.getToken());
+        sqlExpression.andEqNoEmpty("token", search.getToken());
 
-        sqlExpression.andEqNoEmpty("type",search.getType());
+        sqlExpression.andEqNoEmpty("type", search.getType());
 
-        sqlExpression.andEqNoEmpty("status",search.getStatus());
+        sqlExpression.andEqNoEmpty("status", search.getStatus());
 
     }
 }
