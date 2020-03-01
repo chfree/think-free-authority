@@ -56,4 +56,9 @@ public class LoginAuthServiceImpl extends SuperService<LoginAuth> implements ILo
         return loginAuthDao.checkTokenIsValid(token);
     }
 
+    @Override
+    public boolean updateStatusByToken(String token, String status) {
+        return loginAuthDao.updateStatusByToken(token,status);
+    }
+
 }

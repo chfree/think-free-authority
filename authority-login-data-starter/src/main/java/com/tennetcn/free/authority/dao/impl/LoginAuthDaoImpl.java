@@ -63,7 +63,8 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
 
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.update(LoginAuth.class)
-                     .setColumn("status",status)
+                     .set("status","setStatus")
+                     .setParam("setStatus",status)
                      .andEq("user_id",userId)
                      .andEq("status",notStatus);
         
@@ -81,6 +82,16 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
                 .andWhere("exp_tm>now()");
 
         return queryCount(sqlExpression) > 0;
+    }
+
+    @Override
+    public boolean updateStatusByToken(String token, String status) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.update(LoginAuth.class)
+                .setColumn("status",status)
+                .andEq("token",token);
+
+        return update(sqlExpression)>=0;
     }
 
     private void appendUserWhere(ISqlExpression sqlExpression,LoginAuthSearch search){

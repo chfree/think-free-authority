@@ -24,4 +24,6 @@ public interface ILoginAuthService extends ISuperService<LoginAuth>{
     boolean saveLoginAuth(LoginAuth loginAuth);
 
     boolean checkTokenIsValid(String token);
+
+    boolean updateStatusByToken(String token,String status);
 }

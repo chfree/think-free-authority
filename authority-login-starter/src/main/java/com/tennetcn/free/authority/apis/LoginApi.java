@@ -112,6 +112,8 @@ public class LoginApi extends AuthorityApi {
         String token = getCurrentLogin().getToken();
         cached.remove(token);
 
+        loginAuthService.updateStatusByToken(token,LoginAuthStatus.INVALID.getKey());
+
         resp.put("result", true);
         return resp;
     }

@@ -23,4 +23,6 @@ public interface ILoginAuthDao extends ISuperDao<LoginAuth>{
     boolean updateStatusByUserId(String userId,String status);
 
     boolean checkTokenIsValid(String token);
+
+    boolean updateStatusByToken(String token,String status);
 }
