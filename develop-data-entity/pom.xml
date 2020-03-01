@@ -9,22 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>develop-web-starter</artifactId>
+    <artifactId>develop-data-entity</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
-            <artifactId>authority-security-starter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.tennetcn.free</groupId>
-            <artifactId>swagger-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
-            <artifactId>develop-data-service-starter</artifactId>
-            <version>0.0.1</version>
+            <artifactId>core-starter</artifactId>
         </dependency>
     </dependencies>
-
 </project>

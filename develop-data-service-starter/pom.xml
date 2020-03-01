@@ -9,22 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>develop-web-starter</artifactId>
+    <artifactId>develop-data-service-starter</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
-            <artifactId>authority-security-starter</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.tennetcn.free</groupId>
-            <artifactId>swagger-starter</artifactId>
+            <artifactId>data-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.tennetcn.free.authority</groupId>
-            <artifactId>develop-data-service-starter</artifactId>
-            <version>0.0.1</version>
+            <artifactId>develop-data-entity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
     </dependencies>
-
 </project>

@@ -2,9 +2,9 @@ package com.tennetcn.free.develop.apis;
 
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.core.message.web.BaseResponse;
-import com.tennetcn.free.develop.apimodel.dictcolumn.DictColumnListReq;
-import com.tennetcn.free.develop.apimodel.dictcolumn.DictColumnListResp;
-import com.tennetcn.free.develop.apimodel.dictcolumn.SaveDictColumnReq;
+import com.tennetcn.free.develop.data.entity.apimodel.dictcolumn.DictColumnListReq;
+import com.tennetcn.free.develop.data.entity.apimodel.dictcolumn.DictColumnListResp;
+import com.tennetcn.free.develop.data.entity.apimodel.dictcolumn.SaveDictColumnReq;
 import com.tennetcn.free.develop.service.IDictColumnService;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
