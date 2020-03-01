@@ -9,6 +9,6 @@ import org.springframework.context.annotation.ImportResource;
  * @comment
  */
 
-@ImportResource(locations={"develop-web-starter-config.xml"})
+@ImportResource(locations={"quartz-web-starter-config.xml"})
 public class QuartzWebAutoConfiguration {
 }
