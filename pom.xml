@@ -14,10 +14,12 @@
         <module>authority-web-starter</module>
         <module>authority-web-starter-run</module>
         <module>authority-security-starter</module>
-        <module>develop-data-starter</module>
+        <module>develop-data-service-starter</module>
         <module>develop-web-starter</module>
         <module>authority-login-starter</module>
         <module>authority-login-data-starter</module>
+        <module>quartz-web-starter</module>
+        <module>develop-data-entity</module>
     </modules>
 
     <parent>
@@ -54,6 +56,17 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>develop-data-entity</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
