@@ -65,6 +65,11 @@
         <appender-ref ref="COMMON_FILE" />
     </logger>
 
+    <logger name="org.quartz.core" additivity="false">
+        <level value="ERROR" />
+        <appender-ref ref="COMMON_FILE" />
+    </logger>
+
     <root level="DEBUG">
         <appender-ref ref="COMMON_FILE" />
     </root>
