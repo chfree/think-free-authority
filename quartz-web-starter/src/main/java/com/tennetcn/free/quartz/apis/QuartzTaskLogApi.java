@@ -1,6 +1,7 @@
 package com.tennetcn.free.quartz.apis;
 
 
+import cn.hutool.json.JSONUtil;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.quartz.apimodel.quartztasklog.QuartzTaskLogListReq;
 import com.tennetcn.free.quartz.apimodel.quartztasklog.QuartzTaskLogListResp;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 
 /**
@@ -28,6 +30,7 @@ import javax.validation.constraints.NotBlank;
 @RequestMapping(value = "/api/v1/quartz/taskLog/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="定时任务日志表管理",value ="定时任务日志表相关的操作")
 public class QuartzTaskLogApi extends AuthorityApi {
+
     @Autowired
     IQuartzTaskLogService quartzTaskLogService;
 
