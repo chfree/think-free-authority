@@ -10,6 +10,7 @@ import com.tennetcn.free.quartz.apimodel.quartztask.SaveQuartzTaskReq;
 import com.tennetcn.free.quartz.logical.model.QuartzTask;
 import com.tennetcn.free.quartz.logical.service.IQuartzTaskService;
 import com.tennetcn.free.quartz.logical.viewmodel.QuartzTaskSearch;
+import com.tennetcn.free.quartz.service.IQuartzService;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +35,9 @@ import javax.validation.constraints.NotBlank;
 public class QuartzTaskApi extends AuthorityApi {
     @Autowired
     IQuartzTaskService quartzTaskService;
+
+    @Autowired
+    IQuartzService quartzService;
 
     @ApiOperation(value = "获取定时任务列表")
     @PostMapping("list")
@@ -105,4 +109,43 @@ public class QuartzTaskApi extends AuthorityApi {
         return response;
     }
 
+    @ApiOperation(value = "刷新一个task任务")
+    @PostMapping("refreshTask")
+    public BaseResponse refreshTask(@Valid @NotBlank(message = "任务名称不能为空")String name){
+        BaseResponse response = new BaseResponse();
+
+        boolean result = quartzService.refreshTask(name);
+        response.put("result",result);
+        return response;
+    }
+
+    @ApiOperation(value = "刷新所有任务")
+    @PostMapping("refreshAllTask")
+    public BaseResponse refreshAllTask(){
+        BaseResponse response = new BaseResponse();
+
+        boolean result = quartzService.refreshAllTask();
+        response.put("result",result);
+        return response;
+    }
+
+    @ApiOperation(value = "停止一个task任务")
+    @PostMapping("stopTask")
+    public BaseResponse stopTask(@Valid @NotBlank(message = "任务名称不能为空")String name){
+        BaseResponse response = new BaseResponse();
+
+        boolean result = quartzService.stopTask(name);
+        response.put("result",result);
+        return response;
+    }
+
+    @ApiOperation(value = "停止所有任务")
+    @PostMapping("stopAllTask")
+    public BaseResponse stopAllTask(){
+        BaseResponse response = new BaseResponse();
+
+        boolean result = quartzService.stopAllTask();
+        response.put("result",result);
+        return response;
+    }
 }
