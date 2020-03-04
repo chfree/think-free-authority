@@ -35,7 +35,7 @@ public class QuartzTaskApi extends AuthorityApi {
     @Autowired
     IQuartzTaskService quartzTaskService;
 
-    @ApiOperation(value = "获取定时任务表列表")
+    @ApiOperation(value = "获取定时任务列表")
     @PostMapping("list")
     public BaseResponse list(@RequestBody @Valid QuartzTaskListReq listReq){
         QuartzTaskListResp resp = new QuartzTaskListResp();
@@ -45,12 +45,23 @@ public class QuartzTaskApi extends AuthorityApi {
         return resp;
     }
 
-    @ApiOperation(value = "获取指定定时任务表")
+    @ApiOperation(value = "获取指定定时任务")
     @GetMapping("get")
     public BaseResponse get(@Valid @NotBlank(message = "定时任务表id不能为空") String id){
         BaseResponse response=new BaseResponse();
 
         QuartzTask quartzTask = quartzTaskService.queryModel(id);
+        response.put("quartzTask",quartzTask);
+
+        return response;
+    }
+
+    @ApiOperation(value = "根据名称获取指定定时任务")
+    @GetMapping("getByName")
+    public BaseResponse getByName(@Valid @NotBlank(message = "任务名称不能为空") String name){
+        BaseResponse response=new BaseResponse();
+
+        QuartzTask quartzTask = quartzTaskService.queryModelByName(name);
         response.put("quartzTask",quartzTask);
 
         return response;
