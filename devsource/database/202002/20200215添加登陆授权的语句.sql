@@ -1,4 +1,4 @@
-create table base_login_auth (
+create table base_authority_auth (
     id varchar(50) NOT NULL COMMENT '主键',
     user_id varchar(50) NOT NULL COMMENT '用户id',
     token varchar(50) NULL COMMENT 'token信息',
