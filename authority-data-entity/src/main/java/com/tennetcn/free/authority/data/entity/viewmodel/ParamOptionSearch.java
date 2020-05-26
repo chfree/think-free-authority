@@ -20,4 +20,6 @@ public class ParamOptionSearch {
     private String value;
 
     private String text;
+
+    private String defineName;
 }

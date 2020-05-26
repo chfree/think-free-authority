@@ -26,4 +26,8 @@ public interface IParamOptionService extends ISuperService<ParamOption> {
     List<ParamOptionView> queryListByDefineNames(List<String> defineNames);
 
     Map<Object, List<ParamOption>> queryListGroupByDefineNames(List<String> defineNames);
+
+    ParamOption queryModel(ParamOptionSearch search);
+
+    ParamOption queryModel(String defineName,String text);
 }

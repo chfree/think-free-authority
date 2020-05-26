@@ -40,4 +40,16 @@ public class ParamOption extends ModelBase {
 
     @Column(name="comments")
     private String comments;
+
+    public int getIntValue(){
+        return Integer.parseInt(this.value);
+    }
+
+    public double getDoubleValue(){
+        return Double.parseDouble(this.value);
+    }
+
+    public float getFloatValue(){
+        return Float.parseFloat(this.value);
+    }
 }

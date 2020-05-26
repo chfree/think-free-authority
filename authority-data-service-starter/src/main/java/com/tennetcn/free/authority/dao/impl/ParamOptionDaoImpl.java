@@ -11,6 +11,7 @@ import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -72,6 +73,22 @@ public class ParamOptionDaoImpl extends SuperDao<ParamOption> implements IParamO
                 .addOrder("sort_code", OrderEnum.asc);
 
         return queryList(sqlExpression,ParamOptionView.class);
+    }
+
+    @Override
+    public ParamOption queryModel(ParamOptionSearch search) {
+
+
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(ParamOption.class).addOrder("sort_code", OrderEnum.asc);;
+        if(StringUtils.isEmpty(search.getDefineName())){
+            ISqlExpression defineIdSql = SqlExpressionFactory.createExpression().select("id").from(ParamDefine.class).andEq("name",search.getDefineName());
+            sqlExpression.andWhereIn("define_id",defineIdSql);
+        }
+
+        appendExpression(sqlExpression,search);
+
+        return queryModel(sqlExpression);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, ParamOptionSearch search){

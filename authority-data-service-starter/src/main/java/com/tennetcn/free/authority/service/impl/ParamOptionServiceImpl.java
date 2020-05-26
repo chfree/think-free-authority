@@ -63,4 +63,18 @@ public class ParamOptionServiceImpl extends SuperService<ParamOption> implements
 
         return resultMap;
     }
+
+    @Override
+    public ParamOption queryModel(ParamOptionSearch search) {
+        return paramOptionDao.queryModel(search);
+    }
+
+    @Override
+    public ParamOption queryModel(String defineName, String text) {
+        ParamOptionSearch search = new ParamOptionSearch();
+        search.setDefineName(defineName);
+        search.setText(text);
+
+        return queryModel(search);
+    }
 }
