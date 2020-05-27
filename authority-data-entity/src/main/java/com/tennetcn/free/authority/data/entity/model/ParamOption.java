@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.data.entity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tennetcn.free.core.message.data.ModelBase;
 import lombok.Data;
 
@@ -41,14 +42,17 @@ public class ParamOption extends ModelBase {
     @Column(name="comments")
     private String comments;
 
+    @JsonIgnore
     public int getIntValue(){
         return Integer.parseInt(this.value);
     }
 
+    @JsonIgnore
     public double getDoubleValue(){
         return Double.parseDouble(this.value);
     }
 
+    @JsonIgnore
     public float getFloatValue(){
         return Float.parseFloat(this.value);
     }
