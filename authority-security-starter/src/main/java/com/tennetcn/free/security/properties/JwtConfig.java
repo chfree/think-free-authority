@@ -1,6 +1,7 @@
 package com.tennetcn.free.security.properties;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,11 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "jwt")
 public class JwtConfig {
-    private String secretKey = "chfree001@gmail.com";
+    @Value("${think.jwt.secret-key:chfree001@gmail.com}")
+    private String secretKey;
 
+    @Value("${think.jwt.expires-second:86400}")
     private long expiresSecond = 86400;
 
 }
