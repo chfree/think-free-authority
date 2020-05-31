@@ -8,9 +8,9 @@
 
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{96} [TraceNo=%X{bussiness} reqURL=%X{reqUrl}] - %msg%n" />
     <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{120} [TraceNo=%X{bussiness} reqURL=%X{reqUrl}] - %msg%n" />
-    <property name="LOG_HOME" value="/Users/chenghuan/Desktop/testdir/logtest" />
+    <property name="LOG_HOME" value="/home/logs/authority" />
     <property name="maxHistory" value="30" />
-    <property name="maxFileSize" value="1MB" />
+    <property name="maxFileSize" value="20MB" />
 
     <!--输出到控制台 -->
     <appender name="COMMON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
