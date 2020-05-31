@@ -81,7 +81,7 @@ public class ParamOptionDaoImpl extends SuperDao<ParamOption> implements IParamO
 
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(ParamOption.class).addOrder("sort_code", OrderEnum.asc);;
-        if(StringUtils.isEmpty(search.getDefineName())){
+        if(!StringUtils.isEmpty(search.getDefineName())){
             ISqlExpression defineIdSql = SqlExpressionFactory.createExpression().select("id").from(ParamDefine.class).andEq("name",search.getDefineName());
             sqlExpression.andWhereIn("define_id",defineIdSql);
         }
