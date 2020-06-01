@@ -35,8 +35,8 @@ public class Group extends ModelBase{
     /**
      * 描述
      */
-    @Column(name="desc")
-    private String desc;
+    @Column(name="description")
+    private String description;
 
     /**
      * 逻辑标记

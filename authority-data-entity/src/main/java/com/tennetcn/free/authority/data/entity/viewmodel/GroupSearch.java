@@ -28,14 +28,24 @@ public class GroupSearch{
     private String name;
 
     /**
+     * 名称模糊搜索
+     */
+    private String likeName;
+
+    /**
      * 描述
      */
-    private String desc;
+    private String description;
 
     /**
      * 逻辑标记
      */
     private String groupMark;
+
+    /**
+     * 逻辑标记模糊搜索
+     */
+    private String likeGroupMark;
 
     /**
      * 级别

@@ -1,7 +1,7 @@
 create table base_authority_group (
     id varchar(50) NOT NULL COMMENT '主键',
     name varchar(100) NULL COMMENT '名称',
-    desc varchar(2000) NULL COMMENT '描述',
+    description varchar(2000) NULL COMMENT '描述',
     group_mark varchar(50) NULL COMMENT '逻辑标记',
     level varchar(50) NULL COMMENT '级别',
     status varchar(50) NULL COMMENT '状态',
