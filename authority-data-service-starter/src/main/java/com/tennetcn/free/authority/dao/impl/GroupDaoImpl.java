@@ -54,16 +54,5 @@ public class GroupDaoImpl extends SuperDao<Group> implements IGroupDao {
         sqlExpression.andEqNoEmpty("level",search.getLevel());
 
         sqlExpression.andEqNoEmpty("status",search.getStatus());
-
-        sqlExpression.andEqNoEmpty("sort_code",search.getSortCode());
-
-        sqlExpression.andEqNoEmpty("create_user_id",search.getCreateUserId());
-
-        sqlExpression.andEqNoEmpty("create_user_name",search.getCreateUserName());
-
-        sqlExpression.andEqNoEmpty("modify_user_id",search.getModifyUserId());
-
-        sqlExpression.andEqNoEmpty("modify_user_name",search.getModifyUserName());
-
     }
 }

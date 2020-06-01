@@ -28,7 +28,7 @@ import javax.validation.constraints.NotBlank;
  * @comment     权限组
  */
 @RestController
-@RequestMapping(value = "/api/v1/xxxx/group/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/authority/group/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="权限组管理",value ="权限组相关的操作")
 public class GroupApi extends AuthorityApi {
     @Autowired
