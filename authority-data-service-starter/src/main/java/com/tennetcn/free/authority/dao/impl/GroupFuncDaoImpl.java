@@ -2,7 +2,6 @@ package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IGroupFuncDao;
 import com.tennetcn.free.authority.data.entity.model.GroupFunc;
-import com.tennetcn.free.authority.data.entity.model.RoleFunc;
 import com.tennetcn.free.authority.data.entity.viewmodel.GroupFuncSearch;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
@@ -34,7 +33,7 @@ public class GroupFuncDaoImpl extends SuperDao<GroupFunc> implements IGroupFuncD
     @Override
     public List<GroupFunc> queryListBySearch(GroupFuncSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(RoleFunc.class);
+        sqlExpression.selectAllFrom(GroupFunc.class);
 
         appendExpression(sqlExpression,search);
 

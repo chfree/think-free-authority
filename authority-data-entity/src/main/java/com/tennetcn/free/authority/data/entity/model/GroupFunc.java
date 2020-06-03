@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name="base_authority_role_func")
+@Table(name="base_authority_group_func")
 public class GroupFunc extends ModelBase {
     @Id
     @Column(name="id")
