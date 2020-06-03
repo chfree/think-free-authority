@@ -22,7 +22,7 @@ import java.util.List;
 public class GroupFuncServiceImpl extends SuperService<GroupFunc> implements IGroupFuncService {
 
     @Autowired
-    IGroupFuncDao GroupFuncDao;
+    IGroupFuncDao groupFuncDao;
 
     @Override
     public boolean saveGroupFuncs(String groupId, List<GroupFunc> groupFuncs) {
@@ -32,9 +32,9 @@ public class GroupFuncServiceImpl extends SuperService<GroupFunc> implements IGr
         if(groupFuncs==null||groupFuncs.size()<=0){
             return true;
         }
-        groupFuncs.forEach(GroupFunc -> {
-            GroupFunc.setId(IdUtil.randomUUID());
-            GroupFunc.setGroupId(groupId);
+        groupFuncs.forEach(groupFunc -> {
+            groupFunc.setId(IdUtil.randomUUID());
+            groupFunc.setGroupId(groupId);
         });
 
         return insertListEx(groupFuncs)==groupFuncs.size();
@@ -42,11 +42,11 @@ public class GroupFuncServiceImpl extends SuperService<GroupFunc> implements IGr
 
     @Override
     public boolean deleteByGroupId(String groupId) {
-        return GroupFuncDao.deleteByGroupId(groupId);
+        return groupFuncDao.deleteByGroupId(groupId);
     }
 
     @Override
     public List<GroupFunc> queryListBySearch(GroupFuncSearch search) {
-        return GroupFuncDao.queryListBySearch(search);
+        return groupFuncDao.queryListBySearch(search);
     }
 }
