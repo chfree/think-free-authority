@@ -3,6 +3,7 @@ package com.tennetcn.free.authority.data.entity.model;
 import com.tennetcn.free.core.message.data.ModelBase;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +14,9 @@ import java.util.Date;
 @Data
 @Builder
 @Entity
-@Table(name="base_authority_user_role")
-public class UserRole extends ModelBase {
+@NoArgsConstructor
+@Table(name="base_authority_user_group")
+public class UserGroup extends ModelBase {
     //主键
     @Id
     @Column(name="id")
@@ -24,7 +26,7 @@ public class UserRole extends ModelBase {
     @Column(name="user_id")
     private String userId;
 
-    //角色id
-    @Column(name="role_id")
-    private String roleId;
+    //用户组id
+    @Column(name="group_id")
+    private String groupId;
 }

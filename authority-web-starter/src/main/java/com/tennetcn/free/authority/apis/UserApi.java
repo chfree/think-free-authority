@@ -111,7 +111,7 @@ public class UserApi extends AuthorityApi {
             userReq.setModelStatus(ModelStatus.update);
         }
 
-        boolean result = userService.applyChange(userReq);
+        boolean result = userService.saveUser(userReq);
         response.put("result",result);
 
         return response;
