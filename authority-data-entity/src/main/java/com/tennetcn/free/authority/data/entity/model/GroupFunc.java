@@ -29,16 +29,4 @@ public class GroupFunc extends ModelBase {
     //组Id
     @Column(name="group_id")
     private String groupId;
-
-    //创建时间
-    @Column(name="create_date")
-    private Date createDate = DateUtil.date();
-
-    //创建者id
-    @Column(name="create_user_id")
-    private String createUserId;
-
-    //创建者名称
-    @Column(name="create_user_name")
-    private String createUserName;
 }
