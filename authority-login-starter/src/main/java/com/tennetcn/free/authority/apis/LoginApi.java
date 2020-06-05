@@ -48,6 +48,9 @@ public class LoginApi extends AuthorityApi {
     @Autowired
     private ILoginAuthService loginAuthService;
 
+    @Autowired
+    JwtHelper jwtHelper;
+
     @ApiAuthPassport
     @ApiOperation(value = "登陆")
     @PostMapping("login")
@@ -67,7 +70,7 @@ public class LoginApi extends AuthorityApi {
         claims.put("account",loginModel.getAccount());
         claims.put("name",loginModel.getName());
 
-        String token = JwtHelper.instance().createJwt(user.getId(),claims);
+        String token = jwtHelper.createJwt(user.getId(),claims);
         loginModel.setToken(token);
 
         addLoginAuth(loginModel,token);
@@ -82,7 +85,7 @@ public class LoginApi extends AuthorityApi {
     private void addLoginAuth(LoginModel loginModel,String token){
         LoginAuth loginAuth = new LoginAuth();
 
-        Claims claims = JwtHelper.instance().parseJWT(token);
+        Claims claims = jwtHelper.parseJWT(token);
 
         loginAuth.setId(IdUtil.randomUUID());
         loginAuth.setExpTm(claims.getExpiration());

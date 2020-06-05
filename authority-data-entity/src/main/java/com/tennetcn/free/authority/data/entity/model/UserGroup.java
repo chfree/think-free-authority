@@ -14,7 +14,6 @@ import java.util.Date;
 @Data
 @Builder
 @Entity
-@NoArgsConstructor
 @Table(name="base_authority_user_group")
 public class UserGroup extends ModelBase {
     //主键

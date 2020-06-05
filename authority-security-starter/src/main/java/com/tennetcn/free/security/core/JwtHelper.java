@@ -7,6 +7,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -22,27 +24,11 @@ import java.util.Map;
  * @comment
  */
 
+@Component
 public class JwtHelper {
-    private static JwtHelper helper = null;
-
+    @Autowired
     private JwtConfig jwtConfig;
 
-    public void setJwtConfig(JwtConfig jwtConfig){
-        this.jwtConfig = jwtConfig;
-    }
-
-    public JwtConfig getJwtConfig(){
-        return jwtConfig;
-    }
-
-    public static JwtHelper instance(){
-        if(helper==null){
-            helper = new JwtHelper();
-            JwtConfig jwtConfig = SpringContextUtils.getCurrentContext().getBean(JwtConfig.class);
-            helper.setJwtConfig(jwtConfig);
-        }
-        return helper;
-    }
 
     public String createJwt(Claims claims){
         return createJwt(claims,jwtConfig.getExpiresSecond()*1000L);

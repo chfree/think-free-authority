@@ -55,10 +55,8 @@ public class UserRoleApi extends AuthorityApi {
     private List<UserRole> getUserRoleFormat(SaveUserRoleReq saveUserRoleReq){
         return saveUserRoleReq.getRoleIds().stream().map(roleId-> UserRole.builder()
                 .id(IdUtil.randomUUID())
-                .createDate(DateUtil.date())
                 .userId(saveUserRoleReq.getUserId())
                 .roleId(roleId)
-                .deleteMark(YesOrNoInteger.NO)
                 .build()
         ).collect(Collectors.toList());
     }

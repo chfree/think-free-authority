@@ -29,6 +29,9 @@ public class ApiAuthPassportValid {
 
 	@Autowired
 	private ICached cached;
+
+	@Autowired
+	JwtHelper jwtHelper;
 	
 	public boolean valid(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception{
 		if(checkAppAuthorizeRule(handler)){
@@ -91,8 +94,8 @@ public class ApiAuthPassportValid {
 			}
 		}
 		
-		Claims claims = JwtHelper.instance().parseJWT(token);
-		if(claims == null || JwtHelper.instance().isTokenExpired(claims.getExpiration())){
+		Claims claims = jwtHelper.parseJWT(token);
+		if(claims == null || jwtHelper.isTokenExpired(claims.getExpiration())){
 			cached.remove(token);
 			return false;
 		}

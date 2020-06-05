@@ -32,9 +32,9 @@ public class UserGroupDaoImpl extends SuperDao<UserGroup> implements IUserGroupD
     @Override
     public List<Group> queryListByUserId(String userId) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("group.id,group.name")
+        sqlExpression.select("gp.id,gp.name")
                      .from(UserGroup.class,"ur")
-                     .leftJoin(Group.class,"group").on("ur.group_id","group.id")
+                     .leftJoin(Group.class,"gp").on("ur.group_id","gp.id")
                      .andEq("ur.user_id",userId);
 
         return queryList(sqlExpression,Group.class);
