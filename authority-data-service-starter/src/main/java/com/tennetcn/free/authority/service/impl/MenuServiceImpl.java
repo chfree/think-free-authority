@@ -89,7 +89,32 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
         }
 
         int minLevel = 0;
-        // 在求出顶级所有的顶级部门
+        // 在求出顶级所有的顶级菜单
+        var minMenuRoutes = allMenuRoutes.stream().filter(menu -> menu.getLevel() == minLevel).collect(Collectors.toList());
+
+        // 进行递归循环
+        for (MenuRoute menuRoute: minMenuRoutes) {
+            menuRouteLoop(menuRoute,allMenuRoutes);
+        }
+
+        return minMenuRoutes;
+    }
+
+    @Override
+    public List<MenuRoute> queryMenuRouteByRGIds(List<String> roleIds, List<String> groupIds) {
+        return menuDao.queryMenuRouteByRGIds(roleIds,groupIds);
+    }
+
+    @Override
+    public List<MenuRoute> queryMenuRouteFormatByRGIds(List<String> roleIds, List<String> groupIds) {
+        List<MenuRoute> allMenuRoutes = queryMenuRouteByRGIds(roleIds, groupIds);
+
+        if(allMenuRoutes==null||allMenuRoutes.size()<=0){
+            return null;
+        }
+
+        int minLevel = 0;
+        // 在求出顶级所有的顶级菜单
         var minMenuRoutes = allMenuRoutes.stream().filter(menu -> menu.getLevel() == minLevel).collect(Collectors.toList());
 
         // 进行递归循环

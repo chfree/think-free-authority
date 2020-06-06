@@ -18,4 +18,6 @@ public interface IGroupService extends ISuperService<Group>{
     int queryCountBySearch(GroupSearch search);
 
     List<Group> queryListBySearch(GroupSearch search, PagerModel pagerModel);
+
+    List<Group> queryListByUserId(String userId);
 }

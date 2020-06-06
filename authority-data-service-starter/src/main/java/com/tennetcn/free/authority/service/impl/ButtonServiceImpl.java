@@ -38,4 +38,9 @@ public class ButtonServiceImpl extends SuperService<Button> implements IButtonSe
     public List<Button> queryListByRoleIds(List<String> roleIds) {
         return buttonDao.queryListByRoleIds(roleIds);
     }
+
+    @Override
+    public List<Button> queryListByRGds(List<String> roleIds, List<String> groupIds) {
+        return buttonDao.queryListByRGds(roleIds,groupIds);
+    }
 }

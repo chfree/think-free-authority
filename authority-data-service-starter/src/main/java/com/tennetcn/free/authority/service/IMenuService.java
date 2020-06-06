@@ -28,4 +28,8 @@ public interface IMenuService extends ISuperService<Menu> {
     List<MenuRoute> queryMenuRouteByRoleIds(List<String> roleIds);
 
     List<MenuRoute> queryMenuRouteFormatByRoleIds(List<String> roleIds);
+
+    List<MenuRoute> queryMenuRouteByRGIds(List<String> roleIds, List<String> groupIds);
+
+    List<MenuRoute> queryMenuRouteFormatByRGIds(List<String> roleIds, List<String> groupIds);
 }

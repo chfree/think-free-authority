@@ -7,7 +7,7 @@ package com.tennetcn.free.authority.data.enums;
  * @comment
  */
 
-public class RoleFuncType {
+public class MenuFuncType {
     public final static String MENU="menu";
 
     public final static String BUTTON="button";

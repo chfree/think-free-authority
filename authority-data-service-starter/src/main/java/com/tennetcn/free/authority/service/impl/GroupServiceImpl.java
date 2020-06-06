@@ -34,4 +34,9 @@ public class GroupServiceImpl extends SuperService<Group> implements IGroupServi
         return groupDao.queryListBySearch(search,pagerModel);
     }
 
+    @Override
+    public List<Group> queryListByUserId(String userId) {
+        return groupDao.queryListByUserId(userId);
+    }
+
 }

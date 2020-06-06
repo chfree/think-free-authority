@@ -1,6 +1,8 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IGroupDao;
+import com.tennetcn.free.authority.data.entity.model.UserGroup;
+import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
@@ -38,6 +40,18 @@ public class GroupDaoImpl extends SuperDao<Group> implements IGroupDao {
         appendExpression(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
+    }
+
+    @Override
+    public List<Group> queryListByUserId(String userId) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(Group.class, "gr")
+                     .leftJoin(UserGroup.class, "ur").on("gr.id","ur.group_id")
+                     .andEq("ur.user_id",userId)
+                     .addOrder("gr.sort_code", OrderEnum.asc);
+
+        return queryList(sqlExpression);
+
     }
 
     private void appendExpression(ISqlExpression sqlExpression, GroupSearch search){

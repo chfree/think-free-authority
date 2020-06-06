@@ -6,10 +6,7 @@ import com.tennetcn.free.authority.data.entity.apimodel.user.SaveUserReq;
 import com.tennetcn.free.authority.data.entity.apimodel.user.UpdatePwd;
 import com.tennetcn.free.authority.data.entity.apimodel.user.UserListReq;
 import com.tennetcn.free.authority.data.entity.apimodel.user.UserListResp;
-import com.tennetcn.free.authority.data.entity.model.Button;
-import com.tennetcn.free.authority.data.entity.model.Department;
-import com.tennetcn.free.authority.data.entity.model.Role;
-import com.tennetcn.free.authority.data.entity.model.User;
+import com.tennetcn.free.authority.data.entity.model.*;
 import com.tennetcn.free.authority.data.entity.viewmodel.MenuRoute;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
@@ -45,22 +42,22 @@ import java.util.stream.Collectors;
 public class UserApi extends AuthorityApi {
 
     @Autowired
-    private IUserService userService;
+    IUserService userService;
 
     @Autowired
-    private IMenuService menuService;
+    IMenuService menuService;
 
     @Autowired
-    private IRoleService roleService;
+    IRoleService roleService;
 
     @Autowired
-    private IButtonService buttonService;
+    IButtonService buttonService;
 
     @Autowired
-    private IDepartmentService departmentService;
+    IDepartmentService departmentService;
 
-    public UserApi() {
-    }
+    @Autowired
+    IGroupService groupService;
 
     @ApiOperation(value = "获取用户列表")
     @PostMapping("list")
@@ -188,7 +185,10 @@ public class UserApi extends AuthorityApi {
 
     public void additionLoginModel(LoginModel loginModel, BaseResponse response) {
         List<Role> roles = roleService.queryListRoleByUserId(loginModel.getId());
+        List<Group> groups = groupService.queryListByUserId(loginModel.getId());
+
         loginModel.put("roles", roles);
+        loginModel.put("groups", groups);
 
         Department department = departmentService.queryModel(loginModel.getString("departmentId"));
         if(department!=null){
@@ -196,14 +196,20 @@ public class UserApi extends AuthorityApi {
             loginModel.put("department",department);
         }
 
-        if(roles!=null&&roles.size()>0){
-            List<String> roleIds = roles.stream().map(role-> role.getId()).collect(Collectors.toList());
-
-            List<MenuRoute> menuRouteList = menuService.queryMenuRouteFormatByRoleIds(roleIds);
-            response.put("menuRoutes", menuRouteList);
-
-            List<Button> buttons = buttonService.queryListByRoleIds(roleIds);
-            response.put("buttons", buttons);
+        List<String> roleIds = null;
+        List<String> groupIds = null;
+        if(roles!=null&&roles.size()>0) {
+            roleIds = roles.stream().map(role -> role.getId()).collect(Collectors.toList());
         }
+        if(groups!=null&&groups.size()>0) {
+            groupIds = groups.stream().map(group -> group.getId()).collect(Collectors.toList());
+        }
+
+        List<MenuRoute> menuRouteList = menuService.queryMenuRouteFormatByRGIds(roleIds, groupIds);
+        response.put("menuRoutes", menuRouteList);
+
+        List<Button> buttons = buttonService.queryListByRGds(roleIds, groupIds);
+        response.put("buttons", buttons);
+
     }
 }

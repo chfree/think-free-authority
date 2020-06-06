@@ -1,7 +1,5 @@
 package com.tennetcn.free.security.core;
 
-import cn.hutool.json.JSONUtil;
-import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.security.properties.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;

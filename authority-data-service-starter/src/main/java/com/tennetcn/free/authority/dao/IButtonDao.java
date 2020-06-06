@@ -20,4 +20,6 @@ public interface IButtonDao extends ISuperDao<Button> {
     List<Button> queryListBySearch(ButtonSearch search, PagerModel pagerModel);
 
     List<Button> queryListByRoleIds(List<String> roleIds);
+
+    List<Button> queryListByRGds(List<String> roleIds,List<String> groupIds);
 }
