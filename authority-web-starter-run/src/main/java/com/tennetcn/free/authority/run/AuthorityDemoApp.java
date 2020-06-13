@@ -1,13 +1,8 @@
 package com.tennetcn.free.authority.run;
 
-import cn.hutool.core.date.DateUtil;
 import com.tennetcn.free.swagger.annotations.EnableThinkSwagger;
-import org.junit.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.text.SimpleDateFormat;
 
 /**
  * @author chfree

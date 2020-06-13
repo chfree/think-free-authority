@@ -70,7 +70,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
     }
 
     private ISqlExpression roleSql(List<String> roleIds){
-        if(roleIds==null&&roleIds.isEmpty()){
+        if(roleIds==null||roleIds.isEmpty()){
             return null;
         }
 
@@ -87,7 +87,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
     }
 
     private ISqlExpression groupSql(List<String> groupIds){
-        if(groupIds==null&&groupIds.isEmpty()){
+        if(groupIds==null||groupIds.isEmpty()){
             return null;
         }
 

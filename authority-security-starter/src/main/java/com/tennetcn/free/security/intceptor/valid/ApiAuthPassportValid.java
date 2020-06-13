@@ -35,7 +35,7 @@ public class ApiAuthPassportValid {
 	
 	public boolean valid(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception{
 		if(checkAppAuthorizeRule(handler)){
-			BaseResponse rm=new BaseResponse(WebResponseStatus.AUTHORIZE_ERROR,"授权错误");
+			BaseResponse rm=new BaseResponse(WebResponseStatus.AUTHORIZE_ERROR,"登陆超时或授权错误，请重新登录");
 
 			boolean authorizeResult=checkAuthorizeJwt(request);
 
