@@ -2,9 +2,7 @@ package com.tennetcn.free.authority.intceptor;
 
 import com.tennetcn.free.authority.configuration.LoginConfig;
 import com.tennetcn.free.authority.service.ILoginAuthService;
-import com.tennetcn.free.authority.service.ILoginUserService;
 import com.tennetcn.free.core.exception.BizException;
-import com.tennetcn.free.core.message.web.ResponseStatus;
 import com.tennetcn.free.security.handle.ITokenCheckIntceptor;
 import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.web.message.WebResponseStatus;

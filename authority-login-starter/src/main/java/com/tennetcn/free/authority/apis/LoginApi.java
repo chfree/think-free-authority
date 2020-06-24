@@ -3,14 +3,19 @@ package com.tennetcn.free.authority.apis;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.login.LoginReq;
+import com.tennetcn.free.authority.apimodel.login.RegisterReq;
 import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.enums.LoginAuthType;
+import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
 import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginAuthService;
 import com.tennetcn.free.authority.service.ILoginUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
+import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
+import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
+import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.message.LoginModel;
@@ -19,6 +24,7 @@ import com.tennetcn.free.web.message.WebResponseStatus;
 import io.jsonwebtoken.Claims;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +43,7 @@ import java.util.Map;
  * @comment
  */
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/authority/login/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="登陆模块",value ="登陆相关的操作" )
@@ -119,5 +126,55 @@ public class LoginApi extends AuthorityApi {
 
         resp.put("result", true);
         return resp;
+    }
+
+    @ApiAuthPassport
+    @ApiOperation(value = "用户注册")
+    @PostMapping("register")
+    public BaseResponse register(@Valid RegisterReq registerReq){
+        BaseResponse response = new BaseResponse();
+        if(!registerReq.getPassword().equals(registerReq.getConfirmPassword())){
+            response.setStatus(WebResponseStatus.DATA_ERROR);
+            response.setMessage("新密码和旧密码不一致");
+            return response;
+        }
+        LoginUserSearch search=new LoginUserSearch();
+        search.setAccount(registerReq.getAccount());
+        if(userService.queryCountByLoginUserSearch(search)>0){
+            response.setStatus(WebResponseStatus.DATA_ERROR);
+            response.setMessage("已经存在相同账号");
+            return response;
+        }
+
+        LoginUser loginUser = regiester2User(registerReq);
+
+        if(isRegister(loginUser,registerReq)){
+            response.put("result",userService.applyChange(loginUser));
+        }else{
+            log.info("IRegisterLoginUserIntceptor impl exec register return false");
+            response.put("result",false);
+        }
+        return response;
+    }
+
+    private boolean isRegister(LoginUser loginUser, RegisterReq req){
+        IRegisterLoginUserIntceptor registerLoginUserIntceptor = SpringContextUtils.getCurrentContext().getBean(IRegisterLoginUserIntceptor.class);
+        if(registerLoginUserIntceptor==null){
+            return true;
+        }
+        return registerLoginUserIntceptor.register(loginUser,req);
+    }
+
+    private LoginUser regiester2User(RegisterReq req){
+        LoginUser loginUser = new LoginUser();
+        loginUser.setAccount(req.getAccount());
+        loginUser.setPassword(userService.passwordFormat(req.getPassword()));
+        loginUser.setCreateDate(DateUtil.date());
+        loginUser.setEmail(req.getAccount());
+        loginUser.setId(IdUtil.randomUUID());
+        loginUser.setName(req.getName());
+        loginUser.setModelStatus(ModelStatus.add);
+
+        return loginUser;
     }
 }

@@ -1,6 +1,7 @@
 package com.tennetcn.free.authority.service;
 
 import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
 import com.tennetcn.free.data.dao.base.ISuperService;
 
 /**
@@ -14,4 +15,8 @@ public interface ILoginUserService extends ISuperService<LoginUser> {
     LoginUser queryModelByLogin(String account, String password);
 
     LoginUser queryModelByAccount(String account);
+
+    int queryCountByLoginUserSearch(LoginUserSearch search);
+
+    String passwordFormat(String password);
 }

@@ -4,6 +4,7 @@ import cn.hutool.crypto.SecureUtil;
 import com.tennetcn.free.authority.dao.ILoginUserDao;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginUserService;
+import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.data.message.DaoBaseRuntimeException;
@@ -31,7 +32,8 @@ public class LoginUserServiceImpl extends SuperService<LoginUser> implements ILo
         return userDao.queryModelByLogin(account,passwordFormat(password));
     }
 
-    private String passwordFormat(String password){
+    @Override
+    public String passwordFormat(String password){
         return SecureUtil.md5(password);
     }
 
@@ -41,10 +43,15 @@ public class LoginUserServiceImpl extends SuperService<LoginUser> implements ILo
     }
 
     @Override
+    public int queryCountByLoginUserSearch(LoginUserSearch search) {
+        return userDao.queryCountByLoginUserSearch(search);
+    }
+
+    @Override
     public boolean applyChange(LoginUser user) throws DaoBaseRuntimeException {
         if(ModelStatus.add.equals(user.getModelStatus())){
             if(StringUtils.isEmpty(user.getPassword())){
-                user.setPassword(SecureUtil.md5(defaultPwd));
+                user.setPassword(passwordFormat(defaultPwd));
             }
         }
         return super.applyChange(user);

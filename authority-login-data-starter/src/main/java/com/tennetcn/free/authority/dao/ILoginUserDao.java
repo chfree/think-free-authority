@@ -1,6 +1,7 @@
 package com.tennetcn.free.authority.dao;
 
 import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
 import com.tennetcn.free.data.dao.base.ISuperDao;
 
 /**
@@ -14,4 +15,6 @@ public interface ILoginUserDao extends ISuperDao<LoginUser> {
     LoginUser queryModelByLogin(String account, String password);
 
     LoginUser queryModelByAccount(String account);
+
+    int queryCountByLoginUserSearch(LoginUserSearch search);
 }

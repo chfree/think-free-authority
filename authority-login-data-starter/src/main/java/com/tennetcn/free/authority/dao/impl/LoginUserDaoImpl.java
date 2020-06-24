@@ -36,6 +36,15 @@ public class LoginUserDaoImpl extends SuperDao<LoginUser> implements ILoginUserD
         return queryModel(sqlExpression);
     }
 
+    @Override
+    public int queryCountByLoginUserSearch(LoginUserSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectCount().from(LoginUser.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryCount(sqlExpression);
+    }
 
 
     private void appendExpression(ISqlExpression sqlExpression, LoginUserSearch search){
