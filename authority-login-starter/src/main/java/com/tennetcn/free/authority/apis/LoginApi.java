@@ -25,6 +25,7 @@ import io.jsonwebtoken.Claims;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -129,6 +131,22 @@ public class LoginApi extends AuthorityApi {
     }
 
     @ApiAuthPassport
+    @ApiOperation(value = "检测用户是否已经被注册")
+    @PostMapping("accountExist")
+    public BaseResponse accountExist(@Valid @NotBlank(message = "账号不能为空") String account){
+        BaseResponse response = new BaseResponse();
+
+        LoginUserSearch search=new LoginUserSearch();
+        search.setAccount(account);
+        if(userService.queryCountByLoginUserSearch(search)>0){
+            response.put("result", true);
+        }else{
+            response.put("result", false);
+        }
+        return response;
+    }
+
+    @ApiAuthPassport
     @ApiOperation(value = "用户注册")
     @PostMapping("register")
     public BaseResponse register(@Valid RegisterReq registerReq){
@@ -157,12 +175,19 @@ public class LoginApi extends AuthorityApi {
         return response;
     }
 
-    private boolean isRegister(LoginUser loginUser, RegisterReq req){
-        IRegisterLoginUserIntceptor registerLoginUserIntceptor = SpringContextUtils.getCurrentContext().getBean(IRegisterLoginUserIntceptor.class);
-        if(registerLoginUserIntceptor==null){
+    private boolean isRegister(LoginUser loginUser, RegisterReq req) {
+        IRegisterLoginUserIntceptor registerLoginUserIntceptor = null;
+        try {
+            registerLoginUserIntceptor = SpringContextUtils.getCurrentContext().getBean(IRegisterLoginUserIntceptor.class);
+        } catch (NoSuchBeanDefinitionException ex) {
+            log.info("No qualifying bean of type '{}' available", IRegisterLoginUserIntceptor.class.getName());
             return true;
         }
-        return registerLoginUserIntceptor.register(loginUser,req);
+        if (registerLoginUserIntceptor == null) {
+            return true;
+        }
+        return registerLoginUserIntceptor.register(loginUser, req);
+
     }
 
     private LoginUser regiester2User(RegisterReq req){
