@@ -7,6 +7,7 @@ import com.tennetcn.free.authority.apimodel.login.RegisterReq;
 import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.enums.LoginAuthType;
 import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
+import com.tennetcn.free.authority.handle.IloginedIntceptor;
 import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginAuthService;
@@ -82,7 +83,15 @@ public class LoginApi extends AuthorityApi {
         String token = jwtHelper.createJwt(user.getId(),claims);
         loginModel.setToken(token);
 
+        // 执行Logined切入点
+        if(!isAllowLogin(loginModel, user)){
+            response.setMessage("该用户暂时无法登陆，请联系管理员");
+            response.setStatus(WebResponseStatus.DATA_ERROR);
+            return response;
+        }
+
         addLoginAuth(loginModel,token);
+
 
         cached.put(token,loginModel);
         response.put("result",true);
@@ -91,6 +100,11 @@ public class LoginApi extends AuthorityApi {
         return response;
     }
 
+    /**
+     * 处理登陆授权信息
+     * @param loginModel loginModel实体
+     * @param token token信息
+     */
     private void addLoginAuth(LoginModel loginModel,String token){
         LoginAuth loginAuth = new LoginAuth();
 
@@ -105,6 +119,20 @@ public class LoginApi extends AuthorityApi {
         loginAuth.setAuthTm(DateUtil.date());
 
         loginAuthService.saveLoginAuth(loginAuth);
+    }
+
+    private boolean isAllowLogin(LoginModel loginModel,LoginUser loginUser){
+        IloginedIntceptor loginedIntceptor = null;
+        try{
+            loginedIntceptor = SpringContextUtils.getCurrentContext().getBean(IloginedIntceptor.class);
+        }catch (NoSuchBeanDefinitionException ex){
+            log.info("No qualifying bean of type '{}' available", IloginedIntceptor.class.getName());
+            return true;
+        }
+        if(loginedIntceptor == null){
+            return true;
+        }
+        return loginedIntceptor.isAllowLogin(loginModel, loginUser);
     }
 
     @PostMapping("loginfo")
