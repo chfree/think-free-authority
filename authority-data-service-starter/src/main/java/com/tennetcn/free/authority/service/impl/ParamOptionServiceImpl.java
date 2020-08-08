@@ -77,4 +77,22 @@ public class ParamOptionServiceImpl extends SuperService<ParamOption> implements
 
         return queryModel(search);
     }
+
+    @Override
+    public ParamOption queryFirstOption(String defineName) {
+        List<ParamOption> paramOptions = queryListByDefineName(defineName);
+        if(paramOptions==null||paramOptions.isEmpty()){
+            return null;
+        }
+        return paramOptions.get(0);
+    }
+
+    @Override
+    public boolean isMatch(String defineName, String value) {
+        ParamOption paramOption = queryFirstOption(defineName);
+        if(paramOption==null){
+            return false;
+        }
+        return value.equals(paramOption.getValue());
+    }
 }

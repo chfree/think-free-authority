@@ -77,8 +77,6 @@ public class ParamOptionDaoImpl extends SuperDao<ParamOption> implements IParamO
 
     @Override
     public ParamOption queryModel(ParamOptionSearch search) {
-
-
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(ParamOption.class).addOrder("sort_code", OrderEnum.asc);;
         if(!StringUtils.isEmpty(search.getDefineName())){
@@ -87,6 +85,19 @@ public class ParamOptionDaoImpl extends SuperDao<ParamOption> implements IParamO
         }
 
         appendExpression(sqlExpression,search);
+
+        return queryModel(sqlExpression);
+    }
+
+    @Override
+    public ParamOption queryFirstOption(String defineName) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(ParamOption.class)
+                .addOrder("sort_code", OrderEnum.asc)
+                .limit(1,1);
+
+        ISqlExpression defineIdSql = SqlExpressionFactory.createExpression().select("id").from(ParamDefine.class).andEq("name",defineName);
+        sqlExpression.andWhereIn("define_id",defineIdSql);
 
         return queryModel(sqlExpression);
     }

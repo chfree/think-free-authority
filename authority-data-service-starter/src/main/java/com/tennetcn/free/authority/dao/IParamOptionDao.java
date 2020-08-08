@@ -25,4 +25,6 @@ public interface IParamOptionDao extends ISuperDao<ParamOption> {
     List<ParamOptionView> queryListByDefineNames(List<String> defineNames);
 
     ParamOption queryModel(ParamOptionSearch search);
+
+    ParamOption queryFirstOption(String defineName);
 }

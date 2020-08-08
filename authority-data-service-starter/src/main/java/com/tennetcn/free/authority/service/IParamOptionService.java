@@ -30,4 +30,8 @@ public interface IParamOptionService extends ISuperService<ParamOption> {
     ParamOption queryModel(ParamOptionSearch search);
 
     ParamOption queryModel(String defineName,String text);
+
+    ParamOption queryFirstOption(String defineName);
+
+    boolean isMatch(String defineName,String value);
 }
