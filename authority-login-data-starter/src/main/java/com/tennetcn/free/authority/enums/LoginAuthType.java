@@ -10,21 +10,21 @@ import com.tennetcn.free.core.enums.BaseEnum;
  */
 
 public enum LoginAuthType implements BaseEnum<String> {
-    LOGIN("login","登陆");
+    LOGIN("登陆","login");
 
 
-    private String key;
+    private String text;
 
     private String value;
 
-    LoginAuthType(String key, String value){
-        this.key = key;
+    LoginAuthType(String text, String value){
+        this.text = text;
         this.value = value;
     }
 
     @Override
-    public String getKey() {
-        return key;
+    public String getText() {
+        return text;
     }
 
     @Override

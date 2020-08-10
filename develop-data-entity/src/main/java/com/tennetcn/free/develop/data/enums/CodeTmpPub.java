@@ -10,21 +10,21 @@ import com.tennetcn.free.core.enums.BaseEnum;
  */
 
 public enum CodeTmpPub implements BaseEnum<String> {
-    PRI("01", "私有"),
-    PUB("02", "公开");
+    PRI("私有","01"),
+    PUB("公开","02");
 
 
-    private String key;
+    private String text;
     private String value;
 
-    CodeTmpPub(String key, String value) {
-        this.key = key;
+    CodeTmpPub(String text, String value) {
+        this.text = text;
         this.value = value;
     }
 
     @Override
-    public String getKey() {
-        return this.key;
+    public String getText() {
+        return this.text;
     }
 
     @Override

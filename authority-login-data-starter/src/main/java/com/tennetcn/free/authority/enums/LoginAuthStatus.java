@@ -10,22 +10,22 @@ import com.tennetcn.free.core.enums.BaseEnum;
  */
 
 public enum LoginAuthStatus implements BaseEnum<String> {
-    VALID("valid","有效"),
-    INVALID("invalid","无效");
+    VALID("有效","valid"),
+    INVALID("无效","invalid");
 
 
-    private String key;
+    private String text;
 
     private String value;
 
-    LoginAuthStatus(String key, String value){
-        this.key = key;
+    LoginAuthStatus(String text, String value){
+        this.text = text;
         this.value = value;
     }
 
     @Override
-    public String getKey() {
-        return key;
+    public String getText() {
+        return text;
     }
 
     @Override

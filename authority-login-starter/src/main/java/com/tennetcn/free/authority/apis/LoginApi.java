@@ -114,8 +114,8 @@ public class LoginApi extends AuthorityApi {
         loginAuth.setExpTm(claims.getExpiration());
         loginAuth.setToken(token);
         loginAuth.setUserId(loginModel.getId());
-        loginAuth.setType(LoginAuthType.LOGIN.getKey());
-        loginAuth.setStatus(LoginAuthStatus.VALID.getKey());
+        loginAuth.setType(LoginAuthType.LOGIN.getValue());
+        loginAuth.setStatus(LoginAuthStatus.VALID.getValue());
         loginAuth.setAuthTm(DateUtil.date());
 
         loginAuthService.saveLoginAuth(loginAuth);
@@ -152,7 +152,7 @@ public class LoginApi extends AuthorityApi {
         String token = getCurrentLogin().getToken();
         cached.remove(token);
 
-        loginAuthService.updateStatusByToken(token,LoginAuthStatus.INVALID.getKey());
+        loginAuthService.updateStatusByToken(token,LoginAuthStatus.INVALID.getValue());
 
         resp.put("result", true);
         return resp;

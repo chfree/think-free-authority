@@ -44,7 +44,7 @@ public class LoginAuthServiceImpl extends SuperService<LoginAuth> implements ILo
     public boolean saveLoginAuth(LoginAuth loginAuth) {
         if(loginConfig.isOpenSSO()){
             // 先将当前用户的其他的token置为无效
-            if(!loginAuthDao.updateStatusByUserId(loginAuth.getUserId(), LoginAuthStatus.INVALID.getKey())){
+            if(!loginAuthDao.updateStatusByUserId(loginAuth.getUserId(), LoginAuthStatus.INVALID.getValue())){
                 return false;
             }
         }

@@ -75,7 +75,7 @@ public class LoginAuthApi extends AuthorityApi {
         BaseResponse response=new BaseResponse();
 
         LoginAuth loginAuth = loginAuthService.queryModel(id);
-        loginAuth.setStatus(LoginAuthStatus.INVALID.getKey());
+        loginAuth.setStatus(LoginAuthStatus.INVALID.getValue());
 
         response.put("result",loginAuthService.updateModel(loginAuth));
 

@@ -59,7 +59,7 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
 
     @Override
     public boolean updateStatusByUserId(String userId,String status) {
-        String notStatus = LoginAuthStatus.VALID.getKey().equals(status)?LoginAuthStatus.INVALID.getKey():LoginAuthStatus.VALID.getKey();
+        String notStatus = LoginAuthStatus.VALID.getValue().equals(status)?LoginAuthStatus.INVALID.getValue():LoginAuthStatus.VALID.getValue();
 
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.update(LoginAuth.class)
@@ -78,7 +78,7 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
         sqlExpression.selectCount()
                 .from(LoginAuth.class)
                 .andEq("token", token)
-                .andEq("status", LoginAuthStatus.VALID.getKey())
+                .andEq("status", LoginAuthStatus.VALID.getValue())
                 .andWhere("exp_tm>now()");
 
         return queryCount(sqlExpression) > 0;

@@ -8,3 +8,6 @@ spring:
 think:
   authority:
     logined-callback: base
+  checkmac:
+    slat: iMmiThink
+    enabled: true
