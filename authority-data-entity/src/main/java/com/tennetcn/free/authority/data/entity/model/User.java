@@ -47,7 +47,6 @@ public class User extends ModelBase {
     @Column(name="delete_mark")
     private Integer deleteMark = YesOrNoInteger.NO;
 
-    @OrderBy(value= OrderByEnum.DESC)
     @Column(name="create_date")
     private Date createDate;
 

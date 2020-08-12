@@ -10,6 +10,7 @@ import com.tennetcn.free.authority.data.entity.model.*;
 import com.tennetcn.free.authority.data.entity.viewmodel.MenuRoute;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
+import com.tennetcn.free.authority.enums.LoginStatus;
 import com.tennetcn.free.authority.exception.AuthorityBizException;
 import com.tennetcn.free.authority.service.*;
 import com.tennetcn.free.core.enums.ModelStatus;
@@ -104,6 +105,7 @@ public class UserApi extends AuthorityApi {
         if(StringUtils.isEmpty(userReq.getId())){
             userReq.setId(IdUtil.randomUUID());
             userReq.setModelStatus(ModelStatus.add);
+            userReq.setStatus(LoginStatus.NORMAL.getValue());
         }else{
             userReq.setModelStatus(ModelStatus.update);
         }

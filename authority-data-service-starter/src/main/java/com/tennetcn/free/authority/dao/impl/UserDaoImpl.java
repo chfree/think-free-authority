@@ -5,6 +5,7 @@ import com.tennetcn.free.authority.data.entity.model.Department;
 import com.tennetcn.free.authority.data.entity.model.User;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
+import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
@@ -50,7 +51,8 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
                      .setMainTableAlias("user")
                      .appendSelect("dept.full_name as departmentName")
                      .leftJoin(Department.class,"dept")
-                     .on("user.department_id","dept.id");
+                     .on("user.department_id","dept.id")
+                     .addOrder("user.create_date", OrderEnum.desc);
 
         appendExpression(sqlExpression,search);
 

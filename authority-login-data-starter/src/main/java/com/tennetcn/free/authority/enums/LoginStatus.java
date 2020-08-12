@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public enum  LoginStatus implements BaseEnum<String> {
 
-    UNACTIVE("待激活","un_active"),
+    UNACTIVE("待激活","unActive"),
     NORMAL("正常","normal"),
     LOCK("锁定","lock"),
     FORBIDDEN("禁用","forbidden"),
