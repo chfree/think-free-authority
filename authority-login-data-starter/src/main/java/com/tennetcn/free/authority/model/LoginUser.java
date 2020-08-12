@@ -74,11 +74,8 @@ public class LoginUser extends ModelBase {
     @Column(name="unique_mark")
     private String uniqueMark;
 
-    @Column(name="is_login")
-    private String isLogin;
-
-    @Column(name="is_locked")
-    private String isLocked;
+    @Column(name="status")
+    private String status;
 
     @Override
     public void setModelStatus(ModelStatus modelStatus) {

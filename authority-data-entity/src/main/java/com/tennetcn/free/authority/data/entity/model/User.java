@@ -75,11 +75,8 @@ public class User extends ModelBase {
     @Column(name="unique_mark")
     private String uniqueMark;
 
-    @Column(name="is_login")
-    private String isLogin;
-
-    @Column(name="is_locked")
-    private String isLocked;
+    @Column(name="status")
+    private String status;
 
     @Column(name="department_id")
     private String departmentId;

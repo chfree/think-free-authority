@@ -6,6 +6,7 @@ import com.tennetcn.free.authority.apimodel.login.LoginReq;
 import com.tennetcn.free.authority.apimodel.login.RegisterReq;
 import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.enums.LoginAuthType;
+import com.tennetcn.free.authority.enums.LoginStatus;
 import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
 import com.tennetcn.free.authority.handle.IloginedIntceptor;
 import com.tennetcn.free.authority.model.LoginAuth;
@@ -74,6 +75,20 @@ public class LoginApi extends AuthorityApi {
             response.setStatus(WebResponseStatus.DATA_ERROR);
             return response;
         }
+
+        // 用户名密码正确了，在检查状态是否正常,不是正常则不允许登陆
+        if(!LoginStatus.NORMAL.getValue().equals(user.getStatus())){
+            response.setMessage("您的用户状态处于【"+LoginStatus.convert2Text(user.getStatus())+"】，暂时无法登陆，请联系管理员");
+            response.setStatus(WebResponseStatus.DATA_ERROR);
+            return response;
+        }
+
+        loginSuccess(response, user);
+
+        return response;
+    }
+
+    private void loginSuccess(BaseResponse response, LoginUser user) {
         LoginModel loginModel = LoginUtil.user2LoginModel(user);
 
         Map<String,Object> claims = new HashMap<>();
@@ -87,7 +102,7 @@ public class LoginApi extends AuthorityApi {
         if(!isAllowLogin(loginModel, user)){
             response.setMessage("该用户暂时无法登陆，请联系管理员");
             response.setStatus(WebResponseStatus.DATA_ERROR);
-            return response;
+            return;
         }
 
         addLoginAuth(loginModel,token);
@@ -96,8 +111,6 @@ public class LoginApi extends AuthorityApi {
         cached.put(token,loginModel);
         response.put("result",true);
         response.put("token",token);
-
-        return response;
     }
 
     /**
@@ -227,6 +240,9 @@ public class LoginApi extends AuthorityApi {
         loginUser.setId(IdUtil.randomUUID());
         loginUser.setName(req.getName());
         loginUser.setModelStatus(ModelStatus.add);
+
+        // 注册用户统一设置成待激活
+        loginUser.setStatus(LoginStatus.UNACTIVE.getValue());
 
         return loginUser;
     }
