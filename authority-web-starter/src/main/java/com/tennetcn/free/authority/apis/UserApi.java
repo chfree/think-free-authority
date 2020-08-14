@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.apis;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.apimodel.login.LoginLoadDataResp;
 import com.tennetcn.free.authority.data.entity.apimodel.user.SaveUserReq;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -158,12 +160,35 @@ public class UserApi extends AuthorityApi {
         User user = userService.queryModel(id);
 
         if(user==null){
-            response.setMessage("用户不存在，更改密码失败");
-            response.setStatus(WebResponseStatus.DATA_ERROR);
-
             throw new AuthorityBizException("用户不存在，更改密码失败");
         }
         user.setPassword(userService.passwordFormat(pwd));
+        user.setModifyDate(DateUtil.date());
+        user.setModifyUserId(getLoginId());
+        user.setModifyUserName(getLoginName());
+
+        response.put("result",userService.updateModel(user));
+
+        return response;
+    }
+
+    @ApiOperation(value = "更改用户状态")
+    @PostMapping("updateUserStatus")
+    public BaseResponse updateUserStatus(@Valid @NotBlank(message = "用户id不能为空") String id,@Valid @NotBlank(message = "密码不能为空") String status){
+        BaseResponse response = new BaseResponse();
+        User user = userService.queryModel(id);
+
+        if(Arrays.asList(LoginStatus.DELETE.getValue(),LoginStatus.NORMAL.getValue(),LoginStatus.FORBIDDEN.getValue()).indexOf(status)<0){
+            throw new AuthorityBizException("状态只能更新为【正常、禁用、废除】");
+        }
+
+        if(user==null){
+            throw new AuthorityBizException("用户不存在，更新状态失败");
+        }
+        user.setStatus(status);
+        user.setModifyDate(DateUtil.date());
+        user.setModifyUserId(getLoginId());
+        user.setModifyUserName(getLoginName());
 
         response.put("result",userService.updateModel(user));
 
@@ -171,6 +196,7 @@ public class UserApi extends AuthorityApi {
     }
 
     @PostMapping("loginLoadData")
+    @ApiOperation(value = "登陆后数据加载")
     public BaseResponse loginLoadData(){
         LoginLoadDataResp resp = new LoginLoadDataResp();
 

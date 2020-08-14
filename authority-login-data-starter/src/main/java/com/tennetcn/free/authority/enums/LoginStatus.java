@@ -16,7 +16,7 @@ public enum  LoginStatus implements BaseEnum<String> {
     NORMAL("正常","normal"),
     LOCK("锁定","lock"),
     FORBIDDEN("禁用","forbidden"),
-    DELETE("删除","delete");
+    DELETE("废除","delete");
 
     private String text;
     private String value;
