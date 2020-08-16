@@ -22,4 +22,6 @@ public class UserSearch {
     private String likeName;
 
     private String likeAccount;
+
+    private String status;
 }

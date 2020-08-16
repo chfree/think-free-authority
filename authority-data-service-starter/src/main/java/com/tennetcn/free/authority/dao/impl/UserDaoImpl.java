@@ -104,5 +104,7 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
         sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
 
         sqlExpression.andRightLikeNoEmpty("account",search.getLikeAccount());
+
+        sqlExpression.andEqNoEmpty("status",search.getStatus());
     }
 }
