@@ -19,4 +19,6 @@ public interface IParamSettingDao extends ISuperDao<ParamSetting>{
     int queryCountBySearch(ParamSettingSearch search);
 
     List<ParamSetting> queryListBySearch(ParamSettingSearch search, PagerModel pagerModel);
+
+    ParamSetting queryModelBySearch(ParamSettingSearch search);
 }

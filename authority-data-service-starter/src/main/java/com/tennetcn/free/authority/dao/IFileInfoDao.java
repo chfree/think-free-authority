@@ -18,4 +18,6 @@ public interface IFileInfoDao extends ISuperDao<FileInfo>{
     int queryCountBySearch(FileInfoSearch search);
 
     List<FileInfo> queryListBySearch(FileInfoSearch search, PagerModel pagerModel);
+
+    FileInfo queryModelBySearch(FileInfoSearch search);
 }

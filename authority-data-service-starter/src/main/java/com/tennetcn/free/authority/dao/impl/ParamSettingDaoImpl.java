@@ -41,6 +41,16 @@ public class ParamSettingDaoImpl extends SuperDao<ParamSetting> implements IPara
         return queryList(sqlExpression,pagerModel);
     }
 
+    @Override
+    public ParamSetting queryModelBySearch(ParamSettingSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(ParamSetting.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryModel(sqlExpression);
+    }
+
     private void appendExpression(ISqlExpression sqlExpression, ParamSettingSearch search){
         sqlExpression.andEqNoEmpty("id",search.getId());
 

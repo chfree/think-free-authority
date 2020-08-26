@@ -31,7 +31,7 @@ public class FileInfo extends ModelBase{
      * 大小
      */
     @Column(name="size")
-    private Integer size;
+    private long size;
 
     /**
      * 文件类型
@@ -92,5 +92,9 @@ public class FileInfo extends ModelBase{
      */
     @Column(name="delete_mark")
     private String deleteMark;
+
+    public String getFileName(){
+        return this.fileId + "." + this.suffix;
+    }
 
 }

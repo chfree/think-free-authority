@@ -33,4 +33,12 @@ public class ParamSettingServiceImpl extends SuperService<ParamSetting> implemen
         return paramSettingDao.queryListBySearch(search,pagerModel);
     }
 
+    @Override
+    public ParamSetting queryModelByName(String name) {
+        ParamSettingSearch search = new ParamSettingSearch();
+        search.setName(name);
+
+        return paramSettingDao.queryModelBySearch(search);
+    }
+
 }

@@ -33,4 +33,12 @@ public class FileInfoServiceImpl extends SuperService<FileInfo> implements IFile
         return fileInfoDao.queryListBySearch(search,pagerModel);
     }
 
+    @Override
+    public FileInfo getFileInfoBySha1(String sha1) {
+        FileInfoSearch fileInfoSearch = new FileInfoSearch();
+        fileInfoSearch.setSha1(sha1);
+
+        return fileInfoDao.queryModelBySearch(fileInfoSearch);
+    }
+
 }

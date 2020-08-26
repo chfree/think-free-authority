@@ -17,7 +17,7 @@ import com.tennetcn.free.core.message.data.ModelBase;
 
 @Data
 @Entity
-@Table(name="basse_file_bsn")
+@Table(name="base_file_bsn")
 public class FileBsn extends ModelBase{
     /**
      * 主键
@@ -31,6 +31,13 @@ public class FileBsn extends ModelBase{
      */
     @Column(name="file_id")
     private String fileId;
+
+    /**
+     * 显示名称
+     * sha1情况下，可能文件名不同，业务表存储当前上传的文件名称
+     */
+    @Column(name="display_name")
+    private String displayName;
 
     /**
      * 业务id

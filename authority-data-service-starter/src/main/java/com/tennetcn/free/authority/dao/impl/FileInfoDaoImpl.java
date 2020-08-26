@@ -41,12 +41,20 @@ public class FileInfoDaoImpl extends SuperDao<FileInfo> implements IFileInfoDao 
         return queryList(sqlExpression,pagerModel);
     }
 
+    @Override
+    public FileInfo queryModelBySearch(FileInfoSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(FileInfo.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryModel(sqlExpression);
+    }
+
     private void appendExpression(ISqlExpression sqlExpression, FileInfoSearch search){
         sqlExpression.andEqNoEmpty("file_id",search.getFileId());
 
         sqlExpression.andNotEqNoEmpty("file_id",search.getNotFileId());
-
-        sqlExpression.andEqNoEmpty("size",search.getSize());
 
         sqlExpression.andEqNoEmpty("mime_type",search.getMimeType());
 

@@ -18,4 +18,6 @@ public interface IFileInfoService extends ISuperService<FileInfo>{
     int queryCountBySearch(FileInfoSearch search);
 
     List<FileInfo> queryListBySearch(FileInfoSearch search, PagerModel pagerModel);
+
+    FileInfo getFileInfoBySha1(String sha1);
 }

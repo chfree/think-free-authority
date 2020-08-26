@@ -19,4 +19,6 @@ public interface IParamSettingService extends ISuperService<ParamSetting>{
     int queryCountBySearch(ParamSettingSearch search);
 
     List<ParamSetting> queryListBySearch(ParamSettingSearch search, PagerModel pagerModel);
+
+    ParamSetting queryModelByName(String name);
 }
