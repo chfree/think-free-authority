@@ -1,6 +1,7 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
@@ -37,6 +38,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,11 +89,22 @@ public class UploadApi extends AuthorityApi {
         for (MultipartFile file : files) {
             FileInfo fileInfo = saveFileInfo(bsnType, bsnId, file);
             FileBsn fileBsn = saveFileBsn(fileInfo,file, bsnType, bsnId);
-            if(ModelStatus.add.equals(fileInfo.getModelStatus())){
-                saveFileToDisk(fileInfo,file);
-            }
 
             UploadModel uploadModel = new UploadModel();
+
+            try {
+                if(ModelStatus.add.equals(fileInfo.getModelStatus())){
+                    File saveFile = saveFileToDisk(fileInfo, file);
+                    uploadModel.setInputStream(new FileInputStream(saveFile));
+                }else{
+                    // 已经存在,file中的inputStream还没有被读走
+                    uploadModel.setInputStream(file.getInputStream());
+                }
+            } catch (IOException e) {
+                log.info("处理文件流失败",e);
+                new BizException("处理文件流失败",e);
+            }
+
             uploadModel.setFile(file);
             uploadModel.setFileInfo(fileInfo);
             uploadModel.setFileBsn(fileBsn);
@@ -106,6 +120,7 @@ public class UploadApi extends AuthorityApi {
         }
 
         // 如何处理上传后的文件由具体的intceptor进行处理
+        // todo chenghuan 此处可以考虑缓存起来，不用每次获取
         Map<String,IUploadIntceptor> uploadIntceptors = SpringContextUtils.getCurrentContext().getBeansOfType(IUploadIntceptor.class);
         if(uploadIntceptors==null&&uploadIntceptors.values()==null||uploadIntceptors.values().size()<=0){
             return resp;
@@ -155,6 +170,14 @@ public class UploadApi extends AuthorityApi {
             fileInfo.setModelStatus(ModelStatus.add);
 
             fileInfoService.addModel(fileInfo);
+        } else {
+            // 如果不为null，判断一下文件是否存在，不存在文件，可能被删了，在存储一下
+            String localPath = getDiskPath() + fileInfo.getPath();
+            File localPathFile = new File(localPath +"/"+ fileInfo.getFileName());
+            if(!localPathFile.exists()){
+                // 设置为add，在保存完fileInfo逻辑会进行add状态的本地文件保存
+                fileInfo.setModelStatus(ModelStatus.add);
+            }
         }
 
         return fileInfo;
@@ -176,20 +199,20 @@ public class UploadApi extends AuthorityApi {
         return paramSetting.getParamValue();
     }
 
-    private boolean saveFileToDisk(FileInfo fileInfo,MultipartFile file){
+    private File saveFileToDisk(FileInfo fileInfo,MultipartFile file){
         String localPath = getDiskPath() + fileInfo.getPath();
         File localPathFile = new File(localPath);
 
         if (!localPathFile.exists()) {
             localPathFile.mkdirs();
         }
+        File saveFile = new File(localPath, fileInfo.getFileName());
         try {
-            file.transferTo(new File(localPath, fileInfo.getFileName()));
+            file.transferTo(saveFile);
         }catch (Exception ex){
             log.error("保存文件到本地出错;路径:"+ localPath +"；文件id:"+ fileInfo.getFileId(),ex);
-            return false;
         }
-        return true;
+        return saveFile;
     }
 
     private FileBsn saveFileBsn(FileInfo fileInfo,MultipartFile file,String bsnType,String bsnId){

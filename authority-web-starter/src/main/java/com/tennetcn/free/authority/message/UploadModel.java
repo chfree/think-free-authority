@@ -6,6 +6,9 @@ import com.tennetcn.free.security.message.LoginModel;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.InputStream;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -20,4 +23,6 @@ public class UploadModel {
     private MultipartFile file;
 
     private FileBsn fileBsn;
+
+    private InputStream inputStream;
 }
