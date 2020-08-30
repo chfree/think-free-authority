@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author chfree
@@ -126,7 +127,11 @@ public class UploadApi extends AuthorityApi {
             return resp;
         }
 
-        IUploadIntceptor execUploadIntceptor = uploadIntceptors.values().stream().filter(uploadIntceptor -> bsnType.equals(uploadIntceptor.getBsnType())).findFirst().get();
+        Optional<IUploadIntceptor> first = uploadIntceptors.values().stream().filter(uploadIntceptor -> bsnType.equals(uploadIntceptor.getBsnType())).findFirst();
+        if(!first.isPresent()){
+            return resp;
+        }
+        IUploadIntceptor execUploadIntceptor = first.get();
         if(execUploadIntceptor!=null){
             UploadIntceptorParam param = new UploadIntceptorParam();
             param.setBsnType(bsnType);
