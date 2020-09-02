@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+
+import cn.hutool.core.convert.Convert;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import com.tennetcn.free.core.message.data.ModelBase;
 
@@ -48,5 +51,35 @@ public class ParamSetting extends ModelBase{
      */
     @Column(name="comments")
     private String comments;
+
+    @JsonIgnore
+    public int getIntValue(){
+        return Integer.parseInt(this.paramValue);
+    }
+
+    @JsonIgnore
+    public int getIntValue(int defaultValue){
+        return Convert.toInt(this.paramValue,defaultValue);
+    }
+
+    @JsonIgnore
+    public double getDoubleValue(){
+        return Double.parseDouble(this.paramValue);
+    }
+
+    @JsonIgnore
+    public double getDoubleValue(double defaultValue){
+        return Convert.toDouble(this.paramValue,defaultValue);
+    }
+
+    @JsonIgnore
+    public float getFloatValue(){
+        return Float.parseFloat(this.paramValue);
+    }
+
+    @JsonIgnore
+    public float getFloatValue(float defaultValue){
+        return Convert.toFloat(this.paramValue,defaultValue);
+    }
 
 }

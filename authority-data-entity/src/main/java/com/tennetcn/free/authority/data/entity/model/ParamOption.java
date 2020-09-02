@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.data.entity.model;
 
+import cn.hutool.core.convert.Convert;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tennetcn.free.core.message.data.ModelBase;
 import lombok.Data;
@@ -48,12 +49,27 @@ public class ParamOption extends ModelBase {
     }
 
     @JsonIgnore
+    public int getIntValue(int defaultValue){
+        return Convert.toInt(this.value,defaultValue);
+    }
+
+    @JsonIgnore
     public double getDoubleValue(){
         return Double.parseDouble(this.value);
     }
 
     @JsonIgnore
+    public double getDoubleValue(double defaultValue){
+        return Convert.toDouble(this.value,defaultValue);
+    }
+
+    @JsonIgnore
     public float getFloatValue(){
         return Float.parseFloat(this.value);
+    }
+
+    @JsonIgnore
+    public float getFloatValue(float defaultValue){
+        return Convert.toFloat(this.value,defaultValue);
     }
 }

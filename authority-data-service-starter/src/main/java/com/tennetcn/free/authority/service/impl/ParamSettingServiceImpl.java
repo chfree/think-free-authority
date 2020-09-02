@@ -1,6 +1,8 @@
 package com.tennetcn.free.authority.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import com.tennetcn.free.authority.dao.IParamSettingDao;
+import com.tennetcn.free.authority.data.entity.model.ParamOption;
 import com.tennetcn.free.authority.data.entity.model.ParamSetting;
 import com.tennetcn.free.authority.data.entity.viewmodel.ParamSettingSearch;
 import com.tennetcn.free.authority.service.IParamSettingService;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.core.message.data.PagerModel;
+import org.springframework.util.StringUtils;
+
 import java.util.List;
 
 
@@ -39,6 +43,69 @@ public class ParamSettingServiceImpl extends SuperService<ParamSetting> implemen
         search.setName(name);
 
         return paramSettingDao.queryModelBySearch(search);
+    }
+
+    @Override
+    public String queryStrValue(String name) {
+        ParamSetting paramSetting = queryModelByName(name);
+        if(paramSetting==null){
+            return null;
+        }
+        return paramSetting.getParamValue();
+    }
+
+    @Override
+    public String queryStrValue(String name, String defaultValue) {
+        ParamSetting paramSetting = queryModelByName(name);
+        if(paramSetting==null){
+            return defaultValue;
+        }
+        if(StringUtils.isEmpty(paramSetting.getParamValue())){
+            return defaultValue;
+        }
+        return paramSetting.getParamValue();
+    }
+
+    @Override
+    public int queryIntValue(String name) {
+        return queryIntValue(name,0);
+    }
+
+    @Override
+    public int queryIntValue(String name, int defaultValue) {
+        ParamSetting paramSetting = queryModelByName(name);
+        if(paramSetting==null){
+            return defaultValue;
+        }
+        return paramSetting.getIntValue(defaultValue);
+    }
+
+    @Override
+    public double queryDoubleValue(String name) {
+        return queryDoubleValue(name,0);
+    }
+
+    @Override
+    public double queryDoubleValue(String name, double defaultValue) {
+        ParamSetting paramSetting = queryModelByName(name);
+        if(paramSetting==null){
+            return defaultValue;
+        }
+        return paramSetting.getDoubleValue(defaultValue);
+    }
+
+    @Override
+    public float queryFloatValue(String defineName) {
+        return queryFloatValue(defineName);
+    }
+
+    @Override
+    public float queryFloatValue(String name, float defaultValue) {
+        ParamSetting paramSetting = queryModelByName(name);
+        if(paramSetting==null){
+            return defaultValue;
+        }
+        return paramSetting.getFloatValue(defaultValue);
     }
 
 }

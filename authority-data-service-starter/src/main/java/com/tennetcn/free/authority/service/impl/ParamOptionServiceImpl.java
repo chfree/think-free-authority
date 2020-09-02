@@ -1,5 +1,6 @@
 package com.tennetcn.free.authority.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import com.tennetcn.free.authority.dao.IParamOptionDao;
 import com.tennetcn.free.authority.data.entity.model.ParamOption;
 import com.tennetcn.free.authority.data.entity.viewmodel.ParamOptionSearch;
@@ -9,6 +10,7 @@ import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,5 +96,68 @@ public class ParamOptionServiceImpl extends SuperService<ParamOption> implements
             return false;
         }
         return value.equals(paramOption.getValue());
+    }
+
+    @Override
+    public String queryStrValue(String defineName) {
+        ParamOption paramOption = queryFirstOption(defineName);
+        if(paramOption==null){
+            return null;
+        }
+        return paramOption.getValue();
+    }
+
+    @Override
+    public String queryStrValue(String defineName, String defaultValue) {
+        ParamOption paramOption = queryFirstOption(defineName);
+        if(paramOption==null){
+            return defaultValue;
+        }
+        if(StringUtils.isEmpty(paramOption.getValue())){
+            return defaultValue;
+        }
+        return paramOption.getValue();
+    }
+
+    @Override
+    public int queryIntValue(String defineName) {
+        return queryIntValue(defineName,0);
+    }
+
+    @Override
+    public int queryIntValue(String defineName, int defaultValue) {
+        ParamOption paramOption = queryFirstOption(defineName);
+        if(paramOption==null){
+            return defaultValue;
+        }
+        return paramOption.getIntValue(defaultValue);
+    }
+
+    @Override
+    public double queryDoubleValue(String defineName) {
+        return queryDoubleValue(defineName,0);
+    }
+
+    @Override
+    public double queryDoubleValue(String defineName, double defaultValue) {
+        ParamOption paramOption = queryFirstOption(defineName);
+        if(paramOption==null){
+            return defaultValue;
+        }
+        return paramOption.getDoubleValue(defaultValue);
+    }
+
+    @Override
+    public float queryFloatValue(String defineName) {
+        return queryFloatValue(defineName);
+    }
+
+    @Override
+    public float queryFloatValue(String defineName, float defaultValue) {
+        ParamOption paramOption = queryFirstOption(defineName);
+        if(paramOption==null){
+            return defaultValue;
+        }
+        return paramOption.getFloatValue(defaultValue);
     }
 }

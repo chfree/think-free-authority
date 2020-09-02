@@ -34,4 +34,20 @@ public interface IParamOptionService extends ISuperService<ParamOption> {
     ParamOption queryFirstOption(String defineName);
 
     boolean isMatch(String defineName,String value);
+
+    String queryStrValue(String defineName);
+
+    String queryStrValue(String defineName,String defaultValue);
+
+    int queryIntValue(String defineName);
+
+    int queryIntValue(String defineName,int defaultValue);
+
+    double queryDoubleValue(String defineName);
+
+    double queryDoubleValue(String defineName,double defaultValue);
+
+    float queryFloatValue(String defineName);
+
+    float queryFloatValue(String defineName,float defaultValue);
 }

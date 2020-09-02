@@ -21,4 +21,20 @@ public interface IParamSettingService extends ISuperService<ParamSetting>{
     List<ParamSetting> queryListBySearch(ParamSettingSearch search, PagerModel pagerModel);
 
     ParamSetting queryModelByName(String name);
+
+    String queryStrValue(String defineName);
+
+    String queryStrValue(String defineName,String defaultValue);
+
+    int queryIntValue(String defineName);
+
+    int queryIntValue(String defineName,int defaultValue);
+
+    double queryDoubleValue(String defineName);
+
+    double queryDoubleValue(String defineName,double defaultValue);
+
+    float queryFloatValue(String defineName);
+
+    float queryFloatValue(String defineName,float defaultValue);
 }
