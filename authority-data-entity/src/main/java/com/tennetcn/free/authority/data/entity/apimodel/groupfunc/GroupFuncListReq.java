@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.data.entity.apimodel.groupfunc.rolefunc;
+package com.tennetcn.free.authority.data.entity.apimodel.groupfunc;
 
 import com.tennetcn.free.authority.data.entity.viewmodel.GroupFuncSearch;
 import com.tennetcn.free.core.message.web.BaseRequest;

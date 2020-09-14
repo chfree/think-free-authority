@@ -1,13 +1,9 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.authority.data.entity.apimodel.groupfunc.rolefunc.GroupFuncListReq;
-import com.tennetcn.free.authority.data.entity.apimodel.groupfunc.rolefunc.SaveGroupFuncReq;
-import com.tennetcn.free.authority.data.entity.apimodel.rolefunc.RoleFuncListReq;
-import com.tennetcn.free.authority.data.entity.apimodel.rolefunc.SaveRoleFuncReq;
+import com.tennetcn.free.authority.data.entity.apimodel.groupfunc.GroupFuncListReq;
+import com.tennetcn.free.authority.data.entity.apimodel.groupfunc.SaveGroupFuncReq;
 import com.tennetcn.free.authority.data.entity.model.GroupFunc;
-import com.tennetcn.free.authority.data.entity.model.RoleFunc;
 import com.tennetcn.free.authority.service.IGroupFuncService;
-import com.tennetcn.free.authority.service.IRoleFuncService;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;

@@ -41,4 +41,14 @@ public class ParamSettingSearch{
      */
     private String comments;
 
+    /**
+     * 参数名称
+     */
+    private String likeName;
+
+    /**
+     * 参数标题
+     */
+    private String likeTitle;
+
 }

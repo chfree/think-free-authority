@@ -48,13 +48,38 @@ public class FileBsnSearch{
     private String uploadUserName;
 
     /**
-     * 上传时间
+     * 上传时间-开始
      */
-    private Date uploadDate;
+    private Date startUploadDate;
+
+    /**
+     * 上传时间-结束
+     */
+    private Date endUploadDate;
+
+    /**
+     * 文件名称
+     */
+    private String displayName;
 
     /**
      * 删除标记
      */
     private String deleteMark;
+
+    /**
+     * 文件类型
+     */
+    private String mimeType;
+
+    /**
+     * 文件的sha1
+     */
+    private String sha1;
+
+    /**
+     * 后缀
+     */
+    private String suffix;
 
 }

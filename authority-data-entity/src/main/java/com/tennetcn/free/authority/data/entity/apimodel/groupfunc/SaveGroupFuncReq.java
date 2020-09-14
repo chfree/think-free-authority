@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.data.entity.apimodel.groupfunc.rolefunc;
+package com.tennetcn.free.authority.data.entity.apimodel.groupfunc;
 
 import com.tennetcn.free.authority.data.entity.model.GroupFunc;
 import lombok.Data;

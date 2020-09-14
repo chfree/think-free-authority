@@ -64,5 +64,8 @@ public class ParamSettingDaoImpl extends SuperDao<ParamSetting> implements IPara
 
         sqlExpression.andEqNoEmpty("comments",search.getComments());
 
+        sqlExpression.andLikeNoEmpty("name",search.getLikeName());
+
+        sqlExpression.andLikeNoEmpty("title",search.getLikeTitle());
     }
 }

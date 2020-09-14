@@ -3,6 +3,7 @@ package com.tennetcn.free.authority.service.impl;
 import com.tennetcn.free.authority.dao.IFileBsnDao;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
+import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnView;
 import com.tennetcn.free.authority.service.IFileBsnService;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,18 @@ public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBs
     }
 
     @Override
+    public int queryViewCountBySearch(FileBsnSearch search) {
+        return 0;
+    }
+
+    @Override
     public List<FileBsn> queryListBySearch(FileBsnSearch search, PagerModel pagerModel) {
         return fileBsnDao.queryListBySearch(search,pagerModel);
+    }
+
+    @Override
+    public List<FileBsnView> queryViewListBySearch(FileBsnSearch search, PagerModel pagerModel) {
+        return null;
     }
 
 }

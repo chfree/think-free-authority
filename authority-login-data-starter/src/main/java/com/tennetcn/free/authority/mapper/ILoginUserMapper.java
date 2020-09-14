@@ -15,7 +15,4 @@ import java.util.List;
 
 @Mapper
 public interface ILoginUserMapper extends IMapper<LoginUser> {
-    List<LoginUser> queryListMPByIds(List<String> ids);
-
-    String getLoginUserNamesByIds(List<String> ids);
 }
