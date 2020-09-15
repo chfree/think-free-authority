@@ -45,9 +45,32 @@ public class FileTemplate extends ModelBase{
     private String title;
 
     /**
+     * 显示名称
+     */
+    @Column(name="display_name")
+    private String displayName;
+
+    /**
      * 上传时间
      */
     @Column(name="upload_date")
     private Date uploadDate;
 
+    /**
+     * 上传人
+     */
+    @Column(name="upload_user_id")
+    private String uploadUserId;
+
+    /**
+     * 上传人名称
+     */
+    @Column(name="upload_user_name")
+    private String uploadUserName;
+
+    /**
+     * 备注
+     */
+    @Column(name="comments")
+    private String comments;
 }

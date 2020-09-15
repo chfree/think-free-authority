@@ -50,5 +50,9 @@ public class FileTemplateDaoImpl extends SuperDao<FileTemplate> implements IFile
         sqlExpression.andEqNoEmpty("name",search.getName());
 
         sqlExpression.andEqNoEmpty("title",search.getTitle());
+
+        sqlExpression.andEqNoEmpty("upload_user_id",search.getUploadUserId());
+
+        sqlExpression.andLikeNoEmpty("upload_user_name",search.getUploadUserName());
     }
 }

@@ -42,4 +42,14 @@ public class FileTemplateSearch{
      */
     private Date uploadDate;
 
+    /**
+     * 上传人
+     */
+    private String uploadUserId;
+
+    /**
+     * 上传人名称
+     */
+    private String uploadUserName;
+
 }
