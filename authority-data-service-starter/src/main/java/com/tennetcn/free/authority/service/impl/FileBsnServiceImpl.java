@@ -31,7 +31,7 @@ public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBs
 
     @Override
     public int queryViewCountBySearch(FileBsnSearch search) {
-        return 0;
+        return fileBsnDao.queryViewCountBySearch(search);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBs
 
     @Override
     public List<FileBsnView> queryViewListBySearch(FileBsnSearch search, PagerModel pagerModel) {
-        return null;
+        return fileBsnDao.queryViewListBySearch(search,pagerModel);
     }
 
 }

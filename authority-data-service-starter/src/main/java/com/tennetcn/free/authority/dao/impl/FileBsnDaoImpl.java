@@ -5,6 +5,7 @@ import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import com.tennetcn.free.authority.data.entity.model.FileInfo;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnView;
+import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
@@ -59,10 +60,11 @@ public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
 
         sqlExpression.selectAllFrom(FileBsn.class,"fileBsn")
-                     .appendSelect("fileInfo.size","fileInfo.mime_type","fileInfo.sha1")
-                     .appendSelect("fileInfo.store_type","fileInfo.suffix","fileInfo.path")
+                     .appendSelect("fileInfo.size","fileInfo.mime_type as mimeType","fileInfo.sha1")
+                     .appendSelect("fileInfo.store_type as storeType","fileInfo.suffix","fileInfo.path")
                      .leftJoin(FileInfo.class,"fileInfo").on("fileBsn.file_id","fileInfo.file_id")
-                     .setMainTableAlias("fileBsn");
+                     .setMainTableAlias("fileBsn")
+                     .addOrder("fileBsn.upload_date", OrderEnum.desc);
 
         appendExpression(sqlExpression,search);
 
