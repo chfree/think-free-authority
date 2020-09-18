@@ -3,6 +3,7 @@ package com.tennetcn.free.authority.dao.impl;
 import com.tennetcn.free.authority.dao.IFileTemplateDao;
 import com.tennetcn.free.authority.data.entity.model.FileTemplate;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileTemplateSearch;
+import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
@@ -33,7 +34,7 @@ public class FileTemplateDaoImpl extends SuperDao<FileTemplate> implements IFile
     @Override
     public List<FileTemplate> queryListBySearch(FileTemplateSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(FileTemplate.class);
+        sqlExpression.selectAllFrom(FileTemplate.class).addOrder("upload_date", OrderEnum.desc);
 
         appendExpression(sqlExpression,search);
 
@@ -53,6 +54,12 @@ public class FileTemplateDaoImpl extends SuperDao<FileTemplate> implements IFile
 
         sqlExpression.andEqNoEmpty("upload_user_id",search.getUploadUserId());
 
-        sqlExpression.andLikeNoEmpty("upload_user_name",search.getUploadUserName());
+        sqlExpression.andEqNoEmpty("upload_user_name",search.getUploadUserName());
+
+        sqlExpression.andLikeNoEmpty("upload_user_name",search.getLikeUploadUserName());
+
+        sqlExpression.andLikeNoEmpty("title",search.getLikeTitle());
+
+        sqlExpression.andLikeNoEmpty("name",search.getLikeName());
     }
 }

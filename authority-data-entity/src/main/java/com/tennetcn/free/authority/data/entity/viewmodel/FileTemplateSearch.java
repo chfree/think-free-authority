@@ -52,4 +52,19 @@ public class FileTemplateSearch{
      */
     private String uploadUserName;
 
+    /**
+     * 上传人名称 模糊搜索
+     */
+    private String likeUploadUserName;
+
+    /**
+     * title 模糊搜索
+     */
+    private String likeTitle;
+
+    /**
+     * name 模糊搜索
+     */
+    private String likeName;
+
 }
