@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.Digester;
+import com.tennetcn.free.authority.apis.helper.FilePathUtils;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import com.tennetcn.free.authority.data.entity.model.FileInfo;
 import com.tennetcn.free.authority.data.entity.model.ParamSetting;
@@ -171,13 +172,13 @@ public class UploadApi extends AuthorityApi {
             fileInfo.setUploadUserId(getLoginId());
             fileInfo.setUploadUserName(getLoginName());
             fileInfo.setStoreType(FileStoreType.LOCAL);
-            fileInfo.setPath(getFilePath());
+            fileInfo.setPath(FilePathUtils.getFilePath());
             fileInfo.setModelStatus(ModelStatus.add);
 
             fileInfoService.addModel(fileInfo);
         } else {
             // 如果不为null，判断一下文件是否存在，不存在文件，可能被删了，在存储一下
-            String localPath = getDiskPath() + fileInfo.getPath();
+            String localPath = FilePathUtils.getDiskPath() + fileInfo.getPath();
             File localPathFile = new File(localPath +"/"+ fileInfo.getFileName());
             if(!localPathFile.exists()){
                 // 设置为add，在保存完fileInfo逻辑会进行add状态的本地文件保存
@@ -190,22 +191,10 @@ public class UploadApi extends AuthorityApi {
 
 
 
-    private String pathExp="/yyyy/MM/dd/";
 
-    private String getFilePath(){
-        return DateUtil.format(DateUtil.date(),pathExp);
-    }
-
-    private String getDiskPath(){
-        ParamSetting paramSetting = paramSettingService.queryModelByName(ParamSettingKeys.UPLOAD_PATH);
-        if(paramSetting==null|| StringUtils.isEmpty(paramSetting.getParamValue())){
-            throw new BizException("无法获取上传文件的路径，请联系管理员;"+ParamSettingKeys.UPLOAD_PATH);
-        }
-        return paramSetting.getParamValue();
-    }
 
     private File saveFileToDisk(FileInfo fileInfo,MultipartFile file){
-        String localPath = getDiskPath() + fileInfo.getPath();
+        String localPath = FilePathUtils.getDiskPath() + fileInfo.getPath();
         File localPathFile = new File(localPath);
 
         if (!localPathFile.exists()) {

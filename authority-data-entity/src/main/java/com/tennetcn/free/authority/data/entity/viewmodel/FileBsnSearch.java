@@ -82,4 +82,13 @@ public class FileBsnSearch{
      */
     private String suffix;
 
+    /**
+     * 文件名称 模糊搜索
+     */
+    private String likeDisplayName;
+
+    /**
+     * 上传人 模糊搜索
+     */
+    private String likeUploadUserName;
 }

@@ -84,9 +84,15 @@ public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
 
         sqlExpression.andEqNoEmpty("upload_user_id",search.getUploadUserId());
 
-        sqlExpression.andLikeNoEmpty("upload_user_name",search.getUploadUserName());
+        sqlExpression.andEqNoEmpty("upload_user_name",search.getUploadUserName());
 
         sqlExpression.andEqNoEmpty("delete_mark",search.getDeleteMark());
+
+        sqlExpression.andEqNoEmpty("display_name",search.getDisplayName());
+
+        sqlExpression.andLikeNoEmpty("upload_user_name",search.getLikeUploadUserName());
+
+        sqlExpression.andLikeNoEmpty("display_name",search.getLikeDisplayName());
 
         sqlExpression.andEqNoEmpty("fileInfo.mime_type",search.getMimeType());
 
@@ -102,7 +108,7 @@ public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
             sqlExpression.andWhere("upload_date<=#{endUploadDate}").setParam("endUploadDate",search.getEndUploadDate());
         }
 
-        sqlExpression.andLikeNoEmpty("fileInfo.display_name",search.getDisplayName());
+
 
     }
 }
