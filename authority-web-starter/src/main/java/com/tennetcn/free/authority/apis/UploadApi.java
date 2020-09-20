@@ -189,10 +189,6 @@ public class UploadApi extends AuthorityApi {
         return fileInfo;
     }
 
-
-
-
-
     private File saveFileToDisk(FileInfo fileInfo,MultipartFile file){
         String localPath = FilePathUtils.getDiskPath() + fileInfo.getPath();
         File localPathFile = new File(localPath);
