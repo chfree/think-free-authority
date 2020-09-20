@@ -16,6 +16,14 @@ public class AuthorityBizException extends BizException {
         super(message);
     }
 
+    public AuthorityBizException(Throwable throwable){
+        super("AuthorityBizException",throwable);
+    }
+
+    public AuthorityBizException(String message,Throwable throwable){
+        super(message,throwable);
+    }
+
     public AuthorityBizException(int code, String message){
         super(code,message);
     }

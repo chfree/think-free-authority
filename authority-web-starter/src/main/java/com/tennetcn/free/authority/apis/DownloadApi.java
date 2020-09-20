@@ -1,12 +1,11 @@
 package com.tennetcn.free.authority.apis;
 
-import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.core.util.RandomUtil;
 import com.tennetcn.free.authority.apis.helper.FilePathUtils;
 import com.tennetcn.free.authority.data.entity.model.FileInfo;
 import com.tennetcn.free.authority.exception.AuthorityBizException;
 import com.tennetcn.free.authority.service.IFileInfoService;
+import com.tennetcn.free.core.exception.BizException;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.webapi.AuthorityApi;
@@ -18,20 +17,16 @@ import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 /**
@@ -75,6 +70,7 @@ public class DownloadApi extends AuthorityApi {
             outputStream =  servletResponse.getOutputStream();
         }catch (Exception ex){
             log.error("downFile getOutputStream is error", ex);
+            throw new BizException("downFile getOutputStream is error",ex);
         }
         if(fileId==null){
             throw new AuthorityBizException("downId异常，找不到对应的文件id");
