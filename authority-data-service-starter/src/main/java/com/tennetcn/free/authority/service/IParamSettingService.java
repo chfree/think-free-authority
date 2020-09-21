@@ -22,19 +22,19 @@ public interface IParamSettingService extends ISuperService<ParamSetting>{
 
     ParamSetting queryModelByName(String name);
 
-    String queryStrValue(String defineName);
+    String queryStrValue(String name);
 
-    String queryStrValue(String defineName,String defaultValue);
+    String queryStrValue(String name,String defaultValue);
 
-    int queryIntValue(String defineName);
+    int queryIntValue(String name);
 
-    int queryIntValue(String defineName,int defaultValue);
+    int queryIntValue(String name,int defaultValue);
 
-    double queryDoubleValue(String defineName);
+    double queryDoubleValue(String name);
 
-    double queryDoubleValue(String defineName,double defaultValue);
+    double queryDoubleValue(String name,double defaultValue);
 
-    float queryFloatValue(String defineName);
+    float queryFloatValue(String name);
 
-    float queryFloatValue(String defineName,float defaultValue);
+    float queryFloatValue(String name,float defaultValue);
 }

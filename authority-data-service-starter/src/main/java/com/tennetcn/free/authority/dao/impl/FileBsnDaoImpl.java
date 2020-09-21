@@ -56,6 +56,16 @@ public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
     }
 
     @Override
+    public FileBsn queryModelBySearch(FileBsnSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(FileBsn.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryModel(sqlExpression);
+    }
+
+    @Override
     public List<FileBsnView> queryViewListBySearch(FileBsnSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
 

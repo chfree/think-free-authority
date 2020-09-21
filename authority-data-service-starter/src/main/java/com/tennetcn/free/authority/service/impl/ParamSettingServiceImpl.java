@@ -95,8 +95,8 @@ public class ParamSettingServiceImpl extends SuperService<ParamSetting> implemen
     }
 
     @Override
-    public float queryFloatValue(String defineName) {
-        return queryFloatValue(defineName);
+    public float queryFloatValue(String name) {
+        return queryFloatValue(name,0);
     }
 
     @Override

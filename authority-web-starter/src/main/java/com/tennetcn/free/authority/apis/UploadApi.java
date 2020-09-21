@@ -1,21 +1,23 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.crypto.digest.DigestAlgorithm;
+import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.digest.Digester;
 import com.tennetcn.free.authority.apis.helper.FilePathUtils;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
+import com.tennetcn.free.authority.data.entity.model.FileDeleteWait;
 import com.tennetcn.free.authority.data.entity.model.FileInfo;
-import com.tennetcn.free.authority.data.entity.model.ParamSetting;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.authority.data.enums.FileStoreType;
 import com.tennetcn.free.authority.data.enums.ParamSettingKeys;
 import com.tennetcn.free.authority.data.enums.UploadType;
 import com.tennetcn.free.authority.exception.AuthorityBizException;
+import com.tennetcn.free.authority.handle.IUploadIntceptor;
 import com.tennetcn.free.authority.message.UploadIntceptorParam;
 import com.tennetcn.free.authority.message.UploadModel;
 import com.tennetcn.free.authority.service.IFileBsnService;
+import com.tennetcn.free.authority.service.IFileDeleteWaitService;
 import com.tennetcn.free.authority.service.IFileInfoService;
 import com.tennetcn.free.authority.service.IParamSettingService;
 import com.tennetcn.free.core.enums.ModelStatus;
@@ -24,25 +26,24 @@ import com.tennetcn.free.core.exception.BizException;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.core.util.PkIdUtils;
 import com.tennetcn.free.core.util.SpringContextUtils;
-import com.tennetcn.free.authority.handle.IUploadIntceptor;
 import com.tennetcn.free.core.util.StringHelper;
 import com.tennetcn.free.security.webapi.AuthorityApi;
-import com.tennetcn.free.web.message.WebResponseStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,9 @@ public class UploadApi extends AuthorityApi {
     @Autowired
     IFileBsnService fileBsnService;
 
+    @Autowired
+    IFileDeleteWaitService fileDeleteWaitService;
+
     @ApiOperation(value = "接收上传的文件")
     @PostMapping("accept")
     @Transactional
@@ -91,7 +95,7 @@ public class UploadApi extends AuthorityApi {
 
         List<UploadModel> uploadModels = new ArrayList<>();
         for (MultipartFile file : files) {
-            FileInfo fileInfo = saveFileInfo(bsnType, bsnId, file);
+            FileInfo fileInfo = saveFileInfo(file);
             FileBsn fileBsn = saveFileBsn(fileInfo,file, bsnType, bsnId);
 
             UploadModel uploadModel = new UploadModel();
@@ -150,12 +154,11 @@ public class UploadApi extends AuthorityApi {
         return resp;
     }
 
-    private FileInfo saveFileInfo(String bsnType,String bsnId,MultipartFile file){
+    private FileInfo saveFileInfo(MultipartFile file){
         FileInfo fileInfo = null;
         String sha1 = null;
-        Digester sha1Digester = new Digester(DigestAlgorithm.SHA1);
         try {
-            sha1 = sha1Digester.digestHex(file.getInputStream());
+            sha1 = DigestUtil.sha1Hex(file.getInputStream());
             fileInfo = fileInfoService.getFileInfoBySha1(sha1);
         } catch (IOException e) {
             log.error("获取文件的sha1时出错:"+fileInfo.getFileId(),e);
@@ -227,36 +230,17 @@ public class UploadApi extends AuthorityApi {
     @ApiOperation(value = "删除上传的文件")
     @PostMapping("deleteFile")
     @Transactional
-    public BaseResponse deleteFile(String bsnId,String fileId){
+    public BaseResponse deleteFile(@Valid @NotEmpty(message = "文件业务id不能为空") String fileBsnId){
         BaseResponse response = new BaseResponse();
 
-        FileBsnSearch search = new FileBsnSearch();
-        search.setFileId(fileId);
-
-        /**
-         * 因为有文件的sha1记录
-         * 所以判一下被引用的情况
-         * 大于1，则只删除fileBsn记录
-         * 否则还要删除文件记录
-         */
-        int fileRelCount = fileBsnService.queryCountBySearch(search);
-        if(fileRelCount==1){
-            deleteFileToDisk(fileId);
-
-            fileInfoService.deleteModel(fileId);
-        }
-        fileBsnService.deleteModel(bsnId, fileId);
+        doDeleteFile(fileBsnId,false);
 
         response.putResult("true");
 
         return response;
     }
 
-    private boolean deleteFileToDisk(String fileId){
-        FileInfo fileInfo = fileInfoService.queryModel(fileId);
-        if(fileInfo==null){
-            throw new AuthorityBizException("文件信息不存在");
-        }
+    private boolean deleteFileToDisk(FileInfo fileInfo){
         String diskFilePathName = FilePathUtils.getDiskPath() + fileInfo.getPath() + fileInfo.getFileName();
         File diskFile = new File(diskFilePathName);
 
@@ -266,4 +250,61 @@ public class UploadApi extends AuthorityApi {
         return true;
     }
 
+    private void doDeleteFile(String fileBsnId,boolean delay){
+        FileBsn fileBsn = fileBsnService.queryModel(fileBsnId);
+        FileInfo fileInfo = fileInfoService.queryModel(fileBsn.getBsnId());
+        if(fileInfo==null){
+            throw new AuthorityBizException("文件信息不存在");
+        }
+
+        if(delay) {
+            saveFileDeleteWait(fileInfo,fileBsnId);
+        }
+        /**
+         * 因为有文件的sha1记录
+         * 所以判一下被引用的情况
+         * 大于1，则只删除fileBsn记录
+         * 否则还要删除文件记录
+         */
+        FileBsnSearch search = new FileBsnSearch();
+        search.setFileId(fileInfo.getFileId());
+        int fileRelCount = fileBsnService.queryCountBySearch(search);
+        if(fileRelCount==1){
+            if(!delay) { // 延迟就不删除文件，先保留，由延迟服务进行删除
+                deleteFileToDisk(fileInfo);
+            }
+            fileInfoService.deleteModel(fileInfo.getFileId());
+        }
+        fileBsnService.deleteModel(fileBsnId);
+    }
+
+    @ApiOperation(value = "延时删除上传的文件")
+    @PostMapping("deleteFileDelay")
+    @Transactional
+    public BaseResponse deleteFileDelay(@Valid @NotEmpty(message = "文件业务id不能为空") String fileBsnId){
+        BaseResponse response = new BaseResponse();
+
+        doDeleteFile(fileBsnId,true);
+
+        response.putResult("true");
+
+        return response;
+    }
+
+    private boolean saveFileDeleteWait(FileInfo fileInfo,String fileBsnId){
+        FileDeleteWait fileDeleteWait = new FileDeleteWait();
+
+        // 先复制fileInfo
+        BeanUtils.copyProperties(fileInfo,fileDeleteWait);
+
+        FileBsn fileBsn = fileBsnService.queryModel(fileBsnId);
+
+        BeanUtils.copyProperties(fileBsn,fileDeleteWait);
+
+        fileDeleteWait.setAddDate(DateUtil.date());
+        int fileDeleteDelayDays = paramSettingService.queryIntValue(ParamSettingKeys.FILE_DELETE_DELAY_DAYS, 3);
+        fileDeleteWait.setWaitDay(fileDeleteDelayDays);
+
+        return fileDeleteWaitService.addModel(fileDeleteWait);
+    }
 }

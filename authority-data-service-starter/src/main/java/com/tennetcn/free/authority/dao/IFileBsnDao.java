@@ -22,6 +22,8 @@ public interface IFileBsnDao extends ISuperDao<FileBsn>{
 
     List<FileBsn> queryListBySearch(FileBsnSearch search, PagerModel pagerModel);
 
+    FileBsn queryModelBySearch(FileBsnSearch search);
+
     List<FileBsnView> queryViewListBySearch(FileBsnSearch search, PagerModel pagerModel);
 
     boolean deleteModel(String bsnId, String fileId);

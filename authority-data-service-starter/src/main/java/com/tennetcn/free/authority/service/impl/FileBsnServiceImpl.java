@@ -40,6 +40,11 @@ public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBs
     }
 
     @Override
+    public FileBsn queryModelBySearch(FileBsnSearch search) {
+        return fileBsnDao.queryModelBySearch(search);
+    }
+
+    @Override
     public List<FileBsnView> queryViewListBySearch(FileBsnSearch search, PagerModel pagerModel) {
         return fileBsnDao.queryViewListBySearch(search,pagerModel);
     }

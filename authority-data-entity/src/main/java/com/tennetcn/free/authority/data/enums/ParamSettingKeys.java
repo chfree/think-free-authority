@@ -9,4 +9,6 @@ package com.tennetcn.free.authority.data.enums;
 
 public class ParamSettingKeys {
     public final static String UPLOAD_PATH="uploadPath";
+
+    public final static String FILE_DELETE_DELAY_DAYS="fileDeleteDelayDays";
 }

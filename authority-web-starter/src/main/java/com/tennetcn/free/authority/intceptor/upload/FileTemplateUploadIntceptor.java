@@ -38,6 +38,9 @@ public class FileTemplateUploadIntceptor implements IUploadIntceptor {
         UploadModel uploadModel = uploadIntceptorParam.getUploadModels().get(0);
 
         FileTemplate fileTemplate = fileTemplateService.queryModel(bsnId);
+        if(fileTemplate==null){
+            throw new BizException("创建的文件模板id找不到对应的信息:" + bsnId);
+        }
         fileTemplate.setFileId(uploadModel.getFileInfo().getFileId());
 
         fileTemplateService.updateModel(fileTemplate);
