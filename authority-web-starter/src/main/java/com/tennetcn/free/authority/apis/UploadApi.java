@@ -8,9 +8,11 @@ import com.tennetcn.free.authority.apis.helper.FilePathUtils;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import com.tennetcn.free.authority.data.entity.model.FileInfo;
 import com.tennetcn.free.authority.data.entity.model.ParamSetting;
+import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.authority.data.enums.FileStoreType;
 import com.tennetcn.free.authority.data.enums.ParamSettingKeys;
 import com.tennetcn.free.authority.data.enums.UploadType;
+import com.tennetcn.free.authority.exception.AuthorityBizException;
 import com.tennetcn.free.authority.message.UploadIntceptorParam;
 import com.tennetcn.free.authority.message.UploadModel;
 import com.tennetcn.free.authority.service.IFileBsnService;
@@ -221,4 +223,47 @@ public class UploadApi extends AuthorityApi {
 
         return fileBsn;
     }
+
+    @ApiOperation(value = "删除上传的文件")
+    @PostMapping("deleteFile")
+    @Transactional
+    public BaseResponse deleteFile(String bsnId,String fileId){
+        BaseResponse response = new BaseResponse();
+
+        FileBsnSearch search = new FileBsnSearch();
+        search.setFileId(fileId);
+
+        /**
+         * 因为有文件的sha1记录
+         * 所以判一下被引用的情况
+         * 大于1，则只删除fileBsn记录
+         * 否则还要删除文件记录
+         */
+        int fileRelCount = fileBsnService.queryCountBySearch(search);
+        if(fileRelCount==1){
+            deleteFileToDisk(fileId);
+
+            fileInfoService.deleteModel(fileId);
+        }
+        fileBsnService.deleteModel(bsnId, fileId);
+
+        response.putResult("true");
+
+        return response;
+    }
+
+    private boolean deleteFileToDisk(String fileId){
+        FileInfo fileInfo = fileInfoService.queryModel(fileId);
+        if(fileInfo==null){
+            throw new AuthorityBizException("文件信息不存在");
+        }
+        String diskFilePathName = FilePathUtils.getDiskPath() + fileInfo.getPath() + fileInfo.getFileName();
+        File diskFile = new File(diskFilePathName);
+
+        if(diskFile.exists()&&diskFile.isFile()){
+            return diskFile.delete();
+        }
+        return true;
+    }
+
 }

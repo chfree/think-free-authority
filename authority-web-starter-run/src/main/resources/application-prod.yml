@@ -7,3 +7,10 @@ spring:
     password: comhdoit
 logging:
   config: classpath:logback-spring-prod.xml
+think:
+  authority:
+    logined-callback: base
+  checkmac:
+    slat: iMmiThink
+    enabled: true
+    allowlist: /v2/api-docs,/api/v1/authority/download/downFile
