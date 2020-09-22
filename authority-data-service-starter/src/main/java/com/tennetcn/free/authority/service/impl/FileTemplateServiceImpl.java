@@ -3,11 +3,14 @@ package com.tennetcn.free.authority.service.impl;
 import com.tennetcn.free.authority.dao.IFileTemplateDao;
 import com.tennetcn.free.authority.data.entity.model.FileTemplate;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileTemplateSearch;
+import com.tennetcn.free.authority.service.IFileBsnService;
 import com.tennetcn.free.authority.service.IFileTemplateService;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.core.message.data.PagerModel;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 
@@ -23,6 +26,9 @@ public class FileTemplateServiceImpl extends SuperService<FileTemplate> implemen
     @Autowired
     IFileTemplateDao fileTemplateDao;
 
+    @Autowired
+    IFileBsnService fileBsnService;
+
     @Override
     public int queryCountBySearch(FileTemplateSearch search) {
         return fileTemplateDao.queryCountBySearch(search);
@@ -31,6 +37,14 @@ public class FileTemplateServiceImpl extends SuperService<FileTemplate> implemen
     @Override
     public List<FileTemplate> queryListBySearch(FileTemplateSearch search, PagerModel pagerModel) {
         return fileTemplateDao.queryListBySearch(search,pagerModel);
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteFileTemplate(String id) {
+        fileBsnService.deleteByBsnId(id);
+
+        return deleteModel(id);
     }
 
 }

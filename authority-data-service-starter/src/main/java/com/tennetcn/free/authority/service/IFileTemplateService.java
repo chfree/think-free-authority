@@ -18,4 +18,6 @@ public interface IFileTemplateService extends ISuperService<FileTemplate>{
     int queryCountBySearch(FileTemplateSearch search);
 
     List<FileTemplate> queryListBySearch(FileTemplateSearch search, PagerModel pagerModel);
+
+    boolean deleteFileTemplate(String id);
 }

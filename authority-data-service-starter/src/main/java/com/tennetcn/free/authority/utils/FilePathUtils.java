@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.apis.helper;
+package com.tennetcn.free.authority.utils;
 
 import cn.hutool.core.date.DateUtil;
 import com.tennetcn.free.authority.data.entity.model.ParamSetting;

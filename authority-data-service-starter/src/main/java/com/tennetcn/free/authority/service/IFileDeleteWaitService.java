@@ -1,6 +1,7 @@
 package com.tennetcn.free.authority.service;
 
 import com.tennetcn.free.authority.data.entity.model.FileDeleteWait;
+import com.tennetcn.free.authority.data.entity.model.FileInfo;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileDeleteWaitSearch;
 import com.tennetcn.free.data.dao.base.ISuperService;
 import com.tennetcn.free.core.message.data.PagerModel;
@@ -18,4 +19,8 @@ public interface IFileDeleteWaitService extends ISuperService<FileDeleteWait>{
     int queryCountBySearch(FileDeleteWaitSearch search);
 
     List<FileDeleteWait> queryListBySearch(FileDeleteWaitSearch search, PagerModel pagerModel);
+
+    boolean moveFileToDelayDir(FileInfo fileInfo);
+
+    boolean moveFilesToDelayDir(List<FileInfo> fileInfos);
 }

@@ -3,6 +3,9 @@ package com.tennetcn.free.authority.mapper;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import org.apache.ibatis.annotations.Mapper;
 import com.tennetcn.free.data.dao.base.IMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
@@ -14,5 +17,5 @@ import com.tennetcn.free.data.dao.base.IMapper;
 
 @Mapper
 public interface IFileBsnMapper extends IMapper<FileBsn>{
-
+    List<String> queryOneLinkFileId(@Param("fileIds") List<String> fileIds);
 }

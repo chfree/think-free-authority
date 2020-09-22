@@ -1,10 +1,8 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.crypto.digest.DigestAlgorithm;
 import cn.hutool.crypto.digest.DigestUtil;
-import cn.hutool.crypto.digest.Digester;
-import com.tennetcn.free.authority.apis.helper.FilePathUtils;
+import com.tennetcn.free.authority.utils.FilePathUtils;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import com.tennetcn.free.authority.data.entity.model.FileDeleteWait;
 import com.tennetcn.free.authority.data.entity.model.FileInfo;
@@ -240,16 +238,6 @@ public class UploadApi extends AuthorityApi {
         return response;
     }
 
-    private boolean deleteFileToDisk(FileInfo fileInfo){
-        String diskFilePathName = FilePathUtils.getDiskPath() + fileInfo.getPath() + fileInfo.getFileName();
-        File diskFile = new File(diskFilePathName);
-
-        if(diskFile.exists()&&diskFile.isFile()){
-            return diskFile.delete();
-        }
-        return true;
-    }
-
     private void doDeleteFile(String fileBsnId,boolean delay){
         FileBsn fileBsn = fileBsnService.queryModel(fileBsnId);
         FileInfo fileInfo = fileInfoService.queryModel(fileBsn.getBsnId());
@@ -270,9 +258,10 @@ public class UploadApi extends AuthorityApi {
         search.setFileId(fileInfo.getFileId());
         int fileRelCount = fileBsnService.queryCountBySearch(search);
         if(fileRelCount==1){
-            if(!delay) { // 延迟就不删除文件，先保留，由延迟服务进行删除
-                deleteFileToDisk(fileInfo);
-            }
+            // 将文件备份到延时目录
+            fileDeleteWaitService.moveFileToDelayDir(fileInfo);
+
+            fileInfoService.deleteFileToDisk(fileInfo);
             fileInfoService.deleteModel(fileInfo.getFileId());
         }
         fileBsnService.deleteModel(fileBsnId);

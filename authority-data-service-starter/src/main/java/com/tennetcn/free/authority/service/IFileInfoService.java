@@ -20,4 +20,8 @@ public interface IFileInfoService extends ISuperService<FileInfo>{
     List<FileInfo> queryListBySearch(FileInfoSearch search, PagerModel pagerModel);
 
     FileInfo getFileInfoBySha1(String sha1);
+
+    boolean deleteFileToDisk(FileInfo fileInfo);
+
+    boolean deleteFilesToDisk(List<FileInfo> fileInfos);
 }

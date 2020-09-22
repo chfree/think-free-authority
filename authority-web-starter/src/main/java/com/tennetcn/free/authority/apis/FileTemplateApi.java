@@ -6,6 +6,7 @@ import com.tennetcn.free.authority.data.entity.apimodel.filetemplate.FileTemplat
 import com.tennetcn.free.authority.data.entity.apimodel.filetemplate.SaveFileTemplateReq;
 import com.tennetcn.free.authority.data.entity.model.FileTemplate;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileTemplateSearch;
+import com.tennetcn.free.authority.service.IFileBsnService;
 import com.tennetcn.free.authority.service.IFileTemplateService;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
@@ -76,7 +77,8 @@ public class FileTemplateApi extends AuthorityApi {
     public BaseResponse delete(@Valid @NotBlank(message = "文件模板表id不能为空")String id){
         BaseResponse response=new BaseResponse();
 
-        boolean result =  fileTemplateService.deleteModel(id);
+        boolean result =  fileTemplateService.deleteFileTemplate(id);
+
         response.put("result",result);
 
         return response;

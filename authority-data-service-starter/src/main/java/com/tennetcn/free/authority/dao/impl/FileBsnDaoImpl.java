@@ -5,10 +5,12 @@ import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import com.tennetcn.free.authority.data.entity.model.FileInfo;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnView;
+import com.tennetcn.free.authority.mapper.IFileBsnMapper;
 import com.tennetcn.free.core.enums.OrderEnum;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import java.util.List;
@@ -23,6 +25,10 @@ import java.util.List;
 
 @Component
 public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
+
+    @Autowired
+    IFileBsnMapper fileBsnMapper;
+
     @Override
     public int queryCountBySearch(FileBsnSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
@@ -87,6 +93,11 @@ public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
         deleteSql.delete().from(FileBsn.class).andEq("file_id",fileId).andEq("bsn_id",bsnId);
 
         return delete(deleteSql)>=0;
+    }
+
+    @Override
+    public List<String> queryOneLinkFileId(List<String> fileIds) {
+        return fileBsnMapper.queryOneLinkFileId(fileIds);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, FileBsnSearch search){

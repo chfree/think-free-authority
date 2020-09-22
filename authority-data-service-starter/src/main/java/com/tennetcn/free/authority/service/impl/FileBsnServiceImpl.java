@@ -1,15 +1,27 @@
 package com.tennetcn.free.authority.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import com.tennetcn.free.authority.dao.IFileBsnDao;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
+import com.tennetcn.free.authority.data.entity.model.FileDeleteWait;
+import com.tennetcn.free.authority.data.entity.model.FileInfo;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnView;
+import com.tennetcn.free.authority.data.enums.ParamSettingKeys;
 import com.tennetcn.free.authority.service.IFileBsnService;
+import com.tennetcn.free.authority.service.IFileDeleteWaitService;
+import com.tennetcn.free.authority.service.IFileInfoService;
+import com.tennetcn.free.authority.service.IParamSettingService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.core.message.data.PagerModel;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 /**
@@ -23,6 +35,15 @@ import java.util.List;
 public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBsnService {
     @Autowired
     IFileBsnDao fileBsnDao;
+
+    @Autowired
+    IFileInfoService fileInfoService;
+
+    @Autowired
+    IParamSettingService paramSettingService;
+
+    @Autowired
+    IFileDeleteWaitService fileDeleteWaitService;
 
     @Override
     public int queryCountBySearch(FileBsnSearch search) {
@@ -52,6 +73,95 @@ public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBs
     @Override
     public boolean deleteModel(String bsnId, String fileId) {
         return fileBsnDao.deleteModel(bsnId,fileId);
+    }
+
+    @Override
+    public List<String> queryOneLinkFileId(List<String> fileIds) {
+        return fileBsnDao.queryOneLinkFileId(fileIds);
+    }
+
+
+    /**
+     * 一个业务id可能包含多个文件
+     * 删除文件信息时，要判断该文件是否只有一个业务关联项
+     */
+    @Override
+    @Transactional
+    public boolean deleteByBsnId(String bsnId) {
+        return doDeleteByBsnId(bsnId, false);
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteDelayByBsnId(String bsnId) {
+        return doDeleteByBsnId(bsnId, true);
+    }
+
+    private boolean doDeleteByBsnId(String bsnId,boolean delay){
+        FileBsnSearch search = new FileBsnSearch();
+        search.setBsnId(bsnId);
+
+        List<FileBsn> fileBsns = queryListBySearch(search, new PagerModel(1000, 1));
+
+        if(fileBsns==null||fileBsns.isEmpty()){
+            return true;
+        }
+
+        List<String> fileIds = fileBsns.stream().map(item -> item.getFileId()).distinct().collect(Collectors.toList());
+        // 找出只有一个业务关联项的文件id，去删除文件信息，及文件
+        List<String> oneLinkFileIds = queryOneLinkFileId(fileIds);
+
+        List<FileInfo> fileInfos = fileInfoService.queryListByIds(fileIds);
+
+        List<FileInfo> oneLinkFileInfos = fileInfos.stream().filter(item -> oneLinkFileIds.contains(item.getFileId())).collect(Collectors.toList());
+
+
+        if(delay) {
+            // 保存到临时待删除表
+            saveToDeleteWait(fileBsns,fileInfos,oneLinkFileInfos);
+        }
+
+        // 删除fileBsn
+        List<String> fileBsnIds = fileBsns.stream().map(item -> item.getId()).collect(Collectors.toList());
+        deleteByIds(fileBsnIds);
+
+        // 删除文件
+        fileInfoService.deleteFilesToDisk(oneLinkFileInfos);
+
+        // 删除文件信息
+        fileInfoService.deleteByIds(oneLinkFileIds);
+
+        return true;
+    }
+
+    private boolean saveToDeleteWait(List<FileBsn> fileBsns,List<FileInfo> fileInfos,List<FileInfo> oneLinkFileInfos){
+        int fileDeleteDelayDays = paramSettingService.queryIntValue(ParamSettingKeys.FILE_DELETE_DELAY_DAYS, 3);
+
+        List<FileDeleteWait> fileDeleteWaits = fileBsns.stream().map(item -> {
+            FileDeleteWait fileDeleteWait = new FileDeleteWait();
+
+            Optional<FileInfo> first = fileInfos.stream().filter(fileInfo -> {
+                return fileInfo.getFileId().equals(item.getFileId());
+            }).findFirst();
+            if (first.isPresent()) {
+                // 先复制fileInfo
+                BeanUtils.copyProperties(first.get(), fileDeleteWait);
+            }
+
+            BeanUtils.copyProperties(item, fileDeleteWait);
+
+            fileDeleteWait.setAddDate(DateUtil.date());
+            fileDeleteWait.setWaitDay(fileDeleteDelayDays);
+
+            return fileDeleteWait;
+        }).collect(Collectors.toList());
+
+        if(oneLinkFileInfos!=null&&oneLinkFileInfos.size()>0){ // 有要删除的就备份到delay目录
+            fileDeleteWaitService.moveFilesToDelayDir(oneLinkFileInfos);
+        }
+
+
+        return fileDeleteWaitService.batchInsertList(fileDeleteWaits) == fileDeleteWaits.size();
     }
 
 }

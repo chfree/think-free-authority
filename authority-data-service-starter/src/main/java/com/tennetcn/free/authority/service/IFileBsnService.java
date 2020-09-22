@@ -27,4 +27,20 @@ public interface IFileBsnService extends ISuperService<FileBsn>{
     List<FileBsnView> queryViewListBySearch(FileBsnSearch search, PagerModel pagerModel);
 
     boolean deleteModel(String bsnId,String fileId);
+
+    List<String> queryOneLinkFileId(List<String> fileIds);
+
+    /**
+     * 根据业务id删除文件-延时
+     * 一个业务id可能包含多个文件
+     * 删除文件信息时，要判断该文件是否只有一个业务关联项
+     */
+    boolean deleteDelayByBsnId(String bsnId);
+
+    /**
+     * 根据业务id删除文件
+     * 一个业务id可能包含多个文件
+     * 删除文件信息时，要判断该文件是否只有一个业务关联项
+     */
+    boolean deleteByBsnId(String bsnId);
 }

@@ -3,8 +3,9 @@ package com.tennetcn.free.authority.dao;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnView;
-import com.tennetcn.free.data.dao.base.ISuperDao;
 import com.tennetcn.free.core.message.data.PagerModel;
+import com.tennetcn.free.data.dao.base.ISuperDao;
+
 import java.util.List;
 
 
@@ -27,4 +28,6 @@ public interface IFileBsnDao extends ISuperDao<FileBsn>{
     List<FileBsnView> queryViewListBySearch(FileBsnSearch search, PagerModel pagerModel);
 
     boolean deleteModel(String bsnId, String fileId);
+
+    List<String> queryOneLinkFileId(List<String> fileIds);
 }
