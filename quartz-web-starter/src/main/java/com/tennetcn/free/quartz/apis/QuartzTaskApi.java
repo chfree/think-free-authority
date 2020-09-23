@@ -148,4 +148,14 @@ public class QuartzTaskApi extends AuthorityApi {
         response.put("result",result);
         return response;
     }
+
+    @ApiOperation(value = "运行一个task任务")
+    @PostMapping("runTask")
+    public BaseResponse runTask(@Valid @NotBlank(message = "任务名称不能为空")String name){
+        BaseResponse response = new BaseResponse();
+
+        boolean result = quartzService.runTask(name);
+        response.put("result",result);
+        return response;
+    }
 }
