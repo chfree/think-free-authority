@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.tennetcn.free.authority.autoconfig.LoginDataAutoConfiguration
+com.tennetcn.free.authority.autoconfig.DataAutoConfiguration
