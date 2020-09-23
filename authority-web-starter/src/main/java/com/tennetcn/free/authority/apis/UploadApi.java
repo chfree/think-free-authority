@@ -72,6 +72,8 @@ public class UploadApi extends AuthorityApi {
     @Autowired
     IFileDeleteWaitService fileDeleteWaitService;
 
+    private Map<String,IUploadIntceptor> uploadIntceptors;
+
     @ApiOperation(value = "接收上传的文件")
     @PostMapping("accept")
     @Transactional
@@ -126,8 +128,7 @@ public class UploadApi extends AuthorityApi {
         }
 
         // 如何处理上传后的文件由具体的intceptor进行处理
-        // todo chenghuan 此处可以考虑缓存起来，不用每次获取
-        Map<String,IUploadIntceptor> uploadIntceptors = SpringContextUtils.getCurrentContext().getBeansOfType(IUploadIntceptor.class);
+        Map<String,IUploadIntceptor> uploadIntceptors = getUploadIntceptors();
         if(uploadIntceptors==null&&uploadIntceptors.values()==null||uploadIntceptors.values().size()<=0){
             return resp;
         }
@@ -150,6 +151,13 @@ public class UploadApi extends AuthorityApi {
             execUploadIntceptor.accept(param);
         }
         return resp;
+    }
+
+    private Map<String,IUploadIntceptor> getUploadIntceptors(){
+        if(this.uploadIntceptors == null){
+            this.uploadIntceptors = SpringContextUtils.getCurrentContext().getBeansOfType(IUploadIntceptor.class);
+        }
+        return this.uploadIntceptors;
     }
 
     private FileInfo saveFileInfo(MultipartFile file){
