@@ -116,4 +116,7 @@ public class FileDeleteWait extends ModelBase{
     @Column(name="wait_day")
     private Integer waitDay;
 
+    public String getFileName(){
+        return this.fileId + "." + this.suffix;
+    }
 }

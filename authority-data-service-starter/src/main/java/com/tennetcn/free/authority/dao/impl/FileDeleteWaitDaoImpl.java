@@ -3,9 +3,11 @@ package com.tennetcn.free.authority.dao.impl;
 import com.tennetcn.free.authority.dao.IFileDeleteWaitDao;
 import com.tennetcn.free.authority.data.entity.model.FileDeleteWait;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileDeleteWaitSearch;
+import com.tennetcn.free.authority.mapper.IFileDeleteWaitMapper;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import java.util.List;
@@ -20,6 +22,10 @@ import java.util.List;
 
 @Component
 public class FileDeleteWaitDaoImpl extends SuperDao<FileDeleteWait> implements IFileDeleteWaitDao {
+
+    @Autowired
+    IFileDeleteWaitMapper fileDeleteWaitMapper;
+
     @Override
     public int queryCountBySearch(FileDeleteWaitSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
@@ -38,6 +44,11 @@ public class FileDeleteWaitDaoImpl extends SuperDao<FileDeleteWait> implements I
         appendExpression(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
+    }
+
+    @Override
+    public List<FileDeleteWait> queryCanDeleteFile(PagerModel pagerModel) {
+        return fileDeleteWaitMapper.queryCanDeleteFile(pagerModel);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, FileDeleteWaitSearch search){

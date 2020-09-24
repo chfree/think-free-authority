@@ -18,6 +18,9 @@ import org.springframework.util.StringUtils;
 
 public class FilePathUtils {
 
+    public static String delayPath = "/delay";
+
+
     private static IParamSettingService paramSettingService;
 
     private static IParamSettingService getParamSettingService(){

@@ -18,4 +18,9 @@ public interface IFileDeleteWaitDao extends ISuperDao<FileDeleteWait>{
     int queryCountBySearch(FileDeleteWaitSearch search);
 
     List<FileDeleteWait> queryListBySearch(FileDeleteWaitSearch search, PagerModel pagerModel);
+
+    /**
+     * 查询符合删除的待删除信息
+     */
+    List<FileDeleteWait> queryCanDeleteFile(PagerModel pagerModel);
 }

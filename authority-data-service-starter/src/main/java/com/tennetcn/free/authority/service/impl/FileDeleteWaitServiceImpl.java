@@ -41,7 +41,7 @@ public class FileDeleteWaitServiceImpl extends SuperService<FileDeleteWait> impl
     @Override
     public boolean moveFileToDelayDir(FileInfo fileInfo) {
         String pathFileName = FilePathUtils.getDiskPath() + fileInfo.getPath() + fileInfo.getFileName();
-        String targetFileName = FilePathUtils.getDiskPath() +"/delay"+ fileInfo.getPath() + fileInfo.getFileName();
+        String targetFileName = FilePathUtils.getDiskPath() +FilePathUtils.delayPath+ fileInfo.getPath() + fileInfo.getFileName();
 
         FileUtil.move(new File(pathFileName),new File(targetFileName),true);
 
@@ -57,6 +57,11 @@ public class FileDeleteWaitServiceImpl extends SuperService<FileDeleteWait> impl
             moveFileToDelayDir(fileInfo);
         }
         return true;
+    }
+
+    @Override
+    public List<FileDeleteWait> queryCanDeleteFile(PagerModel pagerModel) {
+        return fileDeleteWaitDao.queryCanDeleteFile(pagerModel);
     }
 
 }

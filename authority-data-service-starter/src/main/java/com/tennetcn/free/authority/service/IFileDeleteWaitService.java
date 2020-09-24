@@ -23,4 +23,9 @@ public interface IFileDeleteWaitService extends ISuperService<FileDeleteWait>{
     boolean moveFileToDelayDir(FileInfo fileInfo);
 
     boolean moveFilesToDelayDir(List<FileInfo> fileInfos);
+
+    /**
+     * 获取能删除的文件
+     */
+    List<FileDeleteWait> queryCanDeleteFile(PagerModel pagerModel);
 }
