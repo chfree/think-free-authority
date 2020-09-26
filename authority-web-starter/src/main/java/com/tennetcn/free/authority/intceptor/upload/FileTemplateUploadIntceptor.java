@@ -5,7 +5,6 @@ import com.tennetcn.free.authority.data.enums.UploadType;
 import com.tennetcn.free.authority.handle.IUploadIntceptor;
 import com.tennetcn.free.authority.message.UploadIntceptorParam;
 import com.tennetcn.free.authority.message.UploadModel;
-import com.tennetcn.free.authority.service.IFileTemplateService;
 import com.tennetcn.free.core.exception.BizException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

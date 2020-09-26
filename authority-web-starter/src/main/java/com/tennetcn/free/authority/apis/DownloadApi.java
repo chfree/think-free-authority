@@ -4,7 +4,6 @@ import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.utils.FilePathUtils;
 import com.tennetcn.free.authority.data.entity.model.FileInfo;
 import com.tennetcn.free.authority.exception.AuthorityBizException;
-import com.tennetcn.free.authority.service.IFileInfoService;
 import com.tennetcn.free.core.exception.BizException;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;

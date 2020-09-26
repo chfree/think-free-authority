@@ -6,7 +6,6 @@ import com.tennetcn.free.authority.data.enums.ParamSettingKeys;
 import com.tennetcn.free.authority.service.IParamSettingService;
 import com.tennetcn.free.core.exception.BizException;
 import com.tennetcn.free.core.util.SpringContextUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**

@@ -20,6 +20,9 @@
         <module>authority-login-data-starter</module>
         <module>quartz-web-starter</module>
         <module>develop-data-entity</module>
+        <module>file-data-entity</module>
+        <module>file-data-service-starter</module>
+        <module>file-web-starter</module>
     </modules>
 
     <parent>

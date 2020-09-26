@@ -1,13 +1,11 @@
 package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.date.DateUtil;
-import com.tennetcn.free.authority.data.entity.apimodel.filetemplate.FileTemplateListReq;
-import com.tennetcn.free.authority.data.entity.apimodel.filetemplate.FileTemplateListResp;
-import com.tennetcn.free.authority.data.entity.apimodel.filetemplate.SaveFileTemplateReq;
+import com.tennetcn.free.file.data.entity.apimodel.filetemplate.FileTemplateListReq;
+import com.tennetcn.free.file.data.entity.apimodel.filetemplate.FileTemplateListResp;
+import com.tennetcn.free.file.data.entity.apimodel.filetemplate.SaveFileTemplateReq;
 import com.tennetcn.free.authority.data.entity.model.FileTemplate;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileTemplateSearch;
-import com.tennetcn.free.authority.service.IFileBsnService;
-import com.tennetcn.free.authority.service.IFileTemplateService;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.core.util.PkIdUtils;

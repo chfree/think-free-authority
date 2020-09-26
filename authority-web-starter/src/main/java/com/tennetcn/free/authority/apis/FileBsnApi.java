@@ -1,10 +1,9 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.authority.data.entity.apimodel.filebsn.FileBsnListReq;
-import com.tennetcn.free.authority.data.entity.apimodel.filebsn.FileBsnListResp;
+import com.tennetcn.free.file.data.entity.apimodel.filebsn.FileBsnListReq;
+import com.tennetcn.free.file.data.entity.apimodel.filebsn.FileBsnListResp;
 import com.tennetcn.free.authority.data.entity.model.FileBsn;
 import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
-import com.tennetcn.free.authority.service.IFileBsnService;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
