@@ -1,12 +1,12 @@
 package com.tennetcn.free.file.service.impl;
 
-import com.tennetcn.free.authority.dao.IFileTemplateDao;
-import com.tennetcn.free.authority.data.entity.model.FileTemplate;
-import com.tennetcn.free.authority.data.entity.viewmodel.FileTemplateSearch;
-import com.tennetcn.free.authority.service.IFileBsnService;
-import com.tennetcn.free.authority.service.IFileTemplateService;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.file.dao.IFileTemplateDao;
+import com.tennetcn.free.file.data.entity.model.FileTemplate;
+import com.tennetcn.free.file.data.entity.viewmodel.FileTemplateSearch;
+import com.tennetcn.free.file.service.IFileBsnService;
+import com.tennetcn.free.file.service.IFileTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

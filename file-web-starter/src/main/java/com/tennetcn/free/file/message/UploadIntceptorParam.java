@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.message;
+package com.tennetcn.free.file.message;
 
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.message.LoginModel;

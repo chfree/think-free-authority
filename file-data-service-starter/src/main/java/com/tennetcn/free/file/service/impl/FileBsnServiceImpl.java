@@ -1,19 +1,19 @@
 package com.tennetcn.free.file.service.impl;
 
 import cn.hutool.core.date.DateUtil;
-import com.tennetcn.free.authority.dao.IFileBsnDao;
-import com.tennetcn.free.authority.data.entity.model.FileBsn;
-import com.tennetcn.free.authority.data.entity.model.FileDeleteWait;
-import com.tennetcn.free.authority.data.entity.model.FileInfo;
-import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
-import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnView;
-import com.tennetcn.free.authority.data.enums.ParamSettingKeys;
-import com.tennetcn.free.authority.service.IFileBsnService;
-import com.tennetcn.free.authority.service.IFileDeleteWaitService;
-import com.tennetcn.free.authority.service.IFileInfoService;
 import com.tennetcn.free.authority.service.IParamSettingService;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.file.dao.IFileBsnDao;
+import com.tennetcn.free.file.data.entity.model.FileBsn;
+import com.tennetcn.free.file.data.entity.model.FileDeleteWait;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
+import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
+import com.tennetcn.free.file.data.entity.viewmodel.FileBsnView;
+import com.tennetcn.free.file.data.enums.FileParamSettingKeys;
+import com.tennetcn.free.file.service.IFileBsnService;
+import com.tennetcn.free.file.service.IFileDeleteWaitService;
+import com.tennetcn.free.file.service.IFileInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -135,7 +135,7 @@ public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBs
     }
 
     private boolean saveToDeleteWait(List<FileBsn> fileBsns,List<FileInfo> fileInfos,List<FileInfo> oneLinkFileInfos){
-        int fileDeleteDelayDays = paramSettingService.queryIntValue(ParamSettingKeys.FILE_DELETE_DELAY_DAYS, 3);
+        int fileDeleteDelayDays = paramSettingService.queryIntValue(FileParamSettingKeys.FILE_DELETE_DELAY_DAYS, 3);
 
         List<FileDeleteWait> fileDeleteWaits = fileBsns.stream().map(item -> {
             FileDeleteWait fileDeleteWait = new FileDeleteWait();

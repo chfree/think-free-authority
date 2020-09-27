@@ -1,14 +1,14 @@
 package com.tennetcn.free.file.service.impl;
 
 import cn.hutool.core.io.FileUtil;
-import com.tennetcn.free.authority.dao.IFileDeleteWaitDao;
-import com.tennetcn.free.authority.data.entity.model.FileDeleteWait;
-import com.tennetcn.free.authority.data.entity.model.FileInfo;
-import com.tennetcn.free.authority.data.entity.viewmodel.FileDeleteWaitSearch;
-import com.tennetcn.free.authority.service.IFileDeleteWaitService;
-import com.tennetcn.free.authority.utils.FilePathUtils;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.tennetcn.free.file.dao.IFileDeleteWaitDao;
+import com.tennetcn.free.file.data.entity.model.FileDeleteWait;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
+import com.tennetcn.free.file.data.entity.viewmodel.FileDeleteWaitSearch;
+import com.tennetcn.free.file.service.IFileDeleteWaitService;
+import com.tennetcn.free.file.utils.FilePathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

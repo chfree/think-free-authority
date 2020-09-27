@@ -1,19 +1,18 @@
-package com.tennetcn.free.authority.apis;
+package com.tennetcn.free.file.apis;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.tennetcn.free.authority.utils.FilePathUtils;
-import com.tennetcn.free.authority.data.entity.model.FileBsn;
-import com.tennetcn.free.authority.data.entity.model.FileDeleteWait;
-import com.tennetcn.free.authority.data.entity.model.FileInfo;
-import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
-import com.tennetcn.free.authority.data.enums.FileStoreType;
-import com.tennetcn.free.authority.data.enums.ParamSettingKeys;
-import com.tennetcn.free.authority.data.enums.UploadType;
-import com.tennetcn.free.authority.exception.AuthorityBizException;
+import com.tennetcn.free.file.data.entity.model.FileBsn;
+import com.tennetcn.free.file.data.entity.model.FileDeleteWait;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
+import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
+import com.tennetcn.free.file.data.enums.FileParamSettingKeys;
+import com.tennetcn.free.file.data.enums.FileStoreType;
+import com.tennetcn.free.file.data.enums.UploadType;
 import com.tennetcn.free.authority.handle.IUploadIntceptor;
-import com.tennetcn.free.authority.message.UploadIntceptorParam;
-import com.tennetcn.free.authority.message.UploadModel;
+import com.tennetcn.free.file.exception.FileBizException;
+import com.tennetcn.free.file.message.UploadIntceptorParam;
+import com.tennetcn.free.file.message.UploadModel;
 import com.tennetcn.free.authority.service.IParamSettingService;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.enums.YesOrNo;
@@ -22,6 +21,10 @@ import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.core.util.PkIdUtils;
 import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.core.util.StringHelper;
+import com.tennetcn.free.file.service.IFileBsnService;
+import com.tennetcn.free.file.service.IFileDeleteWaitService;
+import com.tennetcn.free.file.service.IFileInfoService;
+import com.tennetcn.free.file.utils.FilePathUtils;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -247,7 +250,7 @@ public class UploadApi extends AuthorityApi {
         FileBsn fileBsn = fileBsnService.queryModel(fileBsnId);
         FileInfo fileInfo = fileInfoService.queryModel(fileBsn.getBsnId());
         if(fileInfo==null){
-            throw new AuthorityBizException("文件信息不存在");
+            throw new FileBizException("文件信息不存在");
         }
 
         if(delay) {
@@ -296,7 +299,7 @@ public class UploadApi extends AuthorityApi {
         BeanUtils.copyProperties(fileBsn,fileDeleteWait);
 
         fileDeleteWait.setAddDate(DateUtil.date());
-        int fileDeleteDelayDays = paramSettingService.queryIntValue(ParamSettingKeys.FILE_DELETE_DELAY_DAYS, 3);
+        int fileDeleteDelayDays = paramSettingService.queryIntValue(FileParamSettingKeys.FILE_DELETE_DELAY_DAYS, 3);
         fileDeleteWait.setWaitDay(fileDeleteDelayDays);
 
         return fileDeleteWaitService.addModel(fileDeleteWait);

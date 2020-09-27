@@ -1,11 +1,12 @@
-package com.tennetcn.free.authority.apis;
+package com.tennetcn.free.file.apis;
 
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.utils.FilePathUtils;
-import com.tennetcn.free.authority.data.entity.model.FileInfo;
-import com.tennetcn.free.authority.exception.AuthorityBizException;
 import com.tennetcn.free.core.exception.BizException;
 import com.tennetcn.free.core.message.web.BaseResponse;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
+import com.tennetcn.free.file.exception.FileBizException;
+import com.tennetcn.free.file.service.IFileInfoService;
+import com.tennetcn.free.file.utils.FilePathUtils;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
@@ -72,12 +73,12 @@ public class DownloadApi extends AuthorityApi {
             throw new BizException("downFile getOutputStream is error",ex);
         }
         if(fileId==null){
-            throw new AuthorityBizException("downId异常，找不到对应的文件id");
+            throw new FileBizException("downId异常，找不到对应的文件id");
         }
 
         FileInfo fileInfo = fileInfoService.queryModel(fileId.toString());
         if(fileInfo == null){
-            throw new AuthorityBizException("fileId找不到对应的文件:"+fileId);
+            throw new FileBizException("fileId找不到对应的文件:"+fileId);
         }
         String localPath = FilePathUtils.getDiskPath() + fileInfo.getPath();
         String filePathName = localPath+fileInfo.getFileName();

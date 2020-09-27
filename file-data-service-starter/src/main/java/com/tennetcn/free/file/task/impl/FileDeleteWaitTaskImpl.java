@@ -1,10 +1,10 @@
 package com.tennetcn.free.file.task.impl;
 
-import com.tennetcn.free.authority.utils.FilePathUtils;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.file.data.entity.model.FileDeleteWait;
 import com.tennetcn.free.file.service.IFileDeleteWaitService;
 import com.tennetcn.free.file.task.IFileDeleteWaitTask;
+import com.tennetcn.free.file.utils.FilePathUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -46,7 +46,7 @@ public class FileDeleteWaitTaskImpl implements IFileDeleteWaitTask {
         }
 
         for (FileDeleteWait fileDeleteWait : fileDeleteWaits) {
-            String filePathName = FilePathUtils.getDiskPath() +FilePathUtils.delayPath+ fileDeleteWait.getPath() + fileDeleteWait.getFileName();
+            String filePathName = FilePathUtils.getDiskPath() + FilePathUtils.delayPath+ fileDeleteWait.getPath() + fileDeleteWait.getFileName();
 
             File file = new File(filePathName);
             if(file.exists()&&file.isFile()){

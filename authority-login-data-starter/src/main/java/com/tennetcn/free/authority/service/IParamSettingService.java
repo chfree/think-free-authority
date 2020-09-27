@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.service;
 
 
-import com.tennetcn.free.authority.data.entity.model.ParamSetting;
-import com.tennetcn.free.authority.data.entity.viewmodel.ParamSettingSearch;
+import com.tennetcn.free.authority.model.ParamSetting;
+import com.tennetcn.free.authority.viewmodel.ParamSettingSearch;
 import com.tennetcn.free.data.dao.base.ISuperService;
 import com.tennetcn.free.core.message.data.PagerModel;
 import java.util.List;

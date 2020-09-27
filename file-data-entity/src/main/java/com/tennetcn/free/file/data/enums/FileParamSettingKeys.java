@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.data.enums;
+package com.tennetcn.free.file.data.enums;
 
 /**
  * @author chfree
@@ -7,7 +7,7 @@ package com.tennetcn.free.authority.data.enums;
  * @comment
  */
 
-public class ParamSettingKeys {
+public class FileParamSettingKeys {
     public final static String UPLOAD_PATH="uploadPath";
 
     public final static String FILE_DELETE_DELAY_DAYS="fileDeleteDelayDays";

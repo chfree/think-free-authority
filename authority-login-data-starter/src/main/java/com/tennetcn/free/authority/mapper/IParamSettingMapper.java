@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.mapper;
 
 
-import com.tennetcn.free.authority.data.entity.model.ParamSetting;
+import com.tennetcn.free.authority.model.ParamSetting;
 import org.apache.ibatis.annotations.Mapper;
 import com.tennetcn.free.data.dao.base.IMapper;
 

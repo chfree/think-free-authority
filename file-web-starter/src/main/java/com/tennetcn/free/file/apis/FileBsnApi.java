@@ -1,10 +1,11 @@
-package com.tennetcn.free.authority.apis;
+package com.tennetcn.free.file.apis;
 
 import com.tennetcn.free.file.data.entity.apimodel.filebsn.FileBsnListReq;
 import com.tennetcn.free.file.data.entity.apimodel.filebsn.FileBsnListResp;
-import com.tennetcn.free.authority.data.entity.model.FileBsn;
-import com.tennetcn.free.authority.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.core.message.web.BaseResponse;
+import com.tennetcn.free.file.data.entity.model.FileBsn;
+import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
+import com.tennetcn.free.file.service.IFileBsnService;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +28,7 @@ import javax.validation.constraints.NotBlank;
  */
 
 @RestController
-@RequestMapping(value = "/api/v1/authority/fileBsn/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/file/fileBsn/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="文件业务",value ="文件业务相关的操作")
 public class FileBsnApi extends AuthorityApi {
     @Autowired

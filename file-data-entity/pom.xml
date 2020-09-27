@@ -26,10 +26,5 @@
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
-            <artifactId>authority-data-service-starter</artifactId>
-            <version>0.0.1</version>
-        </dependency>
     </dependencies>
 </project>

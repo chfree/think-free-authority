@@ -1,11 +1,12 @@
-package com.tennetcn.free.authority.intceptor.upload;
+package com.tennetcn.free.file.inceptor;
 
-import com.tennetcn.free.authority.data.entity.model.FileTemplate;
-import com.tennetcn.free.authority.data.enums.UploadType;
+import com.tennetcn.free.file.data.entity.model.FileTemplate;
+import com.tennetcn.free.file.data.enums.UploadType;
 import com.tennetcn.free.authority.handle.IUploadIntceptor;
-import com.tennetcn.free.authority.message.UploadIntceptorParam;
-import com.tennetcn.free.authority.message.UploadModel;
+import com.tennetcn.free.file.message.UploadIntceptorParam;
+import com.tennetcn.free.file.message.UploadModel;
 import com.tennetcn.free.core.exception.BizException;
+import com.tennetcn.free.file.service.IFileTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

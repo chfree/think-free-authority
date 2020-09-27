@@ -11,5 +11,19 @@
 
     <artifactId>file-web-starter</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.tennetcn.free.authority</groupId>
+            <artifactId>file-data-service-starter</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tennetcn.free.authority</groupId>
+            <artifactId>authority-security-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.tennetcn.free.authority</groupId>
+            <artifactId>authority-login-starter</artifactId>
+        </dependency>
+    </dependencies>
 </project>

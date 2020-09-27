@@ -1,8 +1,8 @@
 package com.tennetcn.free.authority.dao.impl;
 
 import com.tennetcn.free.authority.dao.IParamSettingDao;
-import com.tennetcn.free.authority.data.entity.model.ParamSetting;
-import com.tennetcn.free.authority.data.entity.viewmodel.ParamSettingSearch;
+import com.tennetcn.free.authority.model.ParamSetting;
+import com.tennetcn.free.authority.viewmodel.ParamSettingSearch;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;

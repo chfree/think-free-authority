@@ -1,7 +1,7 @@
-package com.tennetcn.free.authority.message;
+package com.tennetcn.free.file.message;
 
-import com.tennetcn.free.authority.data.entity.model.FileBsn;
-import com.tennetcn.free.authority.data.entity.model.FileInfo;
+import com.tennetcn.free.file.data.entity.model.FileBsn;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 

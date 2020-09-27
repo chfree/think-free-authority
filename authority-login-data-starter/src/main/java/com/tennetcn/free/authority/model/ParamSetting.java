@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.data.entity.model;
+package com.tennetcn.free.authority.model;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

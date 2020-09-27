@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.data.entity.viewmodel;
+package com.tennetcn.free.authority.viewmodel;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.tennetcn.free.authority.data.entity.apimodel.paramsetting;
+package com.tennetcn.free.authority.apimodel.paramsetting;
 
-import com.tennetcn.free.authority.data.entity.viewmodel.ParamSettingSearch;
+import com.tennetcn.free.authority.viewmodel.ParamSettingSearch;
 import com.tennetcn.free.core.message.web.BasePagerReq;
 import lombok.Data;
 

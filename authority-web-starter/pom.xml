@@ -30,5 +30,10 @@
             <groupId>com.tennetcn.free.authority</groupId>
             <artifactId>authority-login-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.tennetcn.free.authority</groupId>
+            <artifactId>file-web-starter</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 </project>

@@ -1,10 +1,8 @@
 package com.tennetcn.free.authority.service.impl;
 
-import cn.hutool.core.convert.Convert;
 import com.tennetcn.free.authority.dao.IParamSettingDao;
-import com.tennetcn.free.authority.data.entity.model.ParamOption;
-import com.tennetcn.free.authority.data.entity.model.ParamSetting;
-import com.tennetcn.free.authority.data.entity.viewmodel.ParamSettingSearch;
+import com.tennetcn.free.authority.model.ParamSetting;
+import com.tennetcn.free.authority.viewmodel.ParamSettingSearch;
 import com.tennetcn.free.authority.service.IParamSettingService;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
