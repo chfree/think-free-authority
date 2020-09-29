@@ -1,4 +1,4 @@
-package com.tennetcn.free.authority.handle;
+package com.tennetcn.free.file.handle;
 
 import com.tennetcn.free.file.message.UploadIntceptorParam;
 

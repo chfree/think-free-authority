@@ -2,7 +2,7 @@ package com.tennetcn.free.file.inceptor;
 
 import com.tennetcn.free.file.data.entity.model.FileTemplate;
 import com.tennetcn.free.file.data.enums.UploadType;
-import com.tennetcn.free.authority.handle.IUploadIntceptor;
+import com.tennetcn.free.file.handle.IUploadIntceptor;
 import com.tennetcn.free.file.message.UploadIntceptorParam;
 import com.tennetcn.free.file.message.UploadModel;
 import com.tennetcn.free.core.exception.BizException;

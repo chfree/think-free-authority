@@ -9,7 +9,7 @@ import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.file.data.enums.FileParamSettingKeys;
 import com.tennetcn.free.file.data.enums.FileStoreType;
 import com.tennetcn.free.file.data.enums.UploadType;
-import com.tennetcn.free.authority.handle.IUploadIntceptor;
+import com.tennetcn.free.file.handle.IUploadIntceptor;
 import com.tennetcn.free.file.exception.FileBizException;
 import com.tennetcn.free.file.message.UploadIntceptorParam;
 import com.tennetcn.free.file.message.UploadModel;
