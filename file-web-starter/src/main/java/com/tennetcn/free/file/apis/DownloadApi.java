@@ -38,7 +38,7 @@ import java.net.URLEncoder;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/v1/authority/download/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/file/download/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="下载上传的文件",value ="下载上传的文件相关的操作")
 public class DownloadApi extends AuthorityApi {
 

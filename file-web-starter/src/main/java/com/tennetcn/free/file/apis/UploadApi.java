@@ -56,7 +56,7 @@ import java.util.Optional;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/v1/authority/upload/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/file/upload/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="文件上传",value ="文件上传相关的操作")
 public class UploadApi extends AuthorityApi {
 
