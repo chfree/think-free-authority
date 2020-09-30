@@ -27,6 +27,10 @@ public interface IFileBsnService extends ISuperService<FileBsn>{
 
     List<FileBsnView> queryViewListBySearch(FileBsnSearch search, PagerModel pagerModel);
 
+    FileBsnView queryViewModelBySearch(FileBsnSearch search);
+
+    FileBsnView queryViewModelById(String id);
+
     boolean deleteModel(String bsnId,String fileId);
 
     List<String> queryOneLinkFileId(List<String> fileIds);

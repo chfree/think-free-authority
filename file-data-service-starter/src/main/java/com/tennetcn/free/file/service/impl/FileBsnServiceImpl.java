@@ -71,6 +71,19 @@ public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBs
     }
 
     @Override
+    public FileBsnView queryViewModelBySearch(FileBsnSearch search) {
+        return fileBsnDao.queryViewModelBySearch(search);
+    }
+
+    @Override
+    public FileBsnView queryViewModelById(String id) {
+        FileBsnSearch search = new FileBsnSearch();
+        search.setId(id);
+
+        return fileBsnDao.queryViewModelBySearch(search);
+    }
+
+    @Override
     public boolean deleteModel(String bsnId, String fileId) {
         return fileBsnDao.deleteModel(bsnId,fileId);
     }

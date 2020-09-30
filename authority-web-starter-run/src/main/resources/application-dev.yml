@@ -11,4 +11,4 @@ think:
   checkmac:
     slat: iMmiThink
     enabled: true
-    allowlist: /v2/api-docs,/api/v1/authority/download/downFile
+    allowlist: /v2/api-docs,/api/v1/file/download/downFile

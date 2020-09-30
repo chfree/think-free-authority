@@ -89,6 +89,15 @@ public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
     }
 
     @Override
+    public FileBsnView queryViewModelBySearch(FileBsnSearch search) {
+        List<FileBsnView> fileBsnViews = queryViewListBySearch(search, new PagerModel(1, 1));
+        if(fileBsnViews==null||fileBsnViews.isEmpty()){
+            return null;
+        }
+        return fileBsnViews.get(0);
+    }
+
+    @Override
     public boolean deleteModel(String bsnId, String fileId) {
         ISqlExpression deleteSql = SqlExpressionFactory.createExpression();
         deleteSql.delete().from(FileBsn.class).andEq("file_id",fileId).andEq("bsn_id",bsnId);

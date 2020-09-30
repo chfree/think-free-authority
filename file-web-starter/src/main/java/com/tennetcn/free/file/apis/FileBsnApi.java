@@ -5,6 +5,7 @@ import com.tennetcn.free.file.data.entity.apimodel.filebsn.FileBsnListResp;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.file.data.entity.model.FileBsn;
 import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
+import com.tennetcn.free.file.data.entity.viewmodel.FileBsnView;
 import com.tennetcn.free.file.service.IFileBsnService;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
@@ -44,13 +45,13 @@ public class FileBsnApi extends AuthorityApi {
         return resp;
     }
 
-    @ApiOperation(value = "获取指定文件业务表")
+    @ApiOperation(value = "获取指定文件业务")
     @GetMapping("get")
-    public BaseResponse get(@Valid @NotBlank(message = "文件业务表id不能为空") String id){
+    public BaseResponse get(@Valid @NotBlank(message = "文件业务id不能为空") String id){
         BaseResponse response=new BaseResponse();
 
-        FileBsn fileBsn = fileBsnService.queryModel(id);
-        response.put("fileBsn",fileBsn);
+        FileBsnView fileBsnView = fileBsnService.queryViewModelById(id);
+        response.put("fileBsn",fileBsnView);
 
         return response;
     }
