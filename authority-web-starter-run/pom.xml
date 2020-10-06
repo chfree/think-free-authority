@@ -26,10 +26,10 @@
             <artifactId>quartz-web-starter</artifactId>
             <version>0.0.1</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>think-free-activiti</groupId>-->
-<!--            <artifactId>activiti-web-starter</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>think-free-activiti</groupId>
+            <artifactId>activiti-web-starter</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
