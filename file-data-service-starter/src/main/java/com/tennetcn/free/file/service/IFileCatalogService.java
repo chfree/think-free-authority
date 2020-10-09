@@ -4,6 +4,7 @@ import com.tennetcn.free.data.dao.base.ISuperService;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
+import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
 
 import java.util.List;
 
@@ -19,4 +20,10 @@ public interface IFileCatalogService extends ISuperService<FileCatalog>{
     int queryCountBySearch(FileCatalogSearch search);
 
     List<FileCatalog> queryListBySearch(FileCatalogSearch search, PagerModel pagerModel);
+
+    List<FileCatalog> queryListByTopLevel(FileCatalogSearch search);
+
+    List<FileCatalog> queryListByTwoLevel(List<String> topIds,FileCatalogSearch search);
+
+    List<FileCatalogTree> queryListByOwnShow(String userId);
 }

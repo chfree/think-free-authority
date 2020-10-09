@@ -19,4 +19,8 @@ public interface IFileCatalogDao extends ISuperDao<FileCatalog>{
     int queryCountBySearch(FileCatalogSearch search);
 
     List<FileCatalog> queryListBySearch(FileCatalogSearch search, PagerModel pagerModel);
+
+    List<FileCatalog> queryListByTopLevel(FileCatalogSearch search);
+
+    List<FileCatalog> queryListByTwoLevel(List<String> topIds,FileCatalogSearch search);
 }

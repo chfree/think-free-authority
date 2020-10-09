@@ -11,7 +11,7 @@ import com.tennetcn.free.core.message.data.ModelBase;
 /**
  * @author      auto build code by think
  * @email       chfree001@gmail.com
- * @createtime  2020-10-06 22:11:38
+ * @createtime  2020-10-09 09:53:24
  * @comment     文件目录表
  */
 
@@ -33,6 +33,12 @@ public class FileCatalog extends ModelBase{
     private String userId;
 
     /**
+     * 父级id
+     */
+    @Column(name="parent_id")
+    private String parentId;
+
+    /**
      * 名称
      */
     @Column(name="name")
@@ -49,6 +55,24 @@ public class FileCatalog extends ModelBase{
      */
     @Column(name="update_date")
     private Date updateDate;
+
+    /**
+     * 图标
+     */
+    @Column(name="icon")
+    private String icon;
+
+    /**
+     * 作用域
+     */
+    @Column(name="scope")
+    private String scope;
+
+    /**
+     * 标记
+     */
+    @Column(name="mark")
+    private String mark;
 
     /**
      * 备注
