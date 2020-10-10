@@ -18,4 +18,8 @@ public class FileCatalogTree extends FileCatalog {
      * 子级目录
      */
     private List<FileCatalogTree> children;
+
+    public String getLabel(){
+        return this.getName();
+    }
 }

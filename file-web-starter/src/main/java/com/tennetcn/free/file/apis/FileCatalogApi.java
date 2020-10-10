@@ -6,6 +6,7 @@ import com.tennetcn.free.file.service.IFileCatalogService;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ import java.util.List;
 @Api(tags="文件目录",value ="文件目录相关的操作")
 public class FileCatalogApi extends AuthorityApi {
 
+    @Autowired
     IFileCatalogService catalogService;
 
     @ApiOperation(value = "获取文件目录树")

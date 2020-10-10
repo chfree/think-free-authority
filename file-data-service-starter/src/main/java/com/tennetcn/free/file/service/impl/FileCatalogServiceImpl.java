@@ -73,8 +73,8 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
          */
         FileCatalogSearch twoPersonSearch = new FileCatalogSearch();
         twoPersonSearch.setScope(CatalogScope.PERSON);
-        twoGlobalSearch.setUserId(userId);
-        List<FileCatalog> twoPersonCatalogs = queryListByTwoLevel(topIds,twoGlobalSearch);
+        twoPersonSearch.setUserId(userId);
+        List<FileCatalog> twoPersonCatalogs = queryListByTwoLevel(topIds,twoPersonSearch);
 
         List<FileCatalog> allTwoList = new ArrayList<>();
         allTwoList.addAll(twoGlobalCatalogs);
