@@ -19,14 +19,4 @@ public class FileCatalogTree extends FileCatalog {
      * 子级目录
      */
     private List<FileCatalogTree> children;
-
-    /**
-     * 父级
-     */
-    private String parentName;
-
-    /**
-     * 父级名称集合
-     */
-    private List<String> pathNames;
 }

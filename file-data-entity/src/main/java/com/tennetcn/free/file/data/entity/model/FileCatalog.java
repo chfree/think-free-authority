@@ -1,10 +1,13 @@
 package com.tennetcn.free.file.data.entity.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
+
 import lombok.Data;
 import com.tennetcn.free.core.message.data.ModelBase;
 
@@ -79,5 +82,4 @@ public class FileCatalog extends ModelBase{
      */
     @Column(name="comments")
     private String comments;
-
 }

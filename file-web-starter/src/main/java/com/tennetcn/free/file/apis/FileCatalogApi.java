@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
@@ -32,13 +34,21 @@ public class FileCatalogApi extends AuthorityApi {
 
     @ApiOperation(value = "获取文件目录树")
     @PostMapping("ownListTree")
-    public BaseResponse list(String userId){
+    public BaseResponse ownListTree(String userId){
         BaseResponse resp = new BaseResponse();
         if(StringUtils.isEmpty(userId)){
             userId = getLoginId();
         }
         List<FileCatalogTree> fileCatalogTrees = catalogService.queryListByOwnShow(userId);
         resp.put("fileCatalogTrees",fileCatalogTrees);
+
+        return resp;
+    }
+
+    @ApiOperation(value = "获取当前节点获得向上的路径信息")
+    @PostMapping("ownListTree")
+    public BaseResponse getPathCatalog(@Valid @NotEmpty(message = "id不能为空") String id){
+        BaseResponse resp = new BaseResponse();
 
         return resp;
     }

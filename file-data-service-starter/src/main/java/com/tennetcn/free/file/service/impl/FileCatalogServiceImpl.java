@@ -89,9 +89,6 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
                     FileCatalogTree childrenTree = new FileCatalogTree();
                     BeanUtils.copyProperties(item, childrenTree);
 
-                    List<String> pathNames = Stream.of(item.getName()).collect(Collectors.toList());
-                    childrenTree.setPathNames(pathNames);
-
                     return childrenTree;
                 })
                 .collect(Collectors.toList());
@@ -114,15 +111,6 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
                     .map(item -> {
                         FileCatalogTree childrenTree = new FileCatalogTree();
                         BeanUtils.copyProperties(item,childrenTree);
-
-                        // 设置父级名称
-                        childrenTree.setParentName(parentCatalog.getName());
-
-                        // 设置父级名称数组
-                        List<String> pathNames = new ArrayList<>();
-                        pathNames.addAll(parentCatalog.getPathNames());
-                        pathNames.add(item.getName());
-                        childrenTree.setPathNames(pathNames);
 
                         return childrenTree;
                     }).collect(Collectors.toList());
