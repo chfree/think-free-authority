@@ -1,5 +1,6 @@
 package com.tennetcn.free.file.service.impl;
 
+import cn.hutool.core.util.ArrayUtil;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.file.dao.IFileCatalogDao;
@@ -13,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
@@ -86,6 +89,9 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
                     FileCatalogTree childrenTree = new FileCatalogTree();
                     BeanUtils.copyProperties(item, childrenTree);
 
+                    List<String> pathNames = Stream.of(item.getName()).collect(Collectors.toList());
+                    childrenTree.setPathNames(pathNames);
+
                     return childrenTree;
                 })
                 .collect(Collectors.toList());
@@ -95,24 +101,33 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
         return topCatalogTrees;
     }
 
-    private void loopFileCatalog(List<FileCatalogTree> parentCatalog,List<FileCatalog> allCatalog){
-        if(parentCatalog==null||parentCatalog.isEmpty()){
+    private void loopFileCatalog(List<FileCatalogTree> parentCatalogs,List<FileCatalog> allCatalog){
+        if(parentCatalogs==null||parentCatalogs.isEmpty()){
             return;
         }
         if(allCatalog==null||allCatalog.isEmpty()){
             return;
         }
-        for (FileCatalogTree fileCatalogTree : parentCatalog) {
+        for (FileCatalogTree parentCatalog : parentCatalogs) {
             List<FileCatalogTree> children = allCatalog.stream()
-                    .filter(item -> fileCatalogTree.getId().equals(item.getParentId()))
+                    .filter(item -> parentCatalog.getId().equals(item.getParentId()))
                     .map(item -> {
                         FileCatalogTree childrenTree = new FileCatalogTree();
                         BeanUtils.copyProperties(item,childrenTree);
 
+                        // 设置父级名称
+                        childrenTree.setParentName(parentCatalog.getName());
+
+                        // 设置父级名称数组
+                        List<String> pathNames = new ArrayList<>();
+                        pathNames.addAll(parentCatalog.getPathNames());
+                        pathNames.add(item.getName());
+                        childrenTree.setPathNames(pathNames);
+
                         return childrenTree;
                     }).collect(Collectors.toList());
 
-            fileCatalogTree.setChildren(children);
+            parentCatalog.setChildren(children);
 
             loopFileCatalog(children, allCatalog);
         }

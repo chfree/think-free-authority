@@ -3,6 +3,7 @@ package com.tennetcn.free.file.data.entity.viewmodel;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,13 @@ public class FileCatalogTree extends FileCatalog {
      */
     private List<FileCatalogTree> children;
 
-    public String getLabel(){
-        return this.getName();
-    }
+    /**
+     * 父级
+     */
+    private String parentName;
+
+    /**
+     * 父级名称集合
+     */
+    private List<String> pathNames;
 }
