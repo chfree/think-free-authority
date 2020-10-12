@@ -48,8 +48,12 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
 
     @Override
     public List<FileCatalog> queryListByTopLevel(FileCatalogSearch search) {
+        ISqlExpression childCount = SqlExpressionFactory.createExpression();
+        childCount.selectCount().from(FileCatalog.class,"cc").andWhere("cc.parent_id=catalog.id");
+
         ISqlExpression topSql = SqlExpressionFactory.createExpression();
-        topSql.selectAllFrom(FileCatalog.class)
+        topSql.selectAllFrom(FileCatalog.class,"catalog")
+                .appendSelect("("+childCount.toSql()+") childCount")
                 .andEq("parent_id",FileDataKeys.CATALOG_TOP)
                 .addOrder("create_date", OrderEnum.asc);
 
@@ -63,8 +67,12 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
         if(topIds==null||topIds.isEmpty()){
             return null;
         }
+        ISqlExpression childCount = SqlExpressionFactory.createExpression();
+        childCount.selectCount().from(FileCatalog.class,"cc").andWhere("cc.parent_id=catalog.id");
+
         ISqlExpression twoSql = SqlExpressionFactory.createExpression();
-        twoSql.selectAllFrom(FileCatalog.class)
+        twoSql.selectAllFrom(FileCatalog.class,"catalog")
+              .appendSelect("("+childCount.toSql()+") childCount")
               .andWhereInString("parent_id",topIds)
               .addOrder("name", OrderEnum.asc);
 
@@ -108,8 +116,6 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
         sqlExpression.andEqNoEmpty("parent_id",search.getParentId());
 
         sqlExpression.andEqNoEmpty("name",search.getName());
-
-        sqlExpression.andEqNoEmpty("level",search.getLevel());
 
         sqlExpression.andEqNoEmpty("rel_scn_dsc",search.getRelScnDsc());
 

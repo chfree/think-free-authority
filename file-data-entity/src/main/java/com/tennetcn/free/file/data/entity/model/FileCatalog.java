@@ -94,4 +94,12 @@ public class FileCatalog extends ModelBase{
      */
     @Column(name="comments")
     private String comments;
+
+    @Transient
+    private int childCount;
+
+
+    public boolean getIsLeaf(){
+        return this.childCount <= 0;
+    }
 }
