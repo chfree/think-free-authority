@@ -38,6 +38,16 @@ public class FileCatalogSearch{
     private String name;
 
     /**
+     * 级别
+     */
+    private Integer level;
+
+    /**
+     * 关系场景描述
+     */
+    private String relScnDsc;
+
+    /**
      * 创建时间
      */
     private Date createDate;

@@ -98,6 +98,16 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
         return topCatalogTrees;
     }
 
+    @Override
+    public List<FileCatalog> queryPathList(String id) {
+        return fileCatalogDao.queryPathList(id);
+    }
+
+    @Override
+    public List<FileCatalog> queryChildList(String id) {
+        return fileCatalogDao.queryChildList(id);
+    }
+
     private void loopFileCatalog(List<FileCatalogTree> parentCatalogs,List<FileCatalog> allCatalog){
         if(parentCatalogs==null||parentCatalogs.isEmpty()){
             return;

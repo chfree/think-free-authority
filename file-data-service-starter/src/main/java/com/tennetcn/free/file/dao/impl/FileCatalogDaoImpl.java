@@ -10,6 +10,9 @@ import com.tennetcn.free.file.data.enums.FileDataKeys;
 import org.springframework.stereotype.Component;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import com.tennetcn.free.file.dao.IFileCatalogDao;
+import org.springframework.util.StringUtils;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,6 +73,31 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
         return queryList(twoSql);
     }
 
+    @Override
+    public List<FileCatalog> queryPathList(String id) {
+        FileCatalog fileCatalog = queryModel(id);
+        if(fileCatalog==null|| StringUtils.isEmpty(fileCatalog.getRelScnDsc())){
+            return null;
+        }
+        String relScnDsc = fileCatalog.getRelScnDsc();
+        List<String> relScnDscList = Arrays.asList(relScnDsc.split("\\|"));
+
+        ISqlExpression pathSql = SqlExpressionFactory.createExpression();
+        pathSql.selectAllFrom(FileCatalog.class)
+                .andWhereInString("id", relScnDscList).addOrder("level",OrderEnum.asc);
+
+        return queryList(pathSql);
+    }
+
+    @Override
+    public List<FileCatalog> queryChildList(String id) {
+        ISqlExpression childSql = SqlExpressionFactory.createExpression();
+        childSql.selectAllFrom(FileCatalog.class)
+                .andEq("parent_id", id).addOrder("name",OrderEnum.asc);
+
+        return queryList(childSql);
+    }
+
     private void appendExpression(ISqlExpression sqlExpression, FileCatalogSearch search){
         sqlExpression.andEqNoEmpty("id",search.getId());
 
@@ -80,6 +108,10 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
         sqlExpression.andEqNoEmpty("parent_id",search.getParentId());
 
         sqlExpression.andEqNoEmpty("name",search.getName());
+
+        sqlExpression.andEqNoEmpty("level",search.getLevel());
+
+        sqlExpression.andEqNoEmpty("rel_scn_dsc",search.getRelScnDsc());
 
         sqlExpression.andEqNoEmpty("icon",search.getIcon());
 

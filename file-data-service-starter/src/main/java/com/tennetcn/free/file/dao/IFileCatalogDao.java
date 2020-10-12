@@ -23,4 +23,8 @@ public interface IFileCatalogDao extends ISuperDao<FileCatalog>{
     List<FileCatalog> queryListByTopLevel(FileCatalogSearch search);
 
     List<FileCatalog> queryListByTwoLevel(List<String> topIds,FileCatalogSearch search);
+
+    List<FileCatalog> queryPathList(String id);
+
+    List<FileCatalog> queryChildList(String id);
 }

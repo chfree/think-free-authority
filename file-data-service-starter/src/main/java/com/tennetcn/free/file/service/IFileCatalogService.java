@@ -26,4 +26,8 @@ public interface IFileCatalogService extends ISuperService<FileCatalog>{
     List<FileCatalog> queryListByTwoLevel(List<String> topIds,FileCatalogSearch search);
 
     List<FileCatalogTree> queryListByOwnShow(String userId);
+
+    List<FileCatalog> queryPathList(String id);
+
+    List<FileCatalog> queryChildList(String id);
 }

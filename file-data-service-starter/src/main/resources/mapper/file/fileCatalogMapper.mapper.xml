@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.tennetcn.free.file.mapper.IFileCatalogMapper">
+
+	<!-- 文件目录表Mapper -->
+	<sql id="tableName">base_file_catalog fileCatalog</sql>
+	<sql id="mainTableAlias"> fileCatalog.</sql>
+
+	<sql id="allColumns">
+        fileCatalog.id,
+        fileCatalog.user_id,
+        fileCatalog.parent_id,
+        fileCatalog.name,
+        fileCatalog.level,
+        fileCatalog.rel_scn_dsc,
+        fileCatalog.create_date,
+        fileCatalog.update_date,
+        fileCatalog.icon,
+        fileCatalog.mark,
+        fileCatalog.scope,
+        fileCatalog.comments
+    </sql>
+
+	<!-- 文件目录表Mapper -->
+	<resultMap type="fileCatalog" id="fileCatalogMap">
+		<id column="id" property="id"/>    <!-- 主键 -->
+		<result column="user_id" property="userId"/>    <!-- 用户id -->
+		<result column="parent_id" property="parentId"/>    <!-- 父级id -->
+		<result column="name" property="name"/>    <!-- 名称 -->
+		<result column="level" property="level"/>    <!-- 级别 -->
+		<result column="rel_scn_dsc" property="relScnDsc"/>    <!-- 关系场景描述 -->
+		<result column="create_date" property="createDate"/>    <!-- 创建时间 -->
+		<result column="update_date" property="updateDate"/>    <!-- 更新时间 -->
+		<result column="icon" property="icon"/>    <!-- 图标 -->
+		<result column="mark" property="mark"/>    <!-- 标记 -->
+		<result column="scope" property="scope"/>    <!-- 作用域 -->
+		<result column="comments" property="comments"/>    <!-- 备注 -->
+	</resultMap>
+
+</mapper>

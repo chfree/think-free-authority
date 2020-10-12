@@ -1,6 +1,7 @@
 package com.tennetcn.free.file.apis;
 
 import com.tennetcn.free.core.message.web.BaseResponse;
+import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
 import com.tennetcn.free.file.service.IFileCatalogService;
 import com.tennetcn.free.security.webapi.AuthorityApi;
@@ -46,9 +47,23 @@ public class FileCatalogApi extends AuthorityApi {
     }
 
     @ApiOperation(value = "获取当前节点获得向上的路径信息")
-    @PostMapping("ownListTree")
+    @PostMapping("getPathCatalog")
     public BaseResponse getPathCatalog(@Valid @NotEmpty(message = "id不能为空") String id){
         BaseResponse resp = new BaseResponse();
+
+        List<FileCatalog> fileCatalogs = catalogService.queryPathList(id);
+        resp.put("fileCatalogs", fileCatalogs);
+
+        return resp;
+    }
+
+    @ApiOperation(value = "获取当前节点子一级信息")
+    @PostMapping("getChildCatalog")
+    public BaseResponse getChildCatalog(@Valid @NotEmpty(message = "id不能为空") String id){
+        BaseResponse resp = new BaseResponse();
+
+        List<FileCatalog> fileCatalogs = catalogService.queryChildList(id);
+        resp.put("fileCatalogs", fileCatalogs);
 
         return resp;
     }

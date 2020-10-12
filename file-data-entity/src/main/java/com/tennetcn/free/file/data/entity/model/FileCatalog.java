@@ -48,6 +48,18 @@ public class FileCatalog extends ModelBase{
     private String name;
 
     /**
+     * 级别
+     */
+    @Column(name="level")
+    private Integer level;
+
+    /**
+     * 关系场景描述
+     */
+    @Column(name="rel_scn_dsc")
+    private String relScnDsc;
+
+    /**
      * 创建时间
      */
     @Column(name="create_date")
