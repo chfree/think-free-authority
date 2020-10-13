@@ -30,4 +30,8 @@ public interface IFileCatalogService extends ISuperService<FileCatalog>{
     List<FileCatalog> queryPathList(String id);
 
     List<FileCatalog> queryChildList(String id);
+
+    boolean saveNewFolder(String userId,String parentId,String folderName);
+
+    boolean renameFolder(String id,String folderName);
 }

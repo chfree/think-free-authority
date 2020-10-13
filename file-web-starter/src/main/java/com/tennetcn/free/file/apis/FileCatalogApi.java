@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 /**
@@ -67,4 +68,29 @@ public class FileCatalogApi extends AuthorityApi {
 
         return resp;
     }
+
+    @ApiOperation(value = "保存一个文件夹")
+    @PostMapping("saveNewFolder")
+    public BaseResponse saveNewFolder(@Valid @NotEmpty(message = "parentId不能为空") String parentId,
+                                   @Valid @Pattern(regexp="^[^\\/:*?\"\"<>|,~`]+$",message = "文件名不能包含特殊字符\\/:*?\"\"<>|,~`") @NotEmpty(message = "文件名不能为空") String folderName){
+        BaseResponse resp = new BaseResponse();
+
+        boolean result = catalogService.saveNewFolder(getLoginId(), parentId, folderName);
+        resp.put("result", result);
+
+        return resp;
+    }
+
+    @ApiOperation(value = "重命名一个文件夹")
+    @PostMapping("renameFolder")
+    public BaseResponse renameFolder(@Valid @NotEmpty(message = "id不能为空") String id,
+                                      @Valid @Pattern(regexp="^[^\\/:*?\"\"<>|,~`]+$",message = "文件名不能包含特殊字符\\/:*?\"\"<>|,~`") @NotEmpty(message = "文件名不能为空") String folderName){
+        BaseResponse resp = new BaseResponse();
+
+        boolean result = catalogService.renameFolder(id, folderName);
+        resp.put("result", result);
+
+        return resp;
+    }
+
 }

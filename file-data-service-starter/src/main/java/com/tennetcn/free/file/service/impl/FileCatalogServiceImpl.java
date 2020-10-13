@@ -1,6 +1,8 @@
 package com.tennetcn.free.file.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.file.dao.IFileCatalogDao;
@@ -8,6 +10,8 @@ import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
 import com.tennetcn.free.file.data.enums.CatalogScope;
+import com.tennetcn.free.file.data.enums.FileDataKeys;
+import com.tennetcn.free.file.exception.FileBizException;
 import com.tennetcn.free.file.service.IFileCatalogService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +110,60 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
     @Override
     public List<FileCatalog> queryChildList(String id) {
         return fileCatalogDao.queryChildList(id);
+    }
+
+    @Override
+    public boolean saveNewFolder(String userId,String parentId, String folderName) {
+        FileCatalogSearch search = new FileCatalogSearch();
+        search.setParentId(parentId);
+        search.setName(folderName);
+
+        int count = queryCountBySearch(search);
+        if(count>0){
+            throw new FileBizException("已经存在相同的文件夹名称");
+        }
+
+        FileCatalog parentCatalog = queryModel(parentId);
+        if(parentCatalog==null){
+            throw new FileBizException("找不到对应的父级文件夹");
+        }
+
+        FileCatalog fileCatalog = new FileCatalog();
+        fileCatalog.setId(IdUtil.randomUUID());
+        fileCatalog.setIcon(FileDataKeys.FOLDER_ICON_DEFAULT);
+        fileCatalog.setLevel(parentCatalog.getLevel()+1);
+        fileCatalog.setParentId(parentId);
+        fileCatalog.setCreateDate(DateUtil.date());
+        fileCatalog.setUpdateDate(DateUtil.date());
+        fileCatalog.setName(folderName);
+        fileCatalog.setScope(CatalogScope.PERSON);
+        fileCatalog.setUserId(userId);
+        fileCatalog.setRelScnDsc(parentCatalog.getRelScnDsc() + FileDataKeys.REL_SCN_SPLIT + fileCatalog.getId());
+
+        return addModel(fileCatalog);
+    }
+
+    @Override
+    public boolean renameFolder(String id, String folderName) {
+        FileCatalog fileCatalog = queryModel(id);
+        if(fileCatalog==null){
+            throw new FileBizException("找不到对应的文件夹");
+        }
+
+        FileCatalogSearch search = new FileCatalogSearch();
+        search.setParentId(fileCatalog.getParentId());
+        search.setName(folderName);
+        search.setNotId(id);
+
+        int count = queryCountBySearch(search);
+        if(count>0){
+            throw new FileBizException("已经存在相同的文件夹名称");
+        }
+
+        fileCatalog.setName(folderName);
+        fileCatalog.setUpdateDate(DateUtil.date());
+
+        return updateModel(fileCatalog);
     }
 
     private void loopFileCatalog(List<FileCatalogTree> parentCatalogs,List<FileCatalog> allCatalog){
