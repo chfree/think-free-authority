@@ -99,8 +99,12 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
 
     @Override
     public List<FileCatalog> queryChildList(String id) {
+        ISqlExpression childCount = SqlExpressionFactory.createExpression();
+        childCount.selectCount().from(FileCatalog.class,"cc").andWhere("cc.parent_id=catalog.id");
+
         ISqlExpression childSql = SqlExpressionFactory.createExpression();
-        childSql.selectAllFrom(FileCatalog.class)
+        childSql.selectAllFrom(FileCatalog.class,"catalog")
+                .appendSelect("("+childCount.toSql()+") childCount")
                 .andEq("parent_id", id).addOrder("name",OrderEnum.asc);
 
         return queryList(childSql);
