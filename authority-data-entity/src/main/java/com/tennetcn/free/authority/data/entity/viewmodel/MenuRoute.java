@@ -24,6 +24,7 @@ public class MenuRoute extends Menu {
         Meta meta = new Meta();
         meta.setTitle(this.getTitle());
         meta.setIcon(this.getIcon());
+        meta.setLangPath(this.getLangPath());
 
         return meta;
     }
@@ -34,4 +35,6 @@ class Meta{
     private String title;
 
     private String icon;
+
+    private String langPath;
 }

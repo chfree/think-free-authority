@@ -75,7 +75,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
         }
 
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("menu.id,menu.name,menu.title,menu.icon,menu.hidden,menu.path,menu.page_path,menu.type,menu.use_type,menu.parent_id,menu.theme,menu.sort_code,menu.delete_mark,menu.comments,menu.menu_mark,menu.level")
+        sqlExpression.select("menu.id,menu.name,menu.title,menu.icon,menu.hidden,menu.path,menu.page_path,menu.lang_path,menu.type,menu.use_type,menu.parent_id,menu.theme,menu.sort_code,menu.delete_mark,menu.comments,menu.menu_mark,menu.level")
                 .from(RoleFunc.class,"roleFunc")
                 .leftJoin(Menu.class,"menu").on("roleFunc.func_id","menu.id")
                 .andWhereInString("role_id",roleIds)
@@ -92,7 +92,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
         }
 
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("menu.id,menu.name,menu.title,menu.icon,menu.hidden,menu.path,menu.page_path,menu.type,menu.use_type,menu.parent_id,menu.theme,menu.sort_code,menu.delete_mark,menu.comments,menu.menu_mark,menu.level")
+        sqlExpression.select("menu.id,menu.name,menu.title,menu.icon,menu.hidden,menu.path,menu.page_path,menu.lang_path,menu.type,menu.use_type,menu.parent_id,menu.theme,menu.sort_code,menu.delete_mark,menu.comments,menu.menu_mark,menu.level")
                 .from(GroupFunc.class,"groupFunc")
                 .leftJoin(Menu.class,"menu").on("groupFunc.func_id","menu.id")
                 .andWhereInString("group_id",groupIds)

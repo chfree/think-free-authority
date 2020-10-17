@@ -1,0 +1,1 @@
+ALTER TABLE base_authority_menu ADD COLUMN `lang_path` varchar(1000) COMMENT '语言路径' AFTER `page_path`;

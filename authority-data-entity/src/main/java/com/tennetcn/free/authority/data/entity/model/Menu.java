@@ -103,6 +103,11 @@ public class Menu  extends ModelBase {
     @Column(name="comments")
     private String comments;
 
+    //语言路径
+    @Column(name="lang_path")
+    private String langPath;
+
+
     @Override
     public void setModelStatus(ModelStatus modelStatus) {
         super.setModelStatus(modelStatus);
