@@ -55,6 +55,17 @@ public class ParamSettingApi extends AuthorityApi {
         return response;
     }
 
+    @ApiOperation(value = "根据参数名获取指定参数配置表")
+    @PostMapping("getByName")
+    public BaseResponse getByName(@Valid @NotBlank(message = "参数配置表id不能为空") String name){
+        BaseResponse response=new BaseResponse();
+
+        ParamSetting paramSetting = paramSettingService.queryModelByName(name);
+        response.put("paramSetting",paramSetting);
+
+        return response;
+    }
+
     @ApiOperation(value = "搜索参数配置表数量")
     @PostMapping("countSearch")
     public BaseResponse countSearch(ParamSettingSearch search){
