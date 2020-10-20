@@ -13,9 +13,12 @@ import com.tennetcn.free.authority.data.entity.viewmodel.UserSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.UserView;
 import com.tennetcn.free.authority.enums.LoginStatus;
 import com.tennetcn.free.authority.exception.AuthorityBizException;
+import com.tennetcn.free.authority.handle.ILoginLoadDataIntceptor;
 import com.tennetcn.free.authority.service.*;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
+import com.tennetcn.free.core.util.SpringContextUtils;
+import com.tennetcn.free.security.handle.ILoginModelIntceptor;
 import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
@@ -30,6 +33,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -204,11 +208,24 @@ public class UserApi extends AuthorityApi {
 
         additionLoginModel(loginModel,resp);
 
+        // 在Intceptor中附加
+        additionLoginModelIntceptor(loginModel,resp);
+
         // 重新放入缓存
         cached.put(loginModel.getToken(),loginModel);
         resp.setLoginInfo(loginModel);
 
         return resp;
+    }
+
+    private void additionLoginModelIntceptor(LoginModel loginModel, BaseResponse response){
+        Map<String, ILoginLoadDataIntceptor> beansOfType = SpringContextUtils.getCurrentContext().getBeansOfType(ILoginLoadDataIntceptor.class);
+        if(beansOfType==null||beansOfType.values()==null||beansOfType.values().isEmpty()){
+            return;
+        }
+        for (ILoginLoadDataIntceptor loadDataIntceptor : beansOfType.values()) {
+            loadDataIntceptor.additionLoginModel(loginModel,response);
+        }
     }
 
     public void additionLoginModel(LoginModel loginModel, BaseResponse response) {
