@@ -239,6 +239,8 @@ public class UserApi extends AuthorityApi {
         if(department!=null){
             loginModel.put("departmentName",department.getFullName());
             loginModel.put("department",department);
+            loginModel.setCurrentDeptId(department.getId());
+            loginModel.setCurrentDeptName(department.getShortName());
         }
 
         List<String> roleIds = null;

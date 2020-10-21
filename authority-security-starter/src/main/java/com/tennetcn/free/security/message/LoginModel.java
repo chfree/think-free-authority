@@ -25,6 +25,13 @@ public class LoginModel {
 
     private String token;
 
+    /**
+     * 当前部门id，考虑后期扩展成一个人多个部门的场景
+     */
+    private String currentDeptId;
+
+    private String currentDeptName;
+
     private Map<String,Object> arguments=new HashMap<>();
 
     public void put(String key,Object object){
