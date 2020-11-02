@@ -11,6 +11,7 @@ import com.tennetcn.free.security.message.LoginModel;
  */
 
 public interface ILoginLoadDataIntceptor {
+    int getOrder();
     /**
      * 在登陆后的loading界面，附加更多的请求信息
      */

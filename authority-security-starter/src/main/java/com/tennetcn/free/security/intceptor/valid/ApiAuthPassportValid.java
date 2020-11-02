@@ -8,6 +8,7 @@ import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.handle.ILoginModelIntceptor;
 import com.tennetcn.free.security.handle.ITokenCheckIntceptor;
+import com.tennetcn.free.security.handle.helper.LoginedIntceptorHelper;
 import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
@@ -110,6 +111,9 @@ public class ApiAuthPassportValid {
 				return false;
 			}
 
+			/**
+			 * 重新注册完loginModel后，重新调起一下logined方法，将其他的附加也拉进来
+			 */
 			loginModel = loginModelIntceptor.registerLoginModel(token,claims);
 			if(loginModel==null){
 				return false;
@@ -117,6 +121,8 @@ public class ApiAuthPassportValid {
 			if(StringUtils.isEmpty(loginModel.getToken())){
 				loginModel.setToken(token);
 			}
+
+			LoginedIntceptorHelper.loginedCallback(loginModel);
 
 			// 在存储一次token
 			cached.put(token,loginModel);

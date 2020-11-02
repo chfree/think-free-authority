@@ -9,7 +9,7 @@ import com.tennetcn.free.authority.enums.LoginAuthType;
 import com.tennetcn.free.authority.enums.LoginStatus;
 import com.tennetcn.free.authority.handle.ILoginAllowIntceptor;
 import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
-import com.tennetcn.free.authority.handle.ILoginedIntceptor;
+import com.tennetcn.free.security.handle.ILoginedIntceptor;
 import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginAuthService;
@@ -21,6 +21,7 @@ import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
 import com.tennetcn.free.security.core.JwtHelper;
+import com.tennetcn.free.security.handle.helper.LoginedIntceptorHelper;
 import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
@@ -109,7 +110,7 @@ public class LoginApi extends AuthorityApi {
             return;
         }
 
-        loginedCallback(response, loginModel, user);
+        LoginedIntceptorHelper.loginedCallback(loginModel);
 
         addLoginAuth(loginModel,token);
 
@@ -117,17 +118,6 @@ public class LoginApi extends AuthorityApi {
         cached.put(token,loginModel);
         response.put("result",true);
         response.put("token",token);
-    }
-
-    private void loginedCallback(BaseResponse response, LoginModel loginModel, LoginUser user){
-        Map<String, ILoginedIntceptor> loginedIntceptorMap = SpringContextUtils.getCurrentContext().getBeansOfType(ILoginedIntceptor.class);
-        if(loginedIntceptorMap==null||loginedIntceptorMap.isEmpty()){
-            return;
-        }
-        List<ILoginedIntceptor> loginedList = loginedIntceptorMap.values().stream().sorted(Comparator.comparing(ILoginedIntceptor::getOrder)).collect(Collectors.toList());
-        loginedList.forEach(loginedItem -> {
-            loginedItem.logined(response, loginModel, user);
-        });
     }
 
     /**

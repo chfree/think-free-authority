@@ -8,7 +8,6 @@ import com.tennetcn.free.authority.data.entity.apimodel.user.UpdatePwd;
 import com.tennetcn.free.authority.data.entity.apimodel.user.UserListReq;
 import com.tennetcn.free.authority.data.entity.apimodel.user.UserListResp;
 import com.tennetcn.free.authority.data.entity.model.Button;
-import com.tennetcn.free.authority.data.entity.model.Department;
 import com.tennetcn.free.authority.data.entity.model.Group;
 import com.tennetcn.free.authority.data.entity.model.Role;
 import com.tennetcn.free.authority.data.entity.model.User;
@@ -19,7 +18,6 @@ import com.tennetcn.free.authority.enums.LoginStatus;
 import com.tennetcn.free.authority.exception.AuthorityBizException;
 import com.tennetcn.free.authority.handle.ILoginLoadDataIntceptor;
 import com.tennetcn.free.authority.service.IButtonService;
-import com.tennetcn.free.authority.service.IDepartmentService;
 import com.tennetcn.free.authority.service.IGroupService;
 import com.tennetcn.free.authority.service.IMenuService;
 import com.tennetcn.free.authority.service.IRoleService;
@@ -44,6 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -71,9 +70,6 @@ public class UserApi extends AuthorityApi {
 
     @Autowired
     IButtonService buttonService;
-
-    @Autowired
-    IDepartmentService departmentService;
 
     @Autowired
     IGroupService groupService;
@@ -231,11 +227,14 @@ public class UserApi extends AuthorityApi {
     }
 
     private void additionLoginModelIntceptor(LoginModel loginModel, BaseResponse response){
-        Map<String, ILoginLoadDataIntceptor> beansOfType = SpringContextUtils.getCurrentContext().getBeansOfType(ILoginLoadDataIntceptor.class);
-        if(beansOfType==null||beansOfType.values()==null||beansOfType.values().isEmpty()){
+        Map<String, ILoginLoadDataIntceptor> loginLoadDataMap = SpringContextUtils.getCurrentContext().getBeansOfType(ILoginLoadDataIntceptor.class);
+        if(loginLoadDataMap==null||loginLoadDataMap.values()==null||loginLoadDataMap.values().isEmpty()){
             return;
         }
-        for (ILoginLoadDataIntceptor loadDataIntceptor : beansOfType.values()) {
+        // 按order 排序一下
+        List<ILoginLoadDataIntceptor> loginLoadList = loginLoadDataMap.values().stream().sorted(Comparator.comparing(ILoginLoadDataIntceptor::getOrder)).collect(Collectors.toList());
+
+        for (ILoginLoadDataIntceptor loadDataIntceptor : loginLoadList) {
             loadDataIntceptor.additionLoginModel(loginModel,response);
         }
     }
@@ -246,14 +245,6 @@ public class UserApi extends AuthorityApi {
 
         loginModel.put("roles", roles);
         loginModel.put("groups", groups);
-
-        Department department = departmentService.queryModel(loginModel.getString("departmentId"));
-        if(department!=null){
-            loginModel.put("departmentName",department.getFullName());
-            loginModel.put("department",department);
-            loginModel.setCurrentDeptId(department.getId());
-            loginModel.setCurrentDeptName(department.getShortName());
-        }
 
         List<String> roleIds = null;
         List<String> groupIds = null;

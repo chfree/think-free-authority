@@ -77,6 +77,9 @@ public class LoginUser extends ModelBase {
     @Column(name="status")
     private String status;
 
+    @Column(name="department_id")
+    private String departmentId;
+
     @Override
     public void setModelStatus(ModelStatus modelStatus) {
         super.setModelStatus(modelStatus);

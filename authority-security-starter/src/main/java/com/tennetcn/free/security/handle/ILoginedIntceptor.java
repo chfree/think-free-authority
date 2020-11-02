@@ -1,6 +1,5 @@
-package com.tennetcn.free.authority.handle;
+package com.tennetcn.free.security.handle;
 
-import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.message.LoginModel;
 
@@ -11,5 +10,5 @@ import com.tennetcn.free.security.message.LoginModel;
 public interface ILoginedIntceptor {
     int getOrder();
 
-    void logined(BaseResponse response,LoginModel loginModel, LoginUser loginUser);
+    void logined(LoginModel loginModel);
 }
