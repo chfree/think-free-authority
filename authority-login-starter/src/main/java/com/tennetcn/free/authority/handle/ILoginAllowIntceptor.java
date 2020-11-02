@@ -4,9 +4,12 @@ import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.security.message.LoginModel;
 
 /**
- * 登陆成功后的回掉
- * 用在验证完用户名和密码后的回调
+ * @author chfree
+ * @email chfree001@gmail.com
+ * @create 2020-11-02 12:39
+ * @comment
  */
-public interface IloginedIntceptor {
+
+public interface ILoginAllowIntceptor {
     boolean isAllowLogin(LoginModel loginModel, LoginUser user);
 }

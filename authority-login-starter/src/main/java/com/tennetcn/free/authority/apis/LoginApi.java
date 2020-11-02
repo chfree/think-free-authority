@@ -7,8 +7,9 @@ import com.tennetcn.free.authority.apimodel.login.RegisterReq;
 import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.enums.LoginAuthType;
 import com.tennetcn.free.authority.enums.LoginStatus;
+import com.tennetcn.free.authority.handle.ILoginAllowIntceptor;
 import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
-import com.tennetcn.free.authority.handle.IloginedIntceptor;
+import com.tennetcn.free.authority.handle.ILoginedIntceptor;
 import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.model.LoginUser;
 import com.tennetcn.free.authority.service.ILoginAuthService;
@@ -37,8 +38,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -105,12 +109,25 @@ public class LoginApi extends AuthorityApi {
             return;
         }
 
+        loginedCallback(response, loginModel, user);
+
         addLoginAuth(loginModel,token);
 
 
         cached.put(token,loginModel);
         response.put("result",true);
         response.put("token",token);
+    }
+
+    private void loginedCallback(BaseResponse response, LoginModel loginModel, LoginUser user){
+        Map<String, ILoginedIntceptor> loginedIntceptorMap = SpringContextUtils.getCurrentContext().getBeansOfType(ILoginedIntceptor.class);
+        if(loginedIntceptorMap==null||loginedIntceptorMap.isEmpty()){
+            return;
+        }
+        List<ILoginedIntceptor> loginedList = loginedIntceptorMap.values().stream().sorted(Comparator.comparing(ILoginedIntceptor::getOrder)).collect(Collectors.toList());
+        loginedList.forEach(loginedItem -> {
+            loginedItem.logined(response, loginModel, user);
+        });
     }
 
     /**
@@ -135,11 +152,11 @@ public class LoginApi extends AuthorityApi {
     }
 
     private boolean isAllowLogin(LoginModel loginModel,LoginUser loginUser){
-        IloginedIntceptor loginedIntceptor = null;
+        ILoginAllowIntceptor loginedIntceptor = null;
         try{
-            loginedIntceptor = SpringContextUtils.getCurrentContext().getBean(IloginedIntceptor.class);
+            loginedIntceptor = SpringContextUtils.getCurrentContext().getBean(ILoginAllowIntceptor.class);
         }catch (NoSuchBeanDefinitionException ex){
-            log.info("No qualifying bean of type '{}' available", IloginedIntceptor.class.getName());
+            log.info("No qualifying bean of type '{}' available", ILoginedIntceptor.class.getName());
             return true;
         }
         if(loginedIntceptor == null){
