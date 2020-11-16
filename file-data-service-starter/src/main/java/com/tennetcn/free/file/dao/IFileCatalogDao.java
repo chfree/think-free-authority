@@ -26,5 +26,5 @@ public interface IFileCatalogDao extends ISuperDao<FileCatalog>{
 
     List<FileCatalog> queryPathList(String id);
 
-    List<FileCatalog> queryChildList(String id);
+    List<FileCatalog> queryChildList(String userId,String id);
 }

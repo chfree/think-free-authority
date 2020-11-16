@@ -21,8 +21,9 @@
         fileCatalog.comments
     </sql>
 
-	<!-- 文件目录表Mapper -->
-	<resultMap type="fileCatalog" id="fileCatalogMap">
+
+    <!-- 文件目录表Mapper -->
+	<resultMap type="com.tennetcn.free.file.data.entity.model.FileCatalog" id="fileCatalogMap">
 		<id column="id" property="id"/>    <!-- 主键 -->
 		<result column="user_id" property="userId"/>    <!-- 用户id -->
 		<result column="parent_id" property="parentId"/>    <!-- 父级id -->
@@ -35,6 +36,29 @@
 		<result column="mark" property="mark"/>    <!-- 标记 -->
 		<result column="scope" property="scope"/>    <!-- 作用域 -->
 		<result column="comments" property="comments"/>    <!-- 备注 -->
+		<result column="childCount" property="childCount" />
 	</resultMap>
+
+
+	<select id="queryChildList" resultMap="fileCatalogMap">
+		select
+		fileCatalog.id,
+        fileCatalog.user_id,
+        fileCatalog.parent_id,
+        fileCatalog.name,
+        fileCatalog.level,
+        fileCatalog.rel_scn_dsc,
+        fileCatalog.create_date,
+        fileCatalog.update_date,
+        fileCatalog.icon,
+        fileCatalog.mark,
+        fileCatalog.scope,
+        fileCatalog.comments,
+        (select count(1) from base_file_catalog cc where cc.parent_id=fileCatalog.id and (cc.scope='global' or (cc.scope='person' and cc.user_id=#{userId}))) as childCount
+        from base_file_catalog fileCatalog
+        where parent_id =#{catalogId}
+        and (fileCatalog.scope='global' or (fileCatalog.scope='person' and fileCatalog.user_id=#{userId}))
+        order by name asc
+	</select>
 
 </mapper>

@@ -63,7 +63,7 @@ public class FileCatalogApi extends AuthorityApi {
     public BaseResponse getChildCatalog(@Valid @NotEmpty(message = "id不能为空") String id){
         BaseResponse resp = new BaseResponse();
 
-        List<FileCatalog> fileCatalogs = catalogService.queryChildList(id);
+        List<FileCatalog> fileCatalogs = catalogService.queryChildList(getCurrentLogin().getId(),id);
         resp.put("fileCatalogs", fileCatalogs);
 
         return resp;

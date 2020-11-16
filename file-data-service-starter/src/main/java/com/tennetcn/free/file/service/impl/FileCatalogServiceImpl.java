@@ -61,6 +61,8 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
         // 先查出top的，top都是global的
         FileCatalogSearch topSearch = new FileCatalogSearch();
         topSearch.setScope(CatalogScope.GLOBAL);
+        // 求childCount用
+        topSearch.setUserId(userId);
         List<FileCatalog> topCatalogs = queryListByTopLevel(topSearch);
         if(topCatalogs==null||topCatalogs.isEmpty()){
             return null;
@@ -76,7 +78,7 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
         List<FileCatalog> twoGlobalCatalogs = queryListByTwoLevel(topIds,twoGlobalSearch);
 
         /**
-         * 查出子级的二级
+         * 查出自己的二级
          */
         FileCatalogSearch twoPersonSearch = new FileCatalogSearch();
         twoPersonSearch.setScope(CatalogScope.PERSON);
@@ -108,8 +110,8 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
     }
 
     @Override
-    public List<FileCatalog> queryChildList(String id) {
-        return fileCatalogDao.queryChildList(id);
+    public List<FileCatalog> queryChildList(String uesrId,String id) {
+        return fileCatalogDao.queryChildList(uesrId,id);
     }
 
     @Override

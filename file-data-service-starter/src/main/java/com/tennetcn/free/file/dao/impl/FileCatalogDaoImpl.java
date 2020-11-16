@@ -6,7 +6,10 @@ import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
+import com.tennetcn.free.file.data.enums.CatalogScope;
 import com.tennetcn.free.file.data.enums.FileDataKeys;
+import com.tennetcn.free.file.mapper.IFileCatalogMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.tennetcn.free.data.dao.base.impl.SuperDao;
 import com.tennetcn.free.file.dao.IFileCatalogDao;
@@ -26,6 +29,10 @@ import java.util.stream.Collectors;
 
 @Component
 public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCatalogDao{
+
+    @Autowired
+    IFileCatalogMapper fileCatalogMapper;
+
     @Override
     public int queryCountBySearch(FileCatalogSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
@@ -50,14 +57,18 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
     public List<FileCatalog> queryListByTopLevel(FileCatalogSearch search) {
         ISqlExpression childCount = SqlExpressionFactory.createExpression();
         childCount.selectCount().from(FileCatalog.class,"cc").andWhere("cc.parent_id=catalog.id");
+        childCount.andWhere("cc.scope=#{ccGlobalScope} or (cc.scope=#{ccPersonScope} and cc.user_id=#{ccUserId})")
+                .setParam("ccGlobalScope",CatalogScope.GLOBAL)
+                .setParam("ccPersonScope", CatalogScope.PERSON)
+                .setParam("ccUserId",search.getUserId());
 
         ISqlExpression topSql = SqlExpressionFactory.createExpression();
         topSql.selectAllFrom(FileCatalog.class,"catalog")
                 .appendSelect("("+childCount.toSql()+") childCount")
                 .andEq("parent_id",FileDataKeys.CATALOG_TOP)
+                .andEq("scope",search.getScope())
+                .setParamAll(childCount.getParams())
                 .addOrder("create_date", OrderEnum.asc);
-
-        appendExpression(topSql,search);
 
         return queryList(topSql);
     }
@@ -69,12 +80,20 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
         }
         ISqlExpression childCount = SqlExpressionFactory.createExpression();
         childCount.selectCount().from(FileCatalog.class,"cc").andWhere("cc.parent_id=catalog.id");
+        if(CatalogScope.GLOBAL.equals(search.getScope())){
+            childCount.andWhere("cc.scope=#{ccGlobalScope}").setParam("ccGlobalScope",CatalogScope.GLOBAL);
+        }else if(CatalogScope.PERSON.equals(search.getScope())){
+            childCount.andWhere("cc.scope=#{ccPersonScope} and cc.user_id=#{ccUserId}")
+                      .setParam("ccPersonScope", CatalogScope.PERSON)
+                      .setParam("ccUserId",search.getUserId());
+        }
 
         ISqlExpression twoSql = SqlExpressionFactory.createExpression();
         twoSql.selectAllFrom(FileCatalog.class,"catalog")
               .appendSelect("("+childCount.toSql()+") childCount")
               .andWhereInString("parent_id",topIds)
-              .addOrder("name", OrderEnum.asc);
+              .addOrder("name", OrderEnum.asc)
+              .setParamAll(childCount.getParams());
 
         appendExpression(twoSql,search);
 
@@ -98,16 +117,8 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
     }
 
     @Override
-    public List<FileCatalog> queryChildList(String id) {
-        ISqlExpression childCount = SqlExpressionFactory.createExpression();
-        childCount.selectCount().from(FileCatalog.class,"cc").andWhere("cc.parent_id=catalog.id");
-
-        ISqlExpression childSql = SqlExpressionFactory.createExpression();
-        childSql.selectAllFrom(FileCatalog.class,"catalog")
-                .appendSelect("("+childCount.toSql()+") childCount")
-                .andEq("parent_id", id).addOrder("name",OrderEnum.asc);
-
-        return queryList(childSql);
+    public List<FileCatalog> queryChildList(String userId,String id) {
+        return fileCatalogMapper.queryChildList(userId,id);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, FileCatalogSearch search){
