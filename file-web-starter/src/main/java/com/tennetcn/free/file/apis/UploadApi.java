@@ -11,6 +11,7 @@ import com.tennetcn.free.file.data.enums.FileStoreType;
 import com.tennetcn.free.file.data.enums.UploadType;
 import com.tennetcn.free.file.handle.IUploadIntceptor;
 import com.tennetcn.free.file.exception.FileBizException;
+import com.tennetcn.free.file.message.FileChunkView;
 import com.tennetcn.free.file.message.UploadIntceptorParam;
 import com.tennetcn.free.file.message.UploadModel;
 import com.tennetcn.free.authority.service.IParamSettingService;
@@ -303,5 +304,27 @@ public class UploadApi extends AuthorityApi {
         fileDeleteWait.setWaitDay(fileDeleteDelayDays);
 
         return fileDeleteWaitService.addModel(fileDeleteWait);
+    }
+
+    @ApiOperation(value = "分片上传文件")
+    @PostMapping("uploadChunk")
+    public BaseResponse uploadChunk(FileChunkView chunk){
+        MultipartFile file = chunk.getFile();
+        log.debug("file originName: {}, chunkNumber: {}", file.getOriginalFilename(), chunk.getChunkNumber());
+
+        try {
+            byte[] bytes = file.getBytes();
+//            Path path = Paths.get(generatePath(uploadFolder, chunk));
+//            //文件写入指定路径
+//            Files.write(path, bytes);
+//            log.debug("文件 {} 写入成功, uuid:{}", chunk.getFilename(), chunk.getIdentifier());
+//            chunkService.saveChunk(chunk);
+
+//            return "文件上传成功";
+        } catch (IOException e) {
+            e.printStackTrace();
+//            return "后端异常...";
+        }
+        return null;
     }
 }
