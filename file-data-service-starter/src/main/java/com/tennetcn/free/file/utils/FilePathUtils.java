@@ -35,6 +35,10 @@ public class FilePathUtils {
         return DateUtil.format(DateUtil.date(),pathExp);
     }
 
+    public static String getFileChunkPath(){
+        return DateUtil.format(DateUtil.date(),pathExp) + "fileChunk/";
+    }
+
     public static String getDiskPath(){
         ParamSetting paramSetting = getParamSettingService().queryModelByName(FileParamSettingKeys.UPLOAD_PATH);
         if(paramSetting==null|| StringUtils.isEmpty(paramSetting.getParamValue())){

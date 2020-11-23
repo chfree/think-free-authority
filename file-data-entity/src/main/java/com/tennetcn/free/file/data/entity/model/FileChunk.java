@@ -27,6 +27,7 @@ public class FileChunk extends ModelBase{
 
     /**
      * 当前文件块
+     * 从1开始
      */
     @Column(name="chunk_number")
     private Integer chunkNumber;

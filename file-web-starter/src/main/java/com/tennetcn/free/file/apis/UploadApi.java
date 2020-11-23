@@ -2,7 +2,9 @@ package com.tennetcn.free.file.apis;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.tennetcn.free.core.message.web.ResponseStatus;
 import com.tennetcn.free.file.data.entity.model.FileBsn;
+import com.tennetcn.free.file.data.entity.model.FileChunk;
 import com.tennetcn.free.file.data.entity.model.FileDeleteWait;
 import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
@@ -23,6 +25,7 @@ import com.tennetcn.free.core.util.PkIdUtils;
 import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.core.util.StringHelper;
 import com.tennetcn.free.file.service.IFileBsnService;
+import com.tennetcn.free.file.service.IFileChunkService;
 import com.tennetcn.free.file.service.IFileDeleteWaitService;
 import com.tennetcn.free.file.service.IFileInfoService;
 import com.tennetcn.free.file.utils.FilePathUtils;
@@ -44,6 +47,9 @@ import javax.validation.constraints.NotEmpty;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +78,9 @@ public class UploadApi extends AuthorityApi {
 
     @Autowired
     IFileDeleteWaitService fileDeleteWaitService;
+
+    @Autowired
+    IFileChunkService fileChunkService;
 
     private Map<String,IUploadIntceptor> uploadIntceptors;
 
@@ -309,22 +318,47 @@ public class UploadApi extends AuthorityApi {
     @ApiOperation(value = "分片上传文件")
     @PostMapping("uploadChunk")
     public BaseResponse uploadChunk(FileChunkView chunk){
+        BaseResponse resp = new BaseResponse();
+
         MultipartFile file = chunk.getFile();
         log.debug("file originName: {}, chunkNumber: {}", file.getOriginalFilename(), chunk.getChunkNumber());
 
         try {
             byte[] bytes = file.getBytes();
-//            Path path = Paths.get(generatePath(uploadFolder, chunk));
-//            //文件写入指定路径
-//            Files.write(path, bytes);
-//            log.debug("文件 {} 写入成功, uuid:{}", chunk.getFilename(), chunk.getIdentifier());
-//            chunkService.saveChunk(chunk);
 
-//            return "文件上传成功";
+            String chunkPath = FilePathUtils.getDiskPath() + FilePathUtils.getFileChunkPath();
+            Path path = Paths.get(generateChunkPath(chunkPath,chunk));
+            //文件写入指定路径
+            Files.write(path, bytes);
+            log.debug("文件 {} 写入成功, uuid:{}", chunk.getFilename(), chunk.getIdentifier());
+
+            fileChunkService.addModel(chunk);
+
+            resp.put("result",true);
         } catch (IOException e) {
             e.printStackTrace();
-//            return "后端异常...";
+            resp.setMessage(e.getMessage());
+            resp.setStatus(ResponseStatus.SERVER_ERROR);
         }
-        return null;
+        return resp;
+    }
+
+    private String generateChunkPath(String uploadFolder, FileChunkView chunk) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(uploadFolder).append("/").append(chunk.getIdentifier());
+        //判断uploadFolder/identifier 路径是否存在，不存在则创建
+        if (!Files.isWritable(Paths.get(sb.toString()))) {
+            log.info("path not exist,create path: {}", sb.toString());
+            try {
+                Files.createDirectories(Paths.get(sb.toString()));
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        return sb.append("/")
+                .append(chunk.getFilename())
+                .append("-")
+                .append(chunk.getChunkNumber()).toString();
     }
 }
