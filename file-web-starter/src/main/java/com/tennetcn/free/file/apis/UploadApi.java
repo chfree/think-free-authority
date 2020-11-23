@@ -325,6 +325,7 @@ public class UploadApi extends AuthorityApi {
 
         try {
             byte[] bytes = file.getBytes();
+            chunk.setType(file.getContentType());
 
             String chunkPath = FilePathUtils.getDiskPath() + FilePathUtils.getFileChunkPath();
             Path path = Paths.get(generateChunkPath(chunkPath,chunk));
@@ -332,6 +333,7 @@ public class UploadApi extends AuthorityApi {
             Files.write(path, bytes);
             log.debug("文件 {} 写入成功, uuid:{}", chunk.getFilename(), chunk.getIdentifier());
 
+            chunk.setId(PkIdUtils.getId());
             fileChunkService.addModel(chunk);
 
             resp.put("result",true);

@@ -54,7 +54,7 @@ public class FileChunkSearch{
     /**
      * 总块数
      */
-    private Integer totalChunk;
+    private Integer totalChunks;
 
     /**
      * 文件类型

@@ -65,8 +65,8 @@ public class FileChunk extends ModelBase{
     /**
      * 总块数
      */
-    @Column(name="total_chunk")
-    private Integer totalChunk;
+    @Column(name="total_chunks")
+    private Integer totalChunks;
 
     /**
      * 文件类型
