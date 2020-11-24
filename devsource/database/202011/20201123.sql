@@ -8,6 +8,9 @@ create table base_file_chunk (
     filename varchar(1000) NULL COMMENT '文件名',
     total_chunks int(11) NULL COMMENT '总块数',
     mime_type varchar(200) NULL COMMENT '文件类型',
+    suffix varchar(50) NULL COMMENT '文件后缀',
     bsn_id varchar(50) NULL COMMENT '业务id',
+    bsn_type varchar(50) NULL COMMENT '业务类型',
+    status varchar(50) NULL COMMENT '状态',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;

@@ -75,9 +75,26 @@ public class FileChunk extends ModelBase{
     private String mimeType;
 
     /**
+     * 文件后缀
+     */
+    @Column(name="suffix")
+    private String suffix;
+
+    /**
      * 业务id
      */
     @Column(name="bsn_id")
     private String bsnId;
 
+    /**
+     * 业务类型
+     */
+    @Column(name="bsn_type")
+    private String bsnType;
+
+    /**
+     * 状态
+     */
+    @Column(name="status")
+    private String status;
 }

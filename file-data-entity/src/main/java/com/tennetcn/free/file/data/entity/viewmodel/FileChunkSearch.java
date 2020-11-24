@@ -62,8 +62,23 @@ public class FileChunkSearch{
     private String mimeType;
 
     /**
+     * 文件后缀
+     */
+    private String suffix;
+
+    /**
      * 业务id
      */
     private String bsnId;
+
+    /**
+     * 业务类型
+     */
+    private String bsnType;
+
+    /**
+     * 状态
+     */
+    private String status;
 
 }
