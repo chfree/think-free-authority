@@ -49,7 +49,7 @@ public class FileChunkDaoImpl extends SuperDao<FileChunk> implements IFileChunkD
 
         sqlExpression.andEqNoEmpty("filename",search.getFilename());
 
-        sqlExpression.andEqNoEmpty("type",search.getType());
+        sqlExpression.andEqNoEmpty("mime_type",search.getMimeType());
 
         sqlExpression.andEqNoEmpty("bsn_id",search.getBsnId());
 

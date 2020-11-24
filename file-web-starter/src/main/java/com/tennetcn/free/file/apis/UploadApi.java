@@ -325,7 +325,7 @@ public class UploadApi extends AuthorityApi {
 
         try {
             byte[] bytes = file.getBytes();
-            chunk.setType(file.getContentType());
+            chunk.setMimeType(file.getContentType());
 
             String chunkPath = FilePathUtils.getDiskPath() + FilePathUtils.getFileChunkPath();
             Path path = Paths.get(generateChunkPath(chunkPath,chunk));

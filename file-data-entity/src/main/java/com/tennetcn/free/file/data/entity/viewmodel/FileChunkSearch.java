@@ -59,7 +59,7 @@ public class FileChunkSearch{
     /**
      * 文件类型
      */
-    private String type;
+    private String mimeType;
 
     /**
      * 业务id
