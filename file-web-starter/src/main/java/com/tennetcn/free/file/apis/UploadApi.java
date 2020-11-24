@@ -8,6 +8,7 @@ import com.tennetcn.free.file.data.entity.model.FileChunk;
 import com.tennetcn.free.file.data.entity.model.FileDeleteWait;
 import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
+import com.tennetcn.free.file.data.enums.FileChunkStatus;
 import com.tennetcn.free.file.data.enums.FileParamSettingKeys;
 import com.tennetcn.free.file.data.enums.FileStoreType;
 import com.tennetcn.free.file.data.enums.UploadType;
@@ -317,32 +318,45 @@ public class UploadApi extends AuthorityApi {
 
     @ApiOperation(value = "分片上传文件")
     @PostMapping("uploadChunk")
+    @Transactional
     public BaseResponse uploadChunk(FileChunkView chunk){
         BaseResponse resp = new BaseResponse();
 
-        MultipartFile file = chunk.getFile();
-        log.debug("file originName: {}, chunkNumber: {}", file.getOriginalFilename(), chunk.getChunkNumber());
-
         try {
-            byte[] bytes = file.getBytes();
-            chunk.setMimeType(file.getContentType());
+            MultipartFile file = chunk.getFile();
+            log.debug("file originName: {}, chunkNumber: {}", file.getOriginalFilename(), chunk.getChunkNumber());
 
-            String chunkPath = FilePathUtils.getDiskPath() + FilePathUtils.getFileChunkPath();
+            saveChunk(chunk);
+
+            byte[] bytes = file.getBytes();
+            String chunkPath = FilePathUtils.getDiskPath() + chunk.getPath();
             Path path = Paths.get(generateChunkPath(chunkPath,chunk));
+
             //文件写入指定路径
             Files.write(path, bytes);
             log.debug("文件 {} 写入成功, uuid:{}", chunk.getFilename(), chunk.getIdentifier());
 
-            chunk.setId(PkIdUtils.getId());
-            fileChunkService.addModel(chunk);
-
             resp.put("result",true);
         } catch (IOException e) {
             e.printStackTrace();
-            resp.setMessage(e.getMessage());
-            resp.setStatus(ResponseStatus.SERVER_ERROR);
+            throw new FileBizException(e.getMessage());
         }
         return resp;
+    }
+
+    private void saveChunk(FileChunkView chunk){
+        MultipartFile file = chunk.getFile();
+
+        chunk.setMimeType(file.getContentType());
+        chunk.setSuffix(StringHelper.fileExt(file.getOriginalFilename()));
+        chunk.setUploadDate(DateUtil.date());
+        chunk.setUploadUserId(getLoginId());
+        chunk.setUploadUserName(getLoginName());
+        chunk.setPath(FilePathUtils.getFileChunkPath());
+        chunk.setStatus(FileChunkStatus.UPLOAD);
+
+        chunk.setId(PkIdUtils.getId());
+        fileChunkService.addModel(chunk);
     }
 
     private String generateChunkPath(String uploadFolder, FileChunkView chunk) {

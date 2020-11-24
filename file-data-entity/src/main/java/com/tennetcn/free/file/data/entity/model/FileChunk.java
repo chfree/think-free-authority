@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import lombok.Data;
 import com.tennetcn.free.core.message.data.ModelBase;
 
+import java.util.Date;
+
 /**
  * @author      auto build code by think
  * @email       chfree001@gmail.com
@@ -97,4 +99,30 @@ public class FileChunk extends ModelBase{
      */
     @Column(name="status")
     private String status;
+
+    /**
+     * 上传时间
+     */
+    @Column(name="upload_date")
+    private Date uploadDate;
+
+    /**
+     * 上传人
+     */
+    @Column(name="upload_user_id")
+    private String uploadUserId;
+
+    /**
+     * 上传人名称
+     */
+    @Column(name="upload_user_name")
+    private String uploadUserName;
+
+    /**
+     * 路径
+     */
+    @Column(name="path")
+    private String path;
+
+
 }

@@ -2,6 +2,8 @@ package com.tennetcn.free.file.data.entity.viewmodel;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author      auto build code by think
  * @email       chfree001@gmail.com
@@ -81,4 +83,18 @@ public class FileChunkSearch{
      */
     private String status;
 
+    /**
+     * 上传人
+     */
+    private String uploadUserId;
+
+    /**
+     * 上传人名称
+     */
+    private String uploadUserName;
+
+    /**
+     * 路径
+     */
+    private String path;
 }

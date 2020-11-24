@@ -12,5 +12,9 @@ create table base_file_chunk (
     bsn_id varchar(50) NULL COMMENT '业务id',
     bsn_type varchar(50) NULL COMMENT '业务类型',
     status varchar(50) NULL COMMENT '状态',
+    upload_date datetime  NULL COMMENT '上传时间',
+    upload_user_id varchar(50) NULL COMMENT '上传人',
+    upload_user_name varchar(100) NULL COMMENT '上传人名称',
+    path varchar(500) NULL COMMENT '路径',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
