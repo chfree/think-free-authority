@@ -8,6 +8,7 @@ import com.tennetcn.free.file.data.entity.model.FileChunk;
 import com.tennetcn.free.file.data.entity.model.FileDeleteWait;
 import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
+import com.tennetcn.free.file.data.entity.viewmodel.FileChunkSearch;
 import com.tennetcn.free.file.data.enums.FileChunkStatus;
 import com.tennetcn.free.file.data.enums.FileParamSettingKeys;
 import com.tennetcn.free.file.data.enums.FileStoreType;
@@ -38,11 +39,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.io.File;
@@ -51,6 +54,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -343,6 +347,85 @@ public class UploadApi extends AuthorityApi {
         }
         return resp;
     }
+
+    @ApiOperation(value = "检查分片上传文件")
+    @GetMapping("uploadChunk")
+    @Transactional
+    public BaseResponse checkUploadChunk(FileChunkView chunk, HttpServletResponse response){
+        BaseResponse resp = new BaseResponse();
+        // 先检查文件有没有，没有文件，在检查分片有没有
+        FileInfo fileInfo = fileInfoService.getFileInfoBySha1(chunk.getIdentifier());
+        if(fileInfo!=null){
+            resp.put("hasType", "file");
+            resp.put("fileInfo", fileInfo);
+            response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+            return resp;
+        }
+        FileChunkSearch fileChunkSearch = new FileChunkSearch();
+        fileChunkSearch.setIdentifier(chunk.getIdentifier());
+        fileChunkSearch.setChunkNumber(chunk.getChunkNumber());
+
+        int count = fileChunkService.queryCountBySearch(fileChunkSearch);
+        if(count>0){
+            resp.put("hasType", "chunk");
+            response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+            return resp;
+        }
+        return resp;
+    }
+
+    @ApiOperation(value = "合并文件")
+    @PostMapping("mergeChunk")
+    @Transactional
+    public BaseResponse mergeChunk(FileChunkView chunk){
+        BaseResponse resp = new BaseResponse();
+
+        // 根据sha1进行文件合并
+
+
+        return resp;
+    }
+
+    private boolean saveChunkToDisk(String sha1){
+        FileChunkSearch fileChunkSearch = new FileChunkSearch();
+        fileChunkSearch.setIdentifier(sha1);
+
+        List<FileChunk> fileChunks = fileChunkService.queryListBySearch(fileChunkSearch,null);
+        if(fileChunks==null||fileChunks.isEmpty()){
+            return false;
+        }
+        FileChunk fileChunk = fileChunks.get(0);
+        if(fileChunk.getTotalChunks()!=fileChunks.size()){
+            throw new FileBizException("文件分片信息不正确，无法进行合并保存");
+        }
+        try {
+            String targetFile = "";
+            String chunkFloder = "";
+            String fileName = "";
+            Files.list(Paths.get(chunkFloder)).filter(path -> !path.getFileName().toString().equals(fileName))
+                    .sorted((o1, o2) -> {
+                        String p1 = o1.getFileName().toString();
+                        String p2 = o2.getFileName().toString();
+                        int i1 = p1.lastIndexOf("-");
+                        int i2 = p2.lastIndexOf("-");
+                        return Integer.valueOf(p2.substring(i2)).compareTo(Integer.valueOf(p1.substring(i1)));
+                    })
+                    .forEach(path -> {
+                        try {
+                            //以追加的形式写入文件
+                            Files.write(Paths.get(targetFile), Files.readAllBytes(path), StandardOpenOption.APPEND);
+                            //合并后删除该块
+                            Files.delete(path);
+                        } catch (IOException e) {
+                            log.error(e.getMessage(), e);
+                        }
+                    });
+        }catch (IOException ex){
+            log.error(ex.getMessage(), ex);
+        }
+        return true;
+    }
+
 
     private void saveChunk(FileChunkView chunk){
         MultipartFile file = chunk.getFile();

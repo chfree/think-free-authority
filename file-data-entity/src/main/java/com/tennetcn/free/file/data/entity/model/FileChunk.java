@@ -54,6 +54,7 @@ public class FileChunk extends ModelBase{
 
     /**
      * 文件标识
+     * sha1
      */
     @Column(name="identifier")
     private String identifier;

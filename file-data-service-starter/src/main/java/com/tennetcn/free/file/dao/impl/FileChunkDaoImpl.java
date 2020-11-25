@@ -64,5 +64,9 @@ public class FileChunkDaoImpl extends SuperDao<FileChunk> implements IFileChunkD
         sqlExpression.andEqNoEmpty("upload_user_name",search.getUploadUserName());
 
         sqlExpression.andEqNoEmpty("path",search.getPath());
+
+        if(search.getChunkNumber()!=null){
+            sqlExpression.andEqNoEmpty("chunk_number",search.getChunkNumber());
+        }
     }
 }
