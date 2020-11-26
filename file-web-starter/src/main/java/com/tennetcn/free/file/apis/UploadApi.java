@@ -358,17 +358,15 @@ public class UploadApi extends AuthorityApi {
         if(fileInfo!=null){
             resp.put("hasType", "file");
             resp.put("fileInfo", fileInfo);
-            response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
             return resp;
         }
         FileChunkSearch fileChunkSearch = new FileChunkSearch();
         fileChunkSearch.setIdentifier(chunk.getIdentifier());
-        fileChunkSearch.setChunkNumber(chunk.getChunkNumber());
 
-        int count = fileChunkService.queryCountBySearch(fileChunkSearch);
-        if(count>0){
+        List<Integer> uploadChunks = fileChunkService.queryListUploadChunk(fileChunkSearch);
+        if(uploadChunks.size()>0){
             resp.put("hasType", "chunk");
-            response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+            resp.put("uploadChunks", uploadChunks);
             return resp;
         }
         return resp;
@@ -398,30 +396,33 @@ public class UploadApi extends AuthorityApi {
         if(fileChunk.getTotalChunks()!=fileChunks.size()){
             throw new FileBizException("文件分片信息不正确，无法进行合并保存");
         }
+
         try {
-            String targetFile = "";
-            String chunkFloder = "";
-            String fileName = "";
-            Files.list(Paths.get(chunkFloder)).filter(path -> !path.getFileName().toString().equals(fileName))
-                    .sorted((o1, o2) -> {
-                        String p1 = o1.getFileName().toString();
-                        String p2 = o2.getFileName().toString();
-                        int i1 = p1.lastIndexOf("-");
-                        int i2 = p2.lastIndexOf("-");
-                        return Integer.valueOf(p2.substring(i2)).compareTo(Integer.valueOf(p1.substring(i1)));
-                    })
-                    .forEach(path -> {
-                        try {
-                            //以追加的形式写入文件
-                            Files.write(Paths.get(targetFile), Files.readAllBytes(path), StandardOpenOption.APPEND);
-                            //合并后删除该块
-                            Files.delete(path);
-                        } catch (IOException e) {
-                            log.error(e.getMessage(), e);
-                        }
-                    });
-        }catch (IOException ex){
+            String targetFile = FilePathUtils.getDiskPath() + FilePathUtils.getFilePath() +File.separator+ PkIdUtils.getId() +"."+fileChunk.getSuffix();
+
+            // 得到所有的路径文件
+            fileChunks.stream().sorted((o1, o2) -> {
+                String p1 = o1.getFilename();
+                String p2 = o2.getFilename();
+                int i1 = p1.lastIndexOf("-");
+                int i2 = p2.lastIndexOf("-");
+                return Integer.valueOf(p2.substring(i2)).compareTo(Integer.valueOf(p1.substring(i1)));
+            }).forEach(chunk -> {
+                try {
+                    Path path = Paths.get(FilePathUtils.getDiskPath()+chunk.getPath());
+                    //以追加的形式写入文件
+                    Files.write(Paths.get(targetFile), Files.readAllBytes(path), StandardOpenOption.APPEND);
+                    //合并后删除该块
+                    Files.delete(path);
+                } catch (IOException e) {
+                    log.error(e.getMessage(), e);
+                    throw new FileBizException("合并文件信息出错");
+                }
+
+            });
+        }catch (Exception ex){
             log.error(ex.getMessage(), ex);
+            throw new FileBizException("合并文件信息出错");
         }
         return true;
     }

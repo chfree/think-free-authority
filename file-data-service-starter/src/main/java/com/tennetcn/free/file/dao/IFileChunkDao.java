@@ -19,4 +19,6 @@ public interface IFileChunkDao extends ISuperDao<FileChunk>{
     int queryCountBySearch(FileChunkSearch search);
 
     List<FileChunk> queryListBySearch(FileChunkSearch search, PagerModel pagerModel);
+
+    List<Integer> queryListUploadChunk(FileChunkSearch search);
 }

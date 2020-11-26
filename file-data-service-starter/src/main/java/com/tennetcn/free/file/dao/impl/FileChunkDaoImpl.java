@@ -40,6 +40,16 @@ public class FileChunkDaoImpl extends SuperDao<FileChunk> implements IFileChunkD
         return queryList(sqlExpression,pagerModel);
     }
 
+    @Override
+    public List<Integer> queryListUploadChunk(FileChunkSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.select("chunk_number").from(FileChunk.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryList(sqlExpression,Integer.class);
+    }
+
     private void appendExpression(ISqlExpression sqlExpression, FileChunkSearch search){
         sqlExpression.andEqNoEmpty("id",search.getId());
 

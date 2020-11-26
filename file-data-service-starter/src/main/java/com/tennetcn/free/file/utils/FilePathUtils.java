@@ -8,6 +8,8 @@ import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.file.data.enums.FileParamSettingKeys;
 import org.springframework.util.StringUtils;
 
+import java.io.File;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -17,7 +19,7 @@ import org.springframework.util.StringUtils;
 
 public class FilePathUtils {
 
-    public static String delayPath = "/delay";
+    public static String delayPath = File.separator + "delay";
 
 
     private static IParamSettingService paramSettingService;
@@ -29,14 +31,14 @@ public class FilePathUtils {
         return paramSettingService;
     }
 
-    private static String pathExp="/yyyy/MM/dd/";
+    private static String pathExp=File.separator +"yyyy+"+File.separator+"MM"+File.separator+"dd"+File.separator;
 
     public static String getFilePath(){
         return DateUtil.format(DateUtil.date(),pathExp);
     }
 
     public static String getFileChunkPath(){
-        return DateUtil.format(DateUtil.date(),pathExp) + "fileChunk/";
+        return DateUtil.format(DateUtil.date(),pathExp) + "fileChunk"+File.separator;
     }
 
     public static String getDiskPath(){

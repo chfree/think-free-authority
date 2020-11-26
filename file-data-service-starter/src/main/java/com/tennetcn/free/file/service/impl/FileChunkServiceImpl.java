@@ -33,4 +33,9 @@ public class FileChunkServiceImpl extends SuperService<FileChunk> implements IFi
         return fileChunkDao.queryListBySearch(search,pagerModel);
     }
 
+    @Override
+    public List<Integer> queryListUploadChunk(FileChunkSearch search) {
+        return fileChunkDao.queryListUploadChunk(search);
+    }
+
 }
