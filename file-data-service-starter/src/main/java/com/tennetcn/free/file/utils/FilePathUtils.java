@@ -31,7 +31,7 @@ public class FilePathUtils {
         return paramSettingService;
     }
 
-    private static String pathExp=File.separator +"yyyy+"+File.separator+"MM"+File.separator+"dd"+File.separator;
+    private static String pathExp=File.separator +"yyyy"+File.separator+"MM"+File.separator+"dd"+File.separator;
 
     public static String getFilePath(){
         return DateUtil.format(DateUtil.date(),pathExp);

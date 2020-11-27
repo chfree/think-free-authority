@@ -325,6 +325,8 @@ public class UploadApi extends AuthorityApi {
     @Transactional
     public BaseResponse uploadChunk(FileChunkView chunk){
         BaseResponse resp = new BaseResponse();
+        FileChunk fileChunk = new FileChunk();
+        BeanUtils.copyProperties(chunk,fileChunk,"file");
 
         try {
             MultipartFile file = chunk.getFile();
@@ -341,6 +343,8 @@ public class UploadApi extends AuthorityApi {
             log.debug("文件 {} 写入成功, uuid:{}", chunk.getFilename(), chunk.getIdentifier());
 
             resp.put("result",true);
+            resp.put("fileChunk", fileChunk);
+            resp.put("needMerge", true);
         } catch (IOException e) {
             e.printStackTrace();
             throw new FileBizException(e.getMessage());
@@ -353,11 +357,17 @@ public class UploadApi extends AuthorityApi {
     @Transactional
     public BaseResponse checkUploadChunk(FileChunkView chunk, HttpServletResponse response){
         BaseResponse resp = new BaseResponse();
+
+        FileChunk fileChunk = new FileChunk();
+        BeanUtils.copyProperties(chunk,fileChunk,"file");
+        resp.put("fileChunk", fileChunk);
+
         // 先检查文件有没有，没有文件，在检查分片有没有
         FileInfo fileInfo = fileInfoService.getFileInfoBySha1(chunk.getIdentifier());
         if(fileInfo!=null){
             resp.put("hasType", "file");
             resp.put("fileInfo", fileInfo);
+            resp.put("needMerge", false);
             return resp;
         }
         FileChunkSearch fileChunkSearch = new FileChunkSearch();
@@ -367,6 +377,7 @@ public class UploadApi extends AuthorityApi {
         if(uploadChunks.size()>0){
             resp.put("hasType", "chunk");
             resp.put("uploadChunks", uploadChunks);
+            resp.put("needMerge", true);
             return resp;
         }
         return resp;
