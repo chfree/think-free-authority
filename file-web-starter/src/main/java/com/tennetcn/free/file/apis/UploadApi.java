@@ -111,7 +111,7 @@ public class UploadApi extends AuthorityApi {
         List<UploadModel> uploadModels = new ArrayList<>();
         for (MultipartFile file : files) {
             FileInfo fileInfo = saveFileInfo(file);
-            FileBsn fileBsn = saveFileBsn(fileInfo,file, bsnType, bsnId);
+            FileBsn fileBsn = saveFileBsn(fileInfo, bsnType, bsnId);
 
             UploadModel uploadModel = new UploadModel();
 
@@ -231,14 +231,14 @@ public class UploadApi extends AuthorityApi {
         return saveFile;
     }
 
-    private FileBsn saveFileBsn(FileInfo fileInfo,MultipartFile file,String bsnType,String bsnId){
+    private FileBsn saveFileBsn(FileInfo fileInfo,String bsnType,String bsnId){
         FileBsn fileBsn = new FileBsn();
         fileBsn.setFileId(fileInfo.getFileId());
         fileBsn.setId(PkIdUtils.getId());
         fileBsn.setDeleteMark(YesOrNo.NO);
         fileBsn.setBsnType(bsnType);
         fileBsn.setBsnId(bsnId);
-        fileBsn.setDisplayName(file.getOriginalFilename());
+        fileBsn.setDisplayName(fileInfo.getDisplayName());
         fileBsn.setUploadDate(DateUtil.date());
         fileBsn.setUploadUserId(getLoginId());
         fileBsn.setUploadUserName(getLoginName());
@@ -383,25 +383,53 @@ public class UploadApi extends AuthorityApi {
         return resp;
     }
 
-    @ApiOperation(value = "合并文件")
-    @PostMapping("mergeChunk")
+    @ApiOperation(value = "保存业务逻辑文件信息")
+    @PostMapping("saveFileByChunk")
     @Transactional
-    public BaseResponse mergeChunk(FileChunkView chunk){
+    public BaseResponse saveFileByChunk(FileChunkView chunk){
         BaseResponse resp = new BaseResponse();
 
-        // 根据sha1进行文件合并
+        FileInfo fileInfo = fileInfoService.getFileInfoBySha1(chunk.getIdentifier());
+        if(fileInfo==null){
+            // 根据sha1进行文件合并,返回数据库中的分片信息，便于fileInfo的保存
+            FileChunk dbFileChunk = saveChunkToDisk(chunk.getIdentifier());
 
+            fileInfo = saveFileInfoByChunk(dbFileChunk);
+        }
+        saveFileBsn(fileInfo,chunk.getBsnType(),chunk.getBsnId());
 
         return resp;
     }
 
-    private boolean saveChunkToDisk(String sha1){
+    private FileInfo saveFileInfoByChunk(FileChunk dbFileChunk){
+        FileInfo fileInfo = new FileInfo();
+        fileInfo.setSha1(dbFileChunk.getIdentifier());
+        fileInfo.setDeleteMark(YesOrNo.NO);
+        fileInfo.setFileId(dbFileChunk.getId());
+        fileInfo.setDisplayName(dbFileChunk.getFilename());
+        fileInfo.setMimeType(dbFileChunk.getMimeType());
+        fileInfo.setSize(dbFileChunk.getTotalSize());
+        fileInfo.setSuffix(StringHelper.fileExt(dbFileChunk.getFilename()));
+        fileInfo.setUploadDate(DateUtil.date());
+        fileInfo.setUploadUserId(getLoginId());
+        fileInfo.setUploadUserName(getLoginName());
+        fileInfo.setStoreType(FileStoreType.LOCAL);
+        fileInfo.setPath(FilePathUtils.getFilePath());
+        fileInfo.setModelStatus(ModelStatus.add);
+
+        fileInfoService.addModel(fileInfo);
+
+        return fileInfo;
+    }
+
+
+    private FileChunk saveChunkToDisk(String sha1){
         FileChunkSearch fileChunkSearch = new FileChunkSearch();
         fileChunkSearch.setIdentifier(sha1);
 
         List<FileChunk> fileChunks = fileChunkService.queryListBySearch(fileChunkSearch,null);
         if(fileChunks==null||fileChunks.isEmpty()){
-            return false;
+            throw new FileBizException("没有需要合并的文件分片信息");
         }
         FileChunk fileChunk = fileChunks.get(0);
         if(fileChunk.getTotalChunks()!=fileChunks.size()){
@@ -409,7 +437,7 @@ public class UploadApi extends AuthorityApi {
         }
 
         try {
-            String targetFile = FilePathUtils.getDiskPath() + FilePathUtils.getFilePath() +File.separator+ PkIdUtils.getId() +"."+fileChunk.getSuffix();
+            String targetFile = FilePathUtils.getDiskPath() + FilePathUtils.getFilePath() +File.separator+ fileChunk.getId() +"."+fileChunk.getSuffix();
 
             // 得到所有的路径文件
             fileChunks.stream().sorted((o1, o2) -> {
@@ -435,7 +463,7 @@ public class UploadApi extends AuthorityApi {
             log.error(ex.getMessage(), ex);
             throw new FileBizException("合并文件信息出错");
         }
-        return true;
+        return fileChunk;
     }
 
 
