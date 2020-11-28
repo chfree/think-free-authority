@@ -38,4 +38,9 @@ public class FileChunkServiceImpl extends SuperService<FileChunk> implements IFi
         return fileChunkDao.queryListUploadChunk(search);
     }
 
+    @Override
+    public boolean updateStatusByIdentifier(String status, String identifier) {
+        return fileChunkDao.updateStatusByIdentifier(status, identifier);
+    }
+
 }

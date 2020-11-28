@@ -21,4 +21,6 @@ public interface IFileChunkService extends ISuperService<FileChunk>{
     List<FileChunk> queryListBySearch(FileChunkSearch search, PagerModel pagerModel);
 
     List<Integer> queryListUploadChunk(FileChunkSearch search);
+
+    boolean updateStatusByIdentifier(String status,String identifier);
 }

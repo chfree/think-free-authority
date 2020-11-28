@@ -50,6 +50,14 @@ public class FileChunkDaoImpl extends SuperDao<FileChunk> implements IFileChunkD
         return queryList(sqlExpression,Integer.class);
     }
 
+    @Override
+    public boolean updateStatusByIdentifier(String status, String identifier) {
+        ISqlExpression updateStatusSql = SqlExpressionFactory.createExpression();
+        updateStatusSql.update(FileChunk.class).setColumn("status",status).andEq("identifier", identifier);
+
+        return update(updateStatusSql) >= 0;
+    }
+
     private void appendExpression(ISqlExpression sqlExpression, FileChunkSearch search){
         sqlExpression.andEqNoEmpty("id",search.getId());
 

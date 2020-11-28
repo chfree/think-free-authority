@@ -394,6 +394,10 @@ public class UploadApi extends AuthorityApi {
             // 根据sha1进行文件合并,返回数据库中的分片信息，便于fileInfo的保存
             FileChunk dbFileChunk = saveChunkToDisk(chunk.getIdentifier());
 
+            // 更新fileChunk的状态
+            fileChunkService.updateStatusByIdentifier(FileChunkStatus.MERGED,chunk.getIdentifier());
+
+            // 保存文件信息
             fileInfo = saveFileInfoByChunk(dbFileChunk);
         }
         saveFileBsn(fileInfo,chunk.getBsnType(),chunk.getBsnId());
@@ -437,18 +441,16 @@ public class UploadApi extends AuthorityApi {
         }
 
         try {
-            String targetFile = FilePathUtils.getDiskPath() + FilePathUtils.getFilePath() +File.separator+ fileChunk.getId() +"."+fileChunk.getSuffix();
+            final String diskPath = FilePathUtils.getDiskPath();
+            String targetFile = diskPath + FilePathUtils.getFilePath() +File.separator+ fileChunk.getId() +"."+fileChunk.getSuffix();
+            Files.createFile(Paths.get(targetFile));
 
             // 得到所有的路径文件
             fileChunks.stream().sorted((o1, o2) -> {
-                String p1 = o1.getFilename();
-                String p2 = o2.getFilename();
-                int i1 = p1.lastIndexOf("-");
-                int i2 = p2.lastIndexOf("-");
-                return Integer.valueOf(p2.substring(i2)).compareTo(Integer.valueOf(p1.substring(i1)));
+                return o1.getChunkNumber().compareTo(o2.getChunkNumber());
             }).forEach(chunk -> {
                 try {
-                    Path path = Paths.get(FilePathUtils.getDiskPath()+chunk.getPath());
+                    Path path = Paths.get(diskPath+chunk.getPath()+ File.separator + chunk.getIdentifier() + File.separator + chunk.getFilename() + "-" + chunk.getChunkNumber());
                     //以追加的形式写入文件
                     Files.write(Paths.get(targetFile), Files.readAllBytes(path), StandardOpenOption.APPEND);
                     //合并后删除该块
