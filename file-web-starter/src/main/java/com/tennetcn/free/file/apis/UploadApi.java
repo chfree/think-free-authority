@@ -335,8 +335,8 @@ public class UploadApi extends AuthorityApi {
             saveChunk(chunk);
 
             byte[] bytes = file.getBytes();
-            String chunkPath = FilePathUtils.getDiskPath() + chunk.getPath();
-            Path path = Paths.get(generateChunkPath(chunkPath,chunk));
+            String diskPath = FilePathUtils.getDiskPath();
+            Path path = Paths.get(chunk.generateChunkPath(diskPath));
 
             //文件写入指定路径
             Files.write(path, bytes);
@@ -450,20 +450,20 @@ public class UploadApi extends AuthorityApi {
                 return o1.getChunkNumber().compareTo(o2.getChunkNumber());
             }).forEach(chunk -> {
                 try {
-                    Path path = Paths.get(diskPath+chunk.getPath()+ File.separator + chunk.getIdentifier() + File.separator + chunk.getFilename() + "-" + chunk.getChunkNumber());
+                    Path path = Paths.get(diskPath+chunk.getChunkFullPath());
                     //以追加的形式写入文件
                     Files.write(Paths.get(targetFile), Files.readAllBytes(path), StandardOpenOption.APPEND);
                     //合并后删除该块
                     Files.delete(path);
-                } catch (IOException e) {
-                    log.error(e.getMessage(), e);
-                    throw new FileBizException("合并文件信息出错");
+                } catch (IOException ex) {
+                    log.error(ex.getMessage(), ex);
+                    throw new FileBizException("合并文件信息出错",ex);
                 }
 
             });
         }catch (Exception ex){
             log.error(ex.getMessage(), ex);
-            throw new FileBizException("合并文件信息出错");
+            throw new FileBizException("合并文件信息出错",ex);
         }
         return fileChunk;
     }
@@ -482,24 +482,5 @@ public class UploadApi extends AuthorityApi {
 
         chunk.setId(PkIdUtils.getId());
         fileChunkService.addModel(chunk);
-    }
-
-    private String generateChunkPath(String uploadFolder, FileChunkView chunk) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(uploadFolder).append("/").append(chunk.getIdentifier());
-        //判断uploadFolder/identifier 路径是否存在，不存在则创建
-        if (!Files.isWritable(Paths.get(sb.toString()))) {
-            log.info("path not exist,create path: {}", sb.toString());
-            try {
-                Files.createDirectories(Paths.get(sb.toString()));
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-            }
-        }
-
-        return sb.append("/")
-                .append(chunk.getFilename())
-                .append("-")
-                .append(chunk.getChunkNumber()).toString();
     }
 }

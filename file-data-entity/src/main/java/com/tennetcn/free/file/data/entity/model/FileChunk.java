@@ -4,9 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
+
 import lombok.Data;
 import com.tennetcn.free.core.message.data.ModelBase;
+import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 
 /**
@@ -16,6 +23,7 @@ import java.util.Date;
  * @comment     文件块
  */
 
+@Slf4j
 @Data
 @Entity
 @Table(name="base_file_chunk")
@@ -125,5 +133,26 @@ public class FileChunk extends ModelBase{
     @Column(name="path")
     private String path;
 
+    public String getChunkFullPath(){
+        return this.getPath() + this.getIdentifier() + File.separator + this.getFilename() + "-" + this.getChunkNumber();
+    }
 
+    public String generateChunkPath(String uploadFolder) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(uploadFolder).append(this.getPath()).append(this.getIdentifier());
+        //判断uploadFolder/identifier 路径是否存在，不存在则创建
+        if (!Files.isWritable(Paths.get(sb.toString()))) {
+            log.info("path not exist,create path: {}", sb.toString());
+            try {
+                Files.createDirectories(Paths.get(sb.toString()));
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        return sb.append("/")
+                .append(this.getFilename())
+                .append("-")
+                .append(this.getChunkNumber()).toString();
+    }
 }
