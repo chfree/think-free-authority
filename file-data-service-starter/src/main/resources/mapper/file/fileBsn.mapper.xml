@@ -2,6 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper  namespace="com.tennetcn.free.file.mapper.IFileBsnMapper">
 
+	<!-- 文件业务表Mapper -->
+	<sql id="tableName">basse_file_bsn fileBsn</sql>
+	<sql id="mainTableAlias"> fileBsn.</sql>
+
+	<sql id="allColumns">
+        fileBsn.id,
+        fileBsn.file_id,
+        fileBsn.bsn_id,
+        fileBsn.bsn_type,
+        fileBsn.upload_user_id,
+        fileBsn.upload_user_name,
+        fileBsn.upload_date,
+        fileBsn.delete_mark
+    </sql>
+
+	<!-- 文件业务表Mapper -->
+	<resultMap type="com.tennetcn.free.file.data.entity.model.FileBsn" id="fileBsnMap">
+		<id column="id" property="id"/>    <!-- 主键 -->
+		<result column="file_id" property="fileId"/>    <!-- 文件id -->
+		<result column="bsn_id" property="bsnId"/>    <!-- 业务id -->
+		<result column="bsn_type" property="bsnType"/>    <!-- 业务类型 -->
+		<result column="upload_user_id" property="uploadUserId"/>    <!-- 上传人 -->
+		<result column="upload_user_name" property="uploadUserName"/>    <!-- 上传人名称 -->
+		<result column="upload_date" property="uploadDate"/>    <!-- 上传时间 -->
+		<result column="delete_mark" property="deleteMark"/>    <!-- 删除标记 -->
+	</resultMap>
+
 	<select id="queryOneLinkFileId" resultType="java.lang.String">
 		select file_id from base_file_bsn where file_id in
 		<foreach item="item" index="index" collection="fileIds" open="(" separator="," close=")">

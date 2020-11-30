@@ -5,6 +5,7 @@ import com.tennetcn.free.data.dao.base.ISqlExpression;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
 import com.tennetcn.free.file.data.enums.CatalogScope;
 import com.tennetcn.free.file.data.enums.FileDataKeys;
@@ -119,6 +120,11 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
     @Override
     public List<FileCatalog> queryChildList(String userId,String id) {
         return fileCatalogMapper.queryChildList(userId,id);
+    }
+
+    @Override
+    public List<FileInfo> queryFileInfoList(String catalogId) {
+        return fileCatalogMapper.queryFileInfoList(catalogId);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, FileCatalogSearch search){

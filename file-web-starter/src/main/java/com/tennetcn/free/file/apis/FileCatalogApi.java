@@ -2,6 +2,7 @@ package com.tennetcn.free.file.apis;
 
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
 import com.tennetcn.free.file.service.IFileCatalogService;
 import com.tennetcn.free.security.webapi.AuthorityApi;
@@ -65,6 +66,10 @@ public class FileCatalogApi extends AuthorityApi {
 
         List<FileCatalog> fileCatalogs = catalogService.queryChildList(getCurrentLogin().getId(),id);
         resp.put("fileCatalogs", fileCatalogs);
+
+        // 获取当前节点的文件信息
+        List<FileInfo> fileInfos = catalogService.queryFileInfoList(id);
+        resp.put("fileInfos", fileInfos);
 
         return resp;
     }

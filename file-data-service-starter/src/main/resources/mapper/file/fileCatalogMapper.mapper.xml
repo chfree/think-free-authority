@@ -61,4 +61,23 @@
         order by name asc
 	</select>
 
+
+    <select id="queryFileInfoList" resultMap="com.tennetcn.free.file.mapper.IFileInfoMapper.fileInfoMap">
+        select
+        fileInfo.file_id,
+        fileInfo.size,
+        fileInfo.mime_type,
+        fileInfo.sha1,
+        fileInfo.store_type,
+        fileInfo.suffix,
+        fileInfo.path,
+        fileBsn.upload_user_id,
+        fileBsn.upload_user_name,
+        fileBsn.upload_date,
+        fileBsn.display_name
+        from base_file_bsn fileBsn
+        left join base_file_info fileInfo on(fileBsn.file_id=fileInfo.file_id)
+        where fileBsn.bsn_id=#{catalogId} and fileBsn.bsn_type='catalog'
+        order by fileBsn.display_name asc,fileBsn.upload_date asc
+    </select>
 </mapper>

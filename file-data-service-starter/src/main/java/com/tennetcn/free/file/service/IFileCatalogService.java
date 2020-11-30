@@ -3,6 +3,7 @@ package com.tennetcn.free.file.service;
 import com.tennetcn.free.data.dao.base.ISuperService;
 import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
 
@@ -34,4 +35,7 @@ public interface IFileCatalogService extends ISuperService<FileCatalog>{
     boolean saveNewFolder(String userId,String parentId,String folderName);
 
     boolean renameFolder(String id,String folderName);
+
+    List<FileInfo> queryFileInfoList(String catalogId);
+
 }

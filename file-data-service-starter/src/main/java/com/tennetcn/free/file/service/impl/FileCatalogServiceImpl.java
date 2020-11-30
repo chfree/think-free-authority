@@ -7,6 +7,7 @@ import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.data.dao.base.impl.SuperService;
 import com.tennetcn.free.file.dao.IFileCatalogDao;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
+import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
 import com.tennetcn.free.file.data.enums.CatalogScope;
@@ -166,6 +167,11 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
         fileCatalog.setUpdateDate(DateUtil.date());
 
         return updateModel(fileCatalog);
+    }
+
+    @Override
+    public List<FileInfo> queryFileInfoList(String catalogId) {
+        return fileCatalogDao.queryFileInfoList(catalogId);
     }
 
     private void loopFileCatalog(List<FileCatalogTree> parentCatalogs,List<FileCatalog> allCatalog){
