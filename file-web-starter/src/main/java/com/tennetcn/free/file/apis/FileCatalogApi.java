@@ -4,6 +4,7 @@ import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
+import com.tennetcn.free.file.data.entity.viewmodel.FileInfoView;
 import com.tennetcn.free.file.service.IFileCatalogService;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
@@ -68,7 +69,7 @@ public class FileCatalogApi extends AuthorityApi {
         resp.put("fileCatalogs", fileCatalogs);
 
         // 获取当前节点的文件信息
-        List<FileInfo> fileInfos = catalogService.queryFileInfoList(id);
+        List<FileInfoView> fileInfos = catalogService.queryFileInfoList(id);
         resp.put("fileInfos", fileInfos);
 
         return resp;

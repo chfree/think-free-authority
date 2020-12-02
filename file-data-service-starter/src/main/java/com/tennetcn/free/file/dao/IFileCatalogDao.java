@@ -5,6 +5,7 @@ import com.tennetcn.free.core.message.data.PagerModel;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
+import com.tennetcn.free.file.data.entity.viewmodel.FileInfoView;
 
 import java.util.List;
 
@@ -29,5 +30,5 @@ public interface IFileCatalogDao extends ISuperDao<FileCatalog>{
 
     List<FileCatalog> queryChildList(String userId,String id);
 
-    List<FileInfo> queryFileInfoList(String catalogId);
+    List<FileInfoView> queryFileInfoList(String catalogId);
 }

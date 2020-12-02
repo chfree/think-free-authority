@@ -7,6 +7,7 @@ import com.tennetcn.free.data.utils.SqlExpressionFactory;
 import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
+import com.tennetcn.free.file.data.entity.viewmodel.FileInfoView;
 import com.tennetcn.free.file.data.enums.CatalogScope;
 import com.tennetcn.free.file.data.enums.FileDataKeys;
 import com.tennetcn.free.file.mapper.IFileCatalogMapper;
@@ -123,7 +124,7 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
     }
 
     @Override
-    public List<FileInfo> queryFileInfoList(String catalogId) {
+    public List<FileInfoView> queryFileInfoList(String catalogId) {
         return fileCatalogMapper.queryFileInfoList(catalogId);
     }
 

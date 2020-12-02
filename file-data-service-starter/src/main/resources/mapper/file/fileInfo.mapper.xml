@@ -36,6 +36,8 @@
         <result column="delete_mark" property="deleteMark"/>    <!-- 删除标记 -->
     </resultMap>
 
-
+    <resultMap id="fileInfoViewMap" type="com.tennetcn.free.file.data.entity.viewmodel.FileInfoView" extends="fileInfoMap">
+        <result column="seq_index" property="seqIndex" />
+    </resultMap>
 
 </mapper>

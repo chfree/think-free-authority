@@ -10,6 +10,7 @@ import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
+import com.tennetcn.free.file.data.entity.viewmodel.FileInfoView;
 import com.tennetcn.free.file.data.enums.CatalogScope;
 import com.tennetcn.free.file.data.enums.FileDataKeys;
 import com.tennetcn.free.file.exception.FileBizException;
@@ -170,7 +171,7 @@ public class FileCatalogServiceImpl extends SuperService<FileCatalog> implements
     }
 
     @Override
-    public List<FileInfo> queryFileInfoList(String catalogId) {
+    public List<FileInfoView> queryFileInfoList(String catalogId) {
         return fileCatalogDao.queryFileInfoList(catalogId);
     }
 

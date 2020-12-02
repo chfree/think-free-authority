@@ -6,6 +6,7 @@ import com.tennetcn.free.file.data.entity.model.FileCatalog;
 import com.tennetcn.free.file.data.entity.model.FileInfo;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogSearch;
 import com.tennetcn.free.file.data.entity.viewmodel.FileCatalogTree;
+import com.tennetcn.free.file.data.entity.viewmodel.FileInfoView;
 
 import java.util.List;
 
@@ -36,6 +37,6 @@ public interface IFileCatalogService extends ISuperService<FileCatalog>{
 
     boolean renameFolder(String id,String folderName);
 
-    List<FileInfo> queryFileInfoList(String catalogId);
+    List<FileInfoView> queryFileInfoList(String catalogId);
 
 }

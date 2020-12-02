@@ -62,7 +62,8 @@
 	</select>
 
 
-    <select id="queryFileInfoList" resultMap="com.tennetcn.free.file.mapper.IFileInfoMapper.fileInfoMap">
+
+    <select id="queryFileInfoList" resultMap="com.tennetcn.free.file.mapper.IFileInfoMapper.fileInfoViewMap">
         select
         fileInfo.file_id,
         fileInfo.size,
@@ -74,7 +75,8 @@
         fileBsn.upload_user_id,
         fileBsn.upload_user_name,
         fileBsn.upload_date,
-        fileBsn.display_name
+        fileBsn.display_name,
+        fileBsn.seq_index
         from base_file_bsn fileBsn
         left join base_file_info fileInfo on(fileBsn.file_id=fileInfo.file_id)
         where fileBsn.bsn_id=#{catalogId} and fileBsn.bsn_type='catalog'
