@@ -75,4 +75,9 @@ public class FileBsn extends ModelBase{
     @Column(name="delete_mark")
     private String deleteMark;
 
+    /**
+     * 顺序索引，重名时候的记录
+     */
+    @Column(name="seq_index")
+    private Integer seqIndex;
 }

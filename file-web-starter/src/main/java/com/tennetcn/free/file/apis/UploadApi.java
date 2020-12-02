@@ -243,7 +243,7 @@ public class UploadApi extends AuthorityApi {
         fileBsn.setUploadUserId(getLoginId());
         fileBsn.setUploadUserName(getLoginName());
 
-        fileBsnService.addModel(fileBsn);
+        fileBsnService.saveFileBsn(fileBsn);
 
         return fileBsn;
     }

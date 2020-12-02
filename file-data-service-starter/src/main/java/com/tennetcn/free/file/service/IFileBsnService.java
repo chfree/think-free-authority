@@ -48,4 +48,14 @@ public interface IFileBsnService extends ISuperService<FileBsn>{
      * 删除文件信息时，要判断该文件是否只有一个业务关联项
      */
     boolean deleteByBsnId(String bsnId);
+
+    /**
+     * 保存文件业务信息，会进行名字重名的判断
+     */
+    boolean saveFileBsn(FileBsn fileBsn);
+
+    /**
+     * 根据业务单号查询下一个间隔的顺序号
+     */
+    Integer queryNextSeqIndex(String bsnId);
 }

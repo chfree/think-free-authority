@@ -37,4 +37,14 @@
 		having count(file_id)=1
 	</select>
 
+	<select id="queryNextSeqIndex" resultType="java.lang.Integer">
+		select t1.seq_index+1
+		from (select tt.seq_index,tt.bsn_id from base_file_bsn tt where tt.bsn_id=#{bsnId} union select -1,#{bsnId}) t1
+		where not exists
+			  (select t2.seq_index from (select tt.seq_index from base_file_bsn tt where tt.bsn_id=#{bsnId} union select -1) t2  where t2.seq_index=t1.seq_index+1)
+		and bsn_id=#{bsnId}
+		order by t1.seq_index
+		limit 1
+	</select>
+
 </mapper>

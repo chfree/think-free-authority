@@ -18,4 +18,6 @@ import java.util.List;
 @Mapper
 public interface IFileBsnMapper extends IMapper<FileBsn>{
     List<String> queryOneLinkFileId(@Param("fileIds") List<String> fileIds);
+
+    Integer queryNextSeqIndex(@Param("bsnId") String bsnId);
 }

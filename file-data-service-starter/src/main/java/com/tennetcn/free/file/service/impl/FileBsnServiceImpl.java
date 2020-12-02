@@ -105,6 +105,19 @@ public class FileBsnServiceImpl extends SuperService<FileBsn> implements IFileBs
     }
 
     @Override
+    public boolean saveFileBsn(FileBsn fileBsn) {
+        Integer seqIndex = queryNextSeqIndex(fileBsn.getBsnId());
+        fileBsn.setSeqIndex(seqIndex);
+
+        return this.addModel(fileBsn);
+    }
+
+    @Override
+    public Integer queryNextSeqIndex(String bsnId) {
+        return fileBsnDao.queryNextSeqIndex(bsnId);
+    }
+
+    @Override
     @Transactional
     public boolean deleteDelayByBsnId(String bsnId) {
         return doDeleteByBsnId(bsnId, true);

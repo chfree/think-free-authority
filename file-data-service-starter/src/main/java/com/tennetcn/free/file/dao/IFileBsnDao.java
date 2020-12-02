@@ -5,6 +5,7 @@ import com.tennetcn.free.data.dao.base.ISuperDao;
 import com.tennetcn.free.file.data.entity.model.FileBsn;
 import com.tennetcn.free.file.data.entity.viewmodel.FileBsnSearch;
 import com.tennetcn.free.file.data.entity.viewmodel.FileBsnView;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,4 +33,6 @@ public interface IFileBsnDao extends ISuperDao<FileBsn>{
     boolean deleteModel(String bsnId, String fileId);
 
     List<String> queryOneLinkFileId(List<String> fileIds);
+
+    Integer queryNextSeqIndex(String bsnId);
 }
