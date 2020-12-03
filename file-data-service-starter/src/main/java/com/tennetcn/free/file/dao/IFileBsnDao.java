@@ -34,5 +34,5 @@ public interface IFileBsnDao extends ISuperDao<FileBsn>{
 
     List<String> queryOneLinkFileId(List<String> fileIds);
 
-    Integer queryNextSeqIndex(String bsnId);
+    Integer queryNextSeqIndex(String bsnId, String displayName);
 }

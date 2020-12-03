@@ -111,8 +111,8 @@ public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
     }
 
     @Override
-    public Integer queryNextSeqIndex(String bsnId) {
-        return fileBsnMapper.queryNextSeqIndex(bsnId);
+    public Integer queryNextSeqIndex(String bsnId, String displayName) {
+        return fileBsnMapper.queryNextSeqIndex(bsnId,displayName);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, FileBsnSearch search){

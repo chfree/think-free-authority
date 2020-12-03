@@ -57,5 +57,5 @@ public interface IFileBsnService extends ISuperService<FileBsn>{
     /**
      * 根据业务单号查询下一个间隔的顺序号
      */
-    Integer queryNextSeqIndex(String bsnId);
+    Integer queryNextSeqIndex(String bsnId, String displayName);
 }
