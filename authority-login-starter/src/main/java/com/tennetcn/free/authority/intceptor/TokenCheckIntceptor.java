@@ -32,7 +32,7 @@ public class TokenCheckIntceptor implements ITokenCheckIntceptor {
         }
         boolean result = loginAuthService.checkTokenIsValid(loginModel.getToken());
         if(!result){
-            throw new BizException(WebResponseStatus.AUTHORIZE_ERROR,"您已经在其他位置登陆，请确认账号密码是否被盗");
+            throw new BizException(WebResponseStatus.AUTHORIZE_ERROR,"您已经登出或在其他位置登陆，无法进行后续操作，如需操作请核实用户密码");
         }
         return result;
     }

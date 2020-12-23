@@ -40,6 +40,13 @@ public class ParamSetting extends ModelBase{
     @Column(name="title")
     private String title;
 
+
+    /**
+     * 值类型
+     */
+    @Column(name="val_type")
+    private String valType;
+
     /**
      * 参数值
      */

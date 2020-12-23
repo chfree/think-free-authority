@@ -96,9 +96,14 @@ public class ApiAuthPassportValid {
 		}
 		
 		Claims claims = jwtHelper.parseJWT(token);
-		if(claims == null || jwtHelper.isTokenExpired(claims.getExpiration())){
+		if(claims == null){
 			cached.remove(token);
 			return false;
+		}
+
+		// 如果token过期
+		if(jwtHelper.isTokenExpired(claims.getExpiration())){
+
 		}
 
 

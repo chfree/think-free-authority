@@ -2,6 +2,7 @@ package com.tennetcn.free.security.core;
 
 import com.tennetcn.free.security.properties.JwtConfig;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -87,6 +88,8 @@ public class JwtHelper {
                     .setSigningKey(key)         //设置签名的秘钥
                     .parseClaimsJws(jwt).getBody();//设置需要解析的jwt
             return claims;
+        }catch(ExpiredJwtException ex) {
+            return ex.getClaims();
         }catch (Exception ex){
             return null;
         }
