@@ -10,5 +10,8 @@ import com.tennetcn.free.security.message.LoginModel;
  */
 
 public interface ITokenCheckIntceptor {
+    /**
+     * 处理完通用的token检查后，在进行自定义的token检查处理
+     */
     boolean checkToken(LoginModel loginModel);
 }

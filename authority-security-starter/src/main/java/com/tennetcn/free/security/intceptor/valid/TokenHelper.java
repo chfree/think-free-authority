@@ -2,9 +2,12 @@ package com.tennetcn.free.security.intceptor.valid;
 
 import com.tennetcn.free.core.cache.ICached;
 import com.tennetcn.free.core.util.SpringContextUtils;
+import com.tennetcn.free.security.core.CreateTokenFactory;
+import com.tennetcn.free.security.core.ITokenCreate;
 import com.tennetcn.free.security.core.JwtHelper;
 import com.tennetcn.free.security.handle.ILoginModelIntceptor;
 import com.tennetcn.free.security.handle.ITokenCheckIntceptor;
+import com.tennetcn.free.security.handle.ITokenUpdateIntceptor;
 import com.tennetcn.free.security.handle.helper.LoginedIntceptorHelper;
 import com.tennetcn.free.security.message.LoginModel;
 import com.tennetcn.free.security.webapi.AuthorityApi;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author chfree
@@ -33,13 +37,16 @@ public class TokenHelper {
     @Autowired
     JwtHelper jwtHelper;
 
-    public boolean checkAuthorizeJwt(HttpServletRequest request) throws Exception{
+    @Autowired
+    CreateTokenFactory createTokenFactory;
+
+    public boolean checkAuthorizeJwt(HttpServletRequest request, HttpServletResponse response) throws Exception{
         String token=request.getHeader("Authorization");
         String refreshToken = request.getHeader("refreshToken");
-        Claims claims = null;
+        Claims claims = jwtHelper.parseJWT(token);;
 
         // 检测token
-        boolean checkTokenSuccess = checkToken(token, refreshToken, claims);
+        boolean checkTokenSuccess = checkToken(token, refreshToken, claims,response);
         if(!checkTokenSuccess){
             return false;
         }
@@ -96,9 +103,7 @@ public class TokenHelper {
     }
 
     // 数据token和刷新token无法精确预估固定的退出时间，只能是介于<刷新token时间-数据token时间>和<刷新token时间>之间的一个时间值
-    private boolean checkToken(String token,String refreshToken,Claims claims){
-
-        claims = jwtHelper.parseJWT(token);
+    private boolean checkToken(String token,String refreshToken,Claims claims, HttpServletResponse response){
         if(claims == null){
             cached.remove(token);
             return false;
@@ -115,9 +120,26 @@ public class TokenHelper {
             return false;
         }
 
-        // 重新分配数据token和刷新token
+        rebuildToken(refreshClaims,response);
 
         return true;
+    }
+
+    private void rebuildToken(Claims refreshClaims,HttpServletResponse response){
+        // 重新分配数据token和刷新token
+        ITokenCreate tokenCreate = createTokenFactory.newTokenCreate();
+
+        String userId = refreshClaims.getId();
+        String account = (String) refreshClaims.get(CreateTokenFactory.ACCOUNT);
+        String name = (String) refreshClaims.get(CreateTokenFactory.NAME);
+
+        String newToken = tokenCreate.createToken(userId, account, name);
+        String newRefreshToken = tokenCreate.createRefreshToken(userId, account, name);
+
+        response.setHeader("token", newToken);
+        response.setHeader("refreshToken", newRefreshToken);
+        response.setHeader("hasNewToken","true");
+        updateToken(userId,newToken,newRefreshToken);
     }
 
     private boolean customTokenCheck(LoginModel loginModel){
@@ -126,5 +148,12 @@ public class TokenHelper {
             return true;
         }
         return tokenCheckIntceptor.checkToken(loginModel);
+    }
+
+    private void updateToken(String userId,String token,String refreshToken){
+        ITokenUpdateIntceptor tokenUpdateIntceptor = SpringContextUtils.getCurrentContext().getBean(ITokenUpdateIntceptor.class);
+        if(tokenUpdateIntceptor==null){
+            tokenUpdateIntceptor.tokenUpdate(userId,token,refreshToken);
+        }
     }
 }

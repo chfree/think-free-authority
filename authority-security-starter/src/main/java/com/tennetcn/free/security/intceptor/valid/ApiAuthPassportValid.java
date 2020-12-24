@@ -1,22 +1,12 @@
 package com.tennetcn.free.security.intceptor.valid;
 
 import cn.hutool.json.JSONUtil;
-import com.tennetcn.free.core.cache.ICached;
 import com.tennetcn.free.core.message.web.BaseResponse;
-import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.security.annotation.ApiAuthPassport;
-import com.tennetcn.free.security.core.JwtHelper;
-import com.tennetcn.free.security.handle.ILoginModelIntceptor;
-import com.tennetcn.free.security.handle.ITokenCheckIntceptor;
-import com.tennetcn.free.security.handle.helper.LoginedIntceptorHelper;
-import com.tennetcn.free.security.message.LoginModel;
-import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.web.message.WebResponseStatus;
-import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 
 import javax.servlet.http.HttpServletRequest;

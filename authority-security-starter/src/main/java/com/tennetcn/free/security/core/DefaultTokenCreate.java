@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 @Component(value = CreateTokenFactory.DEFAULT_TOKEN_CREATE)
 public class DefaultTokenCreate implements ITokenCreate{
     @Override
-    public String createToken(LoginModel loginModel) {
+    public String createToken(String userId,String account,String name) {
         return null;
     }
 
     @Override
-    public String createRefreshToken(LoginModel loginModel) {
+    public String createRefreshToken(String userId,String account,String name) {
         return null;
     }
 }

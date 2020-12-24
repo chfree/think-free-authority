@@ -1,6 +1,5 @@
 package com.tennetcn.free.security.handle;
 
-import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.message.LoginModel;
 
 /**

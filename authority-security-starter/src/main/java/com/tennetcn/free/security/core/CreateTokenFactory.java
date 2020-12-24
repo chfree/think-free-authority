@@ -17,12 +17,17 @@ import org.springframework.util.StringUtils;
 @Component
 public class CreateTokenFactory {
 
+    public final static String ID="id";
+
+    public final static String ACCOUNT="account";
+
+    public final static String NAME="name";
+
     public final static String DEFAULT_TOKEN_CREATE="defaultTokenCreate";
 
     @Autowired
     JwtConfig jwtConfig;
 
-    @Bean
     public ITokenCreate newTokenCreate(){
         String tokenCreateBean = DEFAULT_TOKEN_CREATE;
 

@@ -13,10 +13,10 @@ public interface ITokenCreate {
     /**
      * 创建token
      */
-    String createToken(LoginModel loginModel);
+    String createToken(String userId,String account,String name);
 
     /**
      * 创建刷新token
      */
-    String createRefreshToken(LoginModel loginModel);
+    String createRefreshToken(String userId,String account,String name);
 }
