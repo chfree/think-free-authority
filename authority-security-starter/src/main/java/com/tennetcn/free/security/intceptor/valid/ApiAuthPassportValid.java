@@ -29,17 +29,14 @@ import java.io.OutputStream;
 public class ApiAuthPassportValid {
 
 	@Autowired
-	private ICached cached;
+	TokenHelper tokenHelper;
 
-	@Autowired
-	JwtHelper jwtHelper;
 	
 	public boolean valid(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception{
 		if(checkAppAuthorizeRule(handler)){
 			BaseResponse rm=new BaseResponse(WebResponseStatus.AUTHORIZE_ERROR,"登陆超时或授权错误，请重新登录");
 
-			boolean authorizeResult=checkAuthorizeJwt(request);
-
+			boolean authorizeResult=tokenHelper.checkAuthorizeJwt(request);
 			
 			if(authorizeResult){
 				response.setCharacterEncoding("UTF-8");
@@ -81,76 +78,5 @@ public class ApiAuthPassportValid {
 			}
 		}
 		return true;
-	}
-	
-
-	
-	private boolean checkAuthorizeJwt(HttpServletRequest request) throws Exception{
-		String token=request.getHeader("Authorization");
-		if(StringUtils.isEmpty(token)){
-			token=request.getParameter("token");
-
-			if(StringUtils.isEmpty(token)){
-			     return false;
-			}
-		}
-		
-		Claims claims = jwtHelper.parseJWT(token);
-		if(claims == null){
-			cached.remove(token);
-			return false;
-		}
-
-		// 如果token过期
-		if(jwtHelper.isTokenExpired(claims.getExpiration())){
-
-		}
-
-
-		LoginModel loginModel=(LoginModel)cached.get(token);
-		if(loginModel==null) {
-			log.info("取cache为空");
-			// 如果cache为空，则由loginModelIntceptor进行注册一次
-			ILoginModelIntceptor loginModelIntceptor = SpringContextUtils.getCurrentContext().getBean(ILoginModelIntceptor.class);
-			if(loginModelIntceptor==null){
-				return false;
-			}
-
-			/**
-			 * 重新注册完loginModel后，重新调起一下logined方法，将其他的附加也拉进来
-			 */
-			loginModel = loginModelIntceptor.registerLoginModel(token,claims);
-			if(loginModel==null){
-				return false;
-			}
-			if(StringUtils.isEmpty(loginModel.getToken())){
-				loginModel.setToken(token);
-			}
-
-			LoginedIntceptorHelper.loginedCallback(loginModel);
-
-			// 在存储一次token
-			cached.put(token,loginModel);
-		}
-
-		// 在Jwt验证通过的情况下
-		// 在进行自定义的处理方案
-		boolean customTokenCheck = customTokenCheck(loginModel);
-		if(!customTokenCheck){
-			cached.remove(token);
-			return false;
-		}
-
-		request.setAttribute(AuthorityApi.LOGIN_KEY, loginModel);
-		
-		return true;
-	}
-
-	private boolean customTokenCheck(LoginModel loginModel){
-		ITokenCheckIntceptor tokenCheckIntceptor = SpringContextUtils.getCurrentContext().getBean(ITokenCheckIntceptor.class);
-		if(tokenCheckIntceptor==null){
-			return true;
-		}
-		return tokenCheckIntceptor.checkToken(loginModel);
 	}
 }
