@@ -2,13 +2,16 @@ package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
+import com.tennetcn.free.authority.configuration.LoginConfig;
 import com.tennetcn.free.authority.entity.apimodel.login.LoginReq;
 import com.tennetcn.free.authority.entity.apimodel.login.RegisterReq;
 import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.enums.LoginAuthType;
+import com.tennetcn.free.authority.enums.LoginParamSettingKeys;
 import com.tennetcn.free.authority.enums.LoginStatus;
 import com.tennetcn.free.authority.handle.ILoginAllowIntceptor;
 import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
+import com.tennetcn.free.authority.logical.service.IParamSettingService;
 import com.tennetcn.free.security.core.CreateTokenFactory;
 import com.tennetcn.free.security.handle.ILoginedIntceptor;
 import com.tennetcn.free.authority.entity.model.LoginAuth;
@@ -66,12 +69,23 @@ public class LoginApi extends AuthorityApi {
     @Autowired
     JwtHelper jwtHelper;
 
+    @Autowired
+    IParamSettingService paramSettingService;
+
+    @Autowired
+    LoginConfig loginConfig;
+
     @ApiAuthPassport
     @ApiOperation(value = "登陆")
     @PostMapping("login")
     @Transactional
     public BaseResponse login(@Valid LoginReq loginReq){
         BaseResponse response = new BaseResponse();
+
+        if(loginConfig.isEncrypt()){
+            String rsaPriKey = paramSettingService.queryStrValue(LoginParamSettingKeys.rsaPriKey);
+            loginReq.resolveUserName(rsaPriKey);
+        }
 
         LoginUser user = userService.queryModelByLogin(loginReq.getUsername(),loginReq.getPassword());
         if(user==null){
@@ -247,5 +261,16 @@ public class LoginApi extends AuthorityApi {
         loginUser.setStatus(LoginStatus.UNACTIVE.getValue());
 
         return loginUser;
+    }
+
+    @ApiAuthPassport
+    @ApiOperation(value = "获取公钥信息")
+    @PostMapping("getPubKey")
+    public BaseResponse getPubKey(){
+        BaseResponse resp = new BaseResponse();
+        String pubKey = paramSettingService.queryStrValue(LoginParamSettingKeys.rsaPubKey);
+
+        resp.put("pubKey", pubKey);
+        return resp;
     }
 }

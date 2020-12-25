@@ -21,4 +21,10 @@ public class LoginConfig {
      */
     @Value("${think.login.openSSO:true}")
     private boolean openSSO;
+
+    /**
+     * 登陆是否加密
+     */
+    @Value("${think.login.encrypt:true}")
+    private boolean encrypt;
 }
