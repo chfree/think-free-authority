@@ -26,7 +26,7 @@ public class ApiAuthPassportValid {
 		if(checkAppAuthorizeRule(handler)){
 			BaseResponse rm=new BaseResponse(WebResponseStatus.AUTHORIZE_ERROR,"登陆超时或授权错误，请重新登录");
 
-			boolean authorizeResult=tokenHelper.checkAuthorizeJwt(request);
+			boolean authorizeResult=tokenHelper.checkAuthorizeJwt(request, response);
 			
 			if(authorizeResult){
 				response.setCharacterEncoding("UTF-8");

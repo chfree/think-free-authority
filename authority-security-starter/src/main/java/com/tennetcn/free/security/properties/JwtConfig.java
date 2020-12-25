@@ -18,8 +18,11 @@ public class JwtConfig {
     @Value("${think.jwt.secret-key:chfree001@gmail.com}")
     private String secretKey;
 
-    @Value("${think.jwt.expires-second:86400}")
-    private long expiresSecond = 86400;
+    @Value("${think.jwt.expires-second:7200}")
+    private long expiresSecond = 7200;
+
+    @Value("${think.jwt.refresh-expires-second:14400}")
+    private long refreshExpiresSecond = 14400;
 
     @Value("${think.jwt.create-token-bean:default}")
     private String createTokenBean;

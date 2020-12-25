@@ -9,6 +9,7 @@ import com.tennetcn.free.authority.enums.LoginAuthType;
 import com.tennetcn.free.authority.enums.LoginStatus;
 import com.tennetcn.free.authority.handle.ILoginAllowIntceptor;
 import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
+import com.tennetcn.free.security.core.CreateTokenFactory;
 import com.tennetcn.free.security.handle.ILoginedIntceptor;
 import com.tennetcn.free.authority.model.LoginAuth;
 import com.tennetcn.free.authority.model.LoginUser;
@@ -65,6 +66,9 @@ public class LoginApi extends AuthorityApi {
     private ILoginAuthService loginAuthService;
 
     @Autowired
+    CreateTokenFactory createTokenFactory;
+
+    @Autowired
     JwtHelper jwtHelper;
 
     @ApiAuthPassport
@@ -96,11 +100,7 @@ public class LoginApi extends AuthorityApi {
     private void loginSuccess(BaseResponse response, LoginUser user) {
         LoginModel loginModel = LoginUtil.user2LoginModel(user);
 
-        Map<String,Object> claims = new HashMap<>();
-        claims.put("account",loginModel.getAccount());
-        claims.put("name",loginModel.getName());
-
-        String token = jwtHelper.createJwt(user.getId(),claims);
+        String token = createTokenFactory.newTokenCreate().createToken(loginModel.getId(),loginModel.getAccount(),loginModel.getName());
         loginModel.setToken(token);
 
         // 执行Logined切入点
