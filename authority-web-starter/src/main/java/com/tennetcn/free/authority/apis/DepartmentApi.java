@@ -4,7 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.data.entity.apimodel.department.DepartmentListReq;
 import com.tennetcn.free.authority.data.entity.apimodel.department.DepartmentListResp;
 import com.tennetcn.free.authority.data.entity.apimodel.department.SaveDepartmentReq;
-import com.tennetcn.free.authority.service.IDepartmentService;
+import com.tennetcn.free.authority.logical.service.IDepartmentService;
 import com.tennetcn.free.authority.data.entity.viewmodel.DepartmentSearch;
 import com.tennetcn.free.authority.data.entity.viewmodel.DepartmentTree;
 import com.tennetcn.free.core.enums.ModelStatus;

@@ -5,7 +5,7 @@ import com.tennetcn.free.authority.data.entity.apimodel.business.BusinessListReq
 import com.tennetcn.free.authority.data.entity.apimodel.business.BusinessListResp;
 import com.tennetcn.free.authority.data.entity.apimodel.business.SaveBusinessReq;
 import com.tennetcn.free.authority.data.entity.model.Business;
-import com.tennetcn.free.authority.service.IBusinessService;
+import com.tennetcn.free.authority.logical.service.IBusinessService;
 import com.tennetcn.free.authority.data.entity.viewmodel.BusinessSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;

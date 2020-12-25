@@ -3,7 +3,7 @@ package com.tennetcn.free.authority.apis;
 import com.tennetcn.free.authority.data.entity.apimodel.group.GroupListReq;
 import com.tennetcn.free.authority.data.entity.apimodel.group.GroupListResp;
 import com.tennetcn.free.authority.data.entity.apimodel.group.SaveGroupReq;
-import com.tennetcn.free.authority.service.IGroupService;
+import com.tennetcn.free.authority.logical.service.IGroupService;
 import com.tennetcn.free.core.util.PkIdUtils;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.authority.data.entity.viewmodel.GroupSearch;

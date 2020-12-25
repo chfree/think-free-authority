@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.handle;
 
-import com.tennetcn.free.authority.apimodel.login.RegisterReq;
-import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.entity.apimodel.login.RegisterReq;
+import com.tennetcn.free.authority.entity.model.LoginUser;
 
 public interface IRegisterLoginUserIntceptor {
     /**

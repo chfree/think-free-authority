@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.data.entity.apimodel.menubutton.SaveMenuButtonReq;
 import com.tennetcn.free.authority.data.entity.model.MenuButton;
-import com.tennetcn.free.authority.service.IMenuButtonService;
+import com.tennetcn.free.authority.logical.service.IMenuButtonService;
 import com.tennetcn.free.authority.data.entity.viewmodel.MenuButtonSearch;
 import com.tennetcn.free.core.enums.YesOrNoInteger;
 import com.tennetcn.free.core.message.web.BaseResponse;

@@ -1,6 +1,6 @@
 package com.tennetcn.free.authority.handle;
 
-import com.tennetcn.free.authority.model.LoginUser;
+import com.tennetcn.free.authority.entity.model.LoginUser;
 import com.tennetcn.free.security.message.LoginModel;
 
 /**

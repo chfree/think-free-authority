@@ -5,7 +5,7 @@ import com.tennetcn.free.authority.data.entity.apimodel.paramdefine.ParamDefineL
 import com.tennetcn.free.authority.data.entity.apimodel.paramdefine.ParamDefineListResp;
 import com.tennetcn.free.authority.data.entity.apimodel.paramdefine.SaveParamDefineReq;
 import com.tennetcn.free.authority.data.entity.model.ParamDefine;
-import com.tennetcn.free.authority.service.IParamDefineService;
+import com.tennetcn.free.authority.logical.service.IParamDefineService;
 import com.tennetcn.free.authority.data.entity.viewmodel.ParamDefineSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;

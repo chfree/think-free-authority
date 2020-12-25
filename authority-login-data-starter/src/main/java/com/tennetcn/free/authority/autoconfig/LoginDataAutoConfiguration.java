@@ -9,7 +9,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @create 2019-10-04 17:02
  * @comment
  */
-@MapperScan(value = "com.tennetcn.free.authority.mapper")
+@MapperScan(value = "com.tennetcn.free.authority.logical.mapper")
 @ImportResource(locations={"login-data-starter-config.xml"})
 public class LoginDataAutoConfiguration {
 }

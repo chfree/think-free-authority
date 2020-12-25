@@ -10,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @comment
  */
 
-@MapperScan(value = "com.tennetcn.free.authority.mapper")
+@MapperScan(value = "com.tennetcn.free.authority.logical.mapper")
 @ImportResource(locations={"data-starter-config.xml"})
 public class DataAutoConfiguration {
 }

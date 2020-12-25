@@ -3,7 +3,7 @@ package com.tennetcn.free.authority.apis;
 import cn.hutool.core.util.IdUtil;
 import com.tennetcn.free.authority.data.entity.apimodel.usergroup.SaveUserGroupReq;
 import com.tennetcn.free.authority.data.entity.model.UserGroup;
-import com.tennetcn.free.authority.service.IUserGroupService;
+import com.tennetcn.free.authority.logical.service.IUserGroupService;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;

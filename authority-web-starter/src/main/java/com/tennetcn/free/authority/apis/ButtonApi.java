@@ -5,7 +5,7 @@ import com.tennetcn.free.authority.data.entity.apimodel.button.ButtonListReq;
 import com.tennetcn.free.authority.data.entity.apimodel.button.ButtonListResp;
 import com.tennetcn.free.authority.data.entity.apimodel.button.SaveButtonReq;
 import com.tennetcn.free.authority.data.entity.model.Button;
-import com.tennetcn.free.authority.service.IButtonService;
+import com.tennetcn.free.authority.logical.service.IButtonService;
 import com.tennetcn.free.authority.data.entity.viewmodel.ButtonSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;

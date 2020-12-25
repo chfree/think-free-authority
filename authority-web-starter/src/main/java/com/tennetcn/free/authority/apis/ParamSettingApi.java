@@ -1,11 +1,11 @@
 package com.tennetcn.free.authority.apis;
 
-import com.tennetcn.free.authority.apimodel.paramsetting.ParamSettingListReq;
-import com.tennetcn.free.authority.apimodel.paramsetting.ParamSettingListResp;
-import com.tennetcn.free.authority.apimodel.paramsetting.SaveParamSettingReq;
-import com.tennetcn.free.authority.model.ParamSetting;
-import com.tennetcn.free.authority.viewmodel.ParamSettingSearch;
-import com.tennetcn.free.authority.service.IParamSettingService;
+import com.tennetcn.free.authority.entity.apimodel.paramsetting.ParamSettingListReq;
+import com.tennetcn.free.authority.entity.apimodel.paramsetting.ParamSettingListResp;
+import com.tennetcn.free.authority.entity.apimodel.paramsetting.SaveParamSettingReq;
+import com.tennetcn.free.authority.entity.model.ParamSetting;
+import com.tennetcn.free.authority.entity.viewmodel.ParamSettingSearch;
+import com.tennetcn.free.authority.logical.service.IParamSettingService;
 import com.tennetcn.free.core.util.PkIdUtils;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.security.webapi.AuthorityApi;

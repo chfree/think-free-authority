@@ -2,8 +2,8 @@ package com.tennetcn.free.authority.apis;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
-import com.tennetcn.free.authority.apimodel.login.LoginReq;
-import com.tennetcn.free.authority.apimodel.login.RegisterReq;
+import com.tennetcn.free.authority.entity.apimodel.login.LoginReq;
+import com.tennetcn.free.authority.entity.apimodel.login.RegisterReq;
 import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.enums.LoginAuthType;
 import com.tennetcn.free.authority.enums.LoginStatus;
@@ -11,12 +11,12 @@ import com.tennetcn.free.authority.handle.ILoginAllowIntceptor;
 import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
 import com.tennetcn.free.security.core.CreateTokenFactory;
 import com.tennetcn.free.security.handle.ILoginedIntceptor;
-import com.tennetcn.free.authority.model.LoginAuth;
-import com.tennetcn.free.authority.model.LoginUser;
-import com.tennetcn.free.authority.service.ILoginAuthService;
-import com.tennetcn.free.authority.service.ILoginUserService;
+import com.tennetcn.free.authority.entity.model.LoginAuth;
+import com.tennetcn.free.authority.entity.model.LoginUser;
+import com.tennetcn.free.authority.logical.service.ILoginAuthService;
+import com.tennetcn.free.authority.logical.service.ILoginUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
-import com.tennetcn.free.authority.viewmodel.LoginUserSearch;
+import com.tennetcn.free.authority.entity.viewmodel.LoginUserSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;
 import com.tennetcn.free.core.util.SpringContextUtils;
@@ -40,11 +40,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author chfree

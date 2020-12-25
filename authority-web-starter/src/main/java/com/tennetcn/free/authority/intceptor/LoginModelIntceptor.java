@@ -1,7 +1,7 @@
 package com.tennetcn.free.authority.intceptor;
 
-import com.tennetcn.free.authority.model.LoginUser;
-import com.tennetcn.free.authority.service.ILoginUserService;
+import com.tennetcn.free.authority.entity.model.LoginUser;
+import com.tennetcn.free.authority.logical.service.ILoginUserService;
 import com.tennetcn.free.authority.utils.LoginUtil;
 import com.tennetcn.free.security.handle.ILoginModelIntceptor;
 import com.tennetcn.free.security.message.LoginModel;

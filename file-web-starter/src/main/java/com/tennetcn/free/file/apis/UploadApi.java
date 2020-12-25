@@ -2,7 +2,6 @@ package com.tennetcn.free.file.apis;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.digest.DigestUtil;
-import com.tennetcn.free.core.message.web.ResponseStatus;
 import com.tennetcn.free.file.data.entity.model.FileBsn;
 import com.tennetcn.free.file.data.entity.model.FileChunk;
 import com.tennetcn.free.file.data.entity.model.FileDeleteWait;
@@ -18,7 +17,7 @@ import com.tennetcn.free.file.exception.FileBizException;
 import com.tennetcn.free.file.message.FileChunkView;
 import com.tennetcn.free.file.message.UploadIntceptorParam;
 import com.tennetcn.free.file.message.UploadModel;
-import com.tennetcn.free.authority.service.IParamSettingService;
+import com.tennetcn.free.authority.logical.service.IParamSettingService;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.enums.YesOrNo;
 import com.tennetcn.free.core.exception.BizException;

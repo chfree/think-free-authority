@@ -5,7 +5,7 @@ import com.tennetcn.free.authority.data.entity.apimodel.role.RoleListReq;
 import com.tennetcn.free.authority.data.entity.apimodel.role.RoleListResp;
 import com.tennetcn.free.authority.data.entity.apimodel.role.SaveRoleReq;
 import com.tennetcn.free.authority.data.entity.model.Role;
-import com.tennetcn.free.authority.service.IRoleService;
+import com.tennetcn.free.authority.logical.service.IRoleService;
 import com.tennetcn.free.authority.data.entity.viewmodel.RoleSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;

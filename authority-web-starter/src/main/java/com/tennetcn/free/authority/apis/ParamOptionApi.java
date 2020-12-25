@@ -5,7 +5,7 @@ import com.tennetcn.free.authority.data.entity.apimodel.paramoption.ParamOptionL
 import com.tennetcn.free.authority.data.entity.apimodel.paramoption.ParamOptionListResp;
 import com.tennetcn.free.authority.data.entity.apimodel.paramoption.SaveParamOptionReq;
 import com.tennetcn.free.authority.data.entity.model.ParamOption;
-import com.tennetcn.free.authority.service.IParamOptionService;
+import com.tennetcn.free.authority.logical.service.IParamOptionService;
 import com.tennetcn.free.authority.data.entity.viewmodel.ParamOptionSearch;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.message.web.BaseResponse;

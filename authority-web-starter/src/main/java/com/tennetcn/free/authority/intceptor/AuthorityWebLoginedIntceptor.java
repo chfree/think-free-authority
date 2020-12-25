@@ -2,9 +2,8 @@ package com.tennetcn.free.authority.intceptor;
 
 import com.tennetcn.free.authority.data.entity.model.Department;
 import com.tennetcn.free.security.handle.ILoginedIntceptor;
-import com.tennetcn.free.authority.model.LoginUser;
-import com.tennetcn.free.authority.service.IDepartmentService;
-import com.tennetcn.free.core.message.web.BaseResponse;
+import com.tennetcn.free.authority.entity.model.LoginUser;
+import com.tennetcn.free.authority.logical.service.IDepartmentService;
 import com.tennetcn.free.security.message.LoginModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
