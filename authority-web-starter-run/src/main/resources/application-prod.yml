@@ -18,3 +18,5 @@ think:
     slat: iMmiThink
     enabled: true
     allowlist: /v2/api-docs,/api/v1/file/download/downFile,/api/v1/process/activiti/pdImage
+  cors:
+    exposed-header: token,refreshToken,hasNewToken
