@@ -25,6 +25,6 @@ public class LoginConfig {
     /**
      * 登陆是否加密
      */
-    @Value("${think.login.encrypt:true}")
+    @Value("${think.login.encrypt:false}")
     private boolean encrypt;
 }
