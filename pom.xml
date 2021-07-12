@@ -9,20 +9,21 @@
     <packaging>pom</packaging>
     <version>0.0.1</version>
     <modules>
-        <module>authority-data-entity</module>
-        <module>authority-data-service-starter</module>
-        <module>authority-web-starter</module>
-        <module>authority-web-starter-run</module>
-        <module>authority-security-starter</module>
-        <module>develop-data-service-starter</module>
-        <module>develop-web-starter</module>
-        <module>authority-login-starter</module>
-        <module>authority-login-data-starter</module>
-        <module>quartz-web-starter</module>
-        <module>develop-data-entity</module>
-        <module>file-data-entity</module>
-        <module>file-data-service-starter</module>
-        <module>file-web-starter</module>
+        <module>authority/authority-data-entity</module>
+        <module>authority/authority-data-service-starter</module>
+        <module>authority/authority-web-starter</module>
+        <module>authority/authority-web-starter-run</module>
+        <module>security/authority-security-starter</module>
+        <module>develop/develop-data-service-starter</module>
+        <module>develop/develop-web-starter</module>
+        <module>develop/develop-data-entity</module>
+        <module>authority/authority-login-starter</module>
+        <module>authority/authority-login-data-starter</module>
+        <module>quartz/quartz-web-starter</module>
+
+        <module>file/file-data-entity</module>
+        <module>file/file-data-service-starter</module>
+        <module>file/file-web-starter</module>
     </modules>
 
     <parent>
