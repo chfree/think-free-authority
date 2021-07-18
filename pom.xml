@@ -7,7 +7,7 @@
     <groupId>com.tennetcn.free.authority</groupId>
     <artifactId>base</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1</version>
+    <version>2.0.0</version>
     <modules>
         <module>authority/authority-data-entity</module>
         <module>authority/authority-data-service-starter</module>
@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.tennetcn.free</groupId>
         <artifactId>base</artifactId>
-        <version>0.0.1</version>
+        <version>2.0.0</version>
         <relativePath />
     </parent>
 
@@ -59,6 +59,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <com.tennetcn.free.authority.version>2.0.0</com.tennetcn.free.authority.version>
+        <io.jsonwebtoken.jjwt.version>0.9.1</io.jsonwebtoken.jjwt.version>
     </properties>
 
 
@@ -66,8 +68,63 @@
         <dependencies>
             <dependency>
                 <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>authority-data-entity</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>authority-data-service-starter</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>authority-login-data-starter</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>authority-login-starter</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>file-data-entity</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>file-data-service-starter</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>file-web-starter</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>authority-security-starter</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>quartz-web-starter</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
                 <artifactId>develop-data-entity</artifactId>
-                <version>0.0.1</version>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.tennetcn.free.authority</groupId>
+                <artifactId>develop-data-service-starter</artifactId>
+                <version>${com.tennetcn.free.authority.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${io.jsonwebtoken.jjwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
