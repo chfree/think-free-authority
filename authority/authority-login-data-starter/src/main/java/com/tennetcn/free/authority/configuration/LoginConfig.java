@@ -27,4 +27,16 @@ public class LoginConfig {
      */
     @Value("${think.login.encrypt:false}")
     private boolean encrypt;
+
+    /**
+     * 登陆的rsa公钥
+     */
+    @Value("${think.login.rsaPubKey:}")
+    private String loginRsaPubKey;
+
+    /**
+     * 登陆的rsa私钥
+     */
+    @Value("${think.login.rsaPriKey:}")
+    private String loginRsaPriKey;
 }

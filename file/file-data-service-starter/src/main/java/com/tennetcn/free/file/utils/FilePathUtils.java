@@ -1,8 +1,6 @@
 package com.tennetcn.free.file.utils;
 
 import cn.hutool.core.date.DateUtil;
-import com.tennetcn.free.authority.entity.model.ParamSetting;
-import com.tennetcn.free.authority.logical.service.IParamSettingService;
 import com.tennetcn.free.core.exception.BizException;
 import com.tennetcn.free.core.util.SpringContextUtils;
 import com.tennetcn.free.file.data.enums.FileParamSettingKeys;

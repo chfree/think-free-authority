@@ -17,7 +17,6 @@ import com.tennetcn.free.file.exception.FileBizException;
 import com.tennetcn.free.file.message.FileChunkView;
 import com.tennetcn.free.file.message.UploadIntceptorParam;
 import com.tennetcn.free.file.message.UploadModel;
-import com.tennetcn.free.authority.logical.service.IParamSettingService;
 import com.tennetcn.free.core.enums.ModelStatus;
 import com.tennetcn.free.core.enums.YesOrNo;
 import com.tennetcn.free.core.exception.BizException;

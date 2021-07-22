@@ -7,11 +7,9 @@ import com.tennetcn.free.authority.entity.apimodel.login.LoginReq;
 import com.tennetcn.free.authority.entity.apimodel.login.RegisterReq;
 import com.tennetcn.free.authority.enums.LoginAuthStatus;
 import com.tennetcn.free.authority.enums.LoginAuthType;
-import com.tennetcn.free.authority.enums.LoginParamSettingKeys;
 import com.tennetcn.free.authority.enums.LoginStatus;
 import com.tennetcn.free.authority.handle.ILoginAllowIntceptor;
 import com.tennetcn.free.authority.handle.IRegisterLoginUserIntceptor;
-import com.tennetcn.free.authority.logical.service.IParamSettingService;
 import com.tennetcn.free.security.core.CreateTokenFactory;
 import com.tennetcn.free.security.handle.ILoginedIntceptor;
 import com.tennetcn.free.authority.entity.model.LoginAuth;
@@ -70,9 +68,6 @@ public class LoginApi extends AuthorityApi {
     JwtHelper jwtHelper;
 
     @Autowired
-    IParamSettingService paramSettingService;
-
-    @Autowired
     LoginConfig loginConfig;
 
     @ApiAuthPassport
@@ -83,8 +78,7 @@ public class LoginApi extends AuthorityApi {
         BaseResponse response = new BaseResponse();
 
         if(loginConfig.isEncrypt()){
-            String rsaPriKey = paramSettingService.queryStrValue(LoginParamSettingKeys.rsaPriKey);
-            loginReq.resolveUserName(rsaPriKey);
+            loginReq.resolveUserName(loginConfig.getLoginRsaPriKey());
         }
 
         LoginUser user = userService.queryModelByLogin(loginReq.getUsername(),loginReq.getPassword());
@@ -268,7 +262,7 @@ public class LoginApi extends AuthorityApi {
     @PostMapping("getPubKey")
     public BaseResponse getPubKey(){
         BaseResponse resp = new BaseResponse();
-        String pubKey = paramSettingService.queryStrValue(LoginParamSettingKeys.rsaPubKey);
+        String pubKey = loginConfig.getLoginRsaPubKey();
 
         resp.put("pubKey", pubKey);
         return resp;
