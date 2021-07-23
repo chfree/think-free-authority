@@ -2,6 +2,7 @@ package com.tennetcn.free.file.apis;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.cditer.free.param.logical.service.IParamSettingService;
 import com.tennetcn.free.file.data.entity.model.FileBsn;
 import com.tennetcn.free.file.data.entity.model.FileChunk;
 import com.tennetcn.free.file.data.entity.model.FileDeleteWait;

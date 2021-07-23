@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>base</artifactId>
-        <groupId>com.tennetcn.free.authority</groupId>
+        <groupId>com.cditer.free.components</groupId>
         <version>2.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
@@ -15,23 +15,23 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
+            <groupId>com.cditer.free.components</groupId>
             <artifactId>authority-data-service-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
+            <groupId>com.cditer.free.components</groupId>
             <artifactId>authority-security-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.tennetcn.free</groupId>
+            <groupId>com.cditer.free</groupId>
             <artifactId>swagger-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
+            <groupId>com.cditer.free.components</groupId>
             <artifactId>authority-login-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.tennetcn.free.authority</groupId>
+            <groupId>com.cditer.free.components</groupId>
             <artifactId>file-web-starter</artifactId>
         </dependency>
     </dependencies>

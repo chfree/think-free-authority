@@ -1,17 +1,20 @@
-package com.tennetcn.free.authority.apis;
+package com.cditer.free.param.apis;
 
-import com.tennetcn.free.authority.entity.apimodel.paramsetting.ParamSettingListReq;
-import com.tennetcn.free.authority.entity.apimodel.paramsetting.ParamSettingListResp;
-import com.tennetcn.free.authority.entity.apimodel.paramsetting.SaveParamSettingReq;
-import com.tennetcn.free.core.util.PkIdUtils;
+import com.cditer.free.param.data.entity.apimodel.paramsetting.ParamSettingListReq;
+import com.cditer.free.param.data.entity.apimodel.paramsetting.ParamSettingListResp;
+import com.cditer.free.param.data.entity.apimodel.paramsetting.SaveParamSettingReq;
+import com.cditer.free.param.data.entity.model.ParamSetting;
+import com.cditer.free.param.data.entity.viewmodel.ParamSettingSearch;
+import com.cditer.free.param.logical.service.IParamSettingService;
 import com.tennetcn.free.core.enums.ModelStatus;
-import com.tennetcn.free.security.webapi.AuthorityApi;
 import com.tennetcn.free.core.message.web.BaseResponse;
+import com.tennetcn.free.core.util.PkIdUtils;
+import com.tennetcn.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,6 +31,7 @@ import javax.validation.constraints.NotBlank;
 @RequestMapping(value = "/api/v1/authority/paramSetting/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="参数配置表管理",value ="参数配置表相关的操作")
 public class ParamSettingApi extends AuthorityApi {
+
     @Autowired
     IParamSettingService paramSettingService;
 

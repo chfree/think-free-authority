@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tennetcn.free.authority</groupId>
+    <groupId>com.cditer.free.components</groupId>
     <artifactId>base</artifactId>
     <packaging>pom</packaging>
     <version>2.0.0</version>
@@ -24,10 +24,14 @@
         <module>file/file-data-entity</module>
         <module>file/file-data-service-starter</module>
         <module>file/file-web-starter</module>
+
+        <module>param/param-data-entity</module>
+        <module>param/param-data-service-starter</module>
+        <module>param/param-web-starter</module>
     </modules>
 
     <parent>
-        <groupId>com.tennetcn.free</groupId>
+        <groupId>com.cditer.free</groupId>
         <artifactId>base</artifactId>
         <version>2.0.0</version>
         <relativePath />
@@ -59,7 +63,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <com.tennetcn.free.authority.version>2.0.0</com.tennetcn.free.authority.version>
+        <com.cditer.free.base.version>2.0.0</com.cditer.free.base.version>
+        <com.cditer.free.components.version>2.0.0</com.cditer.free.components.version>
         <io.jsonwebtoken.jjwt.version>0.9.1</io.jsonwebtoken.jjwt.version>
     </properties>
 
@@ -67,59 +72,69 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>authority-data-entity</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>authority-data-service-starter</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>authority-login-data-starter</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>authority-login-starter</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>file-data-entity</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>file-data-service-starter</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>file-web-starter</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>authority-security-starter</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>quartz-web-starter</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>develop-data-entity</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.tennetcn.free.authority</groupId>
+                <groupId>com.cditer.free.components</groupId>
                 <artifactId>develop-data-service-starter</artifactId>
-                <version>${com.tennetcn.free.authority.version}</version>
+                <version>${com.cditer.free.components.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cditer.free.components</groupId>
+                <artifactId>authority-web-starter</artifactId>
+                <version>${com.cditer.free.components.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cditer.free.components</groupId>
+                <artifactId>develop-web-starter</artifactId>
+                <version>${com.cditer.free.components.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
