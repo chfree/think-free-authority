@@ -8,12 +8,12 @@
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <context:component-scan base-package="com.tennetcn.free.authority.*" />
+    <context:component-scan base-package="com.cditer.free.authority.*" />
 
-	<bean class="com.tennetcn.free.data.extend.config.TypeAliasBean">
+	<bean class="com.cditer.free.data.extend.config.TypeAliasBean">
 		<property name="packageNames">
 			<list>
-				<value>com.tennetcn.free.authority.data.model</value>
+				<value>com.cditer.free.authority.data.model</value>
 			</list>
 		</property>
 	</bean>

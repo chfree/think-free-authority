@@ -2,7 +2,7 @@ package com.cditer.free.param.data.entity.model;
 
 import cn.hutool.core.convert.Convert;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tennetcn.free.core.message.data.ModelBase;
+import com.cditer.free.core.message.data.ModelBase;
 import lombok.Data;
 
 import javax.persistence.Column;

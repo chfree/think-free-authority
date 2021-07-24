@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tennetcn.free.file.mapper.IFileInfoMapper">
+<mapper namespace="com.cditer.free.file.mapper.IFileInfoMapper">
     <!-- 文件信息表Mapper -->
     <sql id="tableName">base_file_info fileInfo</sql>
     <sql id="mainTableAlias"> fileInfo.</sql>
@@ -21,7 +21,7 @@
     </sql>
 
     <!-- 文件信息表Mapper -->
-    <resultMap type="com.tennetcn.free.file.data.entity.model.FileInfo" id="fileInfoMap">
+    <resultMap type="com.cditer.free.file.data.entity.model.FileInfo" id="fileInfoMap">
         <id column="file_id" property="fileId"/>    <!-- 主键 -->
         <result column="size" property="size"/>    <!-- 大小 -->
         <result column="mime_type" property="mimeType"/>    <!-- 文件类型 -->
@@ -36,7 +36,7 @@
         <result column="delete_mark" property="deleteMark"/>    <!-- 删除标记 -->
     </resultMap>
 
-    <resultMap id="fileInfoViewMap" type="com.tennetcn.free.file.data.entity.viewmodel.FileInfoView" extends="fileInfoMap">
+    <resultMap id="fileInfoViewMap" type="com.cditer.free.file.data.entity.viewmodel.FileInfoView" extends="fileInfoMap">
         <result column="seq_index" property="seqIndex" />
     </resultMap>
 

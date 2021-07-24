@@ -4,8 +4,8 @@ import com.cditer.free.param.logical.dao.IParamDefineDao;
 import com.cditer.free.param.data.entity.model.ParamDefine;
 import com.cditer.free.param.data.entity.viewmodel.ParamDefineSearch;
 import com.cditer.free.param.logical.service.IParamDefineService;
-import com.tennetcn.free.core.message.data.PagerModel;
-import com.tennetcn.free.data.dao.base.impl.SuperService;
+import com.cditer.free.core.message.data.PagerModel;
+import com.cditer.free.data.dao.base.impl.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

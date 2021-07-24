@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import cn.hutool.core.convert.Convert;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import com.tennetcn.free.core.message.data.ModelBase;
+import com.cditer.free.core.message.data.ModelBase;
 
 /**
  * @author      auto build code by think

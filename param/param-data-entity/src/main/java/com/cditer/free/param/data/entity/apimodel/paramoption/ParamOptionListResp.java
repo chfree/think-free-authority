@@ -1,7 +1,7 @@
 package com.cditer.free.param.data.entity.apimodel.paramoption;
 
 import com.cditer.free.param.data.entity.model.ParamOption;
-import com.tennetcn.free.core.message.web.BasePagerResp;
+import com.cditer.free.core.message.web.BasePagerResp;
 import lombok.Data;
 
 import java.util.List;

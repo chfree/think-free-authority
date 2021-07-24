@@ -7,9 +7,9 @@ import com.cditer.free.param.data.entity.apimodel.paramoption.SaveParamOptionReq
 import com.cditer.free.param.data.entity.model.ParamOption;
 import com.cditer.free.param.data.entity.viewmodel.ParamOptionSearch;
 import com.cditer.free.param.logical.service.IParamOptionService;
-import com.tennetcn.free.core.enums.ModelStatus;
-import com.tennetcn.free.core.message.web.BaseResponse;
-import com.tennetcn.free.security.webapi.AuthorityApi;
+import com.cditer.free.core.enums.ModelStatus;
+import com.cditer.free.core.message.web.BaseResponse;
+import com.cditer.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

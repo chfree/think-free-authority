@@ -3,8 +3,8 @@ package com.cditer.free.param.logical.service;
 import com.cditer.free.param.data.entity.model.ParamOption;
 import com.cditer.free.param.data.entity.viewmodel.ParamOptionSearch;
 import com.cditer.free.param.data.entity.viewmodel.ParamOptionView;
-import com.tennetcn.free.core.message.data.PagerModel;
-import com.tennetcn.free.data.dao.base.ISuperService;
+import com.cditer.free.core.message.data.PagerModel;
+import com.cditer.free.data.dao.base.ISuperService;
 
 import java.util.List;
 import java.util.Map;

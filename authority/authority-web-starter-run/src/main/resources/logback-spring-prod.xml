@@ -49,17 +49,17 @@
         </encoder>
     </appender>
 
-    <logger name="com.tennetcn.free.web.aspect.LogInfo" additivity="false">
+    <logger name="com.cditer.free.web.aspect.LogInfo" additivity="false">
         <level value="debug" />
         <appender-ref ref="MSG_FILE" />
     </logger>
 
-    <logger name="com.tennetcn.free.web.init.BaseServletContextInitializer" additivity="false">
+    <logger name="com.cditer.free.web.init.BaseServletContextInitializer" additivity="false">
         <level value="DEBUG" />
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="COMMON_FILE" />
     </logger>
-    <logger name="com.tennetcn.free.web.listener.BaseApplicationListener" additivity="false">
+    <logger name="com.cditer.free.web.listener.BaseApplicationListener" additivity="false">
         <level value="DEBUG" />
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="COMMON_FILE" />

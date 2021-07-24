@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper  namespace="com.tennetcn.free.file.mapper.IFileBsnMapper">
+<mapper  namespace="com.cditer.free.file.mapper.IFileBsnMapper">
 
 	<!-- 文件业务表Mapper -->
 	<sql id="tableName">basse_file_bsn fileBsn</sql>
@@ -18,7 +18,7 @@
     </sql>
 
 	<!-- 文件业务表Mapper -->
-	<resultMap type="com.tennetcn.free.file.data.entity.model.FileBsn" id="fileBsnMap">
+	<resultMap type="com.cditer.free.file.data.entity.model.FileBsn" id="fileBsnMap">
 		<id column="id" property="id"/>    <!-- 主键 -->
 		<result column="file_id" property="fileId"/>    <!-- 文件id -->
 		<result column="bsn_id" property="bsnId"/>    <!-- 业务id -->

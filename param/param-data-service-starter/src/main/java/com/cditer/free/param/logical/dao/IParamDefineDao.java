@@ -2,8 +2,8 @@ package com.cditer.free.param.logical.dao;
 
 import com.cditer.free.param.data.entity.model.ParamDefine;
 import com.cditer.free.param.data.entity.viewmodel.ParamDefineSearch;
-import com.tennetcn.free.core.message.data.PagerModel;
-import com.tennetcn.free.data.dao.base.ISuperDao;
+import com.cditer.free.core.message.data.PagerModel;
+import com.cditer.free.data.dao.base.ISuperDao;
 
 import java.util.List;
 

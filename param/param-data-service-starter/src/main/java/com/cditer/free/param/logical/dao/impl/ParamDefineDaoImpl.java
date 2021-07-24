@@ -3,11 +3,11 @@ package com.cditer.free.param.logical.dao.impl;
 import com.cditer.free.param.data.entity.model.ParamDefine;
 import com.cditer.free.param.data.entity.viewmodel.ParamDefineSearch;
 import com.cditer.free.param.logical.dao.IParamDefineDao;
-import com.tennetcn.free.core.enums.OrderEnum;
-import com.tennetcn.free.core.message.data.PagerModel;
-import com.tennetcn.free.data.dao.base.ISqlExpression;
-import com.tennetcn.free.data.dao.base.impl.SuperDao;
-import com.tennetcn.free.data.utils.SqlExpressionFactory;
+import com.cditer.free.core.enums.OrderEnum;
+import com.cditer.free.core.message.data.PagerModel;
+import com.cditer.free.data.dao.base.ISqlExpression;
+import com.cditer.free.data.dao.base.impl.SuperDao;
+import com.cditer.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

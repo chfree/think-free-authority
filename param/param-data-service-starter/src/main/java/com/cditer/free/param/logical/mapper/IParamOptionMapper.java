@@ -1,7 +1,7 @@
 package com.cditer.free.param.logical.mapper;
 
 import com.cditer.free.param.data.entity.model.ParamOption;
-import com.tennetcn.free.data.dao.base.IMapper;
+import com.cditer.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

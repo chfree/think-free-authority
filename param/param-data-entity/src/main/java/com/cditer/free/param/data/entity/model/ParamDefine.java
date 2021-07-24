@@ -1,6 +1,6 @@
 package com.cditer.free.param.data.entity.model;
 
-import com.tennetcn.free.core.message.data.ModelBase;
+import com.cditer.free.core.message.data.ModelBase;
 import lombok.Data;
 
 import javax.persistence.Column;

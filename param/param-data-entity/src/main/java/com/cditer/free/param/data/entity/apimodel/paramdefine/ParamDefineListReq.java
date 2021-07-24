@@ -1,7 +1,7 @@
 package com.cditer.free.param.data.entity.apimodel.paramdefine;
 
 import com.cditer.free.param.data.entity.viewmodel.ParamDefineSearch;
-import com.tennetcn.free.core.message.web.BasePagerReq;
+import com.cditer.free.core.message.web.BasePagerReq;
 import lombok.Data;
 
 /**
