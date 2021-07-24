@@ -86,6 +86,7 @@ public class JwtHelper {
         try {
             Claims claims = Jwts.parser()  //得到DefaultJwtParser
                     .setSigningKey(key)         //设置签名的秘钥
+                    .setAllowedClockSkewSeconds(120) // 设置机器时间容差
                     .parseClaimsJws(jwt).getBody();//设置需要解析的jwt
             return claims;
         }catch(ExpiredJwtException ex) {
