@@ -7,7 +7,7 @@ import io.jsonwebtoken.Claims;
  * @author chfree
  * @email chfree001@gmail.com
  * @create 2019-08-25 09:39
- * @comment
+ * @comment 注册loginModel的回调
  */
 
 public interface ILoginModelIntceptor {

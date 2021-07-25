@@ -1,13 +1,11 @@
 package com.cditer.free.security.intceptor.valid;
 
 import com.cditer.free.security.core.CreateTokenFactory;
-import com.cditer.free.security.core.ITokenCreate;
 import com.cditer.free.security.core.JwtHelper;
 import com.cditer.free.security.handle.ITokenCheckIntceptor;
 import com.cditer.free.core.cache.ICached;
 import com.cditer.free.core.util.SpringContextUtils;
 import com.cditer.free.security.handle.ILoginModelIntceptor;
-import com.cditer.free.security.handle.ITokenUpdateIntceptor;
 import com.cditer.free.security.handle.helper.LoginedIntceptorHelper;
 import com.cditer.free.security.message.LoginModel;
 import com.cditer.free.security.webapi.AuthorityApi;
@@ -42,11 +40,10 @@ public class TokenHelper {
 
     public boolean checkAuthorizeJwt(HttpServletRequest request, HttpServletResponse response) throws Exception{
         String token=request.getHeader("Authorization");
-        String refreshToken = request.getHeader("refreshToken");
         Claims claims = jwtHelper.parseJWT(token);;
 
         // 检测token
-        boolean checkTokenSuccess = checkToken(token, refreshToken, claims,response);
+        boolean checkTokenSuccess = checkToken(token, claims,response);
         if(!checkTokenSuccess){
             return false;
         }
@@ -102,45 +99,20 @@ public class TokenHelper {
         return loginModel;
     }
 
-    // 数据token和刷新token无法精确预估固定的退出时间，只能是介于<刷新token时间-数据token时间>和<刷新token时间>之间的一个时间值
-    private boolean checkToken(String token,String refreshToken,Claims claims, HttpServletResponse response){
+    // 数据token过期
+    private boolean checkToken(String token,Claims claims, HttpServletResponse response){
         if(claims == null){
             cached.remove(token);
             return false;
         }
 
-        if(!jwtHelper.isTokenExpired(claims.getExpiration())){
-            return true;
-        }
-
-        // 如果token过期，则检测刷新token
-        Claims refreshClaims = jwtHelper.parseJWT(refreshToken);
-        // 刷新token过期，则直接返回
-        if(jwtHelper.isTokenExpired(refreshClaims.getExpiration())){
+        // token过期直接返回false
+        if(jwtHelper.isTokenExpired(claims.getExpiration())){
             return false;
         }
-
-        rebuildToken(refreshClaims,response);
-
         return true;
     }
 
-    private void rebuildToken(Claims refreshClaims,HttpServletResponse response){
-        // 重新分配数据token和刷新token
-        ITokenCreate tokenCreate = createTokenFactory.newTokenCreate();
-
-        String userId = refreshClaims.getId();
-        String account = (String) refreshClaims.get(CreateTokenFactory.ACCOUNT);
-        String name = (String) refreshClaims.get(CreateTokenFactory.NAME);
-
-        String newToken = tokenCreate.createToken(userId, account, name);
-        String newRefreshToken = tokenCreate.createRefreshToken(userId, account, name);
-
-        response.setHeader("token", newToken);
-        response.setHeader("refreshToken", newRefreshToken);
-        response.setHeader("hasNewToken","true");
-        updateToken(userId,newToken,newRefreshToken);
-    }
 
     private boolean customTokenCheck(LoginModel loginModel){
         ITokenCheckIntceptor tokenCheckIntceptor = SpringContextUtils.getCurrentContext().getBean(ITokenCheckIntceptor.class);
@@ -148,12 +120,5 @@ public class TokenHelper {
             return true;
         }
         return tokenCheckIntceptor.checkToken(loginModel);
-    }
-
-    private void updateToken(String userId,String token,String refreshToken){
-        ITokenUpdateIntceptor tokenUpdateIntceptor = SpringContextUtils.getCurrentContext().getBean(ITokenUpdateIntceptor.class);
-        if(tokenUpdateIntceptor==null){
-            tokenUpdateIntceptor.tokenUpdate(userId,token,refreshToken);
-        }
     }
 }
