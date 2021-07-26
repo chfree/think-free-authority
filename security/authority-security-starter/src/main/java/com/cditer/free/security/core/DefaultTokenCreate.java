@@ -33,15 +33,4 @@ public class DefaultTokenCreate implements ITokenCreate{
 
         return jwtHelper.createJwt(userId,claims,expiresSecond);
     }
-
-    @Override
-    public String createRefreshToken(String userId,String account,String name) {
-        Map<String,Object> claims = new HashMap<>();
-        claims.put("account",account);
-        claims.put("name",name);
-
-        long expiresSecond = jwtConfig.getRefreshExpiresSecond()*1000L;
-
-        return jwtHelper.createJwt(userId,claims,expiresSecond);
-    }
 }

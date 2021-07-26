@@ -21,9 +21,6 @@ public class JwtConfig {
     @Value("${think.jwt.expires-second:7200}")
     private long expiresSecond = 7200;
 
-    @Value("${think.jwt.refresh-expires-second:14400}")
-    private long refreshExpiresSecond = 14400;
-
     @Value("${think.jwt.create-token-bean:default}")
     private String createTokenBean;
 }

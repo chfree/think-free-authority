@@ -31,7 +31,6 @@ public class LoginIntceptor extends HandlerInterceptorAdapter {
 		if (handler.getClass().isAssignableFrom(HandlerMethod.class)) {
 			//如果是api的请求
 			if (((HandlerMethod) handler).getBean() instanceof AuthorityApi) {
-				//response.addHeader("Access-Control-Allow-Origin", "*");
 				authResult= apiAuthPassportValid.valid(request, response, handler);
 			}
 		}
