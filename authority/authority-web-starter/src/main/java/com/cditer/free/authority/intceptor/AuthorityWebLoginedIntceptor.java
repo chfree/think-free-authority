@@ -1,7 +1,7 @@
 package com.cditer.free.authority.intceptor;
 
-import com.cditer.free.authority.entity.model.LoginUser;
 import com.cditer.free.authority.data.entity.model.Department;
+import com.cditer.free.authority.data.entity.model.User;
 import com.cditer.free.security.handle.ILoginedIntceptor;
 import com.cditer.free.authority.logical.service.IDepartmentService;
 import com.cditer.free.security.message.LoginModel;
@@ -29,7 +29,7 @@ public class AuthorityWebLoginedIntceptor implements ILoginedIntceptor {
 
     @Override
     public void logined(LoginModel loginModel) {
-        LoginUser loginUser = (LoginUser)loginModel.get("user");
+        User loginUser = (User)loginModel.get("user");
         Department department = departmentService.queryModel(loginUser.getDepartmentId());
         if(department!=null){
             loginModel.put("departmentName",department.getFullName());

@@ -22,10 +22,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cditer.free.components</groupId>
-            <artifactId>authority-login-data-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.cditer.free.components</groupId>-->
+<!--            <artifactId>authority-login-data-starter</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.cditer.free.components</groupId>
             <artifactId>authority-data-entity</artifactId>

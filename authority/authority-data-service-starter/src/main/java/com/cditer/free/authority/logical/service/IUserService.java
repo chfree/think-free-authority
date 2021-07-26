@@ -32,4 +32,5 @@ public interface IUserService extends ISuperService<User> {
     String passwordFormat(String password);
 
     boolean saveUser(SaveUserReq saveUserReq);
+
 }

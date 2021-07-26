@@ -1,6 +1,6 @@
 package com.cditer.free.authority.intceptor;
 
-import com.cditer.free.authority.entity.model.LoginUser;
+import com.cditer.free.authority.data.entity.model.User;
 import com.cditer.free.authority.logical.service.ILoginUserService;
 import com.cditer.free.authority.utils.LoginUtil;
 import com.cditer.free.security.handle.ILoginModelIntceptor;
@@ -26,7 +26,7 @@ public class LoginModelIntceptor implements ILoginModelIntceptor {
     public LoginModel registerLoginModel(String token, Claims claims) {
         String account = claims.get("account",String.class);
 
-        LoginUser user = userService.queryModelByAccount(account);
+        User user = userService.queryModelByAccount(account);
         if(user==null){
             return null;
         }

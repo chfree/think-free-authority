@@ -1,5 +1,6 @@
 package com.cditer.free.authority.logical.dao;
 
+import com.cditer.free.authority.data.entity.viewmodel.LoginUserSearch;
 import com.cditer.free.authority.data.entity.viewmodel.UserSearch;
 import com.cditer.free.authority.data.entity.viewmodel.UserView;
 import com.cditer.free.authority.data.entity.model.User;
@@ -27,4 +28,6 @@ public interface IUserDao extends ISuperDao<User> {
     User queryModelByAccount(String account);
 
     UserView queryViewModelById(String id);
+
+    int queryCountByLoginUserSearch(LoginUserSearch search);
 }

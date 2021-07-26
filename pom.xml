@@ -17,8 +17,6 @@
         <module>develop/develop-data-service-starter</module>
         <module>develop/develop-web-starter</module>
         <module>develop/develop-data-entity</module>
-        <module>authority/authority-login-starter</module>
-        <module>authority/authority-login-data-starter</module>
         <module>quartz/quartz-web-starter</module>
 
         <module>file/file-data-entity</module>

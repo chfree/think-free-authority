@@ -1,5 +1,6 @@
 package com.cditer.free.authority.logical.dao.impl;
 
+import com.cditer.free.authority.data.entity.viewmodel.LoginUserSearch;
 import com.cditer.free.authority.data.entity.viewmodel.UserSearch;
 import com.cditer.free.authority.data.entity.viewmodel.UserView;
 import com.cditer.free.authority.logical.dao.IUserDao;
@@ -90,6 +91,16 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
 
 
         return queryModel(sqlExpression,UserView.class);
+    }
+
+    @Override
+    public int queryCountByLoginUserSearch(LoginUserSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectCount().from(User.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryCount(sqlExpression);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, UserSearch search){
