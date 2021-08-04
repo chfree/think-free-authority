@@ -15,7 +15,6 @@ import com.cditer.free.authority.handle.ILoginAllowIntceptor;
 import com.cditer.free.authority.handle.IRegisterLoginUserIntceptor;
 import com.cditer.free.authority.logical.service.ILoginAuthService;
 import com.cditer.free.authority.logical.service.ILoginUserService;
-import com.cditer.free.authority.logical.service.IUserService;
 import com.cditer.free.authority.utils.LoginUtil;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;

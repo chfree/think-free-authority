@@ -13,10 +13,12 @@
         <module>authority/authority-data-service-starter</module>
         <module>authority/authority-web-starter</module>
         <module>authority/authority-web-starter-run</module>
-        <module>security/authority-security-starter</module>
+        <module>authority/authority-security-starter</module>
+
         <module>develop/develop-data-service-starter</module>
         <module>develop/develop-web-starter</module>
         <module>develop/develop-data-entity</module>
+
         <module>quartz/quartz-web-starter</module>
 
         <module>file/file-data-entity</module>

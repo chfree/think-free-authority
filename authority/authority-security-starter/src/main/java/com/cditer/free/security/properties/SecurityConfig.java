@@ -1,4 +1,4 @@
-package com.cditer.free.spring.security.properties;
+package com.cditer.free.security.properties;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
