@@ -10,24 +10,25 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>file-web-starter</artifactId>
+    <artifactId>login-authority-server</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.cditer.free.components</groupId>
-            <artifactId>file-data-service-starter</artifactId>
+            <artifactId>authority-web-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.cditer.free.components</groupId>
-            <artifactId>authority-security-starter</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.cditer.free</groupId>
-            <artifactId>swagger-starter</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.cditer.free.components</groupId>-->
-<!--            <artifactId>authority-login-starter</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
     </dependencies>
+
 </project>

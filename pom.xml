@@ -66,6 +66,7 @@
         <com.cditer.free.base.version>2.0.0</com.cditer.free.base.version>
         <com.cditer.free.components.version>2.0.0</com.cditer.free.components.version>
         <io.jsonwebtoken.jjwt.version>0.9.1</io.jsonwebtoken.jjwt.version>
+        <spring-cloud.version>2020.0.3</spring-cloud.version>
     </properties>
 
 
@@ -81,16 +82,16 @@
                 <artifactId>authority-data-service-starter</artifactId>
                 <version>${com.cditer.free.components.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.cditer.free.components</groupId>
-                <artifactId>authority-login-data-starter</artifactId>
-                <version>${com.cditer.free.components.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cditer.free.components</groupId>
-                <artifactId>authority-login-starter</artifactId>
-                <version>${com.cditer.free.components.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.cditer.free.components</groupId>-->
+<!--                <artifactId>authority-login-data-starter</artifactId>-->
+<!--                <version>${com.cditer.free.components.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.cditer.free.components</groupId>-->
+<!--                <artifactId>authority-login-starter</artifactId>-->
+<!--                <version>${com.cditer.free.components.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>com.cditer.free.components</groupId>
                 <artifactId>file-data-entity</artifactId>
@@ -141,7 +142,15 @@
                 <artifactId>jjwt</artifactId>
                 <version>${io.jsonwebtoken.jjwt.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <dependencies>
