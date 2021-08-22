@@ -2,8 +2,10 @@ package com.cditer.free.authority.server;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  * @author chfree
@@ -26,5 +28,10 @@ public class AuthorityServerApi {
     @GetMapping("ping")
     public String ping(){
         return "pong";
+    }
+
+    @PostMapping("pong")
+    public String pong(String ping){
+        return "xxx"+ping;
     }
 }
