@@ -107,6 +107,10 @@ public class Menu  extends ModelBase {
     @Column(name="lang_path")
     private String langPath;
 
+    //服务名称
+    @Column(name="server_name")
+    private String serverName;
+
 
     @Override
     public void setModelStatus(ModelStatus modelStatus) {
