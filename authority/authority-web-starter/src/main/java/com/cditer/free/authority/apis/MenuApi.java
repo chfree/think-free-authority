@@ -107,4 +107,13 @@ public class MenuApi extends AuthorityApi {
 
         return response;
     }
+
+    @ApiOperation(value = "根据服务名称获取菜单")
+    @PostMapping("queryMenusByServerName")
+    public BaseResponse queryMenusByServerName(@Valid @NotBlank(message = "服务名称不能为空") String serverName){
+        BaseResponse resp=new BaseResponse();
+        resp.put("menus",menuService.queryListByServerName(serverName));
+
+        return resp;
+    }
 }

@@ -76,6 +76,16 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
     }
 
     @Override
+    public List<Menu> queryListByServerName(String serverName) {
+        Menu search = new Menu();
+        search.setDeleteMark(null);
+        search.setSortCode(null);
+        search.setServerName(serverName);
+
+        return queryList(search);
+    }
+
+    @Override
     public List<MenuRoute> queryMenuRouteByRoleIds(List<String> roleIds) {
         return menuDao.queryMenuRouteByRoleIds(roleIds);
     }

@@ -25,6 +25,8 @@ public interface IMenuService extends ISuperService<Menu> {
 
     MenuTree queryModelTree(String id);
 
+    List<Menu> queryListByServerName(String serverName);
+
     List<MenuRoute> queryMenuRouteByRoleIds(List<String> roleIds);
 
     List<MenuRoute> queryMenuRouteFormatByRoleIds(List<String> roleIds);
