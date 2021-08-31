@@ -28,7 +28,7 @@ import javax.validation.constraints.NotBlank;
  */
 
 @RestController
-@RequestMapping(value = "/api/v1/authority/paramDefine/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/param/paramDefine/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="参数定义",value ="参数定义相关的操作")
 public class ParamDefineApi extends AuthorityApi {
 

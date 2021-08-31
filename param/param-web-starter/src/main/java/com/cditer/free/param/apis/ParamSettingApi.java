@@ -28,7 +28,7 @@ import javax.validation.constraints.NotBlank;
  * @comment     参数配置表
  */
 @RestController
-@RequestMapping(value = "/api/v1/authority/paramSetting/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/param/paramSetting/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="参数配置表管理",value ="参数配置表相关的操作")
 public class ParamSettingApi extends AuthorityApi {
 

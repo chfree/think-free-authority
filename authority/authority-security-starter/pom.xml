@@ -17,10 +17,10 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cditer.free.components</groupId>
-            <artifactId>authority-data-service-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.cditer.free.components</groupId>-->
+<!--            <artifactId>authority-data-service-starter</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.cditer.free</groupId>
             <artifactId>web-starter</artifactId>
