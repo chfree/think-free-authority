@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DevelopServerAppTest.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("dev,eureka-dev")
+@ActiveProfiles({"dev","eureka-dev"})
 public abstract class BaseTest {
 
 
