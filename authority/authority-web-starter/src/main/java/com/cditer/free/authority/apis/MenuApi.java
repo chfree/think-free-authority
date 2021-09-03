@@ -4,11 +4,15 @@ import cn.hutool.core.util.IdUtil;
 import com.cditer.free.authority.data.entity.apimodel.menu.MenuListReq;
 import com.cditer.free.authority.data.entity.apimodel.menu.MenuListResp;
 import com.cditer.free.authority.data.entity.apimodel.menu.SaveMenuReq;
+import com.cditer.free.authority.data.entity.model.Group;
+import com.cditer.free.authority.data.entity.model.Menu;
+import com.cditer.free.authority.data.entity.model.Role;
+import com.cditer.free.authority.data.entity.viewmodel.MenuSearch;
 import com.cditer.free.authority.logical.service.IMenuService;
 import com.cditer.free.authority.logical.service.IRoleService;
-import com.cditer.free.authority.data.entity.viewmodel.MenuSearch;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;
+import com.cditer.free.security.message.LoginModel;
 import com.cditer.free.security.webapi.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -112,7 +117,22 @@ public class MenuApi extends AuthorityApi {
     @PostMapping("queryMenusByServerName")
     public BaseResponse queryMenusByServerName(@Valid @NotBlank(message = "服务名称不能为空") String serverName){
         BaseResponse resp=new BaseResponse();
-        resp.put("menus",menuService.queryListByServerName(serverName));
+
+        LoginModel currentLogin = getCurrentLogin();
+        List<Role> roles = (List<Role>)currentLogin.get("roles");
+        List<Group> groups = (List<Group>)currentLogin.get("groups");
+
+        List<String> roleIds = null;
+        List<String> groupIds = null;
+        if(roles!=null&&roles.size()>0) {
+            roleIds = roles.stream().map(role -> role.getId()).collect(Collectors.toList());
+        }
+        if(groups!=null&&groups.size()>0) {
+            groupIds = groups.stream().map(group -> group.getId()).collect(Collectors.toList());
+        }
+
+        List<Menu> menus = menuService.queryMenuBySeverNameAndRGIds(serverName, roleIds, groupIds);
+        resp.put("menus", menus);
 
         return resp;
     }

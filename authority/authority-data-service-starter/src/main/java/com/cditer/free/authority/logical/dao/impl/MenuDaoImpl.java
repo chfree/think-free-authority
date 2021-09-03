@@ -136,6 +136,45 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
         return queryList(unionOrderSqlExpression,MenuRoute.class);
     }
 
+    @Override
+    public List<Menu> queryMenuBySeverNameAndRGIds(String serverName, List<String> roleIds, List<String> groupIds) {
+        ISqlExpression roleSqlExpression = roleSql(roleIds);
+        ISqlExpression groupSqlExpression = groupSql(groupIds);
+
+        // 同为null，则返回null
+        if(roleSqlExpression==null&&groupSqlExpression==null){
+            return null;
+        }
+
+        // group为null则返回role
+        if(groupSqlExpression==null){
+            roleSqlExpression.appendSelect("menu.server_name").andEq("server_name", serverName);
+            return queryList(roleSqlExpression,Menu.class);
+        }
+
+        // role为null则返回group
+        if(roleSqlExpression==null){
+            groupSqlExpression.appendSelect("menu.server_name").andEq("server_name", serverName);
+            return queryList(groupSqlExpression,Menu.class);
+        }
+
+        roleSqlExpression.appendSelect("menu.server_name").andEq("server_name", serverName);
+        groupSqlExpression.appendSelect("menu.server_name").andEq("server_name", serverName);
+
+        // 同不为null，则进行union
+        ISqlExpression unionSqlExpression = SqlExpressionFactory.createExpression();
+        unionSqlExpression.union(roleSqlExpression, groupSqlExpression);
+
+        // 进行union
+        ISqlExpression unionOrderSqlExpression = SqlExpressionFactory.createExpression();
+        unionOrderSqlExpression.addBody("select * from ("+unionSqlExpression.toSql()+") odrTmp")
+                .setParamAll(unionSqlExpression.getParams())
+                .addOrder("odrTmp.sort_code",OrderEnum.asc);
+
+        return queryList(unionOrderSqlExpression,Menu.class);
+    }
+
+
     private void appendExpression(ISqlExpression sqlExpression, MenuSearch search){
         sqlExpression.andEqNoEmpty("id",search.getId());
 

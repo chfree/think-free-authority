@@ -34,4 +34,6 @@ public interface IMenuService extends ISuperService<Menu> {
     List<MenuRoute> queryMenuRouteByRGIds(List<String> roleIds, List<String> groupIds);
 
     List<MenuRoute> queryMenuRouteFormatByRGIds(List<String> roleIds, List<String> groupIds);
+
+    List<Menu> queryMenuBySeverNameAndRGIds(String serverName, List<String> roleIds, List<String> groupIds);
 }

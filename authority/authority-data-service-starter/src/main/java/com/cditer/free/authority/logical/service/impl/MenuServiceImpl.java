@@ -135,6 +135,11 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
         return minMenuRoutes;
     }
 
+    @Override
+    public List<Menu> queryMenuBySeverNameAndRGIds(String serverName, List<String> roleIds, List<String> groupIds) {
+        return null;
+    }
+
     private void menuRouteLoop(MenuRoute currentMenuRoute,List<MenuRoute> allMenuRoutes){
 
         var childrenMenuRoute = allMenuRoutes.stream().filter(menu-> currentMenuRoute.getId().equals(menu.getParentId())).collect(Collectors.toList());

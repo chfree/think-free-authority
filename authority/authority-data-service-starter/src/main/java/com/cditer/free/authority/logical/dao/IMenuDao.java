@@ -27,4 +27,6 @@ public interface IMenuDao extends ISuperDao<Menu> {
 
     List<MenuRoute> queryMenuRouteByRGIds(List<String> roleIds, List<String> groupIds);
 
+    List<Menu> queryMenuBySeverNameAndRGIds(String serverName,List<String> roleIds, List<String> groupIds);
+
 }
