@@ -18,14 +18,14 @@
             <groupId>com.cditer.free.components</groupId>
             <artifactId>authority-web-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cditer.free.components</groupId>
-            <artifactId>develop-web-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cditer.free.components</groupId>
-            <artifactId>quartz-web-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.cditer.free.components</groupId>-->
+<!--            <artifactId>develop-web-starter</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.cditer.free.components</groupId>-->
+<!--            <artifactId>quartz-web-starter</artifactId>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>think-free-activiti</groupId>-->
 <!--            <artifactId>activiti-web-starter</artifactId>-->
