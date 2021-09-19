@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.cditer.free.authority.data.entity.apimodel.login.LoginLoadDataResp;
 import com.cditer.free.authority.data.entity.apimodel.user.SaveUserReq;
 import com.cditer.free.authority.data.entity.apimodel.user.UpdatePwd;
+import com.cditer.free.authority.data.entity.apimodel.user.UserGetResp;
 import com.cditer.free.authority.data.entity.apimodel.user.UserListReq;
 import com.cditer.free.authority.data.entity.apimodel.user.UserListResp;
 import com.cditer.free.authority.data.entity.model.Button;
@@ -86,11 +87,11 @@ public class UserApi extends AuthorityApi {
 
     @ApiOperation(value = "获取指定用户")
     @GetMapping("get")
-    public BaseResponse get(@Valid @NotBlank(message = "用户id不能为空") String id){
-        BaseResponse response=new BaseResponse();
+    public UserGetResp get(@Valid @NotBlank(message = "用户id不能为空") String id){
+        UserGetResp response=new UserGetResp();
 
         UserView user = userService.queryViewModelById(id);
-        response.put("user",user);
+        response.setUser(user);
 
         return response;
     }

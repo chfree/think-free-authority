@@ -4,7 +4,7 @@ import com.cditer.cloud.commons.http.entity.RequestEntityEx;
 import com.cditer.cloud.commons.http.entity.RequestEntityExBuilder;
 import com.cditer.cloud.commons.http.entity.ResponseEntityEx;
 import com.cditer.cloud.commons.http.request.impl.BaseServerRequest;
-import com.cditer.free.core.message.web.BaseResponse;
+import com.cditer.free.authority.data.entity.apimodel.user.UserGetResp;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class UserRequestHelper extends BaseServerRequest {
 
     private final static String getUrl = prefix +"get";
 
-    public BaseResponse getUser(String userId){
+    public UserGetResp getUser(String userId){
 
         RequestEntityEx requestEntityEx = RequestEntityExBuilder.builder()
                 .setUrl(getUrl)
@@ -29,7 +29,7 @@ public class UserRequestHelper extends BaseServerRequest {
                 .addParam("id", userId)
                 .build();
 
-        ResponseEntityEx<BaseResponse> request = getServerRequestHelper().request(requestEntityEx, BaseResponse.class);
+        ResponseEntityEx<UserGetResp> request = getServerRequestHelper().request(requestEntityEx, UserGetResp.class);
 
         return request.getBody();
     }

@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.cditer.free.components</groupId>
-            <artifactId>authority-web-starter</artifactId>
+            <artifactId>authority-data-entity</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cditer.cloud</groupId>
