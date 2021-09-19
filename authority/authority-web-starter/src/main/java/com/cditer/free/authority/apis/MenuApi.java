@@ -8,6 +8,7 @@ import com.cditer.free.authority.data.entity.model.Group;
 import com.cditer.free.authority.data.entity.model.Menu;
 import com.cditer.free.authority.data.entity.model.Role;
 import com.cditer.free.authority.data.entity.viewmodel.MenuSearch;
+import com.cditer.free.authority.logical.service.IGroupService;
 import com.cditer.free.authority.logical.service.IMenuService;
 import com.cditer.free.authority.logical.service.IRoleService;
 import com.cditer.free.core.enums.ModelStatus;
@@ -18,6 +19,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,10 +40,13 @@ import java.util.stream.Collectors;
 public class MenuApi extends AuthorityApi {
 
     @Autowired
-    private IMenuService menuService;
+    IMenuService menuService;
 
     @Autowired
-    private IRoleService roleService;
+    IRoleService roleService;
+
+    @Autowired
+    IGroupService groupService;
 
     @ApiOperation(value = "获取菜单列表")
     @PostMapping("list")
@@ -119,15 +124,15 @@ public class MenuApi extends AuthorityApi {
         BaseResponse resp=new BaseResponse();
 
         LoginModel currentLogin = getCurrentLogin();
-        List<Role> roles = (List<Role>)currentLogin.get("roles");
-        List<Group> groups = (List<Group>)currentLogin.get("groups");
+        List<Role> roles = roleService.queryListRoleByUserId(currentLogin.getId());
+        List<Group> groups = groupService.queryListByUserId(currentLogin.getId());
 
         List<String> roleIds = null;
         List<String> groupIds = null;
-        if(roles!=null&&roles.size()>0) {
+        if(!CollectionUtils.isEmpty(roles)) {
             roleIds = roles.stream().map(role -> role.getId()).collect(Collectors.toList());
         }
-        if(groups!=null&&groups.size()>0) {
+        if(!CollectionUtils.isEmpty(groups)) {
             groupIds = groups.stream().map(group -> group.getId()).collect(Collectors.toList());
         }
 

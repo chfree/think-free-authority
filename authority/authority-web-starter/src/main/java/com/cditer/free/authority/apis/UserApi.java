@@ -244,9 +244,6 @@ public class UserApi extends AuthorityApi {
         List<Role> roles = roleService.queryListRoleByUserId(loginModel.getId());
         List<Group> groups = groupService.queryListByUserId(loginModel.getId());
 
-        loginModel.put("roles", roles);
-        loginModel.put("groups", groups);
-
         List<String> roleIds = null;
         List<String> groupIds = null;
         if(roles!=null&&roles.size()>0) {

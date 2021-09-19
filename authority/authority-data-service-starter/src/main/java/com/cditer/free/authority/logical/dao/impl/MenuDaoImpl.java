@@ -14,6 +14,7 @@ import com.cditer.free.data.dao.base.ISqlExpression;
 import com.cditer.free.data.dao.base.impl.SuperDao;
 import com.cditer.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
 
     @Override
     public List<MenuRoute> queryMenuRouteByRoleIds(List<String> roleIds) {
-        if(roleIds==null||roleIds.isEmpty()) {
+        if(CollectionUtils.isEmpty(roleIds)){
             return null;
         }
         ISqlExpression sqlExpression = roleSql(roleIds);
@@ -70,7 +71,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
     }
 
     private ISqlExpression roleSql(List<String> roleIds){
-        if(roleIds==null||roleIds.isEmpty()){
+        if(CollectionUtils.isEmpty(roleIds)){
             return null;
         }
 
@@ -87,7 +88,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
     }
 
     private ISqlExpression groupSql(List<String> groupIds){
-        if(groupIds==null||groupIds.isEmpty()){
+        if(CollectionUtils.isEmpty(groupIds)){
             return null;
         }
 

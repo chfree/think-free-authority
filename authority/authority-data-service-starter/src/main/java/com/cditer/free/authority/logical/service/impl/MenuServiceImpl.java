@@ -137,7 +137,7 @@ public class MenuServiceImpl extends SuperService<Menu> implements IMenuService 
 
     @Override
     public List<Menu> queryMenuBySeverNameAndRGIds(String serverName, List<String> roleIds, List<String> groupIds) {
-        return null;
+        return menuDao.queryMenuBySeverNameAndRGIds(serverName, roleIds, groupIds);
     }
 
     private void menuRouteLoop(MenuRoute currentMenuRoute,List<MenuRoute> allMenuRoutes){
