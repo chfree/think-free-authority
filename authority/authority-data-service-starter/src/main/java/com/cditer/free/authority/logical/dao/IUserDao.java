@@ -19,6 +19,8 @@ import java.util.List;
 public interface IUserDao extends ISuperDao<User> {
     int queryCountBySearch(UserSearch search);
 
+    User queryModelBySearch(UserSearch search);
+
     List<User> queryListBySearch(UserSearch search, PagerModel pagerModel);
 
     List<UserView> queryViewListBySearch(UserSearch search, PagerModel pagerModel);

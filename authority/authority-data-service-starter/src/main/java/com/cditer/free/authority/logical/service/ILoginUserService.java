@@ -20,4 +20,6 @@ public interface ILoginUserService{
     String passwordFormat(String password);
 
     boolean applyChange(User user);
+
+    User queryCountByUserId(String userId);
 }

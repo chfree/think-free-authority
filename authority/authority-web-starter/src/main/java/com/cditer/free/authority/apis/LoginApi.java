@@ -3,6 +3,7 @@ package com.cditer.free.authority.apis;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.IdUtil;
 import com.cditer.free.authority.configuration.LoginConfig;
+import com.cditer.free.authority.data.entity.apimodel.login.CheckUserLoginResp;
 import com.cditer.free.authority.data.entity.apimodel.login.LoginReq;
 import com.cditer.free.authority.data.entity.apimodel.login.RegisterReq;
 import com.cditer.free.authority.data.entity.model.LoginAuth;
@@ -35,6 +36,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -265,6 +267,41 @@ public class LoginApi extends AuthorityApi {
         String pubKey = loginConfig.getLoginRsaPubKey();
 
         resp.put("pubKey", pubKey);
+        return resp;
+    }
+
+
+    /**
+     * 根据用户id判断是否能正常登陆
+     */
+    @ApiOperation(value = "根据用户id判断是否能正常登陆")
+    @PostMapping("checkUserLogin")
+    public CheckUserLoginResp checkUserLogin(String userId){
+        CheckUserLoginResp resp = new CheckUserLoginResp();
+
+        if(StringUtils.hasText(userId)){
+            resp.setAllowLogin(false);
+            resp.setMessage("用户id为空");
+            return resp;
+        }
+
+        User user = userService.queryCountByUserId(userId);
+        if(user==null){
+            resp.setAllowLogin(false);
+            resp.setMessage("用户不存在");
+
+            return resp;
+        }
+
+        // 用户名密码正确了，在检查状态是否正常,不是正常则不允许登陆
+        if(!LoginStatus.NORMAL.getValue().equals(user.getStatus())) {
+            resp.setAllowLogin(false);
+            resp.setMessage("您的用户状态处于【" + LoginStatus.convert2Text(user.getStatus()) + "】，暂时无法登陆，请联系管理员");
+
+            return resp;
+        }
+
+        resp.setAllowLogin(true);
         return resp;
     }
 }

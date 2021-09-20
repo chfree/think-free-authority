@@ -3,6 +3,7 @@ package com.cditer.free.authority.logical.service.impl;
 import cn.hutool.crypto.SecureUtil;
 import com.cditer.free.authority.data.entity.model.User;
 import com.cditer.free.authority.data.entity.viewmodel.LoginUserSearch;
+import com.cditer.free.authority.data.entity.viewmodel.UserSearch;
 import com.cditer.free.authority.logical.dao.IUserDao;
 import com.cditer.free.authority.logical.service.ILoginUserService;
 import com.cditer.free.core.enums.ModelStatus;
@@ -54,5 +55,13 @@ public class LoginUserServiceImpl implements ILoginUserService {
             }
         }
         return userDao.applyChange(user);
+    }
+
+    @Override
+    public User queryCountByUserId(String userId) {
+        UserSearch userSearch = new UserSearch();
+        userSearch.setId(userId);
+
+        return userDao.queryModelBySearch(userSearch);
     }
 }

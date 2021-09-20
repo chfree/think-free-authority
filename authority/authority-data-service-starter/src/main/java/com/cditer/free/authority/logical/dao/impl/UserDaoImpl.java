@@ -36,6 +36,16 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
     }
 
     @Override
+    public User queryModelBySearch(UserSearch search) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(User.class);
+
+        appendExpression(sqlExpression,search);
+
+        return queryModel(sqlExpression);
+    }
+
+    @Override
     public List<User> queryListBySearch(UserSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(User.class);
