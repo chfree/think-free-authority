@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class UserRequestHelper extends BaseServerRequest {
+public class UserReqHelper extends BaseServerRequest {
     final static String prefix = "/api/v1/authority/user/";
 
     private final static String getUrl = prefix +"get";
