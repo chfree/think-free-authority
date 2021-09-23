@@ -6,7 +6,7 @@ import com.cditer.free.file.data.entity.apimodel.filebsn.FileBsnListResp;
 import com.cditer.free.file.data.entity.viewmodel.FileBsnSearch;
 import com.cditer.free.file.data.entity.viewmodel.FileBsnView;
 import com.cditer.free.file.service.IFileBsnService;
-import com.cditer.free.security.webapi.AuthorityApi;
+import com.cditer.free.web.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

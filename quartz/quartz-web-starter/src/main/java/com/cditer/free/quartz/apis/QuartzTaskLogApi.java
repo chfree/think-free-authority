@@ -7,7 +7,7 @@ import com.cditer.free.quartz.apimodel.quartztasklog.QuartzTaskLogListResp;
 import com.cditer.free.quartz.logical.model.QuartzTaskLog;
 import com.cditer.free.quartz.logical.service.IQuartzTaskLogService;
 import com.cditer.free.quartz.logical.viewmodel.QuartzTaskLogSearch;
-import com.cditer.free.security.webapi.AuthorityApi;
+import com.cditer.free.web.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

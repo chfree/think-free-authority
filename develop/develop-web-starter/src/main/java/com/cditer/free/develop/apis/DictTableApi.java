@@ -9,7 +9,7 @@ import com.cditer.free.develop.data.entity.apimodel.dicttable.DictTableListResp;
 import com.cditer.free.develop.data.entity.apimodel.dicttable.SaveDictTableReq;
 import com.cditer.free.develop.data.entity.model.DictTable;
 import com.cditer.free.develop.data.entity.viewmodel.DictTableSearch;
-import com.cditer.free.security.webapi.AuthorityApi;
+import com.cditer.free.web.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

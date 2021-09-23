@@ -8,7 +8,7 @@ import com.cditer.free.core.util.SpringContextUtils;
 import com.cditer.free.security.handle.ILoginModelIntceptor;
 import com.cditer.free.security.handle.helper.LoginedIntceptorHelper;
 import com.cditer.free.security.message.LoginModel;
-import com.cditer.free.security.webapi.AuthorityApi;
+import com.cditer.free.web.security.AuthorityApi;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

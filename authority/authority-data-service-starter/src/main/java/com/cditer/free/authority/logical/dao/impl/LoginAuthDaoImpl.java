@@ -4,13 +4,13 @@ import com.cditer.free.authority.data.entity.model.LoginAuth;
 import com.cditer.free.authority.data.entity.model.User;
 import com.cditer.free.authority.data.entity.viewmodel.LoginAuthSearch;
 import com.cditer.free.authority.data.entity.viewmodel.LoginAuthView;
-import com.cditer.free.authority.data.enums.LoginAuthStatus;
 import com.cditer.free.authority.logical.dao.ILoginAuthDao;
 import com.cditer.free.core.enums.OrderEnum;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.ISqlExpression;
 import com.cditer.free.data.dao.base.impl.SuperDao;
 import com.cditer.free.data.utils.SqlExpressionFactory;
+import com.cditer.free.usersever.logical.enums.LoginAuthStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

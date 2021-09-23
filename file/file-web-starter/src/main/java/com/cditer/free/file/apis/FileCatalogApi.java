@@ -5,7 +5,7 @@ import com.cditer.free.file.data.entity.model.FileCatalog;
 import com.cditer.free.file.data.entity.viewmodel.FileCatalogTree;
 import com.cditer.free.file.data.entity.viewmodel.FileInfoView;
 import com.cditer.free.file.service.IFileCatalogService;
-import com.cditer.free.security.webapi.AuthorityApi;
+import com.cditer.free.web.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

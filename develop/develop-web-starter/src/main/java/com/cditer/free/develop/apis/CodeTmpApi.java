@@ -10,7 +10,7 @@ import com.cditer.free.develop.data.entity.apimodel.codetmp.SaveCodeTmpReq;
 import com.cditer.free.develop.data.entity.model.CodeTmp;
 import com.cditer.free.develop.service.ICodeTmpService;
 import com.cditer.free.develop.data.entity.viewmodel.CodeTmpSearch;
-import com.cditer.free.security.webapi.AuthorityApi;
+import com.cditer.free.web.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

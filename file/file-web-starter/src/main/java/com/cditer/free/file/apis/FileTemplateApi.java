@@ -10,7 +10,7 @@ import com.cditer.free.file.data.entity.apimodel.filetemplate.SaveFileTemplateRe
 import com.cditer.free.file.data.entity.model.FileTemplate;
 import com.cditer.free.file.data.entity.viewmodel.FileTemplateSearch;
 import com.cditer.free.file.service.IFileTemplateService;
-import com.cditer.free.security.webapi.AuthorityApi;
+import com.cditer.free.web.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

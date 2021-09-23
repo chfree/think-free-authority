@@ -8,7 +8,7 @@ import com.cditer.free.file.exception.FileBizException;
 import com.cditer.free.file.service.IFileInfoService;
 import com.cditer.free.file.utils.FilePathUtils;
 import com.cditer.free.security.annotation.ApiAuthPassport;
-import com.cditer.free.security.webapi.AuthorityApi;
+import com.cditer.free.web.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

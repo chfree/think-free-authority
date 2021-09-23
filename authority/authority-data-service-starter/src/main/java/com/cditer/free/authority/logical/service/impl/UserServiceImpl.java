@@ -2,6 +2,7 @@ package com.cditer.free.authority.logical.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.cditer.free.authority.data.entity.viewmodel.LoginUserSearch;
 import com.cditer.free.authority.data.entity.viewmodel.UserView;
 import com.cditer.free.authority.logical.dao.IUserDao;
 import com.cditer.free.authority.data.entity.apimodel.user.SaveUserReq;
@@ -15,6 +16,7 @@ import com.cditer.free.authority.data.entity.viewmodel.UserSearch;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
+import com.cditer.free.data.message.DaoBaseRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -115,5 +117,10 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
     @Override
     public UserView queryViewModelById(String id) {
         return userDao.queryViewModelById(id);
+    }
+
+    @Override
+    public int queryCountByLoginUserSearch(LoginUserSearch search) {
+        return userDao.queryCountByLoginUserSearch(search);
     }
 }
