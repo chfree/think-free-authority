@@ -7,8 +7,8 @@ import com.cditer.free.authority.logical.dao.ILoginAuthDao;
 import com.cditer.free.authority.logical.service.ILoginAuthService;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
-import com.cditer.free.usersever.configuration.LoginConfig;
-import com.cditer.free.usersever.logical.enums.LoginAuthStatus;
+import com.cditer.free.user.configuration.LoginConfig;
+import com.cditer.free.user.logical.enums.LoginAuthStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

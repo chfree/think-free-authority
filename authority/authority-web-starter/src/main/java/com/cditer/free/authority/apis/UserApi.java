@@ -21,7 +21,7 @@ import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.core.util.SpringContextUtils;
 import com.cditer.free.security.message.LoginModel;
-import com.cditer.free.usersever.logical.enums.LoginStatus;
+import com.cditer.free.user.logical.enums.LoginStatus;
 import com.cditer.free.web.message.WebResponseStatus;
 import com.cditer.free.web.security.AuthorityApi;
 import io.swagger.annotations.Api;
