@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/loginweb/server/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class LoginServerApi {
+public class LoginWebApi {
     @GetMapping("ping")
     public String ping(){
         return "pong";

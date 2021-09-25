@@ -13,10 +13,10 @@
     <artifactId>develop-web-starter</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>com.cditer.free.components</groupId>
-            <artifactId>authority-security-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.cditer.free.components</groupId>-->
+<!--            <artifactId>authority-security-starter</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.cditer.free.components</groupId>
             <artifactId>develop-data-service-starter</artifactId>

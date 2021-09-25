@@ -21,10 +21,10 @@
             <groupId>com.cditer.free</groupId>
             <artifactId>swagger-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cditer.free.components</groupId>
-            <artifactId>authority-security-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.cditer.free.components</groupId>-->
+<!--            <artifactId>authority-security-starter</artifactId>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>com.cditer.free.components</groupId>-->
 <!--            <artifactId>authority-login-starter</artifactId>-->

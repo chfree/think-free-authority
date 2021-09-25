@@ -41,7 +41,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/v1/authority/login/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/loginweb/login/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class LoginApi {
 
     //数据异常
