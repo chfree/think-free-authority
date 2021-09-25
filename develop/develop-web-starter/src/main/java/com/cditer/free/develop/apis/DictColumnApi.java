@@ -6,7 +6,7 @@ import com.cditer.free.develop.data.entity.apimodel.dictcolumn.DictColumnListReq
 import com.cditer.free.develop.data.entity.apimodel.dictcolumn.DictColumnListResp;
 import com.cditer.free.develop.data.entity.apimodel.dictcolumn.SaveDictColumnReq;
 import com.cditer.free.develop.service.IDictColumnService;
-import com.cditer.free.web.security.AuthorityApi;
+import com.cditer.free.coreweb.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,7 +8,7 @@ import com.cditer.free.core.util.PkIdUtils;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.authority.data.entity.viewmodel.GroupSearch;
 import com.cditer.free.authority.data.entity.model.Group;
-import com.cditer.free.web.security.AuthorityApi;
+import com.cditer.free.coreweb.security.AuthorityApi;
 import com.cditer.free.core.message.web.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

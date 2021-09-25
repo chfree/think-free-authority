@@ -9,7 +9,7 @@ import com.cditer.free.param.logical.service.IParamSettingService;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.core.util.PkIdUtils;
-import com.cditer.free.web.security.AuthorityApi;
+import com.cditer.free.coreweb.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

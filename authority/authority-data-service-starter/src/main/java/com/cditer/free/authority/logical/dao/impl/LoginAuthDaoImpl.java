@@ -10,7 +10,7 @@ import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.ISqlExpression;
 import com.cditer.free.data.dao.base.impl.SuperDao;
 import com.cditer.free.data.utils.SqlExpressionFactory;
-import com.cditer.free.user.logical.enums.LoginAuthStatus;
+import com.cditer.free.usersever.logical.enums.LoginAuthStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

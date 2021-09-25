@@ -1,7 +1,7 @@
 package com.cditer.free.security.intceptor;
 
 import com.cditer.free.security.intceptor.valid.ApiAuthPassportValid;
-import com.cditer.free.web.security.AuthorityApi;
+import com.cditer.free.coreweb.security.AuthorityApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;

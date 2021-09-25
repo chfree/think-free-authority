@@ -3,7 +3,7 @@ package com.cditer.free.security.intceptor.valid;
 import cn.hutool.json.JSONUtil;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.security.annotation.ApiAuthPassport;
-import com.cditer.free.web.message.WebResponseStatus;
+import com.cditer.free.coreweb.message.WebResponseStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

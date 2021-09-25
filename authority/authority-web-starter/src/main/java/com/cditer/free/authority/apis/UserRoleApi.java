@@ -5,7 +5,7 @@ import com.cditer.free.authority.data.entity.apimodel.userrole.SaveUserRoleReq;
 import com.cditer.free.authority.data.entity.model.UserRole;
 import com.cditer.free.authority.logical.service.IUserRoleService;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.web.security.AuthorityApi;
+import com.cditer.free.coreweb.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

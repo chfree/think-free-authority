@@ -11,7 +11,7 @@ import com.cditer.free.quartz.logical.model.QuartzTask;
 import com.cditer.free.quartz.logical.service.IQuartzTaskService;
 import com.cditer.free.quartz.logical.viewmodel.QuartzTaskSearch;
 import com.cditer.free.quartz.service.IQuartzService;
-import com.cditer.free.web.security.AuthorityApi;
+import com.cditer.free.coreweb.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

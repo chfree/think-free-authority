@@ -2,8 +2,8 @@ package com.cditer.free.security.webapi;
 
 import com.cditer.free.core.exception.BizException;
 import com.cditer.free.security.message.LoginModel;
-import com.cditer.free.web.message.WebResponseStatus;
-import com.cditer.free.web.webapi.FirstApi;
+import com.cditer.free.coreweb.message.WebResponseStatus;
+import com.cditer.free.coreweb.webapi.FirstApi;
 
 /**
  * @author chfree

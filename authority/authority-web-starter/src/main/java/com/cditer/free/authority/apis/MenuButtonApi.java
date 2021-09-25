@@ -8,7 +8,7 @@ import com.cditer.free.authority.logical.service.IMenuButtonService;
 import com.cditer.free.authority.data.entity.viewmodel.MenuButtonSearch;
 import com.cditer.free.core.enums.YesOrNoInteger;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.web.security.AuthorityApi;
+import com.cditer.free.coreweb.security.AuthorityApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
