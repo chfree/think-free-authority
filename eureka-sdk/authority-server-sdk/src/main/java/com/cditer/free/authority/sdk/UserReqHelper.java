@@ -1,4 +1,4 @@
-package com.cditer.free.authority.sdks;
+package com.cditer.free.authority.sdk;
 
 import com.cditer.cloud.commons.http.entity.RequestEntityEx;
 import com.cditer.cloud.commons.http.entity.RequestEntityExBuilder;

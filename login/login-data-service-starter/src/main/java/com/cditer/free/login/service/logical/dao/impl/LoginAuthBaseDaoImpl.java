@@ -5,11 +5,11 @@ import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.ISqlExpression;
 import com.cditer.free.data.dao.base.impl.SuperDao;
 import com.cditer.free.data.utils.SqlExpressionFactory;
-import com.cditer.free.login.service.logical.entity.model.LoginAuthBase;
-import com.cditer.free.login.service.logical.entity.model.LoginUser;
-import com.cditer.free.login.service.logical.entity.viewmodel.LoginAuthSearch;
-import com.cditer.free.login.service.logical.entity.viewmodel.LoginAuthBaseView;
-import com.cditer.free.login.service.logical.enums.LoginAuthStatus;
+import com.cditer.free.login.entity.model.LoginAuthBase;
+import com.cditer.free.login.entity.model.LoginUser;
+import com.cditer.free.login.entity.viewmodel.LoginAuthSearch;
+import com.cditer.free.login.entity.viewmodel.LoginAuthBaseView;
+import com.cditer.free.login.enums.LoginAuthStatus;
 import com.cditer.free.login.service.logical.dao.ILoginAuthBaseDao;
 import org.springframework.stereotype.Component;
 

@@ -1,66 +1,66 @@
-package com.cditer.free.login.service.logical.entity.viewmodel;
+package com.cditer.free.login.entity.model;
 
+import com.cditer.free.core.message.data.ModelBase;
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * @author      auto build code by think
  * @email       chfree001@gmail.com
- * @createtime  2020-02-15 14:12:30
+ * @createtime  2020-02-15 14:10:26
  * @comment     登陆授权表
  */
 
 @Data
-public class LoginAuthSearch{
+@Entity
+@Table(name="base_authority_auth")
+public class LoginAuthBase extends ModelBase{
     /**
      * 主键
      */
+    @Id
+    @Column(name="id")
     private String id;
-
-    /**
-     * not-id
-     */
-    private String notId;
 
     /**
      * 用户id
      */
+    @Column(name="user_id")
     private String userId;
 
     /**
      * token信息
      */
+    @Column(name="token")
     private String token;
 
     /**
      * 授权时间
      */
+    @Column(name="auth_tm")
     private Date authTm;
 
     /**
      * 过期时间
      */
+    @Column(name="exp_tm")
     private Date expTm;
 
     /**
      * 授权方式
      */
+    @Column(name="type")
     private String type;
 
     /**
      * 状态
      */
+    @Column(name="status")
     private String status;
-
-    /**
-     * 账号
-     */
-    private String account;
-
-    /**
-     * 姓名
-     */
-    private String name;
 
 }

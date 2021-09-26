@@ -1,6 +1,6 @@
-package com.cditer.free.login.service.logical.entity.viewmodel;
+package com.cditer.free.login.entity.viewmodel;
 
-import com.cditer.free.login.service.logical.entity.model.LoginAuthBase;
+import com.cditer.free.login.entity.model.LoginAuthBase;
 import lombok.Data;
 
 /**

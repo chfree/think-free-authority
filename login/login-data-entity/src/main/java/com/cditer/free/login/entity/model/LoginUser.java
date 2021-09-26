@@ -1,4 +1,4 @@
-package com.cditer.free.login.service.logical.entity.model;
+package com.cditer.free.login.entity.model;
 
 import cn.hutool.core.date.DateUtil;
 import com.cditer.free.core.enums.ModelStatus;

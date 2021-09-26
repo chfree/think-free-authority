@@ -2,9 +2,9 @@ package com.cditer.free.login.service.logical.dao;
 
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.ISuperDao;
-import com.cditer.free.login.service.logical.entity.model.LoginAuthBase;
-import com.cditer.free.login.service.logical.entity.viewmodel.LoginAuthSearch;
-import com.cditer.free.login.service.logical.entity.viewmodel.LoginAuthBaseView;
+import com.cditer.free.login.entity.model.LoginAuthBase;
+import com.cditer.free.login.entity.viewmodel.LoginAuthSearch;
+import com.cditer.free.login.entity.viewmodel.LoginAuthBaseView;
 
 import java.util.List;
 

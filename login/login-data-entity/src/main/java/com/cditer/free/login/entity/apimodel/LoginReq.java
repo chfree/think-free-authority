@@ -1,4 +1,4 @@
-package com.cditer.free.login.service.logical.entity.apimodel;
+package com.cditer.free.login.entity.apimodel;
 
 import com.cditer.free.core.exception.BizException;
 import com.cditer.free.core.message.web.ResponseStatus;

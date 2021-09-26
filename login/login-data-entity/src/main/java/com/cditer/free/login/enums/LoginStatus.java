@@ -1,4 +1,4 @@
-package com.cditer.free.login.service.logical.enums;
+package com.cditer.free.login.enums;
 
 import com.cditer.free.core.enums.BaseEnum;
 import org.apache.commons.lang3.StringUtils;

@@ -1,4 +1,4 @@
-package com.cditer.free.login.service.logical.enums;
+package com.cditer.free.login.enums;
 
 import com.cditer.free.core.enums.BaseEnum;
 
@@ -9,16 +9,15 @@ import com.cditer.free.core.enums.BaseEnum;
  * @comment
  */
 
-public enum LoginAuthStatus implements BaseEnum<String> {
-    VALID("有效","valid"),
-    INVALID("无效","invalid");
+public enum LoginAuthType implements BaseEnum<String> {
+    LOGIN("登陆","login");
 
 
     private String text;
 
     private String value;
 
-    LoginAuthStatus(String text, String value){
+    LoginAuthType(String text, String value){
         this.text = text;
         this.value = value;
     }

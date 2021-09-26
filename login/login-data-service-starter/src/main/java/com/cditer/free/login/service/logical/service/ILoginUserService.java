@@ -1,8 +1,8 @@
 package com.cditer.free.login.service.logical.service;
 
 import com.cditer.free.data.dao.base.ISuperService;
-import com.cditer.free.login.service.logical.entity.model.LoginUser;
-import com.cditer.free.login.service.logical.entity.viewmodel.LoginUserSearch;
+import com.cditer.free.login.entity.model.LoginUser;
+import com.cditer.free.login.entity.viewmodel.LoginUserSearch;
 
 /**
  * @author chfree

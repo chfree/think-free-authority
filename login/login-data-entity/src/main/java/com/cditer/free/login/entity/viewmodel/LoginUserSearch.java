@@ -1,4 +1,4 @@
-package com.cditer.free.login.service.logical.entity.viewmodel;
+package com.cditer.free.login.entity.viewmodel;
 
 import lombok.Data;
 

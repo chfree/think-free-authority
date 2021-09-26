@@ -1,6 +1,6 @@
 package com.cditer.free.login.handle;
 
-import com.cditer.free.login.service.logical.entity.model.LoginUser;
+import com.cditer.free.login.entity.model.LoginUser;
 import com.cditer.free.security.message.LoginModel;
 
 /**

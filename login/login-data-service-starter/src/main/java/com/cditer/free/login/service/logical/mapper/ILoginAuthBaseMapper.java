@@ -1,7 +1,7 @@
 package com.cditer.free.login.service.logical.mapper;
 
 import com.cditer.free.data.dao.base.IMapper;
-import com.cditer.free.login.service.logical.entity.model.LoginAuthBase;
+import com.cditer.free.login.entity.model.LoginAuthBase;
 import org.apache.ibatis.annotations.Mapper;
 
 

@@ -1,10 +1,10 @@
-package com.cditer.free.authority.sdks;
+package com.cditer.free.login.sdk;
 
 import com.cditer.cloud.commons.http.entity.RequestEntityEx;
 import com.cditer.cloud.commons.http.entity.RequestEntityExBuilder;
 import com.cditer.cloud.commons.http.entity.ResponseEntityEx;
 import com.cditer.cloud.commons.http.request.impl.BaseServerRequest;
-import com.cditer.free.authority.data.entity.apimodel.login.CheckUserLoginResp;
+import com.cditer.free.login.entity.apimodel.CheckUserLoginResp;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
