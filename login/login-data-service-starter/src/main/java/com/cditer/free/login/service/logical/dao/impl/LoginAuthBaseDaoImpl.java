@@ -1,16 +1,16 @@
-package com.cditer.free.authority.logical.dao.impl;
+package com.cditer.free.login.service.logical.dao.impl;
 
-import com.cditer.free.authority.data.entity.model.LoginAuth;
-import com.cditer.free.authority.data.entity.model.User;
-import com.cditer.free.authority.data.entity.viewmodel.LoginAuthSearch;
-import com.cditer.free.authority.data.entity.viewmodel.LoginAuthView;
-import com.cditer.free.authority.logical.dao.ILoginAuthDao;
 import com.cditer.free.core.enums.OrderEnum;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.ISqlExpression;
 import com.cditer.free.data.dao.base.impl.SuperDao;
 import com.cditer.free.data.utils.SqlExpressionFactory;
+import com.cditer.free.login.service.logical.entity.model.LoginAuthBase;
+import com.cditer.free.login.service.logical.entity.model.LoginUser;
+import com.cditer.free.login.service.logical.entity.viewmodel.LoginAuthSearch;
+import com.cditer.free.login.service.logical.entity.viewmodel.LoginAuthBaseView;
 import com.cditer.free.login.service.logical.enums.LoginAuthStatus;
+import com.cditer.free.login.service.logical.dao.ILoginAuthBaseDao;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 @Component
-public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthDao{
+public class LoginAuthBaseDaoImpl extends SuperDao<LoginAuthBase> implements ILoginAuthBaseDao {
 
     private String mainTableAlias = "loginAuth";
 
@@ -32,8 +32,8 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
     public int queryCountBySearch(LoginAuthSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
 
-        sqlExpression.selectCount().from(LoginAuth.class,mainTableAlias)
-                .leftJoin(User.class,"user").on(mainTableAlias+".user_id","user.id");
+        sqlExpression.selectCount().from(LoginAuthBase.class,mainTableAlias)
+                .leftJoin(LoginUser.class,"user").on(mainTableAlias+".user_id","user.id");
 
 
         appendExpression(sqlExpression,search);
@@ -43,19 +43,19 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
     }
 
     @Override
-    public List<LoginAuthView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel) {
+    public List<LoginAuthBaseView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
 
-        sqlExpression.selectAllFrom(LoginAuth.class, mainTableAlias)
+        sqlExpression.selectAllFrom(LoginAuthBase.class, mainTableAlias)
                 .appendSelect("user.account as account", "user.name as name")
-                .leftJoin(User.class, "user").on(mainTableAlias + ".user_id", "user.id")
+                .leftJoin(LoginUser.class, "user").on(mainTableAlias + ".user_id", "user.id")
                 .addOrder("auth_tm", OrderEnum.desc);
 
 
         appendExpression(sqlExpression,search);
         appendUserWhere(sqlExpression,search);
 
-        return queryList(sqlExpression,pagerModel,LoginAuthView.class);
+        return queryList(sqlExpression,pagerModel, LoginAuthBaseView.class);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
         String notStatus = LoginAuthStatus.VALID.getValue().equals(status)? LoginAuthStatus.INVALID.getValue():LoginAuthStatus.VALID.getValue();
 
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.update(LoginAuth.class)
+        sqlExpression.update(LoginAuthBase.class)
                      .set("status","setStatus")
                      .setParam("setStatus",status)
                      .andEq("user_id",userId)
@@ -77,7 +77,7 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
 
         sqlExpression.selectCount()
-                .from(LoginAuth.class)
+                .from(LoginAuthBase.class)
                 .andEq("token", token)
                 .andEq("status", LoginAuthStatus.VALID.getValue())
                 .andWhere("exp_tm>now()");
@@ -88,7 +88,7 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
     @Override
     public boolean updateStatusByToken(String token, String status) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.update(LoginAuth.class)
+        sqlExpression.update(LoginAuthBase.class)
                 .setColumn("status",status)
                 .andEq("token",token);
 

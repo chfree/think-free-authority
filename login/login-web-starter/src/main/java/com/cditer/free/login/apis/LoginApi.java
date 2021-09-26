@@ -7,19 +7,19 @@ import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.core.util.SpringContextUtils;
 import com.cditer.free.login.handle.ILoginAllowIntceptor;
 import com.cditer.free.login.handle.helper.LoginedIntceptorHelper;
+import com.cditer.free.login.service.configuration.LoginConfig;
+import com.cditer.free.login.service.jwtcore.CreateTokenFactory;
+import com.cditer.free.login.service.jwtcore.JwtHelper;
+import com.cditer.free.login.service.logical.entity.apimodel.LoginReq;
+import com.cditer.free.login.service.logical.entity.model.LoginAuthBase;
+import com.cditer.free.login.service.logical.entity.model.LoginUser;
+import com.cditer.free.login.service.logical.enums.LoginAuthStatus;
+import com.cditer.free.login.service.logical.enums.LoginAuthType;
+import com.cditer.free.login.service.logical.enums.LoginStatus;
+import com.cditer.free.login.service.logical.service.ILoginAuthBaseService;
+import com.cditer.free.login.service.logical.service.ILoginUserService;
+import com.cditer.free.login.service.utils.LoginUtil;
 import com.cditer.free.security.message.LoginModel;
-import com.cditer.free.user.configuration.LoginConfig;
-import com.cditer.free.user.jwtcore.CreateTokenFactory;
-import com.cditer.free.user.jwtcore.JwtHelper;
-import com.cditer.free.user.logical.entity.apimodel.LoginReq;
-import com.cditer.free.user.logical.entity.model.LoginAuth;
-import com.cditer.free.user.logical.entity.model.User;
-import com.cditer.free.user.logical.enums.LoginAuthStatus;
-import com.cditer.free.user.logical.enums.LoginAuthType;
-import com.cditer.free.user.logical.enums.LoginStatus;
-import com.cditer.free.user.logical.service.ILoginAuthService;
-import com.cditer.free.user.logical.service.IUserService;
-import com.cditer.free.user.utils.LoginUtil;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -48,10 +48,10 @@ public class LoginApi {
     private static final int LOGIN_ERROR=1001;
 
     @Autowired
-    private IUserService userService;
+    private ILoginUserService userService;
 
     @Autowired
-    private ILoginAuthService loginAuthService;
+    private ILoginAuthBaseService loginAuthService;
 
     @Autowired
     private CreateTokenFactory createTokenFactory;
@@ -74,7 +74,7 @@ public class LoginApi {
             loginReq.resolveUserName(loginConfig.getLoginRsaPriKey());
         }
 
-        User user = userService.queryModelByLogin(loginReq.getUsername(),loginReq.getPassword());
+        LoginUser user = userService.queryModelByLogin(loginReq.getUsername(),loginReq.getPassword());
         if(user==null){
             response.setMessage("用户名或密码不正确");
             response.setStatus(LOGIN_ERROR);
@@ -93,7 +93,7 @@ public class LoginApi {
         return response;
     }
 
-    private void loginSuccess(BaseResponse response, User user) {
+    private void loginSuccess(BaseResponse response, LoginUser user) {
         LoginModel loginModel = LoginUtil.user2LoginModel(user);
 
         String token = createTokenFactory.newTokenCreate().createToken(loginModel.getId(),loginModel.getAccount(),loginModel.getName());
@@ -122,22 +122,22 @@ public class LoginApi {
      * @param token token信息
      */
     private void addLoginAuth(LoginModel loginModel,String token){
-        LoginAuth loginAuth = new LoginAuth();
+        LoginAuthBase loginAuthBase = new LoginAuthBase();
 
         Claims claims = jwtHelper.parseJWT(token);
 
-        loginAuth.setId(IdUtil.randomUUID());
-        loginAuth.setExpTm(claims.getExpiration());
-        loginAuth.setToken(token);
-        loginAuth.setUserId(loginModel.getId());
-        loginAuth.setType(LoginAuthType.LOGIN.getValue());
-        loginAuth.setStatus(LoginAuthStatus.VALID.getValue());
-        loginAuth.setAuthTm(DateUtil.date());
+        loginAuthBase.setId(IdUtil.randomUUID());
+        loginAuthBase.setExpTm(claims.getExpiration());
+        loginAuthBase.setToken(token);
+        loginAuthBase.setUserId(loginModel.getId());
+        loginAuthBase.setType(LoginAuthType.LOGIN.getValue());
+        loginAuthBase.setStatus(LoginAuthStatus.VALID.getValue());
+        loginAuthBase.setAuthTm(DateUtil.date());
 
-        loginAuthService.saveLoginAuth(loginAuth);
+        loginAuthService.saveLoginAuth(loginAuthBase);
     }
 
-    private boolean isAllowLogin(LoginModel loginModel,User loginUser){
+    private boolean isAllowLogin(LoginModel loginModel,LoginUser loginUser){
         ILoginAllowIntceptor loginAllowIntceptor = null;
         try{
             loginAllowIntceptor = SpringContextUtils.getCurrentContext().getBean(ILoginAllowIntceptor.class);

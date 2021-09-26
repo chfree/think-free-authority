@@ -1,14 +1,14 @@
-package com.cditer.free.authority.logical.service.impl;
+package com.cditer.free.login.service.logical.service.impl;
 
-import com.cditer.free.authority.data.entity.model.LoginAuth;
-import com.cditer.free.authority.data.entity.viewmodel.LoginAuthSearch;
-import com.cditer.free.authority.data.entity.viewmodel.LoginAuthView;
-import com.cditer.free.authority.logical.dao.ILoginAuthDao;
-import com.cditer.free.authority.logical.service.ILoginAuthService;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
 import com.cditer.free.login.service.configuration.LoginConfig;
+import com.cditer.free.login.service.logical.dao.ILoginAuthBaseDao;
+import com.cditer.free.login.service.logical.entity.model.LoginAuthBase;
+import com.cditer.free.login.service.logical.entity.viewmodel.LoginAuthSearch;
+import com.cditer.free.login.service.logical.entity.viewmodel.LoginAuthBaseView;
 import com.cditer.free.login.service.logical.enums.LoginAuthStatus;
+import com.cditer.free.login.service.logical.service.ILoginAuthBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +23,9 @@ import java.util.List;
  */
 
 @Component
-public class LoginAuthServiceImpl extends SuperService<LoginAuth> implements ILoginAuthService {
+public class LoginAuthBaseServiceImpl extends SuperService<LoginAuthBase> implements ILoginAuthBaseService {
     @Autowired
-    ILoginAuthDao loginAuthDao;
+    ILoginAuthBaseDao loginAuthDao;
 
     @Autowired
     LoginConfig loginConfig;
@@ -36,19 +36,19 @@ public class LoginAuthServiceImpl extends SuperService<LoginAuth> implements ILo
     }
 
     @Override
-    public List<LoginAuthView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel) {
+    public List<LoginAuthBaseView> queryListBySearch(LoginAuthSearch search, PagerModel pagerModel) {
         return loginAuthDao.queryListBySearch(search,pagerModel);
     }
 
     @Override
-    public boolean saveLoginAuth(LoginAuth loginAuth) {
+    public boolean saveLoginAuth(LoginAuthBase loginAuthBase) {
         if(loginConfig.isOpenSSO()){
             // 先将当前用户的其他的token置为无效
-            if(!loginAuthDao.updateStatusByUserId(loginAuth.getUserId(), LoginAuthStatus.INVALID.getValue())){
+            if(!loginAuthDao.updateStatusByUserId(loginAuthBase.getUserId(), LoginAuthStatus.INVALID.getValue())){
                 return false;
             }
         }
-        return addModel(loginAuth);
+        return addModel(loginAuthBase);
     }
 
     @Override

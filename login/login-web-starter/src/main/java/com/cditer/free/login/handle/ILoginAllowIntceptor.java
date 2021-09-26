@@ -1,7 +1,7 @@
 package com.cditer.free.login.handle;
 
+import com.cditer.free.login.service.logical.entity.model.LoginUser;
 import com.cditer.free.security.message.LoginModel;
-import com.cditer.free.user.logical.entity.model.User;
 
 /**
  * @author chfree
@@ -11,5 +11,5 @@ import com.cditer.free.user.logical.entity.model.User;
  */
 
 public interface ILoginAllowIntceptor {
-    boolean isAllowLogin(LoginModel loginModel, User user);
+    boolean isAllowLogin(LoginModel loginModel, LoginUser user);
 }

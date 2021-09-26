@@ -11,7 +11,7 @@ import com.cditer.free.authority.logical.service.ILoginAuthService;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.coreweb.security.AuthorityApi;
-import com.cditer.free.user.logical.enums.LoginAuthStatus;
+import com.cditer.free.login.service.logical.enums.LoginAuthStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

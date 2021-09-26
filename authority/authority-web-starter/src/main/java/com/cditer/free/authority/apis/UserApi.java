@@ -23,7 +23,7 @@ import com.cditer.free.core.util.SpringContextUtils;
 import com.cditer.free.coreweb.message.WebResponseStatus;
 import com.cditer.free.coreweb.security.AuthorityApi;
 import com.cditer.free.security.message.LoginModel;
-import com.cditer.free.user.logical.enums.LoginStatus;
+import com.cditer.free.login.service.logical.enums.LoginStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
