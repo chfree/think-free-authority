@@ -5,6 +5,7 @@ import com.cditer.cloud.commons.http.entity.RequestEntityExBuilder;
 import com.cditer.cloud.commons.http.entity.ResponseEntityEx;
 import com.cditer.cloud.commons.http.request.impl.BaseServerRequest;
 import com.cditer.free.login.entity.apimodel.CheckUserLoginResp;
+import com.cditer.free.login.sdk.contant.LoginSdkContant;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoginReqHelper extends BaseServerRequest {
-    final static String prefix = "/api/v1/authority/login/";
+    final static String prefix = LoginSdkContant.LOGIN_SERVER_PREFIX + "/api/v1/loginweb/login/";
 
     private final static String checkUserLoginUrl = prefix + "checkUserLogin";
 

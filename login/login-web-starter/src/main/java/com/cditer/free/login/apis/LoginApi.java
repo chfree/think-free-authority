@@ -5,17 +5,19 @@ import cn.hutool.core.util.IdUtil;
 import com.cditer.free.core.cache.ICached;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.core.util.SpringContextUtils;
-import com.cditer.free.login.handle.ILoginAllowIntceptor;
-import com.cditer.free.login.handle.helper.LoginedIntceptorHelper;
-import com.cditer.free.login.service.configuration.LoginConfig;
-import com.cditer.free.login.service.jwtcore.CreateTokenFactory;
-import com.cditer.free.login.service.jwtcore.JwtHelper;
+import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.jwt.core.CreateTokenFactory;
+import com.cditer.free.jwt.core.JwtHelper;
+import com.cditer.free.login.entity.apimodel.CheckUserLoginResp;
 import com.cditer.free.login.entity.apimodel.LoginReq;
 import com.cditer.free.login.entity.model.LoginAuthBase;
 import com.cditer.free.login.entity.model.LoginUser;
 import com.cditer.free.login.enums.LoginAuthStatus;
 import com.cditer.free.login.enums.LoginAuthType;
 import com.cditer.free.login.enums.LoginStatus;
+import com.cditer.free.login.handle.ILoginAllowIntceptor;
+import com.cditer.free.login.handle.helper.LoginedIntceptorHelper;
+import com.cditer.free.login.service.configuration.LoginConfig;
 import com.cditer.free.login.service.logical.service.ILoginAuthBaseService;
 import com.cditer.free.login.service.logical.service.ILoginUserService;
 import com.cditer.free.login.service.utils.LoginUtil;
@@ -42,7 +44,7 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/loginweb/login/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class LoginApi {
+public class LoginApi extends AuthorityApi {
 
     //数据异常
     private static final int LOGIN_ERROR=1001;
@@ -183,7 +185,24 @@ public class LoginApi {
         return resp;
     }
 
-    private LoginModel getCurrentLogin(){
-        return new LoginModel();
+
+    public CheckUserLoginResp checkUserLogin(String userId){
+        CheckUserLoginResp resp = new CheckUserLoginResp();
+
+        LoginUser loginUser = userService.queryModelBySearch(userId);
+        if(loginUser==null){
+            resp.setMessage("用户信息异常");
+            resp.setAllowLogin(false);
+            return resp;
+        }
+
+        // 用户名密码正确了，在检查状态是否正常,不是正常则不允许登陆
+        if(!LoginStatus.NORMAL.getValue().equals(loginUser.getStatus())){
+            resp.setMessage("您的用户状态处于【"+LoginStatus.convert2Text(loginUser.getStatus())+"】，暂时无法登陆，请联系管理员");
+            resp.setAllowLogin(false);
+            return resp;
+        }
+
+        return resp;
     }
 }
