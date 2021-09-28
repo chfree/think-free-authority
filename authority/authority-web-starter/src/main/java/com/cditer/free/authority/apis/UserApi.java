@@ -21,7 +21,7 @@ import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.core.util.SpringContextUtils;
 import com.cditer.free.coreweb.message.WebResponseStatus;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.security.message.LoginModel;
 import com.cditer.free.login.enums.LoginStatus;
 import io.swagger.annotations.Api;
@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/authority/user/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="用户模块",value ="用户相关的操作" )
-public class UserApi extends AuthorityApi {
+public class UserApi extends TokenApi {
 
     @Autowired
     IUserService userService;

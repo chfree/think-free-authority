@@ -2,7 +2,7 @@ package com.cditer.free.security.intceptor.valid;
 
 import cn.hutool.json.JSONUtil;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.security.annotation.ApiAuthPassport;
+import com.cditer.free.security.annotation.TokenPassport;
 import com.cditer.free.coreweb.message.WebResponseStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.io.OutputStream;
 
 @Slf4j
 @Component
-public class ApiAuthPassportValid {
+public class TokenPassportValid {
 
 	@Autowired
 	TokenHelper tokenHelper;
@@ -50,8 +50,8 @@ public class ApiAuthPassportValid {
 	}
 	
 	private boolean checkAppAuthorizeRule(Object handler){
-		ApiAuthPassport authorizePassport = ((HandlerMethod) handler).getMethodAnnotation(ApiAuthPassport.class);
-		ApiAuthPassport authorizePassportBean = ((HandlerMethod) handler).getBeanType().getAnnotation(ApiAuthPassport.class);
+		TokenPassport authorizePassport = ((HandlerMethod) handler).getMethodAnnotation(TokenPassport.class);
+		TokenPassport authorizePassportBean = ((HandlerMethod) handler).getBeanType().getAnnotation(TokenPassport.class);
 		
 		//return false 则不验证 true则要验证
 		if(authorizePassportBean!=null){  //类上面有

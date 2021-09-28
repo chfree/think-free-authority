@@ -6,7 +6,7 @@ import com.cditer.free.develop.data.entity.apimodel.dictcolumn.DictColumnListReq
 import com.cditer.free.develop.data.entity.apimodel.dictcolumn.DictColumnListResp;
 import com.cditer.free.develop.data.entity.apimodel.dictcolumn.SaveDictColumnReq;
 import com.cditer.free.develop.service.IDictColumnService;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/api/v1/develop/dictColumn/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="字典字段管理",value ="字典字段相关的操作")
-public class DictColumnApi extends AuthorityApi {
+public class DictColumnApi extends TokenApi {
 
     @Autowired
     IDictColumnService dictColumnService;

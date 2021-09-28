@@ -10,7 +10,7 @@ import com.cditer.free.file.data.entity.apimodel.filetemplate.SaveFileTemplateRe
 import com.cditer.free.file.data.entity.model.FileTemplate;
 import com.cditer.free.file.data.entity.viewmodel.FileTemplateSearch;
 import com.cditer.free.file.service.IFileTemplateService;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/file/fileTemplate/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="文件模板表管理",value ="文件模板表相关的操作")
-public class FileTemplateApi extends AuthorityApi {
+public class FileTemplateApi extends TokenApi {
     @Autowired
     IFileTemplateService fileTemplateService;
 

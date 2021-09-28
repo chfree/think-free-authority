@@ -5,7 +5,7 @@ import com.cditer.free.file.data.entity.model.FileCatalog;
 import com.cditer.free.file.data.entity.viewmodel.FileCatalogTree;
 import com.cditer.free.file.data.entity.viewmodel.FileInfoView;
 import com.cditer.free.file.service.IFileCatalogService;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/file/fileCatalog/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="文件目录",value ="文件目录相关的操作")
-public class FileCatalogApi extends AuthorityApi {
+public class FileCatalogApi extends TokenApi {
 
     @Autowired
     IFileCatalogService catalogService;

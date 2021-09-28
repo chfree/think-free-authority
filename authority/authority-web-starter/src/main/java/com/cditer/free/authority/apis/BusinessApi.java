@@ -9,7 +9,7 @@ import com.cditer.free.authority.logical.service.IBusinessService;
 import com.cditer.free.authority.data.entity.viewmodel.BusinessSearch;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(value = "/api/v1/authority/business/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="企业管理",value ="企业相关的操作")
-public class BusinessApi extends AuthorityApi {
+public class BusinessApi extends TokenApi {
 
     @Autowired
     private IBusinessService businessService;

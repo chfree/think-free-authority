@@ -1,9 +1,7 @@
 package com.cditer.free.security.intceptor.valid;
 
-import com.cditer.free.core.cache.ICached;
-import com.cditer.free.coreweb.security.AuthorityApi;
-import com.cditer.free.jwt.core.CreateTokenFactory;
 import com.cditer.free.jwt.core.JwtHelper;
+import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.security.message.LoginModel;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +36,7 @@ public class TokenHelper {
         }
 
         LoginModel loginModel = jwtHelper.token2LoginModel(token);
-        request.setAttribute(AuthorityApi.LOGIN_KEY, loginModel);
+        request.setAttribute(TokenApi.LOGIN_KEY, loginModel);
 
         return true;
     }

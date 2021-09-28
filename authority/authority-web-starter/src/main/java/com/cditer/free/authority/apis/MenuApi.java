@@ -14,7 +14,7 @@ import com.cditer.free.authority.logical.service.IRoleService;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.security.message.LoginModel;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/authority/menu/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="菜单管理",value ="菜单相关的操作")
-public class MenuApi extends AuthorityApi {
+public class MenuApi extends TokenApi {
 
     @Autowired
     IMenuService menuService;

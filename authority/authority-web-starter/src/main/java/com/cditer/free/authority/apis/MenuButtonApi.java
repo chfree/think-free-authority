@@ -8,7 +8,7 @@ import com.cditer.free.authority.logical.service.IMenuButtonService;
 import com.cditer.free.authority.data.entity.viewmodel.MenuButtonSearch;
 import com.cditer.free.core.enums.YesOrNoInteger;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.var;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/authority/menuButton/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="菜单按钮",value ="菜单按钮相关的操作")
-public class MenuButtonApi extends AuthorityApi {
+public class MenuButtonApi extends TokenApi {
 
     @Autowired
     private IMenuButtonService menuButtonService;

@@ -5,7 +5,7 @@ import com.cditer.free.authority.data.entity.apimodel.groupfunc.SaveGroupFuncReq
 import com.cditer.free.authority.data.entity.model.GroupFunc;
 import com.cditer.free.authority.logical.service.IGroupFuncService;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/authority/groupFunc/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="分组功能",value ="分组功能相关的操作")
-public class GroupFuncApi extends AuthorityApi {
+public class GroupFuncApi extends TokenApi {
 
     @Autowired
     private IGroupFuncService groupFuncService;

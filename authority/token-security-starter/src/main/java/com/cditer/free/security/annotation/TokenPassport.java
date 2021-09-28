@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 @Inherited
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ApiAuthPassport {
+public @interface TokenPassport {
 	boolean validate() default false;
 }

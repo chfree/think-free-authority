@@ -8,7 +8,7 @@ import com.cditer.free.core.util.PkIdUtils;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.authority.data.entity.viewmodel.GroupSearch;
 import com.cditer.free.authority.data.entity.model.Group;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.core.message.web.BaseResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,7 +30,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/authority/group/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="权限组管理",value ="权限组相关的操作")
-public class GroupApi extends AuthorityApi {
+public class GroupApi extends TokenApi {
     @Autowired
     IGroupService groupService;
 

@@ -11,7 +11,7 @@ import com.cditer.free.quartz.logical.model.QuartzTask;
 import com.cditer.free.quartz.logical.service.IQuartzTaskService;
 import com.cditer.free.quartz.logical.viewmodel.QuartzTaskSearch;
 import com.cditer.free.quartz.service.IQuartzService;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/quartz/task/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="定时任务表管理",value ="定时任务表相关的操作")
-public class QuartzTaskApi extends AuthorityApi {
+public class QuartzTaskApi extends TokenApi {
     @Autowired
     IQuartzTaskService quartzTaskService;
 

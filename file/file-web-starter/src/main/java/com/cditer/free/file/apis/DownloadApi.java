@@ -7,8 +7,8 @@ import com.cditer.free.file.data.entity.model.FileInfo;
 import com.cditer.free.file.exception.FileBizException;
 import com.cditer.free.file.service.IFileInfoService;
 import com.cditer.free.file.utils.FilePathUtils;
-import com.cditer.free.security.annotation.ApiAuthPassport;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.annotation.TokenPassport;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ import java.net.URLEncoder;
 @RestController
 @RequestMapping(value = "/api/v1/file/download/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="下载上传的文件",value ="下载上传的文件相关的操作")
-public class DownloadApi extends AuthorityApi {
+public class DownloadApi extends TokenApi {
 
     @Autowired
     IFileInfoService fileInfoService;
@@ -58,7 +58,7 @@ public class DownloadApi extends AuthorityApi {
         return response;
     }
 
-    @ApiAuthPassport
+    @TokenPassport
     @ApiOperation(value = "根据下载编号下载文件")
     @GetMapping("downFile/{downId}")
     public void downFile(@Valid @NotBlank(message = "下载id不能为空") @PathVariable("downId") String downId, String fileName){

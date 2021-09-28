@@ -13,7 +13,7 @@
         <module>authority/authority-data-service-starter</module>
         <module>authority/authority-web-starter</module>
         <module>authority/authority-web-starter-run</module>
-        <module>authority/authority-security-starter</module>
+        <module>authority/token-security-starter</module>
 
         <module>develop/develop-data-service-starter</module>
         <module>develop/develop-web-starter</module>

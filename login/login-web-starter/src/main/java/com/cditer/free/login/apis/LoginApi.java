@@ -5,7 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.cditer.free.core.cache.ICached;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.core.util.SpringContextUtils;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.jwt.core.CreateTokenFactory;
 import com.cditer.free.jwt.core.JwtHelper;
 import com.cditer.free.login.entity.apimodel.CheckUserLoginResp;
@@ -44,7 +44,7 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequestMapping(value = "/api/v1/loginweb/login/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class LoginApi extends AuthorityApi {
+public class LoginApi extends TokenApi {
 
     //数据异常
     private static final int LOGIN_ERROR=1001;
@@ -175,6 +175,7 @@ public class LoginApi extends AuthorityApi {
         resp.put("result", true);
         return resp;
     }
+
 
     @PostMapping("getPubKey")
     public BaseResponse getPubKey(){

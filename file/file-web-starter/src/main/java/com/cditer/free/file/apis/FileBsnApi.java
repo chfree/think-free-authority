@@ -6,7 +6,7 @@ import com.cditer.free.file.data.entity.apimodel.filebsn.FileBsnListResp;
 import com.cditer.free.file.data.entity.viewmodel.FileBsnSearch;
 import com.cditer.free.file.data.entity.viewmodel.FileBsnView;
 import com.cditer.free.file.service.IFileBsnService;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/file/fileBsn/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="文件业务",value ="文件业务相关的操作")
-public class FileBsnApi extends AuthorityApi {
+public class FileBsnApi extends TokenApi {
     @Autowired
     IFileBsnService fileBsnService;
 

@@ -5,7 +5,7 @@ import com.cditer.free.authority.data.entity.apimodel.rolefunc.SaveRoleFuncReq;
 import com.cditer.free.authority.data.entity.model.RoleFunc;
 import com.cditer.free.authority.logical.service.IRoleFuncService;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/authority/roleFunc/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="角色功能",value ="角色功能相关的操作")
-public class RoleFuncApi extends AuthorityApi {
+public class RoleFuncApi extends TokenApi {
 
     @Autowired
     private IRoleFuncService roleFuncService;

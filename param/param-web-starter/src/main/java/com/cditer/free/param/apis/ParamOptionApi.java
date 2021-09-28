@@ -9,7 +9,7 @@ import com.cditer.free.param.data.entity.viewmodel.ParamOptionSearch;
 import com.cditer.free.param.logical.service.IParamOptionService;
 import com.cditer.free.core.enums.ModelStatus;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/param/paramOption/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="参数选项",value ="参数选项相关的操作")
-public class ParamOptionApi extends AuthorityApi {
+public class ParamOptionApi extends TokenApi {
 
     @Autowired
     IParamOptionService paramOptionService;

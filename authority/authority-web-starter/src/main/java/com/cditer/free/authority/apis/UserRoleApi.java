@@ -5,7 +5,7 @@ import com.cditer.free.authority.data.entity.apimodel.userrole.SaveUserRoleReq;
 import com.cditer.free.authority.data.entity.model.UserRole;
 import com.cditer.free.authority.logical.service.IUserRoleService;
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/authority/userRole/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="用户角色",value ="用户角色相关的操作")
-public class UserRoleApi extends AuthorityApi {
+public class UserRoleApi extends TokenApi {
 
     @Autowired
     private IUserRoleService userRoleService;

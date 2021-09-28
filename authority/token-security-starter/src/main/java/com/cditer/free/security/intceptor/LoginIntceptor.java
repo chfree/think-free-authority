@@ -1,7 +1,7 @@
 package com.cditer.free.security.intceptor;
 
-import com.cditer.free.security.intceptor.valid.ApiAuthPassportValid;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
+import com.cditer.free.security.intceptor.valid.TokenPassportValid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginIntceptor extends HandlerInterceptorAdapter {
 	
 	@Autowired
-	private ApiAuthPassportValid apiAuthPassportValid;
+	private TokenPassportValid tokenPassportValid;
 	
 	private NamedThreadLocal<Long> startTimeThreadLocal = new NamedThreadLocal<Long>("StopWatch-StartTime");
 
@@ -30,8 +30,8 @@ public class LoginIntceptor extends HandlerInterceptorAdapter {
 		boolean authResult=true;
 		if (handler.getClass().isAssignableFrom(HandlerMethod.class)) {
 			//如果是api的请求
-			if (((HandlerMethod) handler).getBean() instanceof AuthorityApi) {
-				authResult= apiAuthPassportValid.valid(request, response, handler);
+			if (((HandlerMethod) handler).getBean() instanceof TokenApi) {
+				authResult= tokenPassportValid.valid(request, response, handler);
 			}
 		}
 		return authResult;

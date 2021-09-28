@@ -10,7 +10,7 @@ import com.cditer.free.develop.data.entity.apimodel.codetmp.SaveCodeTmpReq;
 import com.cditer.free.develop.data.entity.model.CodeTmp;
 import com.cditer.free.develop.service.ICodeTmpService;
 import com.cditer.free.develop.data.entity.viewmodel.CodeTmpSearch;
-import com.cditer.free.coreweb.security.AuthorityApi;
+import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import javax.validation.constraints.NotBlank;
 @RestController
 @RequestMapping(value = "/api/v1/develop/codeTmp/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="代码模板管理",value ="代码模板相关的操作")
-public class CodeTmpApi extends AuthorityApi {
+public class CodeTmpApi extends TokenApi {
     @Autowired
     ICodeTmpService codeTmpService;
 
