@@ -19,12 +19,17 @@
         </dependency>
         <dependency>
             <groupId>com.cditer.free</groupId>
+            <artifactId>webmvc-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cditer.free</groupId>
             <artifactId>swagger-starter</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.cditer.free.components</groupId>-->
-<!--            <artifactId>authority-security-starter</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.cditer.free.components</groupId>
+            <artifactId>token-security-starter</artifactId>
+            <version>2.0.0</version>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.cditer.free.components</groupId>-->
 <!--            <artifactId>authority-login-starter</artifactId>-->
