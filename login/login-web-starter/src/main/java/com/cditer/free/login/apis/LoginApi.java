@@ -5,10 +5,8 @@ import cn.hutool.core.util.IdUtil;
 import com.cditer.free.core.cache.ICached;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.core.util.SpringContextUtils;
-import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.jwt.core.CreateTokenFactory;
 import com.cditer.free.jwt.core.JwtHelper;
-import com.cditer.free.login.entity.apimodel.CheckUserLoginResp;
 import com.cditer.free.login.entity.apimodel.LoginReq;
 import com.cditer.free.login.entity.model.LoginAuthBase;
 import com.cditer.free.login.entity.model.LoginUser;
@@ -21,6 +19,8 @@ import com.cditer.free.login.service.configuration.LoginConfig;
 import com.cditer.free.login.service.logical.service.ILoginAuthBaseService;
 import com.cditer.free.login.service.logical.service.ILoginUserService;
 import com.cditer.free.login.service.utils.LoginUtil;
+import com.cditer.free.security.annotation.TokenPassport;
+import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.security.message.LoginModel;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
@@ -68,6 +68,7 @@ public class LoginApi extends TokenApi {
     private ICached cached;
 
     @PostMapping("login")
+    @TokenPassport
     @Transactional
     public BaseResponse login(@Valid LoginReq loginReq){
         BaseResponse response = new BaseResponse();
@@ -176,34 +177,13 @@ public class LoginApi extends TokenApi {
         return resp;
     }
 
-
+    @TokenPassport
     @PostMapping("getPubKey")
     public BaseResponse getPubKey(){
         BaseResponse resp = new BaseResponse();
         String pubKey = loginConfig.getLoginRsaPubKey();
 
         resp.put("pubKey", pubKey);
-        return resp;
-    }
-
-
-    public CheckUserLoginResp checkUserLogin(String userId){
-        CheckUserLoginResp resp = new CheckUserLoginResp();
-
-        LoginUser loginUser = userService.queryModelBySearch(userId);
-        if(loginUser==null){
-            resp.setMessage("用户信息异常");
-            resp.setAllowLogin(false);
-            return resp;
-        }
-
-        // 用户名密码正确了，在检查状态是否正常,不是正常则不允许登陆
-        if(!LoginStatus.NORMAL.getValue().equals(loginUser.getStatus())){
-            resp.setMessage("您的用户状态处于【"+LoginStatus.convert2Text(loginUser.getStatus())+"】，暂时无法登陆，请联系管理员");
-            resp.setAllowLogin(false);
-            return resp;
-        }
-
         return resp;
     }
 }
