@@ -1,7 +1,7 @@
 package com.cditer.free.file.message;
 
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.security.message.LoginModel;
+import com.cditer.free.core.message.security.LoginModel;
 import lombok.Data;
 
 import java.util.List;

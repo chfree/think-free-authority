@@ -1,7 +1,7 @@
 package com.cditer.free.authority.handle;
 
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.security.message.LoginModel;
+import com.cditer.free.core.message.security.LoginModel;
 
 /**
  * @author chfree

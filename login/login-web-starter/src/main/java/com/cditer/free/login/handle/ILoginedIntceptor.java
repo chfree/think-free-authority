@@ -1,6 +1,6 @@
 package com.cditer.free.login.handle;
 
-import com.cditer.free.security.message.LoginModel;
+import com.cditer.free.core.message.security.LoginModel;
 
 /**
  * 登陆成功后的回掉

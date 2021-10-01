@@ -22,7 +22,7 @@ import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.core.util.SpringContextUtils;
 import com.cditer.free.coreweb.message.WebResponseStatus;
 import com.cditer.free.security.baseapi.TokenApi;
-import com.cditer.free.security.message.LoginModel;
+import com.cditer.free.core.message.security.LoginModel;
 import com.cditer.free.login.enums.LoginStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,7 +1,7 @@
 package com.cditer.free.login.service.utils;
 
 import com.cditer.free.login.entity.model.LoginUser;
-import com.cditer.free.security.message.LoginModel;
+import com.cditer.free.core.message.security.LoginModel;
 
 /**
  * @author chfree

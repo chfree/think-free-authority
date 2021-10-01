@@ -21,7 +21,7 @@ import com.cditer.free.login.service.logical.service.ILoginUserService;
 import com.cditer.free.login.service.utils.LoginUtil;
 import com.cditer.free.security.annotation.TokenPassport;
 import com.cditer.free.security.baseapi.TokenApi;
-import com.cditer.free.security.message.LoginModel;
+import com.cditer.free.core.message.security.LoginModel;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;

@@ -2,7 +2,7 @@ package com.cditer.free.login.handle.helper;
 
 import com.cditer.free.core.util.SpringContextUtils;
 import com.cditer.free.login.handle.ILoginedIntceptor;
-import com.cditer.free.security.message.LoginModel;
+import com.cditer.free.core.message.security.LoginModel;
 
 import java.util.Comparator;
 import java.util.List;

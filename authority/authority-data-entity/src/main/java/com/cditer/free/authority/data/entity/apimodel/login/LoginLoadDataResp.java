@@ -1,7 +1,7 @@
 package com.cditer.free.authority.data.entity.apimodel.login;
 
 import com.cditer.free.core.message.web.BaseResponse;
-import com.cditer.free.security.message.LoginModel;
+import com.cditer.free.core.message.security.LoginModel;
 import lombok.Data;
 
 /**
