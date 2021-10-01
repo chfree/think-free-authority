@@ -1,12 +1,12 @@
-CREATE TABLE `config_properties` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `key1` varchar(50) COLLATE utf8_bin NOT NULL,
-  `value1` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `application` varchar(50) COLLATE utf8_bin NOT NULL,
-  `profile` varchar(50) COLLATE utf8_bin NOT NULL,
-  `label` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+create table config_properties (
+    id varchar(50) NOT NULL COMMENT '主键',
+    key varchar(200) NULL COMMENT '键',
+    value varchar(1000) NULL COMMENT '值',
+    application varchar(100) NULL COMMENT '应用名称',
+    profile varchar(50) NULL COMMENT '环境',
+    label varchar(50) NULL COMMENT '分支',
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 create table dps_project_info (
     id varchar(50) NOT NULL COMMENT '主键',
@@ -31,5 +31,14 @@ create table dps_project_profile_setting (
     project_id varchar(50) NULL COMMENT '项目id',
     profile varchar(50) NULL COMMENT '环境',
     label varchar(50) NULL COMMENT '分支',
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
+create table dps_project_puburl (
+    id varchar(50) NOT NULL COMMENT '主键',
+    project_id varchar(50) NULL COMMENT '项目id',
+    url varchar(500) NULL COMMENT '访问地址',
+    descr varchar(4000) NULL COMMENT '访问说明',
+    url_mark varchar(50) NULL COMMENT '访问标记',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
