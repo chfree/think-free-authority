@@ -43,4 +43,10 @@ public class ProjectProfileSetting extends ModelBase{
     @Column(name="label")
     private String label;
 
+    /**
+     * 备注
+     */
+    @Column(name="remark")
+    private String remark;
+
 }

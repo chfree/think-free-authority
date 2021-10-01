@@ -22,16 +22,6 @@ public class ConfigPropertieSearch{
     private String notId;
 
     /**
-     * 键
-     */
-    private String key;
-
-    /**
-     * 值
-     */
-    private String value;
-
-    /**
      * 应用名称
      */
     private String application;
@@ -45,5 +35,15 @@ public class ConfigPropertieSearch{
      * 分支
      */
     private String label;
+
+    /**
+     * 键
+     */
+    private String settingKey;
+
+    /**
+     * 值
+     */
+    private String settingValue;
 
 }

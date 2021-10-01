@@ -29,14 +29,14 @@ public class ConfigPropertie extends ModelBase {
     /**
      * 键
      */
-    @Column(name="key")
-    private String key;
+    @Column(name="setting_key")
+    private String settingKey;
 
     /**
      * 值
      */
-    @Column(name="value")
-    private String value;
+    @Column(name="setting_value")
+    private String settingValue;
 
     /**
      * 应用名称

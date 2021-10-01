@@ -45,9 +45,9 @@ public class ConfigPropertieDaoImpl extends SuperDao<ConfigPropertie> implements
 
         sqlExpression.andNotEqNoEmpty("id",search.getNotId());
 
-        sqlExpression.andEqNoEmpty("key",search.getKey());
+        sqlExpression.andEqNoEmpty("setting_key",search.getSettingKey());
 
-        sqlExpression.andEqNoEmpty("value",search.getValue());
+        sqlExpression.andEqNoEmpty("setting_value",search.getSettingValue());
 
         sqlExpression.andEqNoEmpty("application",search.getApplication());
 
