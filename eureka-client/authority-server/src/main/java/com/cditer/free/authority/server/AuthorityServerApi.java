@@ -32,6 +32,6 @@ public class AuthorityServerApi {
 
     @PostMapping("pong")
     public String pong(String ping){
-        return "xxx"+ping;
+        return String.format("ping:%s",ping);
     }
 }

@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: dev,eureka-dev
+server:
+  port: 8004
+

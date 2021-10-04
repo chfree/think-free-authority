@@ -1,14 +1,12 @@
-package com.cditer.free.develop.server;
-
-
+import com.cditer.free.devops.server.DevopsServerApi;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class DevelopServerApiTest extends BaseTest{
+public class DevopsServerApiTest extends BaseTest{
 
     @Autowired
-    DevelopServerApi developServerApi;
+    DevopsServerApi developServerApi;
 
     @Test
     public void name() {

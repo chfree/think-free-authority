@@ -32,6 +32,6 @@ public class DevelopServerApi {
 
     @PostMapping("pong")
     public String pong(String ping){
-        return "test"+ping;
+        return String.format("ping:%s",ping);
     }
 }
