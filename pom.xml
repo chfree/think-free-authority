@@ -42,6 +42,7 @@
         <module>eureka-client/authority-server</module>
         <module>eureka-client/develop-server</module>
         <module>eureka-client/login-server</module>
+        <module>eureka-client/devops-server</module>
     </modules>
 
     <parent>
