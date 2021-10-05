@@ -1,0 +1,16 @@
+server:
+  port: 18002
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/think_free_devops?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+    username: root
+    password: comhdoit
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 20MB
+think:
+  authority:
+    logined-callback: base
+  cors:
+    exposed-header: token
