@@ -1,10 +1,11 @@
 package com.cditer.free.devops.web.apis;
 
-import com.cditer.cloud.commons.http.entity.RequestEntityEx;
-import com.cditer.cloud.commons.http.entity.RequestEntityExBuilder;
-import com.cditer.cloud.commons.http.entity.ResponseEntityEx;
-import com.cditer.cloud.commons.http.request.IServerRequestHelper;
+
 import com.cditer.free.core.message.data.PagerModel;
+import com.cditer.free.coreweb.http.entity.RequestEntityEx;
+import com.cditer.free.coreweb.http.entity.RequestEntityExBuilder;
+import com.cditer.free.coreweb.http.entity.ResponseEntityEx;
+import com.cditer.free.coreweb.http.request.IServerRequestHelper;
 import com.cditer.free.devops.BaseTest;
 import com.cditer.free.devops.TestContant;
 import com.cditer.free.devops.data.entity.apimodel.projectinfo.ProjectInfoListReq;
@@ -12,18 +13,13 @@ import com.cditer.free.devops.data.entity.apimodel.projectinfo.ProjectInfoListRe
 import com.cditer.free.devops.data.entity.model.ProjectInfo;
 import com.cditer.free.devops.data.entity.viewmodel.ProjectInfoSearch;
 import com.cditer.free.jwt.core.ITokenCreate;
-import com.cditer.free.jwt.core.JwtHelper;
-import com.cditer.free.security.intceptor.valid.TokenHelper;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class ProjectInfoApiTest extends BaseTest {
 
@@ -37,7 +33,7 @@ public class ProjectInfoApiTest extends BaseTest {
         return tokenCreate.createToken("001", "cheng", "CH");
     }
 
-    private final static String listUrl = TestContant.hostPrefix + "devops/projectInfo/list";
+    private final static String listUrl = TestContant.hostPrefix + "/devops/projectInfo/list";
 
     @Test
     public void list() {

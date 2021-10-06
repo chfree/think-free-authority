@@ -61,8 +61,6 @@ public class ProjectInfoDaoImpl extends SuperDao<ProjectInfo> implements IProjec
 
         sqlExpression.andEqNoEmpty("git_address",search.getGitAddress());
 
-        sqlExpression.andEqNoEmpty("port",search.getPort());
-
         sqlExpression.andEqNoEmpty("context_path",search.getContextPath());
 
         sqlExpression.andEqNoEmpty("language",search.getLanguage());
