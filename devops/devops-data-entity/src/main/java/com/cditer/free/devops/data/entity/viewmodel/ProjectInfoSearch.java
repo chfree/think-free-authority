@@ -37,6 +37,11 @@ public class ProjectInfoSearch{
     private String name;
 
     /**
+     * 项目名称模糊搜索
+     */
+    private String likeName;
+
+    /**
      * 目录名称
      */
     private String catalogName;

@@ -49,7 +49,9 @@ public class ProjectInfoDaoImpl extends SuperDao<ProjectInfo> implements IProjec
 
         sqlExpression.andEqNoEmpty("project_code_name",search.getProjectCodeName());
 
-        sqlExpression.andEqNoEmpty("name",search.getName());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getName,search.getName());
+
+        sqlExpression.andLikeNoEmpty(ProjectInfo::getName, search.getLikeName());
 
         sqlExpression.andEqNoEmpty("catalog_name",search.getCatalogName());
 
@@ -68,6 +70,8 @@ public class ProjectInfoDaoImpl extends SuperDao<ProjectInfo> implements IProjec
         sqlExpression.andEqNoEmpty("description",search.getDescription());
 
         sqlExpression.andEqNoEmpty("remark",search.getRemark());
+
+        sqlExpression.andEqNoEmpty(ProjectInfo::getPort, search.getPort());
 
     }
 }
