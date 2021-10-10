@@ -30,7 +30,6 @@
         <module>param/param-web-starter</module>
 
         <module>login/login-data-entity</module>
-        <module>login/login-data-service-starter</module>
         <module>login/login-web-starter</module>
 
         <module>devops/devops-data-entity</module>

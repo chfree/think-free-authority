@@ -26,5 +26,9 @@
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cditer.free.components</groupId>
+            <artifactId>authority-data-entity</artifactId>
+        </dependency>
     </dependencies>
 </project>

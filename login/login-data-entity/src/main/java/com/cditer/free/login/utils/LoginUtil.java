@@ -1,6 +1,6 @@
-package com.cditer.free.login.service.utils;
+package com.cditer.free.login.utils;
 
-import com.cditer.free.login.entity.model.LoginUser;
+import com.cditer.free.authority.data.entity.model.User;
 import com.cditer.free.core.message.security.LoginModel;
 
 /**
@@ -12,7 +12,7 @@ import com.cditer.free.core.message.security.LoginModel;
 
 public class LoginUtil {
 
-    public static LoginModel user2LoginModel(LoginUser loginUser){
+    public static LoginModel user2LoginModel(User loginUser){
         LoginModel loginModel = new LoginModel();
         loginModel.setId(loginUser.getId());
         loginModel.setAccount(loginUser.getAccount());

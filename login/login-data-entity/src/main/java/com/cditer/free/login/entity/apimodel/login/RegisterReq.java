@@ -1,4 +1,4 @@
-package com.cditer.free.authority.data.entity.apimodel.login;
+package com.cditer.free.login.entity.apimodel.login;
 
 import com.cditer.free.core.message.web.BaseRequest;
 import lombok.Data;

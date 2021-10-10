@@ -1,14 +1,14 @@
 package com.cditer.free.authority.logical.service.impl;
 
+import com.cditer.free.authority.configuration.LoginConfig;
 import com.cditer.free.authority.data.entity.model.LoginAuth;
 import com.cditer.free.authority.data.entity.viewmodel.LoginAuthSearch;
 import com.cditer.free.authority.data.entity.viewmodel.LoginAuthView;
+import com.cditer.free.authority.data.enums.LoginAuthStatus;
 import com.cditer.free.authority.logical.dao.ILoginAuthDao;
 import com.cditer.free.authority.logical.service.ILoginAuthService;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
-import com.cditer.free.login.service.configuration.LoginConfig;
-import com.cditer.free.login.enums.LoginAuthStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

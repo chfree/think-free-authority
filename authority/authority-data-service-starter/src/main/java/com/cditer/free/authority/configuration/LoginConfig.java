@@ -1,4 +1,4 @@
-package com.cditer.free.login.service.configuration;
+package com.cditer.free.authority.configuration;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Configurable;

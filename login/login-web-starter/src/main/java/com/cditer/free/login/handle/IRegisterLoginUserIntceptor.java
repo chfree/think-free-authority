@@ -1,7 +1,7 @@
-package com.cditer.free.authority.handle;
+package com.cditer.free.login.handle;
 
-import com.cditer.free.authority.data.entity.apimodel.login.RegisterReq;
 import com.cditer.free.authority.data.entity.model.User;
+import com.cditer.free.login.entity.apimodel.login.RegisterReq;
 
 public interface IRegisterLoginUserIntceptor {
     /**

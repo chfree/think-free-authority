@@ -1,10 +1,9 @@
 package com.cditer.free.authority.logical.service;
 
 import com.cditer.free.authority.data.entity.apimodel.user.SaveUserReq;
-import com.cditer.free.authority.data.entity.viewmodel.LoginUserSearch;
+import com.cditer.free.authority.data.entity.model.User;
 import com.cditer.free.authority.data.entity.viewmodel.UserSearch;
 import com.cditer.free.authority.data.entity.viewmodel.UserView;
-import com.cditer.free.authority.data.entity.model.User;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.ISuperService;
 
@@ -34,5 +33,7 @@ public interface IUserService extends ISuperService<User> {
 
     boolean saveUser(SaveUserReq saveUserReq);
 
-    int queryCountByLoginUserSearch(LoginUserSearch search);
+    int queryCountByLoginUserSearch(UserSearch search);
+
+    User queryModelBySearch(String userId);
 }

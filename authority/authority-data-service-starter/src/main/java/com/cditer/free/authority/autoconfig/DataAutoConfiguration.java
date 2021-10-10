@@ -11,6 +11,6 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 
 @MapperScan(value = "com.cditer.free.authority.logical.mapper")
-@ImportResource(locations={"data-starter-config.xml"})
+@ImportResource(locations={"classpath:data-starter-config.xml"})
 public class DataAutoConfiguration {
 }
