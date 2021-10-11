@@ -36,8 +36,8 @@
         <module>devops/devops-data-service-starter</module>
         <module>devops/devops-web-starter</module>
 
-        <module>eureka-sdk/authority-server-sdk</module>
-        <module>eureka-sdk/login-server-sdk</module>
+<!--        <module>eureka-sdk/authority-server-sdk</module>-->
+<!--        <module>eureka-sdk/login-server-sdk</module>-->
         <module>eureka-client/authority-server</module>
         <module>eureka-client/develop-server</module>
         <module>eureka-client/login-server</module>
