@@ -7,3 +7,6 @@ spring:
     multipart:
       max-file-size: 2MB
       max-request-size: 20MB
+think:
+  cors:
+    enabled: true
