@@ -1,0 +1,18 @@
+package com.cditer.free.debug;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
+@SpringBootApplication
+public class DebugApp extends SpringBootServletInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(DebugApp.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(DebugApp.class);
+    }
+}
