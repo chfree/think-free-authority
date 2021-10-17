@@ -18,6 +18,8 @@ create table dps_project_info (
     belong_service_registry varchar(50) NULL COMMENT '所属注册中心',
     project_type varchar(50) NULL COMMENT '项目类型',
     git_address varchar(300) NULL COMMENT 'git地址',
+    parent_id varchar(50) NULL COMMENT '父级项目',
+    create_date datetime  NULL COMMENT '创建时间',
     port int(11) NULL COMMENT '端口号',
     context_path varchar(50) NULL COMMENT '虚拟路径',
     language varchar(50) NULL COMMENT '项目语言',

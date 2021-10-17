@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import com.cditer.free.core.message.data.ModelBase;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author      auto build code by think
  * @email       chfree001@gmail.com
@@ -73,6 +75,18 @@ public class ProjectInfo extends ModelBase {
      */
     @Column(name="git_address")
     private String gitAddress;
+
+    /**
+     * 父级项目
+     */
+    @Column(name="parent_id")
+    private String parent_id;
+
+    /**
+     * 创建时间
+     */
+    @Column(name="create_date")
+    private Date createDate;
 
     /**
      * 端口号
