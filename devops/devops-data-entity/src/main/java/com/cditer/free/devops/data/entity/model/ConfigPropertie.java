@@ -17,8 +17,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="config_properties")
+@Table(name="dps_config_properties")
 public class ConfigPropertie extends ModelBase {
+
+    /**
+     * 项目id
+     */
+    @Column(name="project_id")
+    private String projectId;
+
     /**
      * 主键
      */
@@ -37,23 +44,5 @@ public class ConfigPropertie extends ModelBase {
      */
     @Column(name="setting_value")
     private String settingValue;
-
-    /**
-     * 应用名称
-     */
-    @Column(name="application")
-    private String application;
-
-    /**
-     * 环境
-     */
-    @Column(name="profile")
-    private String profile;
-
-    /**
-     * 分支
-     */
-    @Column(name="label")
-    private String label;
 
 }

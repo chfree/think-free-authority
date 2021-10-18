@@ -1,10 +1,8 @@
-create table config_properties (
+create table dps_config_properties (
     id varchar(50) NOT NULL COMMENT '主键',
     setting_key varchar(200) NULL COMMENT '键',
     setting_value varchar(1000) NULL COMMENT '值',
-    application varchar(100) NULL COMMENT '应用名称',
-    profile varchar(50) NULL COMMENT '环境',
-    label varchar(50) NULL COMMENT '分支',
+    project_id varchar(50) NULL COMMENT '项目id',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
@@ -45,3 +43,4 @@ create table dps_project_puburl (
     url_mark varchar(50) NULL COMMENT '访问标记',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
