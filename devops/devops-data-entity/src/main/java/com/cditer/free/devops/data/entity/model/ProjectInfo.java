@@ -80,7 +80,7 @@ public class ProjectInfo extends ModelBase {
      * 父级项目
      */
     @Column(name="parent_id")
-    private String parent_id;
+    private String parentId;
 
     /**
      * 创建时间

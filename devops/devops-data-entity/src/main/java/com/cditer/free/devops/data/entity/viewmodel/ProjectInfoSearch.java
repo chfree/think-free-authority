@@ -37,6 +37,16 @@ public class ProjectInfoSearch{
     private String name;
 
     /**
+     * 项目编号模糊搜索
+     */
+    private String likeProjectNo;
+
+    /**
+     * 项目代号模糊搜索
+     */
+    private String likeProjectCodeName;
+
+    /**
      * 项目名称模糊搜索
      */
     private String likeName;
@@ -72,6 +82,11 @@ public class ProjectInfoSearch{
     private Integer port;
 
     /**
+     * 端口号模糊搜索
+     */
+    private String likePort;
+
+    /**
      * 虚拟路径
      */
     private String contextPath;
@@ -82,13 +97,18 @@ public class ProjectInfoSearch{
     private String language;
 
     /**
-     * 项目说明
+     * 项目语言模糊搜索
      */
-    private String description;
+    private String likeLanguage;
 
     /**
-     * 备注
+     * 父级id
      */
-    private String remark;
+    private String parentId;
+
+    /**
+     * 父级名称模糊搜索
+     */
+    private String likeParentName;
 
 }

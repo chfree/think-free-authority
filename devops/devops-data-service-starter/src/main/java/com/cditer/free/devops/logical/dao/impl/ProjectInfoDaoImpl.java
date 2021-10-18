@@ -41,37 +41,44 @@ public class ProjectInfoDaoImpl extends SuperDao<ProjectInfo> implements IProjec
     }
 
     private void appendExpression(ISqlExpression sqlExpression, ProjectInfoSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getId,search.getId());
 
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
+        sqlExpression.andNotEqNoEmpty(ProjectInfo::getId,search.getNotId());
 
-        sqlExpression.andEqNoEmpty("project_no",search.getProjectNo());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getProjectNo,search.getProjectNo());
 
-        sqlExpression.andEqNoEmpty("project_code_name",search.getProjectCodeName());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getProjectCodeName,search.getProjectCodeName());
 
         sqlExpression.andEqNoEmpty(ProjectInfo::getName,search.getName());
 
         sqlExpression.andLikeNoEmpty(ProjectInfo::getName, search.getLikeName());
 
-        sqlExpression.andEqNoEmpty("catalog_name",search.getCatalogName());
+        sqlExpression.andLikeNoEmpty(ProjectInfo::getProjectNo, search.getLikeProjectNo());
 
-        sqlExpression.andEqNoEmpty("server_name",search.getServerName());
+        sqlExpression.andLikeNoEmpty(ProjectInfo::getProjectCodeName, search.getLikeProjectCodeName());
 
-        sqlExpression.andEqNoEmpty("belong_service_registry",search.getBelongServiceRegistry());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getCatalogName,search.getCatalogName());
 
-        sqlExpression.andEqNoEmpty("project_type",search.getProjectType());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getServerName,search.getServerName());
 
-        sqlExpression.andEqNoEmpty("git_address",search.getGitAddress());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getBelongServiceRegistry,search.getBelongServiceRegistry());
 
-        sqlExpression.andEqNoEmpty("context_path",search.getContextPath());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getProjectType,search.getProjectType());
 
-        sqlExpression.andEqNoEmpty("language",search.getLanguage());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getGitAddress,search.getGitAddress());
 
-        sqlExpression.andEqNoEmpty("description",search.getDescription());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getContextPath,search.getContextPath());
 
-        sqlExpression.andEqNoEmpty("remark",search.getRemark());
+        sqlExpression.andEqNoEmpty(ProjectInfo::getLanguage,search.getLanguage());
+
+        sqlExpression.andLikeNoEmpty(ProjectInfo::getLanguage,search.getLikeLanguage());
 
         sqlExpression.andEqNoEmpty(ProjectInfo::getPort, search.getPort());
 
+        sqlExpression.andLikeNoEmpty(ProjectInfo::getPort, search.getLikePort());
+
+        sqlExpression.andEqNoEmpty(ProjectInfo::getParentId, search.getParentId());
+
+        sqlExpression.andLikeNoEmpty(ProjectInfo::getParentId, search.getLikeParentName());
     }
 }

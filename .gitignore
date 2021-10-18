@@ -2,11 +2,6 @@
 /.settings/
 .idea
 *.iml
-/target/
+**/target/
 *~
 .DS_Store
-authority-data-starter/target/
-authority-web-starter-run/src/test/
-authority-web-starter-run/target/
-authority-web-starter/src/test/
-authority-web-starter/target/
