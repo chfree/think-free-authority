@@ -8,6 +8,7 @@ import com.cditer.free.devops.data.entity.apimodel.projectprofilesetting.Project
 import com.cditer.free.devops.data.entity.apimodel.projectprofilesetting.SaveProjectProfileSettingReq;
 import com.cditer.free.devops.data.entity.model.ProjectProfileSetting;
 import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingSearch;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingView;
 import com.cditer.free.devops.logical.service.IProjectProfileSettingService;
 import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
@@ -39,7 +40,7 @@ public class ProjectProfileSettingApi extends TokenApi {
     public BaseResponse list(@RequestBody @Valid ProjectProfileSettingListReq listReq){
         ProjectProfileSettingListResp resp = new ProjectProfileSettingListResp();
         resp.setTotalCount(projectProfileSettingService.queryCountBySearch(listReq.getSearch()));
-        resp.setProjectProfileSettings(projectProfileSettingService.queryListBySearch(listReq.getSearch(),listReq.getPager()));
+        resp.setProjectProfileSettings(projectProfileSettingService.queryListViewBySearch(listReq.getSearch(),listReq.getPager()));
 
         return resp;
     }
@@ -49,7 +50,7 @@ public class ProjectProfileSettingApi extends TokenApi {
     public BaseResponse get(@Valid @NotBlank(message = "项目环境配置id不能为空") String id){
         BaseResponse response=new BaseResponse();
 
-        ProjectProfileSetting projectProfileSetting = projectProfileSettingService.queryModel(id);
+        ProjectProfileSettingView projectProfileSetting = projectProfileSettingService.queryModelView(id);
         response.put("projectProfileSetting",projectProfileSetting);
 
         return response;

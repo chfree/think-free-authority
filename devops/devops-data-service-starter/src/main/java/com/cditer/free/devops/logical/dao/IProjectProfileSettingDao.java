@@ -4,6 +4,7 @@ import com.cditer.free.data.dao.base.ISuperDao;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.devops.data.entity.model.ProjectProfileSetting;
 import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingSearch;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingView;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public interface IProjectProfileSettingDao extends ISuperDao<ProjectProfileSetti
     int queryCountBySearch(ProjectProfileSettingSearch search);
 
     List<ProjectProfileSetting> queryListBySearch(ProjectProfileSettingSearch search, PagerModel pagerModel);
+
+    List<ProjectProfileSettingView> queryListViewBySearch(ProjectProfileSettingSearch search, PagerModel pagerModel);
+
+    ProjectProfileSettingView queryModelView(String id);
 }

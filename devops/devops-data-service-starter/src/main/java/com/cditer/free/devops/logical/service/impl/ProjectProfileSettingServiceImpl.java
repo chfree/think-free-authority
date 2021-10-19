@@ -2,6 +2,7 @@ package com.cditer.free.devops.logical.service.impl;
 
 import com.cditer.free.devops.data.entity.model.ProjectProfileSetting;
 import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingSearch;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingView;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.cditer.free.data.dao.base.impl.SuperService;
@@ -31,6 +32,16 @@ public class ProjectProfileSettingServiceImpl extends SuperService<ProjectProfil
     @Override
     public List<ProjectProfileSetting> queryListBySearch(ProjectProfileSettingSearch search, PagerModel pagerModel) {
         return projectProfileSettingDao.queryListBySearch(search,pagerModel);
+    }
+
+    @Override
+    public List<ProjectProfileSettingView> queryListViewBySearch(ProjectProfileSettingSearch search, PagerModel pagerModel) {
+        return projectProfileSettingDao.queryListViewBySearch(search, pagerModel);
+    }
+
+    @Override
+    public ProjectProfileSettingView queryModelView(String id) {
+        return projectProfileSettingDao.queryModelView(id);
     }
 
 }

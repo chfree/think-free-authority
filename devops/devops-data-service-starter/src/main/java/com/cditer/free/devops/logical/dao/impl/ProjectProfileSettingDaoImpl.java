@@ -3,8 +3,10 @@ package com.cditer.free.devops.logical.dao.impl;
 import com.cditer.free.data.dao.base.ISqlExpression;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.utils.SqlExpressionFactory;
+import com.cditer.free.devops.data.entity.model.ProjectInfo;
 import com.cditer.free.devops.data.entity.model.ProjectProfileSetting;
 import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingSearch;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingView;
 import org.springframework.stereotype.Component;
 import com.cditer.free.data.dao.base.impl.SuperDao;
 import com.cditer.free.devops.logical.dao.IProjectProfileSettingDao;
@@ -38,6 +40,29 @@ public class ProjectProfileSettingDaoImpl extends SuperDao<ProjectProfileSetting
         appendExpression(sqlExpression,search);
 
         return queryList(sqlExpression,pagerModel);
+    }
+
+    @Override
+    public List<ProjectProfileSettingView> queryListViewBySearch(ProjectProfileSettingSearch search, PagerModel pagerModel) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(ProjectProfileSetting.class, "pps")
+                .appendSelect("pi.name as projectName")
+                .leftJoin(ProjectInfo.class, "pi").on("pi.id", "pps.project_id");
+
+        appendExpression(sqlExpression,search);
+
+        return queryList(sqlExpression,pagerModel, ProjectProfileSettingView.class);
+    }
+
+    @Override
+    public ProjectProfileSettingView queryModelView(String id) {
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+        sqlExpression.selectAllFrom(ProjectProfileSetting.class, "pps")
+                .appendSelect("pi.name as projectName")
+                .leftJoin(ProjectInfo.class, "pi").on("pi.id", "pps.project_id")
+                .andEq("pps.id", id);
+
+        return queryModel(sqlExpression, ProjectProfileSettingView.class);
     }
 
     private void appendExpression(ISqlExpression sqlExpression, ProjectProfileSettingSearch search){

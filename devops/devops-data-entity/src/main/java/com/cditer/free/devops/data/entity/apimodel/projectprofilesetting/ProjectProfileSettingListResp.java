@@ -2,6 +2,7 @@ package com.cditer.free.devops.data.entity.apimodel.projectprofilesetting;
 
 import com.cditer.free.core.message.web.BasePagerResp;
 import com.cditer.free.devops.data.entity.model.ProjectProfileSetting;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectProfileSettingView;
 import lombok.Data;
 import java.util.List;
 
@@ -14,5 +15,5 @@ import java.util.List;
 
 @Data
 public class ProjectProfileSettingListResp extends BasePagerResp {
-    private List<ProjectProfileSetting> projectProfileSettings;
+    private List<ProjectProfileSettingView> projectProfileSettings;
 }
