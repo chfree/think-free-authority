@@ -58,8 +58,9 @@ public class ProjectProfileSettingDaoImpl extends SuperDao<ProjectProfileSetting
     public ProjectProfileSettingView queryModelView(String id) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(ProjectProfileSetting.class, "pps")
-                .appendSelect("pi.name as projectName")
-                .leftJoin(ProjectInfo.class, "pi").on("pi.id", "pps.project_id")
+                .appendSelect("pi", ProjectInfo::getName, "projectName")
+                .leftJoin(ProjectInfo.class, "pi")
+                .on(ProjectInfo::getId, "pi", ProjectProfileSetting::getProjectId,"pps")
                 .andEq("pps.id", id);
 
         return queryModel(sqlExpression, ProjectProfileSettingView.class);
@@ -76,5 +77,8 @@ public class ProjectProfileSettingDaoImpl extends SuperDao<ProjectProfileSetting
 
         sqlExpression.andEqNoEmpty("label",search.getLabel());
 
+        sqlExpression.andLikeNoEmpty(ProjectProfileSettingSearch::getProfile, search.getLikeProfile());
+
+        sqlExpression.andLikeNoEmpty(ProjectProfileSettingSearch::getLabel,search.getLikeLabel());
     }
 }

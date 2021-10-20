@@ -36,4 +36,14 @@ public class ProjectProfileSettingSearch{
      */
     private String label;
 
+    /**
+     * 环境模糊搜索
+     */
+    private String likeProfile;
+
+    /**
+     * 分支模糊搜索
+     */
+    private String likeLabel;
+
 }
