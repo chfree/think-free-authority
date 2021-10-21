@@ -4,6 +4,7 @@ import com.cditer.free.data.dao.base.ISuperDao;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.devops.data.entity.model.ProjectPuburl;
 import com.cditer.free.devops.data.entity.viewmodel.ProjectPuburlSearch;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectPuburlView;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public interface IProjectPuburlDao extends ISuperDao<ProjectPuburl>{
     int queryCountBySearch(ProjectPuburlSearch search);
 
     List<ProjectPuburl> queryListBySearch(ProjectPuburlSearch search, PagerModel pagerModel);
+
+    List<ProjectPuburlView> queryListViewBySearch(ProjectPuburlSearch search, PagerModel pagerModel);
+
+    ProjectPuburlView queryModelView(String id);
 }

@@ -1,8 +1,9 @@
 package com.cditer.free.devops.data.entity.apimodel.projectpuburl;
 
 import com.cditer.free.core.message.web.BasePagerResp;
-import com.cditer.free.devops.data.entity.model.ProjectPuburl;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectPuburlView;
 import lombok.Data;
+
 import java.util.List;
 
 /**
@@ -14,5 +15,5 @@ import java.util.List;
 
 @Data
 public class ProjectPuburlListResp extends BasePagerResp {
-    private List<ProjectPuburl> projectPuburls;
+    private List<ProjectPuburlView> projectPuburls;
 }

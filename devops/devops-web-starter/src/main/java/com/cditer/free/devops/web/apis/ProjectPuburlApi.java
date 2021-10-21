@@ -8,6 +8,7 @@ import com.cditer.free.devops.data.entity.apimodel.projectpuburl.ProjectPuburlLi
 import com.cditer.free.devops.data.entity.apimodel.projectpuburl.SaveProjectPuburlReq;
 import com.cditer.free.devops.data.entity.model.ProjectPuburl;
 import com.cditer.free.devops.data.entity.viewmodel.ProjectPuburlSearch;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectPuburlView;
 import com.cditer.free.devops.logical.service.IProjectPuburlService;
 import com.cditer.free.security.baseapi.TokenApi;
 import io.swagger.annotations.Api;
@@ -39,7 +40,7 @@ public class ProjectPuburlApi extends TokenApi {
     public BaseResponse list(@RequestBody @Valid ProjectPuburlListReq listReq){
         ProjectPuburlListResp resp = new ProjectPuburlListResp();
         resp.setTotalCount(projectPuburlService.queryCountBySearch(listReq.getSearch()));
-        resp.setProjectPuburls(projectPuburlService.queryListBySearch(listReq.getSearch(),listReq.getPager()));
+        resp.setProjectPuburls(projectPuburlService.queryListViewBySearch(listReq.getSearch(),listReq.getPager()));
 
         return resp;
     }
@@ -49,8 +50,8 @@ public class ProjectPuburlApi extends TokenApi {
     public BaseResponse get(@Valid @NotBlank(message = "项目公共访问地址id不能为空") String id){
         BaseResponse response=new BaseResponse();
 
-        ProjectPuburl projectPuburl = projectPuburlService.queryModel(id);
-        response.put("projectPuburl",projectPuburl);
+        ProjectPuburlView projectPuburlView = projectPuburlService.queryModelView(id);
+        response.put("projectPuburl",projectPuburlView);
 
         return response;
     }

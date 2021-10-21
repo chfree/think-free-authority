@@ -2,6 +2,7 @@ package com.cditer.free.devops.logical.service.impl;
 
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
+import com.cditer.free.devops.data.entity.viewmodel.ProjectPuburlView;
 import com.cditer.free.devops.logical.dao.IProjectPuburlDao;
 import com.cditer.free.devops.data.entity.model.ProjectPuburl;
 import com.cditer.free.devops.data.entity.viewmodel.ProjectPuburlSearch;
@@ -32,6 +33,16 @@ public class ProjectPuburlServiceImpl extends SuperService<ProjectPuburl> implem
     @Override
     public List<ProjectPuburl> queryListBySearch(ProjectPuburlSearch search, PagerModel pagerModel) {
         return projectPuburlDao.queryListBySearch(search,pagerModel);
+    }
+
+    @Override
+    public List<ProjectPuburlView> queryListViewBySearch(ProjectPuburlSearch search, PagerModel pagerModel) {
+        return projectPuburlDao.queryListViewBySearch(search, pagerModel);
+    }
+
+    @Override
+    public ProjectPuburlView queryModelView(String id) {
+        return projectPuburlDao.queryModelView(id);
     }
 
 }

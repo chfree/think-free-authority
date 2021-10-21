@@ -41,4 +41,14 @@ public class ProjectPuburlSearch{
      */
     private String urlMark;
 
+    /**
+     * 访问地址
+     */
+    private String likeUrl;
+
+    /**
+     * 访问标记
+     */
+    private String likeUrlMark;
+
 }

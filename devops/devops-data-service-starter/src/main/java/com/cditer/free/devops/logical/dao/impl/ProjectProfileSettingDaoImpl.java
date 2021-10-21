@@ -44,10 +44,7 @@ public class ProjectProfileSettingDaoImpl extends SuperDao<ProjectProfileSetting
 
     @Override
     public List<ProjectProfileSettingView> queryListViewBySearch(ProjectProfileSettingSearch search, PagerModel pagerModel) {
-        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(ProjectProfileSetting.class, "pps")
-                .appendSelect("pi.name as projectName")
-                .leftJoin(ProjectInfo.class, "pi").on("pi.id", "pps.project_id");
+        ISqlExpression sqlExpression = queryViewSql();;
 
         appendExpression(sqlExpression,search);
 
@@ -56,14 +53,22 @@ public class ProjectProfileSettingDaoImpl extends SuperDao<ProjectProfileSetting
 
     @Override
     public ProjectProfileSettingView queryModelView(String id) {
+        ISqlExpression sqlExpression = queryViewSql();
+
+        sqlExpression.andEq("pps.id", id);
+
+        return queryModel(sqlExpression, ProjectProfileSettingView.class);
+    }
+
+    private ISqlExpression queryViewSql() {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
+
         sqlExpression.selectAllFrom(ProjectProfileSetting.class, "pps")
                 .appendSelect("pi", ProjectInfo::getName, "projectName")
                 .leftJoin(ProjectInfo.class, "pi")
-                .on(ProjectInfo::getId, "pi", ProjectProfileSetting::getProjectId,"pps")
-                .andEq("pps.id", id);
+                .on(ProjectInfo::getId, "pi", ProjectProfileSetting::getProjectId,"pps");
 
-        return queryModel(sqlExpression, ProjectProfileSettingView.class);
+        return sqlExpression;
     }
 
     private void appendExpression(ISqlExpression sqlExpression, ProjectProfileSettingSearch search){
