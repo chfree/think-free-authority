@@ -1,8 +1,9 @@
 package com.cditer.free.devops.data.entity.apimodel.configpropertie;
 
 import com.cditer.free.core.message.web.BasePagerResp;
-import com.cditer.free.devops.data.entity.model.ConfigPropertie;
+import com.cditer.free.devops.data.entity.viewmodel.ConfigPropertieView;
 import lombok.Data;
+
 import java.util.List;
 
 /**
@@ -14,5 +15,5 @@ import java.util.List;
 
 @Data
 public class ConfigPropertieListResp extends BasePagerResp {
-    private List<ConfigPropertie> configProperties;
+    private List<ConfigPropertieView> configProperties;
 }

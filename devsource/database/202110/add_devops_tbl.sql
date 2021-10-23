@@ -3,6 +3,7 @@ create table dps_config_properties (
     setting_key varchar(200) NULL COMMENT '键',
     setting_value varchar(1000) NULL COMMENT '值',
     project_id varchar(50) NULL COMMENT '项目id',
+    status varchar(50) NULL COMMENT '状态',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 

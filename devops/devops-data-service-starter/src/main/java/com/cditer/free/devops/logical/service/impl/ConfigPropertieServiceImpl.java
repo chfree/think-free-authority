@@ -2,6 +2,7 @@ package com.cditer.free.devops.logical.service.impl;
 
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
+import com.cditer.free.devops.data.entity.viewmodel.ConfigPropertieView;
 import com.cditer.free.devops.logical.dao.IConfigPropertieDao;
 import com.cditer.free.devops.data.entity.model.ConfigPropertie;
 import com.cditer.free.devops.data.entity.viewmodel.ConfigPropertieSearch;
@@ -32,6 +33,16 @@ public class ConfigPropertieServiceImpl extends SuperService<ConfigPropertie> im
     @Override
     public List<ConfigPropertie> queryListBySearch(ConfigPropertieSearch search, PagerModel pagerModel) {
         return configPropertieDao.queryListBySearch(search,pagerModel);
+    }
+
+    @Override
+    public List<ConfigPropertieView> queryListViewBySearch(ConfigPropertieSearch search, PagerModel pagerModel) {
+        return configPropertieDao.queryListViewBySearch(search, pagerModel);
+    }
+
+    @Override
+    public ConfigPropertieView queryModelView(String id) {
+        return configPropertieDao.queryModelView(id);
     }
 
 }

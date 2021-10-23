@@ -4,6 +4,7 @@ import com.cditer.free.data.dao.base.ISuperService;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.devops.data.entity.model.ConfigPropertie;
 import com.cditer.free.devops.data.entity.viewmodel.ConfigPropertieSearch;
+import com.cditer.free.devops.data.entity.viewmodel.ConfigPropertieView;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public interface IConfigPropertieService extends ISuperService<ConfigPropertie>{
     int queryCountBySearch(ConfigPropertieSearch search);
 
     List<ConfigPropertie> queryListBySearch(ConfigPropertieSearch search, PagerModel pagerModel);
+
+    List<ConfigPropertieView> queryListViewBySearch(ConfigPropertieSearch search, PagerModel pagerModel);
+
+    ConfigPropertieView queryModelView(String id);
 }

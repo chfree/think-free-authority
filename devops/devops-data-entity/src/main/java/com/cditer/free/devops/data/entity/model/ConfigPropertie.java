@@ -45,4 +45,9 @@ public class ConfigPropertie extends ModelBase {
     @Column(name="setting_value")
     private String settingValue;
 
+    /**
+     * 状态
+     */
+    @Column(name="status")
+    private String status;
 }

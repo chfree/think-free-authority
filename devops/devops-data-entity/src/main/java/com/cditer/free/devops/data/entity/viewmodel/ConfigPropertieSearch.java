@@ -22,9 +22,9 @@ public class ConfigPropertieSearch{
     private String notId;
 
     /**
-     * 应用名称
+     * 项目id
      */
-    private String application;
+    private String projectId;
 
     /**
      * 环境
@@ -45,5 +45,30 @@ public class ConfigPropertieSearch{
      * 值
      */
     private String settingValue;
+
+    /**
+     * 状态
+     */
+    private String status;
+
+    /**
+     * 环境
+     */
+    private String likeProfile;
+
+    /**
+     * 分支
+     */
+    private String likeLabel;
+
+    /**
+     * 键
+     */
+    private String likeSettingKey;
+
+    /**
+     * 值
+     */
+    private String likeSettingValue;
 
 }
