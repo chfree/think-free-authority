@@ -36,7 +36,7 @@ public class ParamDefineDaoImpl extends SuperDao<ParamDefine> implements IParamD
     public List<ParamDefine> queryListBySearch(ParamDefineSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(ParamDefine.class)
-                     .addOrder("name", OrderEnum.asc);
+                     .addOrder("name", OrderEnum.ASC);
 
         appendExpression(sqlExpression,search);
 
