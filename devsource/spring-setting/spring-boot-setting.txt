@@ -1,0 +1,120 @@
+https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties
+Array.from($(".sect1 table tbody").rows).forEach(item => console.log(item.cells[0].innerText + ":" +item.cells[1].innerText+":"+item.cells[2].innerText));
+
+-- core
+debug:启用调试日志。:false
+info.*:添加到信息端点的任意属性。:
+logging.charset.console:用于控制台输出的字符集。:
+logging.charset.file:用于文件输出的字符集。:
+logging.config:日志记录配置文件的位置。例如，Logback 的`classpath:logback.xml`。:
+logging.exception-conversion-word:记录异常时使用的转换字。:%wEx
+logging.file.name:日志文件名（例如，`myapp.log`）。名称可以是确切位置或相对于当前目录。:
+logging.file.path:日志文件的位置。例如，`/var/log`。:
+logging.group.*:日志组可同时快速更改多个记录器。例如，`logging.group.db=org.hibernate,org.springframework.jdbc`。:
+logging.level.*:日志级别严重性映射。例如，`logging.level.org.springframework=DEBUG`。:
+logging.logback.rollingpolicy.clean-history-on-start:是否在启动时清除存档日志文件。:false
+logging.logback.rollingpolicy.file-name-pattern:滚动日志文件名的模式。:${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz
+logging.logback.rollingpolicy.max-file-size:最大日志文件大小。:10MB
+logging.logback.rollingpolicy.max-history:存档日志文件的最大保留天数。:7
+logging.logback.rollingpolicy.total-size-cap:要保留的日志备份的总大小。:0B
+logging.pattern.console:输出到控制台的 Appender 模式。仅支持默认的 Logback 设置。:%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+logging.pattern.dateformat:日志日期格式的 Appender 模式。仅支持默认的 Logback 设置。:yyyy-MM-dd HH:mm:ss.SSS
+logging.pattern.file:用于输出到文件的 Appender 模式。仅支持默认的 Logback 设置。:%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+logging.pattern.level:日志级别的 Appender 模式。仅支持默认的 Logback 设置。:%5p
+logging.register-shutdown-hook:在日志系统初始化时为它注册一个关闭钩子。部署为 war 文件时自动禁用。:true
+spring.aop.auto:添加@EnableAspectJAutoProxy。:true
+spring.aop.proxy-target-class:是否要创建基于子类 (CGLIB) 的代理 (true)，而不是基于标准 Java 接口的代理 (false)。:true
+spring.application.admin.enabled:是否为应用程序启用管理功能。:false
+spring.application.admin.jmx-name:应用程序管理 MBean 的 JMX 名称。:org.springframework.boot:type=Admin,name=SpringApplication
+spring.application.name:应用名称。:
+spring.autoconfigure.exclude:要排除的自动配置类。:
+spring.banner.charset:横幅文件编码。:UTF-8
+spring.banner.image.bitdepth:用于 ANSI 颜色的位深度。支持的值为 4（16 色）或 8（256 色）。:4
+spring.banner.image.height:以字符为单位的横幅图像的高度（默认基于图像高度）。:
+spring.banner.image.invert:是否应为深色终端主题反转图像。:false
+spring.banner.image.location:横幅图像文件位置（也可以使用 jpg 或 png）。:classpath:banner.gif
+spring.banner.image.margin:以字符为单位的左侧图像边距。:2
+spring.banner.image.pixelmode:渲染图像时使用的像素模式。:TEXT
+spring.banner.image.width:横幅图像的宽度（以字符为单位）。:76
+spring.banner.location:横幅文本资源位置。:classpath:banner.txt
+spring.beaninfo.ignore:是否跳过对 BeanInfo 类的搜索。:true
+spring.codec.log-request-details:是否在 DEBUG 级别记录表单数据，在 TRACE 级别记录标题。:false
+spring.codec.max-in-memory-size:限制每当需要聚合输入流时可以缓冲的字节数。这仅适用于自动配置的 WebFlux 服务器和 WebClient 实例。默认情况下未设置，在这种情况下，个别编解码器默认值适用。大多数编解码器默认限制为 256K。:
+spring.config.activate.on-cloud-platform:要包含的文档所需的云平台。:
+spring.config.activate.on-profile:应该与要包含的文档匹配的配置文件表达式。:
+spring.config.additional-location:除默认值外使用的配置文件位置。:
+spring.config.import:导入额外的配置数据。:
+spring.config.location:替换默认值的配置文件位置。:
+spring.config.name:配置文件名。:application
+spring.config.use-legacy-processing:是否启用配置数据处理遗留模式。:false
+spring.info.build.encoding:文件编码。:UTF-8
+spring.info.build.location:生成的 build-info.properties 文件的位置。:classpath:META-INF/build-info.properties
+spring.info.git.encoding:文件编码。:UTF-8
+spring.info.git.location:生成的 git.properties 文件的位置。:classpath:git.properties
+spring.jmx.default-domain:JMX 域名。:
+spring.jmx.enabled:将管理 bean 暴露给 JMX 域。:false
+spring.jmx.server:MBeanServer bean 名称。:mbeanServer
+spring.jmx.unique-names:是否应确保唯一的运行时对象名称。:false
+spring.lifecycle.timeout-per-shutdown-phase:任何阶段（具有相同“阶段”值的 SmartLifecycle bean 组）关闭的超时时间。:30s
+spring.main.allow-bean-definition-overriding:是否允许通过注册与现有定义同名的定义来覆盖 bean 定义。:false
+spring.main.banner-mode:用于在应用程序运行时显示横幅的模式。:console
+spring.main.cloud-platform:覆盖 Cloud Platform 自动检测。:
+spring.main.lazy-initialization:是否应该延迟执行初始化。:false
+spring.main.log-startup-info:是否在应用程序启动时记录有关应用程序的信息。:true
+spring.main.register-shutdown-hook:应用程序是否应注册关闭挂钩。:true
+spring.main.sources:要包含在 ApplicationContext 中的源（类名、包名或 XML 资源位置）。:
+spring.main.web-application-type:标记以明确请求特定类型的 Web 应用程序。如果未设置，则根据类路径自动检测。:
+spring.mandatory-file-encoding:应用程序必须使用的预期字符编码。:
+spring.messages.always-use-message-format:是否始终应用 MessageFormat 规则，甚至解析没有参数的消息。:false
+spring.messages.basename:逗号分隔的基本名称列表（本质上是一个完全限定的类路径位置），每个都遵循 ResourceBundle 约定，并宽松地支持基于斜杠的位置。如果它不包含包限定符（例如“org.mypackage”），它将从类路径根目录解析。:messages
+spring.messages.cache-duration:加载的资源包文件缓存持续时间。未设置时，bundle 将被永久缓存。如果未指定持续时间后缀，则将使用秒。:
+spring.messages.encoding:消息包编码。:UTF-8
+spring.messages.fallback-to-system-locale:如果没有找到特定语言环境的文件，是否回退到系统语言环境。如果它被关闭，唯一的回退将是默认文件（例如，基本名称“messages”的“messages.properties”）。:true
+spring.messages.use-code-as-default-message:是否使用消息代码作为默认消息而不是抛出“NoSuchMessageException”。仅在开发期间推荐。:false
+spring.output.ansi.enabled:配置 ANSI 输出。:detect
+spring.pid.fail-on-write-error:如果使用 ApplicationPidFileWriter 失败，但它无法写入 PID 文件。:
+spring.pid.file:要写入的 PID 文件的位置（如果使用 ApplicationPidFileWriter）。:
+spring.profiles.active:活动配置文件的逗号分隔列表。可以被命令行开关覆盖。:
+spring.profiles.default:如果没有配置文件处于活动状态，要启用的配置文件的名称。:default
+spring.profiles.group.*:配置文件组为相关的配置文件组定义逻辑名称。:
+spring.profiles.include:无条件激活指定的以逗号分隔的配置文件列表（如果使用 YAML，则激活配置文件列表）。:
+spring.quartz.auto-startup:初始化后是否自动启动调度器。:true
+spring.quartz.jdbc.comment-prefix:SQL 初始化脚本中单行注释的前缀。:[#, --]
+spring.quartz.jdbc.initialize-schema:数据库模式初始化模式。:embedded
+spring.quartz.jdbc.schema:用于初始化数据库架构的 SQL 文件的路径。:classpath:org/quartz/impl/jdbcjobstore/tables_@@platform@@.sql
+spring.quartz.job-store-type:Quartz 作业存储类型。:memory
+spring.quartz.overwrite-existing-jobs:配置的作业是否应覆盖现有的作业定义。:false
+spring.quartz.properties.*:额外的 Quartz 调度器属性。:
+spring.quartz.scheduler-name:调度程序的名称。:quartzScheduler
+spring.quartz.startup-delay:初始化完成后启动调度程序的延迟。如果在整个应用程序启动之前不应运行任何作业，则设置此属性是有意义的。:0s
+spring.quartz.wait-for-jobs-to-complete-on-shutdown:是否等待正在运行的作业在关机时完成。:false
+spring.reactor.debug-agent.enabled:当反应器工具存在时是否应启用反应器调试代理。:true
+spring.task.execution.pool.allow-core-thread-timeout:是否允许核心线程超时。这可以实现池的动态增长和收缩。:true
+spring.task.execution.pool.core-size:核心线程数。:8
+spring.task.execution.pool.keep-alive:线程在终止之前可以保持空闲的时间限制。:60s
+spring.task.execution.pool.max-size:允许的最大线程数。如果任务填满队列，池可以扩展到该大小以适应负载。如果队列是无界的，则忽略。:
+spring.task.execution.pool.queue-capacity:队列容量。无限容量不会增加池，因此会忽略“max-size”属性。:
+spring.task.execution.shutdown.await-termination:执行程序是否应该等待计划任务在关机时完成。:false
+spring.task.execution.shutdown.await-termination-period:执行器等待剩余任务完成的最长时间。:
+spring.task.execution.thread-name-prefix:用于新创建线程名称的前缀。:task-
+spring.task.scheduling.pool.size:允许的最大线程数。:1
+spring.task.scheduling.shutdown.await-termination:执行程序是否应该等待计划任务在关机时完成。:false
+spring.task.scheduling.shutdown.await-termination-period:执行器等待剩余任务完成的最长时间。:
+spring.task.scheduling.thread-name-prefix:用于新创建线程名称的前缀。:scheduling-
+trace:启用跟踪日志。:false
+
+-- cache
+
+spring.cache.cache-names:如果底层缓存管理器支持，则要创建的以逗号分隔的缓存名称列表。通常，这会禁用动态创建附加缓存的能力。:
+spring.cache.caffeine.spec:用于创建缓存的规范。有关规范格式的更多详细信息，请参阅 CaffeineSpec。:
+spring.cache.couchbase.expiration:入境到期。默认情况下，条目永不过期。请注意，此值最终会转换为秒。:
+spring.cache.ehcache.config:用于初始化 EhCache 的配置文件的位置。:
+spring.cache.infinispan.config:用于初始化 Infinispan 的配置文件的位置。:
+spring.cache.jcache.config:用于初始化缓存管理器的配置文件的位置。配置文件依赖于底层缓存实现。:
+spring.cache.jcache.provider:用于检索符合 JSR-107 的缓存管理器的 CachingProvider 实现的完全限定名称。仅当类路径上有多个 JSR-107 实现时才需要。:
+spring.cache.redis.cache-null-values:允许缓存空值。:true
+spring.cache.redis.enable-statistics:是否开启缓存统计。:false
+spring.cache.redis.key-prefix:键前缀。:
+spring.cache.redis.time-to-live:入境到期。默认情况下，条目永不过期。:
+spring.cache.redis.use-key-prefix:写入Redis时是否使用键前缀。:true
+spring.cache.type:缓存类型。默认情况下，根据环境自动检测。:
