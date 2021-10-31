@@ -45,3 +45,4 @@ create table dps_project_puburl (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
+ALTER TABLE think_free_devops.dps_config_properties CHANGE project_id project_profile_id varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '项目环境id';

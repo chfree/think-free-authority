@@ -55,9 +55,9 @@ public class ConfigPropertieDaoImpl extends SuperDao<ConfigPropertie> implements
                     .appendSelect("pps", ProjectProfileSetting::getLabel);
         }
         sqlExpression.leftJoin(ProjectProfileSetting.class, "pps")
-                .on(ConfigPropertie::getProjectId, "cp", ProjectProfileSetting::getProjectId, "pps")
+                .on(ConfigPropertie::getProjectProfileId, "cp", ProjectProfileSetting::getId, "pps")
                 .leftJoin(ProjectInfo.class, "pi")
-                .on(ProjectInfo::getId, "pi", ConfigPropertie::getProjectId, "cp");
+                .on(ProjectInfo::getId, "pi", ProjectProfileSetting::getProjectId, "pps");
 
         return sqlExpression;
     }
@@ -88,7 +88,7 @@ public class ConfigPropertieDaoImpl extends SuperDao<ConfigPropertie> implements
 
         sqlExpression.andEqNoEmpty(ConfigPropertie::getSettingValue, search.getSettingValue());
 
-        sqlExpression.andEqNoEmpty(ConfigPropertie::getProjectId, search.getProjectId());
+        sqlExpression.andEqNoEmpty(ConfigPropertie::getProjectProfileId, search.getProjectProfileId());
 
         sqlExpression.andEqNoEmpty(ConfigPropertie::getStatus, search.getStatus());
 
@@ -99,6 +99,8 @@ public class ConfigPropertieDaoImpl extends SuperDao<ConfigPropertie> implements
         sqlExpression.andLikeNoEmpty("pps", ProjectProfileSetting::getProfile, search.getLikeProfile());
 
         sqlExpression.andLikeNoEmpty("pps", ProjectProfileSetting::getLabel, search.getLikeLabel());
+
+        sqlExpression.andEqNoEmpty("pps", ProjectProfileSetting::getProjectId, search.getProjectId());
 
         sqlExpression.andLikeNoEmpty(ConfigPropertie::getSettingKey, search.getLikeSettingKey());
 

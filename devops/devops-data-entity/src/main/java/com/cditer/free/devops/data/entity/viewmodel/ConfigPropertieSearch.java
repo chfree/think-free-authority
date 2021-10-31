@@ -22,6 +22,11 @@ public class ConfigPropertieSearch{
     private String notId;
 
     /**
+     * 项目环境id
+     */
+    private String projectProfileId;
+
+    /**
      * 项目id
      */
     private String projectId;

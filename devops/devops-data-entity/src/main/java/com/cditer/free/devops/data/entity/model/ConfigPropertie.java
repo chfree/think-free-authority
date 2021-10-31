@@ -21,17 +21,17 @@ import lombok.Data;
 public class ConfigPropertie extends ModelBase {
 
     /**
-     * 项目id
-     */
-    @Column(name="project_id")
-    private String projectId;
-
-    /**
      * 主键
      */
     @Id
     @Column(name="id")
     private String id;
+
+    /**
+     * 项目id
+     */
+    @Column(name="project_profile_id")
+    private String projectProfileId;
 
     /**
      * 键
