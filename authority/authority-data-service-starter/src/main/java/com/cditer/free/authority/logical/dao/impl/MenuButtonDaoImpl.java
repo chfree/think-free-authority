@@ -75,7 +75,7 @@ public class MenuButtonDaoImpl extends SuperDao<MenuButton> implements IMenuButt
     public List<MenuButtonTree> queryMenuButtonTreeList() {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(Menu.class)
-                .addOrder("sort_code", OrderEnum.asc);
+                .addOrder("sort_code", OrderEnum.ASC);
 
         return queryList(sqlExpression, MenuButtonTree.class);
     }

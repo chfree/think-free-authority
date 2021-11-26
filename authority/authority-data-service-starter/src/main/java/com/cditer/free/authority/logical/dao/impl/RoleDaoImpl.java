@@ -59,7 +59,7 @@ public class RoleDaoImpl extends SuperDao<Role> implements IRoleDao {
                 .from(UserRole.class,"userRole")
                 .leftJoin(Role.class,"role").on("role.id","userRole.role_id")
                 .andEq("userRole.user_id",userId)
-                .addOrder("role.sort_code", OrderEnum.asc);
+                .addOrder("role.sort_code", OrderEnum.ASC);
 
         return  queryList(sqlExpression,Role.class);
     }

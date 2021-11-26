@@ -49,7 +49,7 @@ public class GroupDaoImpl extends SuperDao<Group> implements IGroupDao {
         sqlExpression.selectAllFrom(Group.class, "gr")
                      .leftJoin(UserGroup.class, "ur").on("gr.id","ur.group_id")
                      .andEq("ur.user_id",userId)
-                     .addOrder("gr.sort_code", OrderEnum.asc);
+                     .addOrder("gr.sort_code", OrderEnum.ASC);
 
         return queryList(sqlExpression);
 

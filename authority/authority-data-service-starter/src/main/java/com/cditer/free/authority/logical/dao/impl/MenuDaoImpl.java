@@ -42,7 +42,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
     public List<MenuTree> queryListTreeBySearch(MenuSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(Menu.class)
-                     .addOrder("sort_code", OrderEnum.asc);
+                     .addOrder("sort_code", OrderEnum.ASC);
 
         appendExpression(sqlExpression,search);
 
@@ -82,7 +82,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
                 .andWhereInString("role_id",roleIds)
                 .andEq("func_type", MenuFuncType.MENU)
                 .andWhereInString("menu.type", MenuType.MENU,MenuType.ROUTER)
-                .addOrder("menu.sort_code",OrderEnum.asc);
+                .addOrder("menu.sort_code",OrderEnum.ASC);
 
         return  sqlExpression;
     }
@@ -99,7 +99,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
                 .andWhereInString("group_id",groupIds)
                 .andEq("func_type", MenuFuncType.MENU)
                 .andWhereInString("menu.type", MenuType.MENU,MenuType.ROUTER)
-                .addOrder("menu.sort_code",OrderEnum.asc);
+                .addOrder("menu.sort_code",OrderEnum.ASC);
 
         return  sqlExpression;
     }
@@ -132,7 +132,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
         ISqlExpression unionOrderSqlExpression = SqlExpressionFactory.createExpression();
         unionOrderSqlExpression.addBody("select * from ("+unionSqlExpression.toSql()+") odrTmp")
                 .setParamAll(unionSqlExpression.getParams())
-                .addOrder("odrTmp.sort_code",OrderEnum.asc);
+                .addOrder("odrTmp.sort_code",OrderEnum.ASC);
 
         return queryList(unionOrderSqlExpression,MenuRoute.class);
     }
@@ -170,7 +170,7 @@ public class MenuDaoImpl extends SuperDao<Menu> implements IMenuDao {
         ISqlExpression unionOrderSqlExpression = SqlExpressionFactory.createExpression();
         unionOrderSqlExpression.addBody("select * from ("+unionSqlExpression.toSql()+") odrTmp")
                 .setParamAll(unionSqlExpression.getParams())
-                .addOrder("odrTmp.sort_code",OrderEnum.asc);
+                .addOrder("odrTmp.sort_code",OrderEnum.ASC);
 
         return queryList(unionOrderSqlExpression,Menu.class);
     }

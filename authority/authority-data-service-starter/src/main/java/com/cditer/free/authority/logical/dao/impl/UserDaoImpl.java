@@ -62,7 +62,7 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
                      .appendSelect("dept.full_name as departmentName")
                      .leftJoin(Department.class,"dept")
                      .on("user.department_id","dept.id")
-                     .addOrder("user.create_date", OrderEnum.desc);
+                     .addOrder("user.create_date", OrderEnum.DESC);
 
         appendExpression(sqlExpression,search);
 

@@ -49,7 +49,7 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
         sqlExpression.selectAllFrom(LoginAuth.class, mainTableAlias)
                 .appendSelect("user.account as account", "user.name as name")
                 .leftJoin(User.class, "user").on(mainTableAlias + ".user_id", "user.id")
-                .addOrder("auth_tm", OrderEnum.desc);
+                .addOrder("auth_tm", OrderEnum.ASC);
 
 
         appendExpression(sqlExpression,search);
