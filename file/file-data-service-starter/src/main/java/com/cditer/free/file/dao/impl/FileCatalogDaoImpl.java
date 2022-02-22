@@ -68,7 +68,7 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
                 .andEq("parent_id",FileDataKeys.CATALOG_TOP)
                 .andEq("scope",search.getScope())
                 .setParamAll(childCount.getParams())
-                .addOrder("create_date", OrderEnum.asc);
+                .addOrder("create_date", OrderEnum.ASC);
 
         return queryList(topSql);
     }
@@ -92,7 +92,7 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
         twoSql.selectAllFrom(FileCatalog.class,"catalog")
               .appendSelect("("+childCount.toSql()+") childCount")
               .andWhereInString("parent_id",topIds)
-              .addOrder("name", OrderEnum.asc)
+              .addOrder("name", OrderEnum.ASC)
               .setParamAll(childCount.getParams());
 
         appendExpression(twoSql,search);
@@ -111,7 +111,7 @@ public class FileCatalogDaoImpl extends SuperDao<FileCatalog> implements IFileCa
 
         ISqlExpression pathSql = SqlExpressionFactory.createExpression();
         pathSql.selectAllFrom(FileCatalog.class)
-                .andWhereInString("id", relScnDscList).addOrder("level",OrderEnum.asc);
+                .andWhereInString("id", relScnDscList).addOrder("level",OrderEnum.ASC);
 
         return queryList(pathSql);
     }

@@ -35,7 +35,7 @@ public class DictColumnDaoImpl extends SuperDao<DictColumn> implements IDictColu
     public List<DictColumn> queryListBySearch(DictColumnSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(DictColumn.class)
-        .addOrder("sort_code", OrderEnum.asc);
+        .addOrder("sort_code", OrderEnum.ASC);
 
         appendExpression(sqlExpression,search);
 

@@ -52,9 +52,9 @@ public class CodeTmpDaoImpl extends SuperDao<CodeTmp> implements ICodeTmpDao {
         appendExpression(sqlExpression,search);
         appendSqlByCreateUserId(sqlExpression,search);
 
-        sqlExpression.addOrder("pub", OrderEnum.asc)
-                     .addOrder("name",OrderEnum.asc)
-                     .addOrder("group_name",OrderEnum.asc);
+        sqlExpression.addOrder("pub", OrderEnum.ASC)
+                     .addOrder("name",OrderEnum.ASC)
+                     .addOrder("group_name",OrderEnum.ASC);
 
         return queryList(sqlExpression,pagerModel);
     }

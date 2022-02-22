@@ -35,7 +35,7 @@ public class FileTemplateDaoImpl extends SuperDao<FileTemplate> implements IFile
     @Override
     public List<FileTemplate> queryListBySearch(FileTemplateSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(FileTemplate.class).addOrder("upload_date", OrderEnum.desc);
+        sqlExpression.selectAllFrom(FileTemplate.class).addOrder("upload_date", OrderEnum.DESC);
 
         appendExpression(sqlExpression,search);
 

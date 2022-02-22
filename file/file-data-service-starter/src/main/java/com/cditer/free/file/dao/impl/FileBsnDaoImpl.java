@@ -81,7 +81,7 @@ public class FileBsnDaoImpl extends SuperDao<FileBsn> implements IFileBsnDao {
                      .appendSelect("fileInfo.store_type as storeType","fileInfo.suffix","fileInfo.path")
                      .leftJoin(FileInfo.class,"fileInfo").on("fileBsn.file_id","fileInfo.file_id")
                      .setMainTableAlias("fileBsn")
-                     .addOrder("fileBsn.upload_date", OrderEnum.desc);
+                     .addOrder("fileBsn.upload_date", OrderEnum.DESC);
 
         appendExpression(sqlExpression,search);
 
