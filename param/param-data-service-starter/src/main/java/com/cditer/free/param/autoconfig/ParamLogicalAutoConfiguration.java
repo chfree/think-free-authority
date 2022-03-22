@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ImportResource;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @MapperScan(value = "com.cditer.free.param.logical.mapper")
-@ImportResource(locations={"param-logical-starter-config.xml"})
+@ImportResource(locations={"classpath*:param-logical-starter-config.xml"})
 public class ParamLogicalAutoConfiguration {
 
 }
