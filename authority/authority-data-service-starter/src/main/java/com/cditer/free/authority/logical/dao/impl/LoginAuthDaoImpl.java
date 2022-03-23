@@ -64,7 +64,7 @@ public class LoginAuthDaoImpl extends SuperDao<LoginAuth> implements ILoginAuthD
 
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.update(LoginAuth.class)
-                     .set("status","setStatus")
+                     .setColumnKey("status","setStatus")
                      .setParam("setStatus",status)
                      .andEq("user_id",userId)
                      .andEq("status",notStatus);
