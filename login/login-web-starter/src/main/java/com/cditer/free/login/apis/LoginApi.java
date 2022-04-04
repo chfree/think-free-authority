@@ -263,6 +263,9 @@ public class LoginApi extends TokenApi {
             groupIds = groups.stream().map(group -> group.getId()).collect(Collectors.toList());
         }
 
+        response.put("roles", roles);
+        response.put("groups", groups);
+
         List<MenuRoute> menuRouteList = menuService.queryMenuRouteFormatByRGIds(roleIds, groupIds);
         response.put("menuRoutes", menuRouteList);
 
