@@ -29,6 +29,10 @@
         <module>param/param-data-service-starter</module>
         <module>param/param-web-starter</module>
 
+        <module>behavior/behavior-data-entity</module>
+        <module>behavior/behavior-data-service-starter</module>
+        <module>behavior/behavior-web-starter</module>
+
         <module>login/login-data-entity</module>
         <module>login/login-web-starter</module>
 
@@ -62,14 +66,17 @@
         <repository>
             <id>tennetcn_nexus</id>
             <name>tennetcn nexus repository</name>
-            <url>http://nexus.tennetcn.com/nexus/content/groups/public/</url>
+
+            <url>http://nexus.tennetcn.com/repository/public/</url>
+<!--            <url>http://nexus.tennetcn.com/nexus/content/groups/public/</url>-->
         </repository>
     </repositories>
     <distributionManagement>
         <repository>
             <id>tennetcn_nexus_release</id>
             <name>tennetcn nexus release</name>
-            <url>http://nexus.tennetcn.com/nexus/content/repositories/tennetcn</url>
+            <url>http://nexus.tennetcn.com/repository/public/</url>
+<!--            <url>http://nexus.tennetcn.com/nexus/content/repositories/tennetcn</url>-->
         </repository>
     </distributionManagement>
 
