@@ -1,6 +1,6 @@
 create table bhv_data_edit_log (
     id varchar(50) NOT NULL COMMENT '主键',
-    bsn_type varchar(20) NULL COMMENT '业务类型',
+    bsn_type varchar(50) NULL COMMENT '业务类型',
     bsn_id varchar(50) NULL COMMENT '业务id',
     oper_type varchar(20) NULL COMMENT '操作类型',
     record_dt datetime  NULL COMMENT '记录时间',

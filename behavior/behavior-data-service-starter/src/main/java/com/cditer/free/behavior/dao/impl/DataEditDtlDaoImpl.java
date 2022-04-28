@@ -46,8 +46,6 @@ public class DataEditDtlDaoImpl extends SuperDao<DataEditDtl> implements IDataEd
 
         sqlExpression.andEqNoEmpty("edit_id",search.getEditId());
 
-        sqlExpression.andEqNoEmpty("col_name",search.getColName());
-
         sqlExpression.andEqNoEmpty("pro_name",search.getProName());
 
         sqlExpression.andEqNoEmpty("pro_text",search.getProText());

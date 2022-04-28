@@ -50,10 +50,6 @@ public class DataEditLogDaoImpl extends SuperDao<DataEditLog> implements IDataEd
 
         sqlExpression.andEqNoEmpty("oper_type",search.getOperType());
 
-        sqlExpression.andEqNoEmpty("user_id",search.getCreateUserId());
-
-        sqlExpression.andEqNoEmpty("user_name",search.getCreateUserNm());
-
         sqlExpression.andEqNoEmpty("user_dept_id",search.getUserDeptId());
 
         sqlExpression.andEqNoEmpty("user_dept_name",search.getUserDeptName());
