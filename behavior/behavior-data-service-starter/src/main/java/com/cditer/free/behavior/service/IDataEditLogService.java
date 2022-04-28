@@ -27,11 +27,4 @@ public interface IDataEditLogService extends ISuperService<DataEditLog> {
      * 保存数据修改日志
      */
     void saveListEditLog(List<? extends IDbModel> list, LoginModel loginModel);
-
-    /**
-     * 保存数据修改日志及详情
-     */
-    void saveListEditLog(List<? extends IDbModel> list, IBehaviorQueryDb behaviorQueryDb, LoginModel loginModel);
-
-
 }

@@ -4,6 +4,8 @@ import com.cditer.free.behavior.entity.model.DataEditLog;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 @Data
 public class DataEditLogView extends DataEditLog {
     public boolean isRecord(){
@@ -11,4 +13,8 @@ public class DataEditLogView extends DataEditLog {
     }
 
     private boolean recordDtl;
+
+    private String bsnIdFieldName;
+
+    private List<DataEditDtlView> dataEditDtlViewList;
 }
