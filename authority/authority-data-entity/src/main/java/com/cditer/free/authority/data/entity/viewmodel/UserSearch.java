@@ -15,11 +15,15 @@ public class UserSearch {
 
     private String name;
 
+    private String nickName;
+
     private String account;
 
     private String notId;
 
     private String likeName;
+
+    private String likeNickName;
 
     private String likeAccount;
 

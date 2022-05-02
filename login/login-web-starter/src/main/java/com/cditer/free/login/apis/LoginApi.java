@@ -263,6 +263,9 @@ public class LoginApi extends TokenApi {
             groupIds = groups.stream().map(group -> group.getId()).collect(Collectors.toList());
         }
 
+        User user = userService.queryModel(loginModel.getId());
+        response.put("currUser", user);
+
         response.put("roles", roles);
         response.put("groups", groups);
 

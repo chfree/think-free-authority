@@ -29,7 +29,7 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectCount().from(User.class);
 
-        appendExpression(sqlExpression,search);
+        appendExpression(sqlExpression, search);
 
         return queryCount(sqlExpression);
     }
@@ -39,7 +39,7 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(User.class);
 
-        appendExpression(sqlExpression,search);
+        appendExpression(sqlExpression, search);
 
         return queryModel(sqlExpression);
     }
@@ -49,41 +49,41 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(User.class);
 
-        appendExpression(sqlExpression,search);
+        appendExpression(sqlExpression, search);
 
-        return queryList(sqlExpression,pagerModel);
+        return queryList(sqlExpression, pagerModel);
     }
 
     @Override
     public List<UserView> queryViewListBySearch(UserSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(User.class,"user")
-                     .setMainTableAlias("user")
-                     .appendSelect("dept.full_name as departmentName")
-                     .leftJoin(Department.class,"dept")
-                     .on("user.department_id","dept.id")
-                     .addOrder("user.create_date", OrderEnum.DESC);
+        sqlExpression.selectAllFrom(User.class, "user")
+                .setMainTableAlias("user")
+                .appendSelect("dept.full_name as departmentName")
+                .leftJoin(Department.class, "dept")
+                .on("user.department_id", "dept.id")
+                .addOrder("user.create_date", OrderEnum.DESC);
 
-        appendExpression(sqlExpression,search);
+        appendExpression(sqlExpression, search);
 
-        return queryList(sqlExpression,pagerModel,UserView.class);
+        return queryList(sqlExpression, pagerModel, UserView.class);
     }
 
     @Override
     public User queryModelByLogin(String account, String password) {
-        ISqlExpression sqlExpression=SqlExpressionFactory.createExpression();
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(User.class)
-                     .andEq("account",account)
-                     .andEq("password",password);
+                .andEq("account", account)
+                .andEq("password", password);
 
         return queryModel(sqlExpression);
     }
 
     @Override
     public User queryModelByAccount(String account) {
-        ISqlExpression sqlExpression=SqlExpressionFactory.createExpression();
+        ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(User.class)
-                .andEq("account",account);
+                .andEq("account", account);
 
         return queryModel(sqlExpression);
     }
@@ -91,15 +91,15 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
     @Override
     public UserView queryViewModelById(String id) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(User.class,"user")
+        sqlExpression.selectAllFrom(User.class, "user")
                 .setMainTableAlias("user")
                 .appendSelect("dept.full_name as departmentName")
-                .leftJoin(Department.class,"dept")
-                .on("user.department_id","dept.id")
-                .andEq("id",id);
+                .leftJoin(Department.class, "dept")
+                .on("user.department_id", "dept.id")
+                .andEq("id", id);
 
 
-        return queryModel(sqlExpression,UserView.class);
+        return queryModel(sqlExpression, UserView.class);
     }
 
     @Override
@@ -107,24 +107,28 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectCount().from(User.class);
 
-        appendExpression(sqlExpression,search);
+        appendExpression(sqlExpression, search);
 
         return queryCount(sqlExpression);
     }
 
-    private void appendExpression(ISqlExpression sqlExpression, UserSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
+    private void appendExpression(ISqlExpression sqlExpression, UserSearch search) {
+        sqlExpression.andEqNoEmpty("id", search.getId());
 
-        sqlExpression.andEqNoEmpty("name",search.getName());
+        sqlExpression.andEqNoEmpty("name", search.getName());
 
-        sqlExpression.andEqNoEmpty("account",search.getAccount());
+        sqlExpression.andEqNoEmpty(User::getNickName, search.getNickName());
 
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
+        sqlExpression.andEqNoEmpty("account", search.getAccount());
 
-        sqlExpression.andRightLikeNoEmpty("name",search.getLikeName());
+        sqlExpression.andNotEqNoEmpty("id", search.getNotId());
 
-        sqlExpression.andRightLikeNoEmpty("account",search.getLikeAccount());
+        sqlExpression.andRightLikeNoEmpty("name", search.getLikeName());
 
-        sqlExpression.andEqNoEmpty("status",search.getStatus());
+        sqlExpression.andEqNoEmpty(User::getNickName, search.getLikeNickName());
+
+        sqlExpression.andRightLikeNoEmpty("account", search.getLikeAccount());
+
+        sqlExpression.andEqNoEmpty("status", search.getStatus());
     }
 }

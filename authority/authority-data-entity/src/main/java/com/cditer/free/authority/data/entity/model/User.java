@@ -22,6 +22,9 @@ public class User extends ModelBase {
     @Column(name="name")
     private String name;
 
+    @Column(name="nick_name")
+    private String nickName;
+
     @Column(name="account")
     private String account;
 
