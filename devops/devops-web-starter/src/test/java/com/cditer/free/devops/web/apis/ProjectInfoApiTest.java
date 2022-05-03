@@ -28,7 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProjectInfoApiTest extends BaseTest {
 
@@ -39,7 +41,10 @@ public class ProjectInfoApiTest extends BaseTest {
     ITokenCreate tokenCreate;
 
     private String getToken() {
-        return tokenCreate.createToken("001", "cheng", "CH");
+        Map<String,Object> claims = new HashMap<>();
+        claims.put("account", "cheng");
+        claims.put("name", "CH");
+        return tokenCreate.createToken("001", claims);
     }
 
     private final static String listUrl = TestContant.hostPrefix + "/devops/projectInfo/list";

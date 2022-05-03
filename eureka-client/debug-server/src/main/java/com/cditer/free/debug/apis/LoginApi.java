@@ -1,7 +1,6 @@
 package com.cditer.free.debug.apis;
 
 import com.cditer.free.authority.data.entity.model.User;
-import com.cditer.free.core.cache.ICached;
 import com.cditer.free.core.message.security.LoginModel;
 import com.cditer.free.core.message.web.BaseResponse;
 import com.cditer.free.jwt.core.CreateTokenFactory;
@@ -20,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author chfree
@@ -58,7 +59,10 @@ public class LoginApi extends TokenApi {
     private void loginSuccess(BaseResponse response, User user) {
         LoginModel loginModel = LoginUtil.user2LoginModel(user);
 
-        String token = createTokenFactory.newTokenCreate().createToken(loginModel.getId(),loginModel.getAccount(),loginModel.getName());
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("name", loginModel.getName());
+
+        String token = createTokenFactory.newTokenCreate().createToken(loginModel.getId(),claims);
         loginModel.setToken(token);
 
         response.put("result",true);

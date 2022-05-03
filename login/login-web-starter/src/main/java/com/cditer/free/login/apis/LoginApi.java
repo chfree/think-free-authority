@@ -50,6 +50,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -119,7 +120,10 @@ public class LoginApi extends TokenApi {
     private void loginSuccess(BaseResponse response, User user) {
         LoginModel loginModel = LoginUtil.user2LoginModel(user);
 
-        String token = createTokenFactory.newTokenCreate().createToken(loginModel.getId(),loginModel.getAccount(),loginModel.getName());
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("name", loginModel.getName());
+
+        String token = createTokenFactory.newTokenCreate().createToken(loginModel.getId(), claims);
         loginModel.setToken(token);
 
         // 执行Logined切入点
