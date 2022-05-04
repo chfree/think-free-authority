@@ -15,7 +15,6 @@ public class LoginUtil {
     public static LoginModel user2LoginModel(User loginUser){
         LoginModel loginModel = new LoginModel();
         loginModel.setId(loginUser.getId());
-        loginModel.setAccount(loginUser.getAccount());
         loginModel.setName(loginUser.getName());
 
         return loginModel;
