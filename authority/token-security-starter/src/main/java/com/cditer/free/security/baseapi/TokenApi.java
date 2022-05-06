@@ -1,9 +1,9 @@
 package com.cditer.free.security.baseapi;
 
 import com.cditer.free.core.exception.BizException;
+import com.cditer.free.core.message.security.LoginModel;
 import com.cditer.free.coreweb.message.WebResponseStatus;
 import com.cditer.free.coreweb.webapi.FirstApi;
-import com.cditer.free.core.message.security.LoginModel;
 
 /**
  * @author chfree
@@ -16,11 +16,7 @@ public class TokenApi extends FirstApi {
     public final static String LOGIN_KEY="loginModel";
 
     public LoginModel getCurrentLogin() {
-        LoginModel loginModel = (LoginModel)servletRequest.getAttribute(LOGIN_KEY);
-        if(loginModel==null){
-            throw new BizException(WebResponseStatus.AUTHORIZE_ERROR,"登陆超时，无法获取登陆用户的id");
-        }
-        return loginModel;
+      return getCurrentLogin(LoginModel.class);
     }
 
     public String getLoginId(){
@@ -29,5 +25,17 @@ public class TokenApi extends FirstApi {
 
     public String getLoginName(){
         return getCurrentLogin().getName();
+    }
+
+    public <T> T getCurrentLogin(Class<? extends T> clazz) {
+       return getReqAttr(LOGIN_KEY, clazz);
+    }
+
+    public <T> T getReqAttr(String key, Class<? extends T> clazz) {
+        T loginModel = (T)servletRequest.getAttribute(key);
+        if(loginModel==null){
+            throw new BizException(WebResponseStatus.AUTHORIZE_ERROR,"登陆超时，无法获取登陆用户的id");
+        }
+        return loginModel;
     }
 }

@@ -3,6 +3,8 @@ package com.cditer.free.security.intceptor.valid;
 import com.cditer.free.jwt.core.JwtHelper;
 import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.core.message.security.LoginModel;
+import com.cditer.free.security.handle.helper.TokenCheckInceptorHelper;
+import com.cditer.free.security.handle.helper.TokenLoginModelInceptorHelper;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,10 @@ public class TokenHelper {
         }
 
         LoginModel loginModel = jwtHelper.token2LoginModel(token);
+        TokenCheckInceptorHelper.checkToken(loginModel, token);
+
         request.setAttribute(TokenApi.LOGIN_KEY, loginModel);
+        TokenLoginModelInceptorHelper.convertLoginModel(request, loginModel);
 
         return true;
     }
