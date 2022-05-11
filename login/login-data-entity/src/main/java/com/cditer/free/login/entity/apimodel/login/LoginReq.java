@@ -18,8 +18,8 @@ import javax.validation.constraints.NotBlank;
 @Slf4j
 @Data
 public class LoginReq {
-    @NotBlank(message="用户名不能为空")
-    private String username;
+    @NotBlank(message="账号不能为空")
+    private String account;
 
     @NotBlank(message="密码不能为空")
     private String password;
@@ -29,8 +29,8 @@ public class LoginReq {
             throw new BizException(ResponseStatus.SERVER_ERROR,"服务端未配置私钥信息，请与管理员联系");
         }
         try {
-            String decUsername = RSAUtils.decrypt(username, rsaPriKey);
-            setUsername(decUsername);
+            String decUsername = RSAUtils.decrypt(account, rsaPriKey);
+            setAccount(decUsername);
 
             String decPassword = RSAUtils.decrypt(password, rsaPriKey);
             setPassword(decPassword);
@@ -39,4 +39,6 @@ public class LoginReq {
             throw new BizException(ResponseStatus.SERVER_ERROR,"登陆解析用户名有误");
         }
     }
+
+
 }
