@@ -71,8 +71,13 @@ public class DateEditLogSaveHelper {
                 buildDataEditDtl(dataEditLog, item, dataEditDtlTemplate);
             }
 
+            List<DataEditDtlView> dataEditDtlViewList = dataEditLog.getDataEditDtlViewList();
+            if (CollectionUtils.isEmpty(dataEditDtlViewList) && !dataEditLogMark.emptyDtlRecord()) {
+                return null;
+            }
+
             return dataEditLog;
-        }).filter(item -> item.isRecord()).collect(Collectors.toList());
+        }).filter(item -> item != null && item.isRecord()).collect(Collectors.toList());
 
         return dataEditLogs;
     }

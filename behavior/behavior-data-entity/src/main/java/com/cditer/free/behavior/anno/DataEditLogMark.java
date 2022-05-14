@@ -19,4 +19,9 @@ public @interface DataEditLogMark {
      * 记录详情
      */
     boolean recordDtl() default false;
+
+    /**
+     * 空详情是否记录
+     */
+    boolean emptyDtlRecord() default false;
 }
