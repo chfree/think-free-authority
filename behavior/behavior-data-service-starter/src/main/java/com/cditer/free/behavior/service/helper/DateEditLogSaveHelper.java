@@ -6,7 +6,6 @@ import cn.hutool.core.util.ObjectUtil;
 import com.cditer.free.behavior.anno.BsnId;
 import com.cditer.free.behavior.anno.DataEditDtlMark;
 import com.cditer.free.behavior.anno.DataEditLogMark;
-import com.cditer.free.behavior.entity.model.DataEditLog;
 import com.cditer.free.behavior.entity.viewmodel.DataEditDtlView;
 import com.cditer.free.behavior.entity.viewmodel.DataEditLogView;
 import com.cditer.free.core.message.data.IDbModel;
@@ -27,7 +26,6 @@ import javax.persistence.Table;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -69,7 +67,7 @@ public class DateEditLogSaveHelper {
 
             dataEditLog.setRecordDt(DateUtil.date());
 
-            if(dataEditLogMark.recordDtl()){
+            if (dataEditLogMark.recordDtl()) {
                 buildDataEditDtl(dataEditLog, item, dataEditDtlTemplate);
             }
 
@@ -111,7 +109,7 @@ public class DateEditLogSaveHelper {
 
     }
 
-    private void buildDataEditDtl(DataEditLogView dataEditLog, IDbModel dbModel,List<DataEditDtlView> dataEditDtlTemplate) {
+    private void buildDataEditDtl(DataEditLogView dataEditLog, IDbModel dbModel, List<DataEditDtlView> dataEditDtlTemplate) {
 
         IDbModel modelBase = queryModelBase(dataEditLog, dbModel);
         List<DataEditDtlView> dataEditDtls = new ArrayList<>();
@@ -142,7 +140,7 @@ public class DateEditLogSaveHelper {
         dataEditLog.setDataEditDtlViewList(saveList);
     }
 
-    private IDbModel queryModelBase(DataEditLogView dataEditLog,IDbModel dbModel) {
+    private IDbModel queryModelBase(DataEditLogView dataEditLog, IDbModel dbModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         Class<? extends IDbModel> clazzByAnno = getClassByAnno(dbModel.getClass(), Table.class);
         sqlExpression.selectAllFrom(clazzByAnno)
@@ -151,12 +149,12 @@ public class DateEditLogSaveHelper {
         return sqlExecutor.selectOne(sqlExpression, clazzByAnno);
     }
 
-    private Class<? extends IDbModel> getClassByAnno(Class<?> clazz, Class<? extends Annotation> anno){
-        if(clazz.getName().equals(Object.class.getName())){
+    private Class<? extends IDbModel> getClassByAnno(Class<?> clazz, Class<? extends Annotation> anno) {
+        if (clazz.getName().equals(Object.class.getName())) {
             return null;
         }
-        if(clazz.getAnnotation(anno)!=null){
-            return (Class<? extends ModelBase>)clazz;
+        if (clazz.getAnnotation(anno) != null) {
+            return (Class<? extends ModelBase>) clazz;
         }
         return getClassByAnno(clazz.getSuperclass(), anno);
     }
@@ -175,7 +173,6 @@ public class DateEditLogSaveHelper {
                 return null;
             }
             bsnMnpltDtl.setProName(item.getName());
-            bsnMnpltDtl.setProText(annotation.text());
             bsnMnpltDtl.setLevel(annotation.level());
 
             return bsnMnpltDtl;

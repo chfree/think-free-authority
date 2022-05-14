@@ -12,11 +12,6 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface DataEditDtlMark {
     /**
-     * 显示文本
-     */
-    String text();
-
-    /**
      * 显示级别
      */
     int level() default 1;

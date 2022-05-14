@@ -1,5 +1,6 @@
 package com.cditer.free.behavior.entity.model;
 
+
 import com.cditer.free.core.message.data.ModelBase;
 import lombok.Data;
 
@@ -11,14 +12,14 @@ import javax.persistence.Table;
 /**
  * @author      auto build code by think
  * @email       chfree001@gmail.com
- * @createtime  2022-04-27 21:08:56
- * @comment     数据修改详情
+ * @createtime  2022-05-14 10:23:45
+ * @comment     属性映射表
  */
 
 @Data
 @Entity
-@Table(name="bhv_data_edit_dtl")
-public class DataEditDtl extends ModelBase {
+@Table(name="bhv_data_property_mapping")
+public class DataPropertyMapping extends ModelBase {
     /**
      * 主键
      */
@@ -27,33 +28,33 @@ public class DataEditDtl extends ModelBase {
     private String id;
 
     /**
-     * 修改记录id
+     * 业务类型
      */
-    @Column(name="edit_id")
-    private String editId;
+    @Column(name="bsn_type")
+    private String bsnType;
 
     /**
-     * 级别
+     * 名称
      */
-    @Column(name="level")
-    private Integer level;
+    @Column(name="name")
+    private String name;
 
     /**
-     * 属性名
+     * 标题
      */
-    @Column(name="pro_name")
-    private String proName;
+    @Column(name="title")
+    private String title;
 
     /**
-     * 新值
+     * 类别
      */
-    @Column(name="new_val")
-    private String newVal;
+    @Column(name="cagetory")
+    private String cagetory;
 
     /**
-     * 原始值
+     * 转换
      */
-    @Column(name="old_val")
-    private String oldVal;
+    @Column(name="convert")
+    private String convert;
 
 }
