@@ -127,7 +127,7 @@ public class DateEditLogSaveHelper {
 
             dataEditDtl.setEq(ObjectUtil.equal(oldFieldValue, newFieldValue));
 
-            if (!ObjectUtil.equal(oldFieldValue, newFieldValue)) {
+            if (!dataEditDtl.isEq()) {
                 if (oldFieldValue != null) {
                     dataEditDtl.setOldVal(oldFieldValue.toString());
                 }
