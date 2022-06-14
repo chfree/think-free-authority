@@ -52,6 +52,12 @@ public class WebVisitLog extends ModelBase {
     private String url;
 
     /**
+     * 时长
+     */
+    @Column(name="duration")
+    private long duration;
+
+    /**
      * ip地址
      */
     @Column(name="ip")

@@ -1,5 +1,6 @@
 package com.cditer.free.behavior.service.impl;
 
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.cditer.free.behavior.dao.IWebVisitLogDao;
 import com.cditer.free.behavior.entity.model.WebVisitLog;
@@ -55,6 +56,11 @@ public class WebVisitLogServiceImpl extends SuperService<WebVisitLog> implements
             webVisitLog.setId(PkIdUtils.getId());
             webVisitLog.setUserId(loginModel.getId());
             webVisitLog.setRoleId(loginModel.getRoleId());
+
+            if(webVisitLog.getStartDt()!=null&&webVisitLog.getEndDt()!=null){
+                long between = DateUtil.between(webVisitLog.getStartDt(), webVisitLog.getEndDt(), DateUnit.SECOND);
+                webVisitLog.setDuration(between);
+            }
         }
 
         batchSaveOperLog(operLogs);
