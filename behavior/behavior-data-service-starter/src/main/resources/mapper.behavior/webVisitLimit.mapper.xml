@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.behavior.mapper.IWebVisitLimitMapper">
+    <!-- web访问控制表Mapper -->
+    <sql id="tableName">bhv_web_visit_limit webVisitLimit</sql>
+    <sql id="mainTableAlias"> webVisitLimit.</sql>
+
+    <sql id="allColumns">
+        webVisitLimit.id,
+        webVisitLimit.visit_type,
+        webVisitLimit.limit_type,
+        webVisitLimit.max_count,
+        webVisitLimit.status,
+        webVisitLimit.enable_dt
+    </sql>
+
+    <resultMap type="com.cditer.free.behavior.entity.model.WebVisitLimit" id="webVisitLimitMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="visit_type" property="visitType"/>    <!-- 访问类型 -->
+        <result column="limit_type" property="limitType"/>    <!-- 控制类型 -->
+        <result column="max_count" property="maxCount"/>    <!-- 最大数量 -->
+        <result column="status" property="status"/>    <!-- 状态 -->
+        <result column="enable_dt" property="enableDt"/>    <!-- 启用日期 -->
+    </resultMap>
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and id = #{search.id}
+            </if>
+            <if test="search.visitType != null  and search.visitType != ''">
+                and visit_type = #{search.visitType}
+            </if>
+            <if test="search.limitType != null  and search.limitType != ''">
+                and limit_type = #{search.limitType}
+            </if>
+            <if test="search.maxCount != null  and search.maxCount != ''">
+                and max_count = #{search.maxCount}
+            </if>
+            <if test="search.status != null  and search.status != ''">
+                and status = #{search.status}
+            </if>
+            <if test="search.enableDt != null  and search.enableDt != ''">
+                and enable_dt = #{search.enableDt}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

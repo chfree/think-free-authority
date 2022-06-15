@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.behavior.mapper.IWebVisitLogMapper">
+    <!-- web访问日志表Mapper -->
+    <sql id="tableName">bhv_web_visit_log webVisitLog</sql>
+    <sql id="mainTableAlias"> webVisitLog.</sql>
+
+    <sql id="allColumns">
+        webVisitLog.id,
+        webVisitLog.trace_id,
+        webVisitLog.start_dt,
+        webVisitLog.end_dt,
+        webVisitLog.url,
+        webVisitLog.duration,
+        webVisitLog.ip,
+        webVisitLog.type,
+        webVisitLog.bsn_id,
+        webVisitLog.user_id,
+        webVisitLog.role_id,
+        webVisitLog.mark1,
+        webVisitLog.mark2,
+        webVisitLog.mark3,
+        webVisitLog.mark4
+    </sql>
+
+    <resultMap type="com.cditer.free.behavior.entity.model.WebVisitLog" id="webVisitLogMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="trace_id" property="traceId"/>    <!-- 全局跟踪号 -->
+        <result column="start_dt" property="startDt"/>    <!-- 开始时间 -->
+        <result column="end_dt" property="endDt"/>    <!-- 结束时间 -->
+        <result column="url" property="url"/>    <!-- 地址 -->
+        <result column="duration" property="duration"/>    <!-- 时长 -->
+        <result column="ip" property="ip"/>    <!-- ip地址 -->
+        <result column="type" property="type"/>    <!-- 日志类型 -->
+        <result column="bsn_id" property="bsnId"/>    <!-- 业务id -->
+        <result column="user_id" property="userId"/>    <!-- 用户id -->
+        <result column="role_id" property="roleId"/>    <!-- 角色id -->
+        <result column="mark1" property="mark1"/>    <!-- 标志1 -->
+        <result column="mark2" property="mark2"/>    <!-- 标志2 -->
+        <result column="mark3" property="mark3"/>    <!-- 标志3 -->
+        <result column="mark4" property="mark4"/>    <!-- 标志4 -->
+    </resultMap>
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and id = #{search.id}
+            </if>
+            <if test="search.traceId != null  and search.traceId != ''">
+                and trace_id = #{search.traceId}
+            </if>
+            <if test="search.startDt != null  and search.startDt != ''">
+                and start_dt = #{search.startDt}
+            </if>
+            <if test="search.endDt != null  and search.endDt != ''">
+                and end_dt = #{search.endDt}
+            </if>
+            <if test="search.url != null  and search.url != ''">
+                and url = #{search.url}
+            </if>
+            <if test="search.duration != null  and search.duration != ''">
+                and duration = #{search.duration}
+            </if>
+            <if test="search.ip != null  and search.ip != ''">
+                and ip = #{search.ip}
+            </if>
+            <if test="search.type != null  and search.type != ''">
+                and type = #{search.type}
+            </if>
+            <if test="search.bsnId != null  and search.bsnId != ''">
+                and bsn_id = #{search.bsnId}
+            </if>
+            <if test="search.userId != null  and search.userId != ''">
+                and user_id = #{search.userId}
+            </if>
+            <if test="search.roleId != null  and search.roleId != ''">
+                and role_id = #{search.roleId}
+            </if>
+            <if test="search.mark1 != null  and search.mark1 != ''">
+                and mark1 = #{search.mark1}
+            </if>
+            <if test="search.mark2 != null  and search.mark2 != ''">
+                and mark2 = #{search.mark2}
+            </if>
+            <if test="search.mark3 != null  and search.mark3 != ''">
+                and mark3 = #{search.mark3}
+            </if>
+            <if test="search.mark4 != null  and search.mark4 != ''">
+                and mark4 = #{search.mark4}
+            </if>
+        </where>
+    </sql>
+
+</mapper>
