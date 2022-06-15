@@ -9,6 +9,8 @@
         webVisitLimit.id,
         webVisitLimit.visit_type,
         webVisitLimit.limit_type,
+        webVisitLimit.matcher_type,
+        webVisitLimit.matcher_rule,
         webVisitLimit.max_count,
         webVisitLimit.status,
         webVisitLimit.enable_dt
@@ -18,6 +20,8 @@
         <id column="id" property="id"/>    <!-- 主键 -->
         <result column="visit_type" property="visitType"/>    <!-- 访问类型 -->
         <result column="limit_type" property="limitType"/>    <!-- 控制类型 -->
+        <result column="matcher_type" property="matcherType"/>    <!-- 匹配类型 -->
+        <result column="matcher_rule" property="matcherRule"/>    <!-- 匹配规则 -->
         <result column="max_count" property="maxCount"/>    <!-- 最大数量 -->
         <result column="status" property="status"/>    <!-- 状态 -->
         <result column="enable_dt" property="enableDt"/>    <!-- 启用日期 -->
@@ -33,6 +37,12 @@
             </if>
             <if test="search.limitType != null  and search.limitType != ''">
                 and limit_type = #{search.limitType}
+            </if>
+            <if test="search.matcherType != null  and search.matcherType != ''">
+                and matcher_type = #{search.matcherType}
+            </if>
+            <if test="search.matcherRule != null  and search.matcherRule != ''">
+                and matcher_rule = #{search.matcherRule}
             </if>
             <if test="search.maxCount != null  and search.maxCount != ''">
                 and max_count = #{search.maxCount}

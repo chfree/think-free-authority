@@ -40,6 +40,18 @@ public class WebVisitLimit extends ModelBase {
     private String limitType;
 
     /**
+     * 匹配类型
+     */
+    @Column(name="matcher_type")
+    private String matcherType;
+
+    /**
+     * 匹配规则
+     */
+    @Column(name="matcher_rule")
+    private String matcherRule;
+
+    /**
      * 最大数量
      */
     @Column(name="max_count")
