@@ -1,8 +1,10 @@
 package com.cditer.free.behavior.mapper;
 
 import com.cditer.free.behavior.entity.model.WebVisitLimit;
+import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitSearch;
 import com.cditer.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 
 /**
@@ -14,5 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IWebVisitLimitMapper extends IMapper<WebVisitLimit> {
-
+    WebVisitLimit queryModelBySearch(@Param("search") WebVisitLimitSearch search);
 }

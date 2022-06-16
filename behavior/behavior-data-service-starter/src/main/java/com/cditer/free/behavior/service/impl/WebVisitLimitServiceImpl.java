@@ -3,6 +3,7 @@ package com.cditer.free.behavior.service.impl;
 import com.cditer.free.behavior.dao.IWebVisitLimitDao;
 import com.cditer.free.behavior.entity.model.WebVisitLimit;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitSearch;
+import com.cditer.free.behavior.mapper.IWebVisitLimitMapper;
 import com.cditer.free.behavior.service.IWebVisitLimitService;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
@@ -22,7 +23,11 @@ import java.util.List;
 @Component
 public class WebVisitLimitServiceImpl extends SuperService<WebVisitLimit> implements IWebVisitLimitService {
     @Autowired
-    IWebVisitLimitDao webVisitLimitDao;
+    private IWebVisitLimitDao webVisitLimitDao;
+
+    @Autowired
+    private IWebVisitLimitMapper webVisitLimitMapper;
+
 
     @Override
     public int queryCountBySearch(WebVisitLimitSearch search) {
@@ -32,6 +37,11 @@ public class WebVisitLimitServiceImpl extends SuperService<WebVisitLimit> implem
     @Override
     public List<WebVisitLimit> queryListBySearch(WebVisitLimitSearch search, PagerModel pagerModel) {
         return webVisitLimitDao.queryListBySearch(search,pagerModel);
+    }
+
+    @Override
+    public WebVisitLimit queryModelBySearch(WebVisitLimitSearch search) {
+        return webVisitLimitMapper.queryModelBySearch(search);
     }
 
 }

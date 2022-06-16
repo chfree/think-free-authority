@@ -69,4 +69,10 @@ public class WebVisitLimit extends ModelBase {
     @Column(name="enable_dt")
     private Date enableDt;
 
+    /**
+     * 优先级
+     */
+    @Column(name="priority")
+    private Integer priority;
+
 }

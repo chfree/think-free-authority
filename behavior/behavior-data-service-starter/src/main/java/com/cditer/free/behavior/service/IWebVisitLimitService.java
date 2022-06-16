@@ -19,4 +19,6 @@ public interface IWebVisitLimitService extends ISuperService<WebVisitLimit> {
     int queryCountBySearch(WebVisitLimitSearch search);
 
     List<WebVisitLimit> queryListBySearch(WebVisitLimitSearch search, PagerModel pagerModel);
+
+    WebVisitLimit queryModelBySearch(WebVisitLimitSearch search);
 }

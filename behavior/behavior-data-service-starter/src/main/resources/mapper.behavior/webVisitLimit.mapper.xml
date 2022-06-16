@@ -13,7 +13,8 @@
         webVisitLimit.matcher_rule,
         webVisitLimit.max_count,
         webVisitLimit.status,
-        webVisitLimit.enable_dt
+        webVisitLimit.enable_dt,
+        webVisitLimit.priority
     </sql>
 
     <resultMap type="com.cditer.free.behavior.entity.model.WebVisitLimit" id="webVisitLimitMap">
@@ -25,6 +26,7 @@
         <result column="max_count" property="maxCount"/>    <!-- 最大数量 -->
         <result column="status" property="status"/>    <!-- 状态 -->
         <result column="enable_dt" property="enableDt"/>    <!-- 启用日期 -->
+        <result column="priority" property="priority"/>    <!-- 优先级 -->
     </resultMap>
     <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
     <sql id="whereSql">
@@ -50,10 +52,26 @@
             <if test="search.status != null  and search.status != ''">
                 and status = #{search.status}
             </if>
-            <if test="search.enableDt != null  and search.enableDt != ''">
-                and enable_dt = #{search.enableDt}
+            <if test="search.enableDt != null">
+                <![CDATA[
+                    and enable_dt <= #{search.enableDt}
+                ]]>
+            </if>
+            <if test="search.matcherItems!=null and search.matcherItems.size > 0">
+                and (matcher_type, matcher_rule) in
+                <foreach collection="search.matcherItems" index="index" item="item" open="("  separator="," close=")">
+                    (#{item.type},#{item.rule})
+                </foreach>
             </if>
         </where>
     </sql>
 
+    <select id="queryModelBySearch" resultMap="webVisitLimitMap">
+        select
+        <include refid="allColumns" />
+        from bhv_web_visit_limit webVisitLimit
+        <include refid="whereSql" />
+        order by priority
+        limit 1,1
+    </select>
 </mapper>

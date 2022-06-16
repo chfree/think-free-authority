@@ -24,4 +24,6 @@ public interface IWebVisitLogService extends ISuperService<WebVisitLog> {
     void batchSaveOperLog(List<WebVisitLog> operLogs);
 
     void batchSaveOperLog(List<WebVisitLog> operLogs, LoginModel loginModel);
+
+    int queryVisitCountBySearch(WebVisitLogSearch search);
 }

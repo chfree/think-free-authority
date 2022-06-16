@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import com.cditer.free.behavior.dao.IWebVisitLogDao;
 import com.cditer.free.behavior.entity.model.WebVisitLog;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLogSearch;
+import com.cditer.free.behavior.mapper.IWebVisitLogMapper;
 import com.cditer.free.behavior.service.IWebVisitLogService;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.core.message.security.LoginModel;
@@ -27,7 +28,10 @@ import java.util.List;
 @Component
 public class WebVisitLogServiceImpl extends SuperService<WebVisitLog> implements IWebVisitLogService {
     @Autowired
-    IWebVisitLogDao operLogDao;
+    private IWebVisitLogDao operLogDao;
+
+    @Autowired
+    private IWebVisitLogMapper webVisitLogMapper;
 
     @Override
     public int queryCountBySearch(WebVisitLogSearch search) {
@@ -64,5 +68,10 @@ public class WebVisitLogServiceImpl extends SuperService<WebVisitLog> implements
         }
 
         batchSaveOperLog(operLogs);
+    }
+
+    @Override
+    public int queryVisitCountBySearch(WebVisitLogSearch search) {
+        return webVisitLogMapper.queryVisitCountBySearch(search);
     }
 }

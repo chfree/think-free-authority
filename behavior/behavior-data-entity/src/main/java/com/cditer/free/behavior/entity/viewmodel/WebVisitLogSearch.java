@@ -5,4 +5,5 @@ import lombok.Data;
 
 @Data
 public class WebVisitLogSearch extends WebVisitLog {
+    private int timeDiff;
 }

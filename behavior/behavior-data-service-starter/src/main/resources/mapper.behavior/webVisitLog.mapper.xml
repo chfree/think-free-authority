@@ -91,4 +91,14 @@
         </where>
     </sql>
 
+    <select id="queryVisitCountBySearch" resultType="java.lang.Integer">
+        SELECT count(1) from bhv_web_visit_log t
+        where
+        type=#{search.type}
+        and user_id=#{search.userId}
+        <![CDATA[
+        and TIMESTAMPDIFF(SECOND,start_dt,now())< #{search.timeDiff}
+        ]]>
+    </select>
+
 </mapper>

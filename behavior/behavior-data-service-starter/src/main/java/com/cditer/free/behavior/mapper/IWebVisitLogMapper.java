@@ -1,8 +1,10 @@
 package com.cditer.free.behavior.mapper;
 
 import com.cditer.free.behavior.entity.model.WebVisitLog;
+import com.cditer.free.behavior.entity.viewmodel.WebVisitLogSearch;
 import com.cditer.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 
 /**
@@ -14,5 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface IWebVisitLogMapper extends IMapper<WebVisitLog> {
-
+    int queryVisitCountBySearch(@Param("search") WebVisitLogSearch search);
 }
