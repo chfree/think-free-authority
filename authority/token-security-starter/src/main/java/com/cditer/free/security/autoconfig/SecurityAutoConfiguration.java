@@ -21,6 +21,6 @@ public class SecurityAutoConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginIntceptor).addPathPatterns("/api/**");
+        registry.addInterceptor(loginIntceptor).addPathPatterns("/api/**").order(-1);
     }
 }

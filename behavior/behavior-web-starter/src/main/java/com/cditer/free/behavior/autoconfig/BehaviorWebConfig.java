@@ -16,7 +16,7 @@ public class BehaviorWebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(webVisitLogInceptor).addPathPatterns("/**");
+        registry.addInterceptor(webVisitLogInceptor).addPathPatterns("/**").order(10);
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }

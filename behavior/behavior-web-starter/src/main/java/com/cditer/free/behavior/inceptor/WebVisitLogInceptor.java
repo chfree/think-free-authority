@@ -69,6 +69,7 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         WebVisitLimitSearch search = new WebVisitLimitSearch();
         search.setVisitType(apiVisitLog.type());
         search.setEnableDt(DateUtil.date());
+        search.setStatus("01");
 
         setLimitSearch(loginModel, search);
 
