@@ -10,8 +10,10 @@ import com.cditer.free.data.dao.base.ISqlExpression;
 import com.cditer.free.data.dao.base.impl.SuperDao;
 import com.cditer.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author chfree
@@ -27,7 +29,7 @@ public class RoleDaoImpl extends SuperDao<Role> implements IRoleDao {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectCount().from(Role.class);
 
-        appendExpression(sqlExpression,search);
+        appendExpression(sqlExpression, search);
 
         return queryCount(sqlExpression);
     }
@@ -37,40 +39,43 @@ public class RoleDaoImpl extends SuperDao<Role> implements IRoleDao {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.selectAllFrom(Role.class);
 
-        appendExpression(sqlExpression,search);
+        appendExpression(sqlExpression, search);
 
-        return queryList(sqlExpression,pagerModel);
+        return queryList(sqlExpression, pagerModel);
     }
 
     @Override
     public List<String> queryListByUserId(String userId) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("role_id")
-                .from(UserRole.class)
-                .andEq("user_id",userId);
+        sqlExpression.selectAllFrom(UserRole.class)
+                .andEq("user_id", userId);
 
-        return  queryList(sqlExpression,String.class);
+        List<UserRole> userRoles = queryList(sqlExpression, UserRole.class);
+        if (CollectionUtils.isEmpty(userRoles)) {
+            return null;
+        }
+        return userRoles.stream().map(item -> item.getRoleId()).collect(Collectors.toList());
     }
 
     @Override
     public List<Role> queryListRoleByUserId(String userId) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
         sqlExpression.select("role.id,role.comments,role.delete_mark,role.description,role.mark_code,role.role_name,role.sort_code,role.role_mark")
-                .from(UserRole.class,"userRole")
-                .leftJoin(Role.class,"role").on("role.id","userRole.role_id")
-                .andEq("userRole.user_id",userId)
+                .from(UserRole.class, "userRole")
+                .leftJoin(Role.class, "role").on("role.id", "userRole.role_id")
+                .andEq("userRole.user_id", userId)
                 .addOrder("role.sort_code", OrderEnum.ASC);
 
-        return  queryList(sqlExpression,Role.class);
+        return queryList(sqlExpression, Role.class);
     }
 
-    private void appendExpression(ISqlExpression sqlExpression, RoleSearch search){
-        sqlExpression.andEqNoEmpty("id",search.getId());
+    private void appendExpression(ISqlExpression sqlExpression, RoleSearch search) {
+        sqlExpression.andEqNoEmpty("id", search.getId());
 
-        sqlExpression.andEqNoEmpty("role_name",search.getRoleName());
+        sqlExpression.andEqNoEmpty("role_name", search.getRoleName());
 
-        sqlExpression.andNotEqNoEmpty("id",search.getNotId());
+        sqlExpression.andNotEqNoEmpty("id", search.getNotId());
 
-        sqlExpression.andRightLikeNoEmpty("role_name",search.getLikeRoleName());
+        sqlExpression.andRightLikeNoEmpty("role_name", search.getLikeRoleName());
     }
 }

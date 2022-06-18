@@ -43,6 +43,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -122,6 +123,12 @@ public class LoginApi extends TokenApi {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", loginModel.getName());
+
+        List<String> roleList = roleService.queryListByUserId(user.getId());
+        if(!CollectionUtils.isEmpty(roleList)){
+            claims.put("roleId", roleList.get(0));
+        }
+
 
         String token = createTokenFactory.newTokenCreate().createToken(loginModel.getId(), claims);
         loginModel.setToken(token);
