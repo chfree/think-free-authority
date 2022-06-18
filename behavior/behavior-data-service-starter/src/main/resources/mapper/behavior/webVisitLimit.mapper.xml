@@ -74,4 +74,20 @@
         order by priority
         limit 0,1
     </select>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from bhv_web_visit_limit webVisitLimit
+        <include refid="whereSql" />
+    </select>
+
+    <select id="queryListBySearch" resultMap="webVisitLimitMap">
+        select
+        <include refid="allColumns" />
+        from bhv_web_visit_limit webVisitLimit
+        <include refid="whereSql" />
+        order by priority
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
 </mapper>

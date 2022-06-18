@@ -23,25 +23,21 @@ import java.util.List;
 @Component
 public class WebVisitLimitServiceImpl extends SuperService<WebVisitLimit> implements IWebVisitLimitService {
     @Autowired
-    private IWebVisitLimitDao webVisitLimitDao;
-
-    @Autowired
     private IWebVisitLimitMapper webVisitLimitMapper;
 
 
     @Override
     public int queryCountBySearch(WebVisitLimitSearch search) {
-        return webVisitLimitDao.queryCountBySearch(search);
+        return webVisitLimitMapper.queryCountBySearch(search);
     }
 
     @Override
     public List<WebVisitLimit> queryListBySearch(WebVisitLimitSearch search, PagerModel pagerModel) {
-        return webVisitLimitDao.queryListBySearch(search,pagerModel);
+        return webVisitLimitMapper.queryListBySearch(search,pagerModel);
     }
 
     @Override
     public WebVisitLimit queryModelBySearch(WebVisitLimitSearch search) {
         return webVisitLimitMapper.queryModelBySearch(search);
     }
-
 }

@@ -11,12 +11,14 @@ import com.cditer.free.behavior.enums.WebVisitLimitType;
 import com.cditer.free.behavior.service.IWebVisitLimitService;
 import com.cditer.free.behavior.service.IWebVisitLogService;
 import com.cditer.free.core.exception.BizException;
+import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.core.message.security.LoginModel;
 import com.cditer.free.coreweb.webapi.FirstApi;
 import com.cditer.free.security.baseapi.TokenApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -29,6 +31,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -57,13 +60,13 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 
-    private void checkVisitLimit(HttpServletRequest request,WebApiVisitLog apiVisitLog){
-        if(apiVisitLog==null){
+    private void checkVisitLimit(HttpServletRequest request, WebApiVisitLog apiVisitLog) {
+        if (apiVisitLog == null) {
             return;
         }
 
         LoginModel loginModel = getCurrLoginModel(request);
-        if(loginModel==null){
+        if (loginModel == null) {
             return;
         }
         WebVisitLimitSearch search = new WebVisitLimitSearch();
@@ -73,12 +76,21 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
 
         setLimitSearch(loginModel, search);
 
-        WebVisitLimit webVisitLimit = webVisitLimitService.queryModelBySearch(search);
-        if(webVisitLimit==null){
+        List<WebVisitLimit> webVisitLimits = webVisitLimitService.queryListBySearch(search, PagerModel.asOf(1, 10));
+        if(CollectionUtils.isEmpty(webVisitLimits)){
+            return;
+        }
+        for (WebVisitLimit webVisitLimit : webVisitLimits) {
+            visitCheck(webVisitLimit, apiVisitLog, loginModel);
+        }
+    }
+
+    private void visitCheck(WebVisitLimit webVisitLimit,WebApiVisitLog apiVisitLog, LoginModel loginModel) {
+        if (webVisitLimit == null) {
             return;
         }
         WebVisitLimitType webVisitLimitType = WebVisitLimitType.parseByText(webVisitLimit.getLimitType());
-        if(webVisitLimitType==null){
+        if (webVisitLimitType == null) {
             log.error("访问控制类型不正确");
             return;
         }
@@ -88,7 +100,7 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         countSearch.setType(apiVisitLog.type());
 
         int visitSumCount = webVisitLogService.queryVisitCountBySearch(countSearch);
-        if(visitSumCount>webVisitLimit.getMaxCount()){
+        if (visitSumCount > webVisitLimit.getMaxCount()) {
             throw new BizException("该请求被限制访问频次，请稍后在访问");
         }
     }
@@ -96,7 +108,7 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
     private void setLimitSearch(LoginModel loginModel, WebVisitLimitSearch search) {
         search.setMatcherItems(new ArrayList<>());
 
-        if(StringUtils.hasText(loginModel.getRoleId())){
+        if (StringUtils.hasText(loginModel.getRoleId())) {
             LimitMatcherItem limitMatcherItem = new LimitMatcherItem();
             limitMatcherItem.setType("roleId");
             limitMatcherItem.setRule(loginModel.getRoleId());
@@ -104,7 +116,7 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
             search.getMatcherItems().add(limitMatcherItem);
         }
 
-        if(StringUtils.hasText(loginModel.getDeptId())){
+        if (StringUtils.hasText(loginModel.getDeptId())) {
             LimitMatcherItem limitMatcherItem = new LimitMatcherItem();
             limitMatcherItem.setType("deptId");
             limitMatcherItem.setRule(loginModel.getDeptId());
@@ -112,7 +124,7 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
             search.getMatcherItems().add(limitMatcherItem);
         }
 
-        if(StringUtils.hasText(loginModel.getId())){
+        if (StringUtils.hasText(loginModel.getId())) {
             LimitMatcherItem limitMatcherItem = new LimitMatcherItem();
             limitMatcherItem.setType("userId");
             limitMatcherItem.setRule(loginModel.getId());
@@ -129,14 +141,14 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         saveOperLog(request, apiVisitLog);
     }
 
-    private void saveOperLog(HttpServletRequest request,WebApiVisitLog apiVisitLog){
-        if(apiVisitLog==null){
+    private void saveOperLog(HttpServletRequest request, WebApiVisitLog apiVisitLog) {
+        if (apiVisitLog == null) {
             return;
         }
         WebVisitLog visitLog = new WebVisitLog();
 
         Object traceId = request.getAttribute("traceId");
-        if(traceId!=null){
+        if (traceId != null) {
             visitLog.setTraceId(traceId.toString());
         }
         visitLog.setType(apiVisitLog.type());
@@ -146,7 +158,7 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         visitLog.setEndDt(DateUtil.date());
         visitLog.setIp(getClientIP(request));
 
-        if(apiVisitLog.recordUrl()){
+        if (apiVisitLog.recordUrl()) {
             visitLog.setUrl(getRequestUrl(request));
         }
 
@@ -155,16 +167,16 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         webVisitLogService.batchSaveOperLog(Arrays.asList(visitLog), loginModel);
     }
 
-    private LoginModel getCurrLoginModel(HttpServletRequest request){
-        return (LoginModel)request.getAttribute(TokenApi.LOGIN_KEY);
+    private LoginModel getCurrLoginModel(HttpServletRequest request) {
+        return (LoginModel) request.getAttribute(TokenApi.LOGIN_KEY);
     }
 
-    private void setBsnId(HttpServletRequest request,WebVisitLog visitLog, WebApiVisitLog apiVisitLog){
+    private void setBsnId(HttpServletRequest request, WebVisitLog visitLog, WebApiVisitLog apiVisitLog) {
         Object paramName = request.getAttribute(apiVisitLog.bsnIdOfParamName());
-        if(paramName==null){
+        if (paramName == null) {
             paramName = request.getParameter(apiVisitLog.bsnIdOfParamName());
         }
-        if(paramName!=null){
+        if (paramName != null) {
             visitLog.setBsnId(paramName.toString());
         }
     }
@@ -182,8 +194,8 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         return ((HandlerMethod) handler).getMethod().getAnnotation(WebApiVisitLog.class);
     }
 
-    private String getRequestUrl(HttpServletRequest request){
-        return request.getRequestURI().replace(request.getContextPath(),"");
+    private String getRequestUrl(HttpServletRequest request) {
+        return request.getRequestURI().replace(request.getContextPath(), "");
     }
 
 
