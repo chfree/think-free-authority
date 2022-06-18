@@ -8,6 +8,7 @@ import com.cditer.free.behavior.entity.viewmodel.LimitMatcherItem;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitSearch;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLogSearch;
 import com.cditer.free.behavior.enums.WebVisitLimitType;
+import com.cditer.free.behavior.handle.helper.SurpassLimitInceptorHelper;
 import com.cditer.free.behavior.service.IWebVisitLimitService;
 import com.cditer.free.behavior.service.IWebVisitLogService;
 import com.cditer.free.core.exception.BizException;
@@ -77,15 +78,15 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         setLimitSearch(loginModel, search);
 
         List<WebVisitLimit> webVisitLimits = webVisitLimitService.queryListBySearch(search, PagerModel.asOf(1, 10));
-        if(CollectionUtils.isEmpty(webVisitLimits)){
+        if (CollectionUtils.isEmpty(webVisitLimits)) {
             return;
         }
         for (WebVisitLimit webVisitLimit : webVisitLimits) {
-            visitCheck(webVisitLimit, apiVisitLog, loginModel);
+            visitCheck(webVisitLimit, loginModel);
         }
     }
 
-    private void visitCheck(WebVisitLimit webVisitLimit,WebApiVisitLog apiVisitLog, LoginModel loginModel) {
+    private void visitCheck(WebVisitLimit webVisitLimit, LoginModel loginModel) {
         if (webVisitLimit == null) {
             return;
         }
@@ -97,10 +98,12 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
         WebVisitLogSearch countSearch = new WebVisitLogSearch();
         countSearch.setTimeDiff(webVisitLimitType.getValue());
         countSearch.setUserId(loginModel.getId());
-        countSearch.setType(apiVisitLog.type());
+        countSearch.setType(webVisitLimit.getVisitType());
 
         int visitSumCount = webVisitLogService.queryVisitCountBySearch(countSearch);
         if (visitSumCount > webVisitLimit.getMaxCount()) {
+            // 通知订阅的inceptor是否进行记录处理
+            SurpassLimitInceptorHelper.execSurpassLimitNotify(loginModel, webVisitLimit, visitSumCount);
             throw new BizException("该请求被限制访问频次，请稍后在访问");
         }
     }
