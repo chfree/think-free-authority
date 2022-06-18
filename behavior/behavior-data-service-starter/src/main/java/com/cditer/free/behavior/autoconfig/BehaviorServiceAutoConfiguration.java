@@ -10,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @comment
  */
 @MapperScan(value = "com.cditer.free.behavior.mapper")
-@ImportResource(locations={"behavior-data-starter-config.xml"})
+@ImportResource(locations={"classpath:behavior-data-starter-config.xml"})
 public class BehaviorServiceAutoConfiguration {
 
 }

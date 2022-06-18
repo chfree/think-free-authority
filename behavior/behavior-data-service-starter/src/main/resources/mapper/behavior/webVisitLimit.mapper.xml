@@ -72,6 +72,6 @@
         from bhv_web_visit_limit webVisitLimit
         <include refid="whereSql" />
         order by priority
-        limit 1,1
+        limit 0,1
     </select>
 </mapper>

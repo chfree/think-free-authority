@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ImportResource;
  * @create 2019-07-12 00:01
  * @comment
  */
-@ImportResource(locations={"behavior-web-starter-config.xml"})
+@ImportResource(locations={"classpath:behavior-web-starter-config.xml"})
 public class BehaviorWebAutoConfiguration {
 
 }
