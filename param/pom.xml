@@ -7,7 +7,7 @@
     <groupId>com.cditer.free.components</groupId>
     <artifactId>think-free-param</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <modules>
         <module>param-data-entity</module>
         <module>param-data-service-starter</module>
