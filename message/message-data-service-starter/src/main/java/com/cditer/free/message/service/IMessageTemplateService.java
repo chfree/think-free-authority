@@ -1,7 +1,12 @@
 package com.cditer.free.message.service;
 
+import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.ISuperService;
 import com.cditer.free.message.entity.model.MessageTemplate;
+import com.cditer.free.message.entity.viewmodel.MessageTemplateSearch;
+import com.cditer.free.message.entity.viewmodel.MessageTemplateView;
+
+import java.util.List;
 
 
 /**
@@ -12,5 +17,11 @@ import com.cditer.free.message.entity.model.MessageTemplate;
  */
 
 public interface IMessageTemplateService extends ISuperService<MessageTemplate> {
+    int queryCountBySearch(MessageTemplateSearch search);
 
+    List<MessageTemplateView> queryListViewBySearch(MessageTemplateSearch search, PagerModel pagerModel);
+
+    MessageTemplateView queryModelViewBySearch(MessageTemplateSearch search);
+
+    MessageTemplateView queryModelViewById(String id);
 }

@@ -84,8 +84,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <com.cditer.free.base.version>2.0.0</com.cditer.free.base.version>
-        <com.cditer.free.components.version>2.0.0</com.cditer.free.components.version>
+        <com.cditer.free.base.version>2.1.0</com.cditer.free.base.version>
+        <com.cditer.free.components.version>2.1.0</com.cditer.free.components.version>
         <io.jsonwebtoken.jjwt.version>0.9.1</io.jsonwebtoken.jjwt.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
     </properties>
@@ -128,11 +128,11 @@
                 <artifactId>file-web-starter</artifactId>
                 <version>${com.cditer.free.components.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.cditer.free.components</groupId>
-                <artifactId>authority-security-starter</artifactId>
-                <version>${com.cditer.free.components.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.cditer.free.components</groupId>-->
+<!--                <artifactId>authority-security-starter</artifactId>-->
+<!--                <version>${com.cditer.free.components.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>com.cditer.free.components</groupId>
                 <artifactId>quartz-web-starter</artifactId>
