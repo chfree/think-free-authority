@@ -40,7 +40,7 @@ public class MessageReceive extends ModelBase{
     private String receiveType;
 
     /**
-     * 接收人id
+     * 接收id
      */
     @Column(name="receive_id")
     private String receiveId;
