@@ -24,4 +24,6 @@ public interface IMessageTemplateService extends ISuperService<MessageTemplate> 
     MessageTemplateView queryModelViewBySearch(MessageTemplateSearch search);
 
     MessageTemplateView queryModelViewById(String id);
+
+    boolean saveMessageTemplate(MessageTemplate messageTemplate);
 }
