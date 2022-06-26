@@ -31,7 +31,7 @@ import java.util.List;
  * @comment     消息模板表
  */
 @RestController
-@RequestMapping(value = "/api/v1/xxxx/messageTemplate/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/message/messageTemplate/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="消息模板表管理",value ="消息模板表相关的操作")
 public class MessageTemplateApi extends TokenApi {
     @Autowired
@@ -72,7 +72,7 @@ public class MessageTemplateApi extends TokenApi {
 
     @ApiOperation(value = "保存一个消息模板表")
     @PostMapping("save")
-    public BaseResponse save(@Valid BaseRequest<MessageTemplate> req){
+    public BaseResponse save(@RequestBody @Valid BaseRequest<MessageTemplate> req){
         boolean result = messageTemplateService.saveMessageTemplate(req.getData());
 
         return BaseResponse.success(result);

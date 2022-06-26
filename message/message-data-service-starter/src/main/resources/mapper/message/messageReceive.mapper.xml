@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.message.mapper.IMessageReceiveMapper">
+    <!-- 消息接收人Mapper -->
+    <sql id="tableName">base_message_receive messageReceive</sql>
+    <sql id="mainTableAlias"> messageReceive.</sql>
+
+    <sql id="allColumns">
+        messageReceive.id,
+        messageReceive.message_id,
+        messageReceive.receive_type,
+        messageReceive.receive_id
+    </sql>
+
+    <resultMap type="com.cditer.free.message.entity.model.MessageReceive" id="messageReceiveMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="message_id" property="messageId"/>    <!-- 消息id -->
+        <result column="receive_type" property="receiveType"/>    <!-- 接收范围 -->
+        <result column="receive_id" property="receiveId"/>    <!-- 接收人id -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and messageReceive.id = #{search.id}
+            </if>
+            <if test="search.messageId != null  and search.messageId != ''">
+                and messageReceive.message_id = #{search.messageId}
+            </if>
+            <if test="search.receiveType != null  and search.receiveType != ''">
+                and messageReceive.receive_type = #{search.receiveType}
+            </if>
+            <if test="search.receiveId != null  and search.receiveId != ''">
+                and messageReceive.receive_id = #{search.receiveId}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="messageReceiveViewMap" extends="messageReceiveMap" type="com.cditer.free.message.entity.viewmodel.MessageReceiveView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from base_message_receive messageReceive
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from base_message_receive messageReceive
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="messageReceiveViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by messageReceive.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="messageReceiveViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

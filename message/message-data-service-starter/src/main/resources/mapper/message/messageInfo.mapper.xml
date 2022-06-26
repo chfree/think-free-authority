@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.message.mapper.IMessageInfoMapper">
+    <!-- 消息表Mapper -->
+    <sql id="tableName">base_message_info messageInfo</sql>
+    <sql id="mainTableAlias"> messageInfo.</sql>
+
+    <sql id="allColumns">
+        messageInfo.id,
+        messageInfo.title,
+        messageInfo.content,
+        messageInfo.icon,
+        messageInfo.start_dt,
+        messageInfo.end_dt,
+        messageInfo.type,
+        messageInfo.bus_data,
+        messageInfo.level,
+        messageInfo.rmrk,
+        messageInfo.rmrk1,
+        messageInfo.add_user_id,
+        messageInfo.add_date
+    </sql>
+
+    <resultMap type="com.cditer.free.message.entity.model.MessageInfo" id="messageInfoMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="title" property="title"/>    <!-- 标题 -->
+        <result column="content" property="content"/>    <!-- 正文 -->
+        <result column="icon" property="icon"/>    <!-- 标题图标 -->
+        <result column="start_dt" property="startDt"/>    <!-- 开始提示时间 -->
+        <result column="end_dt" property="endDt"/>    <!-- 消息结束时间 -->
+        <result column="type" property="type"/>    <!-- 消息类型 -->
+        <result column="bus_data" property="busData"/>    <!-- 业务数据 -->
+        <result column="level" property="level"/>    <!-- 消息级别 -->
+        <result column="rmrk" property="rmrk"/>    <!-- 备注 -->
+        <result column="rmrk1" property="rmrk1"/>    <!-- 备注1 -->
+        <result column="add_user_id" property="addUserId"/>    <!-- 添加人 -->
+        <result column="add_date" property="addDate"/>    <!-- 添加时间 -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and messageInfo.id = #{search.id}
+            </if>
+            <if test="search.title != null  and search.title != ''">
+                and messageInfo.title = #{search.title}
+            </if>
+            <if test="search.content != null  and search.content != ''">
+                and messageInfo.content = #{search.content}
+            </if>
+            <if test="search.icon != null  and search.icon != ''">
+                and messageInfo.icon = #{search.icon}
+            </if>
+            <if test="search.startDt != null  and search.startDt != ''">
+                and messageInfo.start_dt = #{search.startDt}
+            </if>
+            <if test="search.endDt != null  and search.endDt != ''">
+                and messageInfo.end_dt = #{search.endDt}
+            </if>
+            <if test="search.type != null  and search.type != ''">
+                and messageInfo.type = #{search.type}
+            </if>
+            <if test="search.busData != null  and search.busData != ''">
+                and messageInfo.bus_data = #{search.busData}
+            </if>
+            <if test="search.level != null  and search.level != ''">
+                and messageInfo.level = #{search.level}
+            </if>
+            <if test="search.rmrk != null  and search.rmrk != ''">
+                and messageInfo.rmrk = #{search.rmrk}
+            </if>
+            <if test="search.rmrk1 != null  and search.rmrk1 != ''">
+                and messageInfo.rmrk1 = #{search.rmrk1}
+            </if>
+            <if test="search.addUserId != null  and search.addUserId != ''">
+                and messageInfo.add_user_id = #{search.addUserId}
+            </if>
+            <if test="search.addDate != null  and search.addDate != ''">
+                and messageInfo.add_date = #{search.addDate}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="messageInfoViewMap" extends="messageInfoMap" type="com.cditer.free.message.entity.viewmodel.MessageInfoView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from base_message_info messageInfo
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from base_message_info messageInfo
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="messageInfoViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by messageInfo.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="messageInfoViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>
