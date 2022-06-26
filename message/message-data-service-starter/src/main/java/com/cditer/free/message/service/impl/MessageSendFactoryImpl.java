@@ -1,13 +1,140 @@
 package com.cditer.free.message.service.impl;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.Dict;
+import cn.hutool.core.lang.Pair;
+import cn.hutool.extra.template.Template;
+import cn.hutool.extra.template.TemplateConfig;
+import cn.hutool.extra.template.TemplateEngine;
+import cn.hutool.extra.template.TemplateUtil;
+import com.cditer.free.core.exception.BizException;
+import com.cditer.free.core.util.PkIdUtils;
+import com.cditer.free.message.entity.model.MessageInfo;
+import com.cditer.free.message.entity.model.MessageReceive;
 import com.cditer.free.message.entity.viewmodel.MessageSendView;
+import com.cditer.free.message.entity.viewmodel.MessageTemplateView;
+import com.cditer.free.message.service.IMessageInfoService;
+import com.cditer.free.message.service.IMessageReceiveService;
 import com.cditer.free.message.service.IMessageSendFactory;
+import com.cditer.free.message.service.IMessageTemplateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 @Component
 public class MessageSendFactoryImpl implements IMessageSendFactory {
+
+    @Autowired
+    private IMessageTemplateService messageTemplateService;
+
+    @Autowired
+    private IMessageInfoService messageInfoService;
+
+    @Autowired
+    private IMessageReceiveService messageReceiveService;
+
     @Override
-    public boolean sendMessage(String tempId, MessageSendView messageSendView) {
-        return false;
+    public <T> boolean sendMessage(MessageSendView<T> messageSendView) {
+        MessageInfo messageInfo = formatMessageInfo(messageSendView);
+
+        return sendMessage(messageInfo, messageSendView.getMessageReceives());
     }
+
+    private <T> MessageInfo formatMessageInfo(MessageSendView<T> messageSendView) {
+        MessageInfo messageInfo = messageSendView.getMessageInfo();
+        if(messageInfo==null){
+            messageInfo = buildMessageInfo(messageSendView.getTempName(), messageSendView.getData());
+        }else{
+            if(!StringUtils.hasText(messageInfo.getContent())&&!StringUtils.hasText(messageInfo.getContent())){
+                MessageInfo tempMessageInfo = buildMessageInfo(messageSendView.getTempName(), messageSendView.getData());
+                messageInfo.setContent(tempMessageInfo.getContent());
+                messageInfo.setTitle(tempMessageInfo.getTitle());
+            }
+            if(!StringUtils.hasText(messageInfo.getContent())){
+                MessageInfo tempMessageInfo = buildMessageInfo(messageSendView.getTempName(), messageSendView.getData());
+                messageInfo.setContent(tempMessageInfo.getContent());
+            }
+            if(!StringUtils.hasText(messageInfo.getTitle())){
+                MessageInfo tempMessageInfo = buildMessageInfo(messageSendView.getTempName(), messageSendView.getData());
+                messageInfo.setTitle(tempMessageInfo.getTitle());
+            }
+        }
+        return messageInfo;
+    }
+
+    @Override
+    public boolean sendMessage(MessageInfo messageInfo, List<MessageReceive> messageReceives) {
+        if (messageInfo == null) {
+            throw new BizException("要发送的消息不能为空");
+        }
+        if (CollectionUtils.isEmpty(messageReceives)) {
+            throw new BizException("消息的接收方不能为空");
+        }
+        if (!StringUtils.hasText(messageInfo.getId())) {
+            messageInfo.setId(PkIdUtils.getId());
+        }
+
+        for (MessageReceive messageReceive : messageReceives) {
+            if (!StringUtils.hasText(messageReceive.getId())) {
+                messageReceive.setId(PkIdUtils.getId());
+            }
+            messageReceive.setMessageId(messageInfo.getId());
+        }
+
+        boolean result = messageInfoService.addModel(messageInfo);
+        if (result) {
+            messageReceiveService.insertListEx(messageReceives);
+        }
+        return result;
+    }
+
+    @Override
+    public  <T> MessageInfo buildMessageInfo(String tempName, T data){
+        if(!StringUtils.hasText(tempName)){
+            throw new BizException("发送消息时，消息模板不能为空");
+        }
+
+        MessageTemplateView messageTemplateView = messageTemplateService.queryModelViewByName(tempName);
+        if(messageTemplateView==null){
+            throw new BizException(String.format("发送消息时，找不到对应的消息模板[%s]", tempName));
+        }
+
+        TemplateEngine engine = TemplateUtil.createEngine(new TemplateConfig());
+
+        // 设置参数
+        Dict entity = Dict.create().set("data", data);
+        entity.put("currDate", DateUtil.date());
+
+        MessageInfo messageInfo = new MessageInfo();
+        if(StringUtils.hasText(messageTemplateView.getContentTpl())){
+            // 创建模板
+            Template contentTemplate = engine.getTemplate(messageTemplateView.getContentTpl());
+            // 渲染
+            String content = contentTemplate.render(entity);
+            messageInfo.setContent(content);
+        }
+
+        if(StringUtils.hasText(messageTemplateView.getContentTpl())) {
+            Template titleTemplate = engine.getTemplate(messageTemplateView.getContentTpl());
+            String title = titleTemplate.render(entity);
+            messageInfo.setTitle(title);
+        }
+
+        return messageInfo;
+    }
+
+    @Override
+    public <T> String buildMessageContent(String tempName, T data) {
+        return buildMessageInfo(tempName, data).getContent();
+    }
+
+    @Override
+    public <T> String buildMessageTitle(String tempName, T data) {
+        return buildMessageInfo(tempName, data).getTitle();
+    }
+
+
 }

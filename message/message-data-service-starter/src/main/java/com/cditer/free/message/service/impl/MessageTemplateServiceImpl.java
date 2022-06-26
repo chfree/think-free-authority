@@ -53,6 +53,14 @@ public class MessageTemplateServiceImpl extends SuperService<MessageTemplate> im
     }
 
     @Override
+    public MessageTemplateView queryModelViewByName(String name) {
+        MessageTemplateSearch search = new MessageTemplateSearch();
+        search.setName(name);
+
+        return messageTemplateMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
     public boolean saveMessageTemplate(MessageTemplate messageTemplate) {
         if(StringUtils.isEmpty(messageTemplate.getId())){
             messageTemplate.setId(PkIdUtils.getId());

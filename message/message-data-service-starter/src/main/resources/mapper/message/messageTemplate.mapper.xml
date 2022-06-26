@@ -10,7 +10,8 @@
         messageTemplate.name,
         messageTemplate.title,
         messageTemplate.icon,
-        messageTemplate.content,
+        messageTemplate.title_tpl,
+        messageTemplate.content_tpl,
         messageTemplate.enabled,
         messageTemplate.type,
         messageTemplate.level,
@@ -25,7 +26,8 @@
         <result column="name" property="name"/>    <!-- 模板名称 -->
         <result column="title" property="title"/>    <!-- 标题 -->
         <result column="icon" property="icon"/>    <!-- 图标 -->
-        <result column="content" property="content"/>    <!-- 模板内容 -->
+        <result column="title_tpl" property="titleTpl"/>    <!-- 标题模板 -->
+        <result column="content_tpl" property="contentTpl"/>    <!-- 内容模板 -->
         <result column="enabled" property="enabled"/>    <!-- 是否启用 -->
         <result column="type" property="type"/>    <!-- 类型 -->
         <result column="level" property="level"/>    <!-- 消息级别 -->
@@ -49,8 +51,11 @@
             <if test="search.icon != null  and search.icon != ''">
                 and messageTemplate.icon = #{search.icon}
             </if>
-            <if test="search.content != null  and search.content != ''">
-                and messageTemplate.content = #{search.content}
+            <if test="search.titleTpl != null  and search.titleTpl != ''">
+                and messageTemplate.title_tpl = #{search.titleTpl}
+            </if>
+            <if test="search.contentTpl != null  and search.contentTpl != ''">
+                and messageTemplate.content_tpl = #{search.contentTpl}
             </if>
             <if test="search.enabled != null  and search.enabled != ''">
                 and messageTemplate.enabled = #{search.enabled}

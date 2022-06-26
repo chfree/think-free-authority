@@ -46,10 +46,16 @@ public class MessageTemplate extends ModelBase {
     private String icon;
 
     /**
-     * 模板内容
+     * 标题模板
      */
-    @Column(name="content")
-    private String content;
+    @Column(name="title_tpl")
+    private String titleTpl;
+
+    /**
+     * 内容模板
+     */
+    @Column(name="content_tpl")
+    private String contentTpl;
 
     /**
      * 是否启用
