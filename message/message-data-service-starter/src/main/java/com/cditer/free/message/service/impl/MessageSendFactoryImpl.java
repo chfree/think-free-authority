@@ -15,6 +15,7 @@ import com.cditer.free.message.entity.model.MessageInfo;
 import com.cditer.free.message.entity.model.MessageReceive;
 import com.cditer.free.message.entity.viewmodel.MessageSendView;
 import com.cditer.free.message.entity.viewmodel.MessageTemplateView;
+import com.cditer.free.message.enums.MessageShowMode;
 import com.cditer.free.message.service.IMessageInfoService;
 import com.cditer.free.message.service.IMessageReceiveService;
 import com.cditer.free.message.service.IMessageSendFactory;
@@ -76,6 +77,9 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
             }
             if(!StringUtils.hasText(messageInfo.getAddUserId())){
                 messageInfo.setAddUserId(tempMessageInfo.getAddUserId());
+            }
+            if(!StringUtils.hasText(messageInfo.getShowMode())){
+                messageInfo.setShowMode(tempMessageInfo.getShowMode());
             }
         }
         return messageInfo;
@@ -142,6 +146,7 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
         messageInfo.setIcon(messageTemplateView.getIcon());
         messageInfo.setLevel(messageTemplateView.getLevel());
         messageInfo.setType(messageTemplateView.getType());
+        messageInfo.setShowMode(MessageShowMode.MESSAGE_PAGE.getValue());
         messageInfo.setAddDate(DateUtil.date());
 
         LoginModel currentLogin = loginModelQuery.getCurrentLogin();
