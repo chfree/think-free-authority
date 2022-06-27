@@ -20,6 +20,7 @@ create table base_message_info (
     id varchar(50) NOT NULL COMMENT '主键',
     title varchar(1000) NULL COMMENT '标题',
     content varchar(8000) NULL COMMENT '正文',
+    show_mode varchar(20) NULL COMMENT '显示模式',
     icon varchar(200) NULL COMMENT '标题图标',
     start_dt datetime  NULL COMMENT '开始提示时间',
     end_dt datetime  NULL COMMENT '消息结束时间',

@@ -13,6 +13,8 @@ public interface IMessageSendFactory {
 
     <T> boolean sendMessage(MessageSendView<T> messageSendView);
 
+    <T> MessageInfo formatMessageInfo(MessageInfo messageInfo, String tempName,T data);
+
     boolean sendMessage(MessageInfo messageInfo, List<MessageReceive> messageReceives);
 
     <T> String buildMessageContent(String tempName,T data);

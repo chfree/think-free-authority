@@ -40,6 +40,13 @@ public class MessageInfo extends ModelBase {
     private String content;
 
     /**
+     * 显示模式
+     */
+    @Column(name="show_mode")
+    private String showMode;
+
+
+    /**
      * 标题图标
      */
     @Column(name="icon")

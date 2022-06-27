@@ -8,6 +8,8 @@ import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.TemplateEngine;
 import cn.hutool.extra.template.TemplateUtil;
 import com.cditer.free.core.exception.BizException;
+import com.cditer.free.core.inceptor.ILoginModelQuery;
+import com.cditer.free.core.message.security.LoginModel;
 import com.cditer.free.core.util.PkIdUtils;
 import com.cditer.free.message.entity.model.MessageInfo;
 import com.cditer.free.message.entity.model.MessageReceive;
@@ -18,6 +20,7 @@ import com.cditer.free.message.service.IMessageReceiveService;
 import com.cditer.free.message.service.IMessageSendFactory;
 import com.cditer.free.message.service.IMessageTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -36,30 +39,43 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
     @Autowired
     private IMessageReceiveService messageReceiveService;
 
+    @Autowired
+    @Qualifier("loginModelQueryTokenImpl")
+    private ILoginModelQuery loginModelQuery;
+
     @Override
     public <T> boolean sendMessage(MessageSendView<T> messageSendView) {
-        MessageInfo messageInfo = formatMessageInfo(messageSendView);
+        MessageInfo messageInfo = formatMessageInfo(messageSendView.getMessageInfo(), messageSendView.getTempName(), messageSendView.getData());
 
         return sendMessage(messageInfo, messageSendView.getMessageReceives());
     }
 
-    private <T> MessageInfo formatMessageInfo(MessageSendView<T> messageSendView) {
-        MessageInfo messageInfo = messageSendView.getMessageInfo();
+    @Override
+    public <T> MessageInfo formatMessageInfo(MessageInfo messageInfo, String tempName,T data) {
         if(messageInfo==null){
-            messageInfo = buildMessageInfo(messageSendView.getTempName(), messageSendView.getData());
+            messageInfo = buildMessageInfo(tempName, data);
         }else{
-            if(!StringUtils.hasText(messageInfo.getContent())&&!StringUtils.hasText(messageInfo.getContent())){
-                MessageInfo tempMessageInfo = buildMessageInfo(messageSendView.getTempName(), messageSendView.getData());
-                messageInfo.setContent(tempMessageInfo.getContent());
-                messageInfo.setTitle(tempMessageInfo.getTitle());
-            }
+            MessageInfo tempMessageInfo = buildMessageInfo(tempName, data);
             if(!StringUtils.hasText(messageInfo.getContent())){
-                MessageInfo tempMessageInfo = buildMessageInfo(messageSendView.getTempName(), messageSendView.getData());
                 messageInfo.setContent(tempMessageInfo.getContent());
             }
             if(!StringUtils.hasText(messageInfo.getTitle())){
-                MessageInfo tempMessageInfo = buildMessageInfo(messageSendView.getTempName(), messageSendView.getData());
                 messageInfo.setTitle(tempMessageInfo.getTitle());
+            }
+            if(!StringUtils.hasText(messageInfo.getIcon())){
+                messageInfo.setIcon(tempMessageInfo.getIcon());
+            }
+            if(!StringUtils.hasText(messageInfo.getType())){
+                messageInfo.setType(tempMessageInfo.getType());
+            }
+            if(messageInfo.getLevel()==null){
+                messageInfo.setLevel(tempMessageInfo.getLevel());
+            }
+            if(messageInfo.getAddDate()==null){
+                messageInfo.setAddDate(tempMessageInfo.getAddDate());
+            }
+            if(!StringUtils.hasText(messageInfo.getAddUserId())){
+                messageInfo.setAddUserId(tempMessageInfo.getAddUserId());
             }
         }
         return messageInfo;
@@ -123,6 +139,16 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
             messageInfo.setTitle(title);
         }
 
+        messageInfo.setIcon(messageTemplateView.getIcon());
+        messageInfo.setLevel(messageTemplateView.getLevel());
+        messageInfo.setType(messageTemplateView.getType());
+        messageInfo.setAddDate(DateUtil.date());
+
+        LoginModel currentLogin = loginModelQuery.getCurrentLogin();
+        if(currentLogin!=null){
+            messageInfo.setAddUserId(currentLogin.getId());
+        }
+
         return messageInfo;
     }
 
@@ -135,6 +161,4 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
     public <T> String buildMessageTitle(String tempName, T data) {
         return buildMessageInfo(tempName, data).getTitle();
     }
-
-
 }

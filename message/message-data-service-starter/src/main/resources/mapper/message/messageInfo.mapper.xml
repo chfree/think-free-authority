@@ -9,6 +9,7 @@
         messageInfo.id,
         messageInfo.title,
         messageInfo.content,
+        messageInfo.show_mode,
         messageInfo.icon,
         messageInfo.start_dt,
         messageInfo.end_dt,
@@ -25,6 +26,7 @@
         <id column="id" property="id"/>    <!-- 主键 -->
         <result column="title" property="title"/>    <!-- 标题 -->
         <result column="content" property="content"/>    <!-- 正文 -->
+        <result column="show_mode" property="showMode"/>    <!-- 显示模式 -->
         <result column="icon" property="icon"/>    <!-- 标题图标 -->
         <result column="start_dt" property="startDt"/>    <!-- 开始提示时间 -->
         <result column="end_dt" property="endDt"/>    <!-- 消息结束时间 -->
@@ -48,6 +50,9 @@
             </if>
             <if test="search.content != null  and search.content != ''">
                 and messageInfo.content = #{search.content}
+            </if>
+            <if test="search.showMode != null  and search.showMode != ''">
+                and messageInfo.show_mode = #{search.showMode}
             </if>
             <if test="search.icon != null  and search.icon != ''">
                 and messageInfo.icon = #{search.icon}
