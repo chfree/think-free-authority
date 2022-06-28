@@ -53,12 +53,7 @@ public class MessageReadServiceImpl extends SuperService<MessageRead> implements
 
     @Override
     public boolean saveMessageRead(MessageRead messageRead) {
-        if(StringUtils.hasText(messageRead.getId())){
-            messageRead.setModelStatus(ModelStatus.update);
-        }else{
-            messageRead.setId(PkIdUtils.getId());
-            messageRead.setModelStatus(ModelStatus.add);
-        }
+        messageRead.autoPkIdAndStatus();
 
         return applyChange(messageRead);
     }

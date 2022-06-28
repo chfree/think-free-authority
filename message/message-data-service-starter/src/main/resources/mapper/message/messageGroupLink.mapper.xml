@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.message.mapper.IMessageGroupLinkMapper">
+    <!-- 消息组连接Mapper -->
+    <sql id="tableName">base_message_group_link messageGroupLink</sql>
+    <sql id="mainTableAlias"> messageGroupLink.</sql>
+
+    <sql id="allColumns">
+        messageGroupLink.id,
+        messageGroupLink.group_id,
+        messageGroupLink.link_type,
+        messageGroupLink.link_id
+    </sql>
+
+    <resultMap type="com.cditer.free.message.entity.model.MessageGroupLink" id="messageGroupLinkMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="group_id" property="groupId"/>    <!-- 组id -->
+        <result column="link_type" property="linkType"/>    <!-- 连接类型 -->
+        <result column="link_id" property="linkId"/>    <!-- 连接id -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and messageGroupLink.id = #{search.id}
+            </if>
+            <if test="search.groupId != null  and search.groupId != ''">
+                and messageGroupLink.group_id = #{search.groupId}
+            </if>
+            <if test="search.linkType != null  and search.linkType != ''">
+                and messageGroupLink.link_type = #{search.linkType}
+            </if>
+            <if test="search.linkId != null  and search.linkId != ''">
+                and messageGroupLink.link_id = #{search.linkId}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="messageGroupLinkViewMap" extends="messageGroupLinkMap" type="com.cditer.free.message.entity.viewmodel.MessageGroupLinkView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from base_message_group_link messageGroupLink
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from base_message_group_link messageGroupLink
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="messageGroupLinkViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by messageGroupLink.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="messageGroupLinkViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

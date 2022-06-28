@@ -62,12 +62,7 @@ public class MessageTemplateServiceImpl extends SuperService<MessageTemplate> im
 
     @Override
     public boolean saveMessageTemplate(MessageTemplate messageTemplate) {
-        if(StringUtils.isEmpty(messageTemplate.getId())){
-            messageTemplate.setId(PkIdUtils.getId());
-            messageTemplate.setModelStatus(ModelStatus.add);
-        }else{
-            messageTemplate.setModelStatus(ModelStatus.update);
-        }
+        messageTemplate.autoPkIdAndStatus();
 
         return applyChange(messageTemplate);
     }

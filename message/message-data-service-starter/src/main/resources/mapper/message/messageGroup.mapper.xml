@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.message.mapper.IMessageGroupMapper">
+    <!-- 消息组Mapper -->
+    <sql id="tableName">base_message_group messageGroup</sql>
+    <sql id="mainTableAlias"> messageGroup.</sql>
+
+    <sql id="allColumns">
+        messageGroup.id,
+        messageGroup.name,
+        messageGroup.title,
+        messageGroup.status
+    </sql>
+
+    <resultMap type="com.cditer.free.message.entity.model.MessageGroup" id="messageGroupMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="name" property="name"/>    <!-- 名称 -->
+        <result column="title" property="title"/>    <!-- 标题 -->
+        <result column="status" property="status"/>    <!-- 状态 -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and messageGroup.id = #{search.id}
+            </if>
+            <if test="search.notId != null  and search.notId != ''">
+                and messageGroup.id != #{search.notId}
+            </if>
+            <if test="search.name != null  and search.name != ''">
+                and messageGroup.name = #{search.name}
+            </if>
+            <if test="search.title != null  and search.title != ''">
+                and messageGroup.title = #{search.title}
+            </if>
+            <if test="search.status != null  and search.status != ''">
+                and messageGroup.status = #{search.status}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="messageGroupViewMap" extends="messageGroupMap" type="com.cditer.free.message.entity.viewmodel.MessageGroupView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from base_message_group messageGroup
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from base_message_group messageGroup
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="messageGroupViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by messageGroup.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="messageGroupViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

@@ -53,12 +53,7 @@ public class MessageReceiveServiceImpl extends SuperService<MessageReceive> impl
 
     @Override
     public boolean saveMessageReceive(MessageReceive messageReceive) {
-        if(StringUtils.hasText(messageReceive.getId())){
-            messageReceive.setModelStatus(ModelStatus.update);
-        }else{
-            messageReceive.setId(PkIdUtils.getId());
-            messageReceive.setModelStatus(ModelStatus.add);
-        }
+        messageReceive.autoPkIdAndStatus();
 
         return applyChange(messageReceive);
     }

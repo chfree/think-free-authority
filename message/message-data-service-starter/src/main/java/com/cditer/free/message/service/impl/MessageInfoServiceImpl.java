@@ -54,12 +54,7 @@ public class MessageInfoServiceImpl extends SuperService<MessageInfo> implements
 
     @Override
     public boolean saveMessageInfo(MessageInfo messageInfo) {
-        if(StringUtils.hasText(messageInfo.getId())){
-            messageInfo.setModelStatus(ModelStatus.update);
-        }else{
-            messageInfo.setId(PkIdUtils.getId());
-            messageInfo.setModelStatus(ModelStatus.add);
-        }
+        messageInfo.autoPkIdAndStatus();
 
         return applyChange(messageInfo);
     }
