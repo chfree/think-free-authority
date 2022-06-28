@@ -1,7 +1,7 @@
 package com.cditer.free.message.entity.viewmodel;
 
 
-import com.cditer.free.message.entity.model.MessageGroupLink;
+import com.cditer.free.message.entity.model.ReceiveGroupLink;
 import lombok.Data;
 
 /**
@@ -12,5 +12,5 @@ import lombok.Data;
  */
 
 @Data
-public class MessageGroupLinkView extends MessageGroupLink {
+public class ReceiveGroupLinkView extends ReceiveGroupLink {
 }

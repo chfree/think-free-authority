@@ -18,7 +18,7 @@ import com.cditer.free.core.message.data.ModelBase;
 @Data
 @Entity
 @Table(name="base_message_group_link")
-public class MessageGroupLink extends ModelBase{
+public class ReceiveGroupLink extends ModelBase{
     /**
      * 主键
      */

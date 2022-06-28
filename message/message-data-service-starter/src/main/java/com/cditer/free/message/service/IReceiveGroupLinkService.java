@@ -2,9 +2,9 @@ package com.cditer.free.message.service;
 
 import com.cditer.free.data.dao.base.ISuperService;
 import com.cditer.free.core.message.data.PagerModel;
-import com.cditer.free.message.entity.model.MessageGroupLink;
-import com.cditer.free.message.entity.viewmodel.MessageGroupLinkSearch;
-import com.cditer.free.message.entity.viewmodel.MessageGroupLinkView;
+import com.cditer.free.message.entity.model.ReceiveGroupLink;
+import com.cditer.free.message.entity.viewmodel.ReceiveGroupLinkSearch;
+import com.cditer.free.message.entity.viewmodel.ReceiveGroupLinkView;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ import java.util.List;
  * @comment     消息组连接
  */
 
-public interface IMessageGroupLinkService extends ISuperService<MessageGroupLink>{
+public interface IReceiveGroupLinkService extends ISuperService<ReceiveGroupLink>{
 
     /**
      * 根据搜索条件查询消息组连接条数
      * @param search 搜索条件
      * @return 消息组连接条数
      */
-    int queryCountBySearch(MessageGroupLinkSearch search);
+    int queryCountBySearch(ReceiveGroupLinkSearch search);
 
     /**
      * 根据搜索条件分页查询消息组连接对象集合
@@ -31,27 +31,27 @@ public interface IMessageGroupLinkService extends ISuperService<MessageGroupLink
      * @param pagerModel 分页条件
      * @return 消息组连接对象集合
      */
-    List<MessageGroupLinkView> queryListViewBySearch(MessageGroupLinkSearch search, PagerModel pagerModel);
+    List<ReceiveGroupLinkView> queryListViewBySearch(ReceiveGroupLinkSearch search, PagerModel pagerModel);
 
     /**
      * 根据搜索条件查询消息组连接对象
      * @param search 搜索条件
      * @return 消息组连接对象
      */
-    MessageGroupLinkView queryModelViewBySearch(MessageGroupLinkSearch search);
+    ReceiveGroupLinkView queryModelViewBySearch(ReceiveGroupLinkSearch search);
 
     /**
      * 根据id查询消息组连接对象
      * @param id 主键id
      * @return 消息组连接对象
      */
-    MessageGroupLinkView queryModelViewById(String id);
+    ReceiveGroupLinkView queryModelViewById(String id);
 
     /**
      * 保存一个消息组连接对象
-     * @param messageGroupLink 消息组连接对象
+     * @param receiveGroupLink 消息组连接对象
      * @return 是否成功
      */
-    boolean saveMessageGroupLink(MessageGroupLink messageGroupLink);
+    boolean savereceiveGroupLink(ReceiveGroupLink receiveGroupLink);
 
 }

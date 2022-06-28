@@ -1,9 +1,9 @@
 package com.cditer.free.message.apis;
 
-import com.cditer.free.message.entity.model.MessageGroup;
-import com.cditer.free.message.entity.viewmodel.MessageGroupSearch;
-import com.cditer.free.message.entity.viewmodel.MessageGroupView;
-import com.cditer.free.message.service.IMessageGroupService;
+import com.cditer.free.message.entity.model.ReceiveGroup;
+import com.cditer.free.message.entity.viewmodel.ReceiveGroupSearch;
+import com.cditer.free.message.entity.viewmodel.ReceiveGroupView;
+import com.cditer.free.message.service.IReceiveGroupService;
 import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.core.message.web.BasePagerReq;
 import com.cditer.free.core.message.web.BasePagerResp;
@@ -30,47 +30,47 @@ import javax.validation.constraints.NotBlank;
  * @comment     消息组
  */
 @RestController
-@RequestMapping(value = "/api/v1/xxxx/messageGroup/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/xxxx/receiveGroup/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="消息组管理",value ="消息组相关的操作")
-public class MessageGroupApi extends TokenApi {
+public class ReceiveGroupApi extends TokenApi {
     @Autowired
-    private IMessageGroupService messageGroupService;
+    private IReceiveGroupService receiveGroupService;
 
     @ApiOperation(value = "获取消息组列表")
     @PostMapping("list")
-    public BaseResponse list(@RequestBody @Valid BasePagerReq<MessageGroupSearch> req){
-        int totalCount = messageGroupService.queryCountBySearch(req.getData());
-        List<MessageGroupView> list = messageGroupService.queryListViewBySearch(req.getData(), req.getPager());
+    public BaseResponse list(@RequestBody @Valid BasePagerReq<ReceiveGroupSearch> req){
+        int totalCount = receiveGroupService.queryCountBySearch(req.getData());
+        List<ReceiveGroupView> list = receiveGroupService.queryListViewBySearch(req.getData(), req.getPager());
 
         return BasePagerResp.success(list, totalCount);
     }
 
     @ApiOperation(value = "获取指定消息组")
     @GetMapping("get")
-    public BaseResponse<MessageGroup> get(@Valid @NotBlank(message = "消息组id不能为空") String id){
-        MessageGroup messageGroup = messageGroupService.queryModel(id);
-        return BaseResponse.success(messageGroup);
+    public BaseResponse<ReceiveGroup> get(@Valid @NotBlank(message = "消息组id不能为空") String id){
+        ReceiveGroup receiveGroup = receiveGroupService.queryModel(id);
+        return BaseResponse.success(receiveGroup);
     }
 
     @ApiOperation(value = "搜索消息组数量")
     @PostMapping("countSearch")
-    public BaseResponse countSearch(@RequestBody BaseRequest<MessageGroupSearch> req){
-        int count =  messageGroupService.queryCountBySearch(req.getData());
+    public BaseResponse countSearch(@RequestBody BaseRequest<ReceiveGroupSearch> req){
+        int count =  receiveGroupService.queryCountBySearch(req.getData());
         return BaseResponse.success(count);
     }
 
     @ApiOperation(value = "删除一个消息组")
     @PostMapping("delete")
     public BaseResponse delete(@Valid @NotBlank(message = "消息组id不能为空")String id){
-        boolean result =  messageGroupService.deleteModel(id);
+        boolean result =  receiveGroupService.deleteModel(id);
 
         return BaseResponse.success(result);
     }
 
     @ApiOperation(value = "保存一个消息组")
     @PostMapping("save")
-    public BaseResponse save(@RequestBody @Valid BaseRequest<MessageGroup> req){
-        boolean result = messageGroupService.saveMessageGroup(req.getData());
+    public BaseResponse save(@RequestBody @Valid BaseRequest<ReceiveGroup> req){
+        boolean result = receiveGroupService.savereceiveGroup(req.getData());
 
         return BaseResponse.success(result);
     }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cditer.free.message.mapper.IMessageGroupLinkMapper">
+<mapper namespace="com.cditer.free.message.mapper.IReceiveGroupLinkMapper">
     <!-- 消息组连接Mapper -->
-    <sql id="tableName">base_message_group_link messageGroupLink</sql>
-    <sql id="mainTableAlias"> messageGroupLink.</sql>
+    <sql id="tableName">base_message_group_link receiveGroupLink</sql>
+    <sql id="mainTableAlias"> receiveGroupLink.</sql>
 
     <sql id="allColumns">
-        messageGroupLink.id,
-        messageGroupLink.group_id,
-        messageGroupLink.link_type,
-        messageGroupLink.link_id
+        receiveGroupLink.id,
+        receiveGroupLink.group_id,
+        receiveGroupLink.link_type,
+        receiveGroupLink.link_id
     </sql>
 
-    <resultMap type="com.cditer.free.message.entity.model.MessageGroupLink" id="messageGroupLinkMap">
+    <resultMap type="com.cditer.free.message.entity.model.ReceiveGroupLink" id="receiveGroupLinkMap">
         <id column="id" property="id"/>    <!-- 主键 -->
         <result column="group_id" property="groupId"/>    <!-- 组id -->
         <result column="link_type" property="linkType"/>    <!-- 连接类型 -->
@@ -23,45 +23,45 @@
     <sql id="whereSql">
         <where>
             <if test="search.id != null  and search.id != ''">
-                and messageGroupLink.id = #{search.id}
+                and receiveGroupLink.id = #{search.id}
             </if>
             <if test="search.groupId != null  and search.groupId != ''">
-                and messageGroupLink.group_id = #{search.groupId}
+                and receiveGroupLink.group_id = #{search.groupId}
             </if>
             <if test="search.linkType != null  and search.linkType != ''">
-                and messageGroupLink.link_type = #{search.linkType}
+                and receiveGroupLink.link_type = #{search.linkType}
             </if>
             <if test="search.linkId != null  and search.linkId != ''">
-                and messageGroupLink.link_id = #{search.linkId}
+                and receiveGroupLink.link_id = #{search.linkId}
             </if>
         </where>
     </sql>
 
-    <resultMap id="messageGroupLinkViewMap" extends="messageGroupLinkMap" type="com.cditer.free.message.entity.viewmodel.MessageGroupLinkView">
+    <resultMap id="receiveGroupLinkViewMap" extends="receiveGroupLinkMap" type="com.cditer.free.message.entity.viewmodel.ReceiveGroupLinkView">
 
     </resultMap>
 
     <select id="queryCountBySearch" resultType="java.lang.Integer">
         select
         count(1)
-        from base_message_group_link messageGroupLink
+        from base_message_group_link receiveGroupLink
         <include refid="whereSql" />
     </select>
 
     <sql id="viewSql">
         select
         <include refid="allColumns" />
-        from base_message_group_link messageGroupLink
+        from base_message_group_link receiveGroupLink
     </sql>
 
-    <select id="queryListViewBySearch" resultMap="messageGroupLinkViewMap">
+    <select id="queryListViewBySearch" resultMap="receiveGroupLinkViewMap">
         <include refid="viewSql" />
         <include refid="whereSql" />
-        order by messageGroupLink.add_date desc
+        order by receiveGroupLink.add_date desc
         limit #{pager.currentSize},#{pager.pageSize}
     </select>
 
-    <select id="queryModelViewBySearch" resultMap="messageGroupLinkViewMap">
+    <select id="queryModelViewBySearch" resultMap="receiveGroupLinkViewMap">
         <include refid="viewSql" />
         <include refid="whereSql" />
     </select>

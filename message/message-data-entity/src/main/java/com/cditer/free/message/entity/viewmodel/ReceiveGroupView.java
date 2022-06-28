@@ -1,6 +1,6 @@
 package com.cditer.free.message.entity.viewmodel;
 
-import com.cditer.free.message.entity.model.MessageGroup;
+import com.cditer.free.message.entity.model.ReceiveGroup;
 import lombok.Data;
 
 /**
@@ -11,6 +11,5 @@ import lombok.Data;
  */
 
 @Data
-public class MessageGroupSearch extends MessageGroup {
-    private String notId;
+public class ReceiveGroupView extends ReceiveGroup {
 }
