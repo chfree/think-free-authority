@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -56,33 +57,33 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
     }
 
     @Override
-    public <T> MessageInfo formatMessageInfo(MessageInfo messageInfo, String tempName,T data) {
-        if(messageInfo==null){
+    public <T> MessageInfo formatMessageInfo(MessageInfo messageInfo, String tempName, T data) {
+        if (messageInfo == null) {
             messageInfo = buildMessageInfo(tempName, data);
-        }else{
+        } else {
             MessageInfo tempMessageInfo = buildMessageInfo(tempName, data);
-            if(!StringUtils.hasText(messageInfo.getContent())){
+            if (!StringUtils.hasText(messageInfo.getContent())) {
                 messageInfo.setContent(tempMessageInfo.getContent());
             }
-            if(!StringUtils.hasText(messageInfo.getTitle())){
+            if (!StringUtils.hasText(messageInfo.getTitle())) {
                 messageInfo.setTitle(tempMessageInfo.getTitle());
             }
-            if(!StringUtils.hasText(messageInfo.getIcon())){
+            if (!StringUtils.hasText(messageInfo.getIcon())) {
                 messageInfo.setIcon(tempMessageInfo.getIcon());
             }
-            if(!StringUtils.hasText(messageInfo.getType())){
+            if (!StringUtils.hasText(messageInfo.getType())) {
                 messageInfo.setType(tempMessageInfo.getType());
             }
-            if(messageInfo.getLevel()==null){
+            if (messageInfo.getLevel() == null) {
                 messageInfo.setLevel(tempMessageInfo.getLevel());
             }
-            if(messageInfo.getAddDate()==null){
+            if (messageInfo.getAddDate() == null) {
                 messageInfo.setAddDate(tempMessageInfo.getAddDate());
             }
-            if(!StringUtils.hasText(messageInfo.getAddUserId())){
+            if (!StringUtils.hasText(messageInfo.getAddUserId())) {
                 messageInfo.setAddUserId(tempMessageInfo.getAddUserId());
             }
-            if(!StringUtils.hasText(messageInfo.getShowMode())){
+            if (!StringUtils.hasText(messageInfo.getShowMode())) {
                 messageInfo.setShowMode(tempMessageInfo.getShowMode());
             }
         }
@@ -116,13 +117,13 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
     }
 
     @Override
-    public  <T> MessageInfo buildMessageInfo(String tempName, T data){
-        if(!StringUtils.hasText(tempName)){
+    public <T> MessageInfo buildMessageInfo(String tempName, T data) {
+        if (!StringUtils.hasText(tempName)) {
             throw new BizException("发送消息时，消息模板不能为空");
         }
 
         MessageTemplateView messageTemplateView = messageTemplateService.queryModelViewByName(tempName);
-        if(messageTemplateView==null){
+        if (messageTemplateView == null) {
             throw new BizException(String.format("发送消息时，找不到对应的消息模板[%s]", tempName));
         }
 
@@ -133,7 +134,7 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
         entity.put("currDate", DateUtil.date());
 
         MessageInfo messageInfo = new MessageInfo();
-        if(StringUtils.hasText(messageTemplateView.getContentTpl())){
+        if (StringUtils.hasText(messageTemplateView.getContentTpl())) {
             // 创建模板
             Template contentTemplate = engine.getTemplate(messageTemplateView.getContentTpl());
             // 渲染
@@ -141,7 +142,7 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
             messageInfo.setContent(content);
         }
 
-        if(StringUtils.hasText(messageTemplateView.getContentTpl())) {
+        if (StringUtils.hasText(messageTemplateView.getContentTpl())) {
             Template titleTemplate = engine.getTemplate(messageTemplateView.getContentTpl());
             String title = titleTemplate.render(entity);
             messageInfo.setTitle(title);
@@ -154,7 +155,7 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
         messageInfo.setAddDate(DateUtil.date());
 
         LoginModel currentLogin = loginModelQuery.getCurrentLogin();
-        if(currentLogin!=null){
+        if (currentLogin != null) {
             messageInfo.setAddUserId(currentLogin.getId());
         }
 
@@ -162,7 +163,12 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
     }
 
     @Override
-    public List<MessageReceive> buildReceiveByReceiveName(List<String> names) {
+    public List<MessageReceive> buildReceiveByGroupName(String name) {
+        return buildReceiveByGroupName(Arrays.asList(name));
+    }
+
+    @Override
+    public List<MessageReceive> buildReceiveByGroupName(List<String> names) {
         return receiveGroupLinkService.queryMessageReceiveList(names);
     }
 

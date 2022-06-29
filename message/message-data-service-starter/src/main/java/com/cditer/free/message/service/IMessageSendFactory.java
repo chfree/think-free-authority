@@ -23,5 +23,7 @@ public interface IMessageSendFactory {
 
     <T> MessageInfo buildMessageInfo(String tempName, T data);
 
-    List<MessageReceive> buildReceiveByReceiveName(List<String> names);
+    List<MessageReceive> buildReceiveByGroupName(String name);
+
+    List<MessageReceive> buildReceiveByGroupName(List<String> names);
 }
