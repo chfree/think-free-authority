@@ -22,4 +22,6 @@ public interface IMessageSendFactory {
     <T> String buildMessageTitle(String tempName,T data);
 
     <T> MessageInfo buildMessageInfo(String tempName, T data);
+
+    List<MessageReceive> buildReceiveByReceiveName(List<String> names);
 }

@@ -66,4 +66,15 @@
         <include refid="whereSql" />
     </select>
 
+    <select id="queryMessageReceiveList" resultMap="com.cditer.free.message.mapper.IMessageReceiveMapper.messageReceiveMap">
+        select
+        groupLink.link_type as receive_type,
+        groupLink.link_id as receive_id
+        from base_message_group_link groupLink
+        left join base_message_group group on(groupLink.group_id=group.id)
+        where group.name in
+        <foreach item="item" collection="groupNames" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

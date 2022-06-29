@@ -2,9 +2,11 @@ package com.cditer.free.message.service;
 
 import com.cditer.free.data.dao.base.ISuperService;
 import com.cditer.free.core.message.data.PagerModel;
+import com.cditer.free.message.entity.model.MessageReceive;
 import com.cditer.free.message.entity.model.ReceiveGroupLink;
 import com.cditer.free.message.entity.viewmodel.ReceiveGroupLinkSearch;
 import com.cditer.free.message.entity.viewmodel.ReceiveGroupLinkView;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -54,4 +56,10 @@ public interface IReceiveGroupLinkService extends ISuperService<ReceiveGroupLink
      */
     boolean savereceiveGroupLink(ReceiveGroupLink receiveGroupLink);
 
+    /**
+     * 根据接收组名称获取接收人信息
+     * @param groupNames
+     * @return 接收人信息
+     */
+    List<MessageReceive> queryMessageReceiveList(List<String> groupNames);
 }

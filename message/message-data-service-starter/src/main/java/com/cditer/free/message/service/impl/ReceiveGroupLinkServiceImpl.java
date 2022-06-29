@@ -2,6 +2,7 @@ package com.cditer.free.message.service.impl;
 
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
+import com.cditer.free.message.entity.model.MessageReceive;
 import com.cditer.free.message.entity.model.ReceiveGroupLink;
 import com.cditer.free.message.entity.viewmodel.ReceiveGroupLinkSearch;
 import com.cditer.free.message.entity.viewmodel.ReceiveGroupLinkView;
@@ -9,6 +10,7 @@ import com.cditer.free.message.mapper.IReceiveGroupLinkMapper;
 import com.cditer.free.message.service.IReceiveGroupLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -54,5 +56,13 @@ public class ReceiveGroupLinkServiceImpl extends SuperService<ReceiveGroupLink> 
         receiveGroupLink.autoPkIdAndStatus();
 
         return applyChange(receiveGroupLink);
+    }
+
+    @Override
+    public List<MessageReceive> queryMessageReceiveList(List<String> groupNames) {
+        if(CollectionUtils.isEmpty(groupNames)){
+            return null;
+        }
+        return receiveGroupLinkMapper.queryMessageReceiveList(groupNames);
     }
 }

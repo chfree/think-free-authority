@@ -20,6 +20,7 @@ import com.cditer.free.message.service.IMessageInfoService;
 import com.cditer.free.message.service.IMessageReceiveService;
 import com.cditer.free.message.service.IMessageSendFactory;
 import com.cditer.free.message.service.IMessageTemplateService;
+import com.cditer.free.message.service.IReceiveGroupLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -39,6 +40,9 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
 
     @Autowired
     private IMessageReceiveService messageReceiveService;
+
+    @Autowired
+    private IReceiveGroupLinkService receiveGroupLinkService;
 
     @Autowired
     @Qualifier("loginModelQueryTokenImpl")
@@ -155,6 +159,11 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
         }
 
         return messageInfo;
+    }
+
+    @Override
+    public List<MessageReceive> buildReceiveByReceiveName(List<String> names) {
+        return receiveGroupLinkService.queryMessageReceiveList(names);
     }
 
     @Override
