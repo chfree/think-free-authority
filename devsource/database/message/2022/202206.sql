@@ -49,3 +49,19 @@ create table base_message_read (
     read_dt datetime  NULL COMMENT '阅读时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
+create table base_receive_group (
+    id varchar(50) NOT NULL COMMENT '主键',
+    name varchar(50) NULL COMMENT '名称',
+    title varchar(100) NULL COMMENT '标题',
+    status varchar(10) NULL COMMENT '状态',
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+
+create table base_receive_group_link (
+    id varchar(50) NOT NULL COMMENT '主键',
+    group_id varchar(50) NULL COMMENT '组id',
+    link_type varchar(10) NULL COMMENT '连接类型',
+    link_id varchar(50) NULL COMMENT '连接id',
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
