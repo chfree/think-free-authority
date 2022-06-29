@@ -116,4 +116,11 @@
         <include refid="whereSql" />
     </select>
 
+    <select id="queryMessageCount" resultType="java.lang.Integer">
+
+    </select>
+
+    <select id="queryMessageList" resultMap="messageInfoViewMap">
+
+    </select>
 </mapper>

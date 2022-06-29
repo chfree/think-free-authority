@@ -27,4 +27,7 @@ public interface IMessageInfoMapper extends IMapper<MessageInfo>{
 
     MessageInfoView queryModelViewBySearch(@Param("search") MessageInfoSearch search);
 
+    int queryMessageCount(@Param("search")MessageInfoSearch search);
+
+    List<MessageInfoView> queryMessageList(@Param("search")MessageInfoSearch search,@Param("pager") PagerModel pagerModel);
 }

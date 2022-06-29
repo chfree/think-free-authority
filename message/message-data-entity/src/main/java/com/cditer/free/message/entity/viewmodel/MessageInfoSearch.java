@@ -12,5 +12,18 @@ import lombok.Data;
 
 @Data
 public class MessageInfoSearch extends MessageInfo {
+    /**
+     * 查询模式
+     */
+    private String queryMode = "me";
 
+    /**
+     * 用户id
+     */
+    private String userId;
+
+    /**
+     * 是否已读
+     */
+    private String wthrRead = "01";
 }

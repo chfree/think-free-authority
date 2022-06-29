@@ -76,4 +76,21 @@ public class MessageInfoApi extends TokenApi {
         return BaseResponse.success(result);
     }
 
+    @ApiOperation(value = "查询我的消息数量")
+    @PostMapping("messageCount")
+    public BaseResponse messageCount(@RequestBody @Valid BaseRequest<MessageInfoSearch> req){
+        int count = messageInfoService.queryMessageCount(req.getData());
+
+        return BaseResponse.success(count);
+    }
+
+    @ApiOperation(value = "查询我的消息")
+    @PostMapping("messageList")
+    public BaseResponse messageList(@RequestBody @Valid BasePagerReq<MessageInfoSearch> req){
+
+        int count = messageInfoService.queryMessageCount(req.getData());
+        List<MessageInfoView> messageInfoViews = messageInfoService.queryMessageList(req.getData(), req.getPager());
+
+        return BasePagerResp.success(messageInfoViews, count);
+    }
 }

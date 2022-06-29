@@ -54,4 +54,8 @@ public interface IMessageInfoService extends ISuperService<MessageInfo>{
      */
     boolean saveMessageInfo(MessageInfo messageInfo);
 
+    int queryMessageCount(MessageInfoSearch search);
+
+    List<MessageInfoView> queryMessageList(MessageInfoSearch search,PagerModel pagerModel);
+
 }

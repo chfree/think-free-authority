@@ -58,4 +58,14 @@ public class MessageInfoServiceImpl extends SuperService<MessageInfo> implements
 
         return applyChange(messageInfo);
     }
+
+    @Override
+    public int queryMessageCount(MessageInfoSearch search) {
+        return 0;
+    }
+
+    @Override
+    public List<MessageInfoView> queryMessageList(MessageInfoSearch search, PagerModel pagerModel) {
+        return null;
+    }
 }
