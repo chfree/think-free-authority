@@ -10,7 +10,7 @@
     
     <context:component-scan base-package="com.cditer.free.message.*" />
 
-	<bean class="com.cditer.free.data.extend.config.MapperLocationBean" name="behavior">
+	<bean class="com.cditer.free.data.extend.config.MapperLocationBean">
 		<property name="mapperLocations">
 			<list>
 				<value>classpath*:mapper/message/**/*.xml</value>

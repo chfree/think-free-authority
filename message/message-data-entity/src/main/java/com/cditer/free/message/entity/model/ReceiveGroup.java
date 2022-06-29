@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name="base_message_group")
+@Table(name="base_receive_group")
 public class ReceiveGroup extends ModelBase{
     /**
      * 主键

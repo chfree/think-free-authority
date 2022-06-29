@@ -142,8 +142,8 @@ public class MessageSendFactoryImpl implements IMessageSendFactory {
             messageInfo.setContent(content);
         }
 
-        if (StringUtils.hasText(messageTemplateView.getContentTpl())) {
-            Template titleTemplate = engine.getTemplate(messageTemplateView.getContentTpl());
+        if (StringUtils.hasText(messageTemplateView.getTitleTpl())) {
+            Template titleTemplate = engine.getTemplate(messageTemplateView.getTitleTpl());
             String title = titleTemplate.render(entity);
             messageInfo.setTitle(title);
         }

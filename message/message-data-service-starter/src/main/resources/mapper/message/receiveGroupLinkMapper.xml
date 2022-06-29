@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cditer.free.message.mapper.IReceiveGroupLinkMapper">
     <!-- 消息组连接Mapper -->
-    <sql id="tableName">base_message_group_link receiveGroupLink</sql>
+    <sql id="tableName">base_receive_group_link receiveGroupLink</sql>
     <sql id="mainTableAlias"> receiveGroupLink.</sql>
 
     <sql id="allColumns">
@@ -44,14 +44,14 @@
     <select id="queryCountBySearch" resultType="java.lang.Integer">
         select
         count(1)
-        from base_message_group_link receiveGroupLink
+        from base_receive_group_link receiveGroupLink
         <include refid="whereSql" />
     </select>
 
     <sql id="viewSql">
         select
         <include refid="allColumns" />
-        from base_message_group_link receiveGroupLink
+        from base_receive_group_link receiveGroupLink
     </sql>
 
     <select id="queryListViewBySearch" resultMap="receiveGroupLinkViewMap">
@@ -70,9 +70,9 @@
         select
         groupLink.link_type as receive_type,
         groupLink.link_id as receive_id
-        from base_message_group_link groupLink
-        left join base_message_group group on(groupLink.group_id=group.id)
-        where group.name in
+        from base_receive_group_link groupLink
+        left join base_receive_group rgroup on(groupLink.group_id=rgroup.id)
+        where rgroup.name in
         <foreach item="item" collection="groupNames" open="(" separator="," close=")">
             #{item}
         </foreach>
