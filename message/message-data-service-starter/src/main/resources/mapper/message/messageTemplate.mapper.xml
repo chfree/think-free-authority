@@ -42,6 +42,9 @@
             <if test="search.id != null  and search.id != ''">
                 and messageTemplate.id = #{search.id}
             </if>
+            <if test="search.notId != null  and search.notId != ''">
+                and messageTemplate.id != #{search.notId}
+            </if>
             <if test="search.name != null  and search.name != ''">
                 and messageTemplate.name = #{search.name}
             </if>
