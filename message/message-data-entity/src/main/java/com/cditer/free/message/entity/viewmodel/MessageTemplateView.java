@@ -5,4 +5,5 @@ import lombok.Data;
 
 @Data
 public class MessageTemplateView extends MessageTemplate {
+    private String addUserName;
 }

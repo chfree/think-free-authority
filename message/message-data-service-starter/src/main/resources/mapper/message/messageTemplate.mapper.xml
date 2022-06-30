@@ -82,7 +82,7 @@
     </sql>
 
     <resultMap id="messageTemplateViewMap" extends="messageTemplateMap" type="com.cditer.free.message.entity.viewmodel.MessageTemplateView">
-
+        <result column="addUserName" property="addUserName" />
     </resultMap>
 
     <select id="queryCountBySearch" resultType="java.lang.Integer">
@@ -94,8 +94,10 @@
 
     <sql id="viewSql">
         select
+        ifnull(atuser.nick_name,atuser.`name`) as addUserName,
         <include refid="allColumns" />
         from base_message_template messageTemplate
+        left join base_authority_user atuser on(messageTemplate.add_user_id = atuser.id)
     </sql>
 
     <select id="queryListViewBySearch" resultMap="messageTemplateViewMap">
