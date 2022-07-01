@@ -12,5 +12,5 @@ import lombok.Data;
 
 @Data
 public class MessageInfoView extends MessageInfo {
-
+    private String addUserName;
 }
