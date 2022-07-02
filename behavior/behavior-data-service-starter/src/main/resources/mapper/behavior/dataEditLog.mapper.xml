@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.behavior.mapper.IDataEditLogMapper">
+    <!-- 数据修改记录Mapper -->
+    <sql id="tableName">bhv_data_edit_log dataEditLog</sql>
+    <sql id="mainTableAlias"> dataEditLog.</sql>
+
+    <sql id="allColumns">
+        dataEditLog.id,
+        dataEditLog.bsn_type,
+        dataEditLog.bsn_id,
+        dataEditLog.oper_type,
+        dataEditLog.record_dt,
+        dataEditLog.user_id,
+        dataEditLog.user_name,
+        dataEditLog.user_dept_id,
+        dataEditLog.user_dept_name,
+        dataEditLog.user_role_id,
+        dataEditLog.user_role_name
+    </sql>
+
+    <resultMap type="com.cditer.free.behavior.entity.model.DataEditLog" id="dataEditLogMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="bsn_type" property="bsnType"/>    <!-- 业务类型 -->
+        <result column="bsn_id" property="bsnId"/>    <!-- 业务id -->
+        <result column="oper_type" property="operType"/>    <!-- 操作类型 -->
+        <result column="record_dt" property="recordDt"/>    <!-- 记录时间 -->
+        <result column="user_id" property="userId"/>    <!-- 用户id -->
+        <result column="user_name" property="userName"/>    <!-- 用户名称 -->
+        <result column="user_dept_id" property="userDeptId"/>    <!-- 用户部门id -->
+        <result column="user_dept_name" property="userDeptName"/>    <!-- 用户部门名称 -->
+        <result column="user_role_id" property="userRoleId"/>    <!-- 用户角色id -->
+        <result column="user_role_name" property="userRoleName"/>    <!-- 用户角色名称 -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and dataEditLog.id = #{search.id}
+            </if>
+            <if test="search.notId != null  and search.notId != ''">
+                and dataEditLog.id != #{search.notId}
+            </if>
+            <if test="search.bsnType != null  and search.bsnType != ''">
+                and dataEditLog.bsn_type = #{search.bsnType}
+            </if>
+            <if test="search.bsnId != null  and search.bsnId != ''">
+                and dataEditLog.bsn_id = #{search.bsnId}
+            </if>
+            <if test="search.operType != null  and search.operType != ''">
+                and dataEditLog.oper_type = #{search.operType}
+            </if>
+            <if test="search.recordDt != null  and search.recordDt != ''">
+                and dataEditLog.record_dt = #{search.recordDt}
+            </if>
+            <if test="search.userId != null  and search.userId != ''">
+                and dataEditLog.user_id = #{search.userId}
+            </if>
+            <if test="search.userName != null  and search.userName != ''">
+                and dataEditLog.user_name = #{search.userName}
+            </if>
+            <if test="search.userDeptId != null  and search.userDeptId != ''">
+                and dataEditLog.user_dept_id = #{search.userDeptId}
+            </if>
+            <if test="search.userDeptName != null  and search.userDeptName != ''">
+                and dataEditLog.user_dept_name = #{search.userDeptName}
+            </if>
+            <if test="search.userRoleId != null  and search.userRoleId != ''">
+                and dataEditLog.user_role_id = #{search.userRoleId}
+            </if>
+            <if test="search.userRoleName != null  and search.userRoleName != ''">
+                and dataEditLog.user_role_name = #{search.userRoleName}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="dataEditLogViewMap" extends="dataEditLogMap" type="com.cditer.free.behavior.entity.viewmodel.DataEditLogView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from bhv_data_edit_log dataEditLog
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from bhv_data_edit_log dataEditLog
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="dataEditLogViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by dataEditLog.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="dataEditLogViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

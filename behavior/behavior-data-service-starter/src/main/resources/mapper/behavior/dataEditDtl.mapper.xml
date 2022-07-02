@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.behavior.mapper.IDataEditDtlMapper">
+    <!-- 数据修改详情Mapper -->
+    <sql id="tableName">bhv_data_edit_dtl dataEditDtl</sql>
+    <sql id="mainTableAlias"> dataEditDtl.</sql>
+
+    <sql id="allColumns">
+        dataEditDtl.id,
+        dataEditDtl.edit_id,
+        dataEditDtl.level,
+        dataEditDtl.pro_name,
+        dataEditDtl.new_val,
+        dataEditDtl.old_val
+    </sql>
+
+    <resultMap type="com.cditer.free.behavior.entity.model.DataEditDtl" id="dataEditDtlMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="edit_id" property="editId"/>    <!-- 修改记录id -->
+        <result column="level" property="level"/>    <!-- 级别 -->
+        <result column="pro_name" property="proName"/>    <!-- 属性名 -->
+        <result column="new_val" property="newVal"/>    <!-- 新值 -->
+        <result column="old_val" property="oldVal"/>    <!-- 原始值 -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and dataEditDtl.id = #{search.id}
+            </if>
+            <if test="search.notId != null  and search.notId != ''">
+                and dataEditDtl.id != #{search.notId}
+            </if>
+            <if test="search.editId != null  and search.editId != ''">
+                and dataEditDtl.edit_id = #{search.editId}
+            </if>
+            <if test="search.level != null  and search.level != ''">
+                and dataEditDtl.level = #{search.level}
+            </if>
+            <if test="search.proName != null  and search.proName != ''">
+                and dataEditDtl.pro_name = #{search.proName}
+            </if>
+            <if test="search.newVal != null  and search.newVal != ''">
+                and dataEditDtl.new_val = #{search.newVal}
+            </if>
+            <if test="search.oldVal != null  and search.oldVal != ''">
+                and dataEditDtl.old_val = #{search.oldVal}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="dataEditDtlViewMap" extends="dataEditDtlMap" type="com.cditer.free.behavior.entity.viewmodel.DataEditDtlView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from bhv_data_edit_dtl dataEditDtl
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from bhv_data_edit_dtl dataEditDtl
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="dataEditDtlViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by dataEditDtl.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="dataEditDtlViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

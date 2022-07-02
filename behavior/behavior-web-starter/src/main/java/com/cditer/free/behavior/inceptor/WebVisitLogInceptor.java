@@ -6,6 +6,7 @@ import com.cditer.free.behavior.entity.model.WebVisitLimit;
 import com.cditer.free.behavior.entity.model.WebVisitLog;
 import com.cditer.free.behavior.entity.viewmodel.LimitMatcherItem;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitSearch;
+import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitView;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLogSearch;
 import com.cditer.free.behavior.enums.WebVisitLimitType;
 import com.cditer.free.behavior.handle.helper.SurpassLimitInceptorHelper;
@@ -77,7 +78,7 @@ public class WebVisitLogInceptor implements HandlerInterceptor {
 
         setLimitSearch(loginModel, search);
 
-        List<WebVisitLimit> webVisitLimits = webVisitLimitService.queryListBySearch(search, PagerModel.asOf(1, 10));
+        List<WebVisitLimitView> webVisitLimits = webVisitLimitService.queryListViewBySearch(search, PagerModel.asOf(1, 10));
         if (CollectionUtils.isEmpty(webVisitLimits)) {
             return;
         }

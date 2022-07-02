@@ -101,4 +101,33 @@
         ]]>
     </select>
 
+    <resultMap id="webVisitLogViewMap" extends="webVisitLogMap" type="com.cditer.free.behavior.entity.viewmodel.WebVisitLogView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from bhv_web_visit_log webVisitLog
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from bhv_web_visit_log webVisitLog
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="webVisitLogViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by webVisitLog.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="webVisitLogViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
 </mapper>

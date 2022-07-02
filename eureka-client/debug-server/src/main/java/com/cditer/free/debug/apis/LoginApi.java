@@ -47,7 +47,7 @@ public class LoginApi extends TokenApi {
         BaseResponse response = new BaseResponse();
 
         User user = new User();
-        user.setAccount(loginReq.getUsername());
+        user.setAccount(loginReq.getAccount());
         user.setName("DEBUG");
         user.setId("debugId");
 

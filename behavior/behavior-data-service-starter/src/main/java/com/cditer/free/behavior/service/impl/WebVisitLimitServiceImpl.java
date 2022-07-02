@@ -1,8 +1,8 @@
 package com.cditer.free.behavior.service.impl;
 
-import com.cditer.free.behavior.dao.IWebVisitLimitDao;
 import com.cditer.free.behavior.entity.model.WebVisitLimit;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitSearch;
+import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitView;
 import com.cditer.free.behavior.mapper.IWebVisitLimitMapper;
 import com.cditer.free.behavior.service.IWebVisitLimitService;
 import com.cditer.free.core.message.data.PagerModel;
@@ -25,19 +25,33 @@ public class WebVisitLimitServiceImpl extends SuperService<WebVisitLimit> implem
     @Autowired
     private IWebVisitLimitMapper webVisitLimitMapper;
 
-
     @Override
     public int queryCountBySearch(WebVisitLimitSearch search) {
         return webVisitLimitMapper.queryCountBySearch(search);
     }
 
     @Override
-    public List<WebVisitLimit> queryListBySearch(WebVisitLimitSearch search, PagerModel pagerModel) {
-        return webVisitLimitMapper.queryListBySearch(search,pagerModel);
+    public List<WebVisitLimitView> queryListViewBySearch(WebVisitLimitSearch search, PagerModel pagerModel) {
+        return webVisitLimitMapper.queryListViewBySearch(search, pagerModel);
     }
 
     @Override
-    public WebVisitLimit queryModelBySearch(WebVisitLimitSearch search) {
-        return webVisitLimitMapper.queryModelBySearch(search);
+    public WebVisitLimitView queryModelViewBySearch(WebVisitLimitSearch search) {
+        return webVisitLimitMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
+    public WebVisitLimitView queryModelViewById(String id) {
+        WebVisitLimitSearch search = new WebVisitLimitSearch();
+        search.setId(id);
+
+        return webVisitLimitMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
+    public boolean saveWebVisitLimit(WebVisitLimit webVisitLimit) {
+        webVisitLimit.autoPkIdAndStatus();
+
+        return applyChange(webVisitLimit);
     }
 }

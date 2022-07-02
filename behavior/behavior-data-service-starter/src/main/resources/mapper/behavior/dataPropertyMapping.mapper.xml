@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.behavior.mapper.IDataPropertyMappingMapper">
+    <!-- 属性映射表Mapper -->
+    <sql id="tableName">bhv_data_property_mapping dataPropertyMapping</sql>
+    <sql id="mainTableAlias"> dataPropertyMapping.</sql>
+
+    <sql id="allColumns">
+        dataPropertyMapping.id,
+        dataPropertyMapping.bsn_type,
+        dataPropertyMapping.name,
+        dataPropertyMapping.title,
+        dataPropertyMapping.cagetory,
+        dataPropertyMapping.convert
+    </sql>
+
+    <resultMap type="com.cditer.free.behavior.entity.model.DataPropertyMapping" id="dataPropertyMappingMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="bsn_type" property="bsnType"/>    <!-- 业务类型 -->
+        <result column="name" property="name"/>    <!-- 名称 -->
+        <result column="title" property="title"/>    <!-- 标题 -->
+        <result column="cagetory" property="cagetory"/>    <!-- 类别 -->
+        <result column="convert" property="convert"/>    <!-- 转换 -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and dataPropertyMapping.id = #{search.id}
+            </if>
+            <if test="search.notId != null  and search.notId != ''">
+                and dataPropertyMapping.id != #{search.notId}
+            </if>
+            <if test="search.bsnType != null  and search.bsnType != ''">
+                and dataPropertyMapping.bsn_type = #{search.bsnType}
+            </if>
+            <if test="search.name != null  and search.name != ''">
+                and dataPropertyMapping.name = #{search.name}
+            </if>
+            <if test="search.title != null  and search.title != ''">
+                and dataPropertyMapping.title = #{search.title}
+            </if>
+            <if test="search.cagetory != null  and search.cagetory != ''">
+                and dataPropertyMapping.cagetory = #{search.cagetory}
+            </if>
+            <if test="search.convert != null  and search.convert != ''">
+                and dataPropertyMapping.convert = #{search.convert}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="dataPropertyMappingViewMap" extends="dataPropertyMappingMap" type="com.cditer.free.behavior.entity.viewmodel.DataPropertyMappingView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from bhv_data_property_mapping dataPropertyMapping
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from bhv_data_property_mapping dataPropertyMapping
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="dataPropertyMappingViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by dataPropertyMapping.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="dataPropertyMappingViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

@@ -1,10 +1,10 @@
 package com.cditer.free.behavior.service.impl;
 
-import com.cditer.free.behavior.dao.IDataEditLogDao;
 import com.cditer.free.behavior.entity.model.DataEditLog;
 import com.cditer.free.behavior.entity.viewmodel.DataEditDtlView;
 import com.cditer.free.behavior.entity.viewmodel.DataEditLogSearch;
 import com.cditer.free.behavior.entity.viewmodel.DataEditLogView;
+import com.cditer.free.behavior.mapper.IDataEditLogMapper;
 import com.cditer.free.behavior.service.IDataEditDtlService;
 import com.cditer.free.behavior.service.IDataEditLogService;
 import com.cditer.free.behavior.service.helper.DateEditLogSaveHelper;
@@ -30,7 +30,7 @@ import java.util.List;
 @Component
 public class DataEditLogServiceImpl extends SuperService<DataEditLog> implements IDataEditLogService {
     @Autowired
-    IDataEditLogDao dataEditLogDao;
+    IDataEditLogMapper dataEditLogMapper;
 
     @Autowired
     IDataEditDtlService dataEditDtlService;
@@ -40,12 +40,32 @@ public class DataEditLogServiceImpl extends SuperService<DataEditLog> implements
 
     @Override
     public int queryCountBySearch(DataEditLogSearch search) {
-        return dataEditLogDao.queryCountBySearch(search);
+        return dataEditLogMapper.queryCountBySearch(search);
     }
 
     @Override
-    public List<DataEditLog> queryListBySearch(DataEditLogSearch search, PagerModel pagerModel) {
-        return dataEditLogDao.queryListBySearch(search, pagerModel);
+    public List<DataEditLogView> queryListViewBySearch(DataEditLogSearch search, PagerModel pagerModel) {
+        return dataEditLogMapper.queryListViewBySearch(search, pagerModel);
+    }
+
+    @Override
+    public DataEditLogView queryModelViewBySearch(DataEditLogSearch search) {
+        return dataEditLogMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
+    public DataEditLogView queryModelViewById(String id) {
+        DataEditLogSearch search = new DataEditLogSearch();
+        search.setId(id);
+
+        return dataEditLogMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
+    public boolean saveDataEditLog(DataEditLog dataEditLog) {
+        dataEditLog.autoPkIdAndStatus();
+
+        return applyChange(dataEditLog);
     }
 
     @Override

@@ -1,8 +1,9 @@
 package com.cditer.free.behavior.service.impl;
 
-import com.cditer.free.behavior.dao.IDataEntityInfoDao;
 import com.cditer.free.behavior.entity.model.DataEntityInfo;
 import com.cditer.free.behavior.entity.viewmodel.DataEntityInfoSearch;
+import com.cditer.free.behavior.entity.viewmodel.DataEntityInfoView;
+import com.cditer.free.behavior.mapper.IDataEntityInfoMapper;
 import com.cditer.free.behavior.service.IDataEntityInfoService;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
@@ -13,25 +14,45 @@ import java.util.List;
 
 
 /**
- * @author      auto build code by think
- * @email       chfree001@gmail.com
- * @createtime  2022-05-15 21:45:03
+ * @author      C.H
+ * @email       chfree365@qq.com
+ * @createtime  2022-07-02 21:58:51
  * @comment     数据实体信息
  */
 
 @Component
-public class DataEntityInfoServiceImpl extends SuperService<DataEntityInfo> implements IDataEntityInfoService {
+public class DataEntityInfoServiceImpl extends SuperService<DataEntityInfo> implements IDataEntityInfoService{
+
     @Autowired
-    IDataEntityInfoDao dataEntityInfoDao;
+    protected IDataEntityInfoMapper dataEntityInfoMapper;
 
     @Override
     public int queryCountBySearch(DataEntityInfoSearch search) {
-        return dataEntityInfoDao.queryCountBySearch(search);
+        return dataEntityInfoMapper.queryCountBySearch(search);
     }
 
     @Override
-    public List<DataEntityInfo> queryListBySearch(DataEntityInfoSearch search, PagerModel pagerModel) {
-        return dataEntityInfoDao.queryListBySearch(search,pagerModel);
+    public List<DataEntityInfoView> queryListViewBySearch(DataEntityInfoSearch search, PagerModel pagerModel) {
+        return dataEntityInfoMapper.queryListViewBySearch(search, pagerModel);
     }
 
+    @Override
+    public DataEntityInfoView queryModelViewBySearch(DataEntityInfoSearch search) {
+        return dataEntityInfoMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
+    public DataEntityInfoView queryModelViewById(String id) {
+        DataEntityInfoSearch search = new DataEntityInfoSearch();
+        search.setId(id);
+
+        return dataEntityInfoMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
+    public boolean saveDataEntityInfo(DataEntityInfo dataEntityInfo) {
+        dataEntityInfo.autoPkIdAndStatus();
+
+        return applyChange(dataEntityInfo);
+    }
 }

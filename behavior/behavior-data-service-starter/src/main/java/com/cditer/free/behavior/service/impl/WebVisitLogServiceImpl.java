@@ -2,9 +2,9 @@ package com.cditer.free.behavior.service.impl;
 
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
-import com.cditer.free.behavior.dao.IWebVisitLogDao;
 import com.cditer.free.behavior.entity.model.WebVisitLog;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLogSearch;
+import com.cditer.free.behavior.entity.viewmodel.WebVisitLogView;
 import com.cditer.free.behavior.mapper.IWebVisitLogMapper;
 import com.cditer.free.behavior.service.IWebVisitLogService;
 import com.cditer.free.core.message.data.PagerModel;
@@ -28,19 +28,36 @@ import java.util.List;
 @Component
 public class WebVisitLogServiceImpl extends SuperService<WebVisitLog> implements IWebVisitLogService {
     @Autowired
-    private IWebVisitLogDao operLogDao;
-
-    @Autowired
     private IWebVisitLogMapper webVisitLogMapper;
 
     @Override
     public int queryCountBySearch(WebVisitLogSearch search) {
-        return operLogDao.queryCountBySearch(search);
+        return webVisitLogMapper.queryCountBySearch(search);
     }
 
     @Override
-    public List<WebVisitLog> queryListBySearch(WebVisitLogSearch search, PagerModel pagerModel) {
-        return operLogDao.queryListBySearch(search,pagerModel);
+    public List<WebVisitLogView> queryListViewBySearch(WebVisitLogSearch search, PagerModel pagerModel) {
+        return webVisitLogMapper.queryListViewBySearch(search, pagerModel);
+    }
+
+    @Override
+    public WebVisitLogView queryModelViewBySearch(WebVisitLogSearch search) {
+        return webVisitLogMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
+    public WebVisitLogView queryModelViewById(String id) {
+        WebVisitLogSearch search = new WebVisitLogSearch();
+        search.setId(id);
+
+        return webVisitLogMapper.queryModelViewBySearch(search);
+    }
+
+    @Override
+    public boolean saveWebVisitLog(WebVisitLog webVisitLog) {
+        webVisitLog.autoPkIdAndStatus();
+
+        return applyChange(webVisitLog);
     }
 
     @Override

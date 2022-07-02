@@ -2,6 +2,7 @@ package com.cditer.free.behavior.mapper;
 
 import com.cditer.free.behavior.entity.model.WebVisitLimit;
 import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitSearch;
+import com.cditer.free.behavior.entity.viewmodel.WebVisitLimitView;
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.IMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,9 +20,9 @@ import java.util.List;
 
 @Mapper
 public interface IWebVisitLimitMapper extends IMapper<WebVisitLimit> {
-    WebVisitLimit queryModelBySearch(@Param("search") WebVisitLimitSearch search);
+    WebVisitLimitView queryModelViewBySearch(@Param("search") WebVisitLimitSearch search);
 
     int queryCountBySearch(@Param("search")WebVisitLimitSearch search);
 
-    List<WebVisitLimit> queryListBySearch(@Param("search")WebVisitLimitSearch search, @Param("pager") PagerModel pagerModel);
+    List<WebVisitLimitView> queryListViewBySearch(@Param("search")WebVisitLimitSearch search, @Param("pager") PagerModel pagerModel);
 }

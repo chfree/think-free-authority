@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.behavior.mapper.IDataEntityInfoMapper">
+    <!-- 数据实体信息Mapper -->
+    <sql id="tableName">bhv_data_entity_info dataEntityInfo</sql>
+    <sql id="mainTableAlias"> dataEntityInfo.</sql>
+
+    <sql id="allColumns">
+        dataEntityInfo.id,
+        dataEntityInfo.title,
+        dataEntityInfo.bsn_type,
+        dataEntityInfo.table_name
+    </sql>
+
+    <resultMap type="com.cditer.free.behavior.entity.model.DataEntityInfo" id="dataEntityInfoMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="title" property="title"/>    <!-- 标题 -->
+        <result column="bsn_type" property="bsnType"/>    <!-- 业务类型 -->
+        <result column="table_name" property="tableName"/>    <!-- 表名 -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and dataEntityInfo.id = #{search.id}
+            </if>
+            <if test="search.notId != null  and search.notId != ''">
+                and dataEntityInfo.id != #{search.notId}
+            </if>
+            <if test="search.title != null  and search.title != ''">
+                and dataEntityInfo.title = #{search.title}
+            </if>
+            <if test="search.bsnType != null  and search.bsnType != ''">
+                and dataEntityInfo.bsn_type = #{search.bsnType}
+            </if>
+            <if test="search.tableName != null  and search.tableName != ''">
+                and dataEntityInfo.table_name = #{search.tableName}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="dataEntityInfoViewMap" extends="dataEntityInfoMap" type="com.cditer.free.behavior.entity.viewmodel.DataEntityInfoView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from bhv_data_entity_info dataEntityInfo
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from bhv_data_entity_info dataEntityInfo
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="dataEntityInfoViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by dataEntityInfo.add_date desc
+        limit #{pager.currentSize},#{pager.pageSize}
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="dataEntityInfoViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

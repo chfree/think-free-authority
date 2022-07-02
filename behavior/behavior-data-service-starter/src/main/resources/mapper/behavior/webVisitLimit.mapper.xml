@@ -66,7 +66,11 @@
         </where>
     </sql>
 
-    <select id="queryModelBySearch" resultMap="webVisitLimitMap">
+    <resultMap id="webVisitLimitViewMap" extends="webVisitLimitMap" type="com.cditer.free.behavior.entity.viewmodel.WebVisitLimitView">
+
+    </resultMap>
+
+    <select id="queryModelViewBySearch" resultMap="webVisitLimitMap">
         select
         <include refid="allColumns" />
         from bhv_web_visit_limit webVisitLimit
@@ -82,7 +86,7 @@
         <include refid="whereSql" />
     </select>
 
-    <select id="queryListBySearch" resultMap="webVisitLimitMap">
+    <select id="queryListViewBySearch" resultMap="webVisitLimitMap">
         select
         <include refid="allColumns" />
         from bhv_web_visit_limit webVisitLimit
