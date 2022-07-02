@@ -124,9 +124,10 @@ public class LoginApi extends TokenApi {
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", loginModel.getName());
 
-        List<String> roleList = roleService.queryListByUserId(user.getId());
-        if(!CollectionUtils.isEmpty(roleList)){
-            claims.put("roleId", roleList.get(0));
+        List<Role> roles = roleService.queryListRoleByUserId(user.getId());
+
+        if(!CollectionUtils.isEmpty(roles)){
+            claims.put("roleId", roles.get(0).getId());
         }
 
 

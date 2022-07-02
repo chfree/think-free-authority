@@ -47,8 +47,8 @@ public class RoleDaoImpl extends SuperDao<Role> implements IRoleDao {
     @Override
     public List<String> queryListByUserId(String userId) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(UserRole.class)
-                .andEq("user_id", userId);
+        sqlExpression.select(UserRole::getRoleId).from(UserRole.class)
+                .andEq(UserRole::getUserId, userId);
 
         List<UserRole> userRoles = queryList(sqlExpression, UserRole.class);
         if (CollectionUtils.isEmpty(userRoles)) {
@@ -60,10 +60,11 @@ public class RoleDaoImpl extends SuperDao<Role> implements IRoleDao {
     @Override
     public List<Role> queryListRoleByUserId(String userId) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.select("role.id,role.comments,role.delete_mark,role.description,role.mark_code,role.role_name,role.sort_code,role.role_mark")
+        sqlExpression.select("role.id,role.comments,role.delete_mark,role.description,role.mark_code,role.role_name,role.sort_code,role.role_mark,role.level")
                 .from(UserRole.class, "userRole")
                 .leftJoin(Role.class, "role").on("role.id", "userRole.role_id")
                 .andEq("userRole.user_id", userId)
+                .addOrder("role.level", OrderEnum.DESC)
                 .addOrder("role.sort_code", OrderEnum.ASC);
 
         return queryList(sqlExpression, Role.class);
