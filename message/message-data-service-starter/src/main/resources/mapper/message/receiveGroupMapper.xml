@@ -60,7 +60,6 @@
     <select id="queryListViewBySearch" resultMap="receiveGroupViewMap">
         <include refid="viewSql" />
         <include refid="whereSql" />
-        order by receiveGroup.add_date desc
         limit #{pager.currentSize},#{pager.pageSize}
     </select>
 

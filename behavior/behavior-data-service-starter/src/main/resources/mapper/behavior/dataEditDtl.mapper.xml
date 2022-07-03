@@ -70,7 +70,6 @@
     <select id="queryListViewBySearch" resultMap="dataEditDtlViewMap">
         <include refid="viewSql" />
         <include refid="whereSql" />
-        order by dataEditDtl.add_date desc
         limit #{pager.currentSize},#{pager.pageSize}
     </select>
 

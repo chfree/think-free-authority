@@ -60,7 +60,6 @@
     <select id="queryListViewBySearch" resultMap="dataEntityInfoViewMap">
         <include refid="viewSql" />
         <include refid="whereSql" />
-        order by dataEntityInfo.add_date desc
         limit #{pager.currentSize},#{pager.pageSize}
     </select>
 

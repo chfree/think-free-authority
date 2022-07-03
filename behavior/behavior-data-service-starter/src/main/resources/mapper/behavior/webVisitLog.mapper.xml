@@ -121,7 +121,7 @@
     <select id="queryListViewBySearch" resultMap="webVisitLogViewMap">
         <include refid="viewSql" />
         <include refid="whereSql" />
-        order by webVisitLog.add_date desc
+        order by webVisitLog.start_dt desc
         limit #{pager.currentSize},#{pager.pageSize}
     </select>
 

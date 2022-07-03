@@ -70,7 +70,6 @@
     <select id="queryListViewBySearch" resultMap="dataPropertyMappingViewMap">
         <include refid="viewSql" />
         <include refid="whereSql" />
-        order by dataPropertyMapping.add_date desc
         limit #{pager.currentSize},#{pager.pageSize}
     </select>
 
