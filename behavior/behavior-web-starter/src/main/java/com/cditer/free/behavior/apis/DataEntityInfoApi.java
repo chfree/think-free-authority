@@ -48,7 +48,7 @@ public class DataEntityInfoApi extends TokenApi {
     @ApiOperation(value = "获取指定数据实体信息")
     @GetMapping("get")
     public BaseResponse<DataEntityInfo> get(@Valid @NotBlank(message = "数据实体信息id不能为空") String id){
-        DataEntityInfo dataEntityInfo = dataEntityInfoService.queryModel(id);
+        DataEntityInfo dataEntityInfo = dataEntityInfoService.queryModelViewById(id);
         return BaseResponse.success(dataEntityInfo);
     }
 

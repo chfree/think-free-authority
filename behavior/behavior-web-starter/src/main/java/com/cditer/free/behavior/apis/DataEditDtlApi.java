@@ -49,7 +49,7 @@ public class DataEditDtlApi extends TokenApi {
     @ApiOperation(value = "获取指定数据修改详情")
     @GetMapping("get")
     public BaseResponse<DataEditDtl> get(@Valid @NotBlank(message = "数据修改详情id不能为空") String id){
-        DataEditDtl dataEditDtl = dataEditDtlService.queryModel(id);
+        DataEditDtl dataEditDtl = dataEditDtlService.queryModelViewById(id);
         return BaseResponse.success(dataEditDtl);
     }
 

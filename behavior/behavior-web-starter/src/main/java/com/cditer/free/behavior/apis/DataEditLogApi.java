@@ -49,7 +49,7 @@ public class DataEditLogApi extends TokenApi {
     @ApiOperation(value = "获取指定数据修改记录")
     @GetMapping("get")
     public BaseResponse<DataEditLog> get(@Valid @NotBlank(message = "数据修改记录id不能为空") String id){
-        DataEditLog dataEditLog = dataEditLogService.queryModel(id);
+        DataEditLog dataEditLog = dataEditLogService.queryModelViewById(id);
         return BaseResponse.success(dataEditLog);
     }
 

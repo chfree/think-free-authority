@@ -49,7 +49,7 @@ public class WebVisitLogApi extends TokenApi {
     @ApiOperation(value = "获取指定web访问日志表")
     @GetMapping("get")
     public BaseResponse<WebVisitLog> get(@Valid @NotBlank(message = "web访问日志表id不能为空") String id){
-        WebVisitLog webVisitLog = webVisitLogService.queryModel(id);
+        WebVisitLog webVisitLog = webVisitLogService.queryModelViewById(id);
         return BaseResponse.success(webVisitLog);
     }
 

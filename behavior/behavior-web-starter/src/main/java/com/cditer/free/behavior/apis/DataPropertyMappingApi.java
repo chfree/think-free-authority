@@ -48,7 +48,7 @@ public class DataPropertyMappingApi extends TokenApi {
     @ApiOperation(value = "获取指定属性映射表")
     @GetMapping("get")
     public BaseResponse<DataPropertyMapping> get(@Valid @NotBlank(message = "属性映射表id不能为空") String id){
-        DataPropertyMapping dataPropertyMapping = dataPropertyMappingService.queryModel(id);
+        DataPropertyMapping dataPropertyMapping = dataPropertyMappingService.queryModelViewById(id);
         return BaseResponse.success(dataPropertyMapping);
     }
 

@@ -49,7 +49,7 @@ public class WebVisitLimitApi extends TokenApi {
     @ApiOperation(value = "获取指定web访问控制表")
     @GetMapping("get")
     public BaseResponse<WebVisitLimit> get(@Valid @NotBlank(message = "web访问控制表id不能为空") String id){
-        WebVisitLimit webVisitLimit = webVisitLimitService.queryModel(id);
+        WebVisitLimit webVisitLimit = webVisitLimitService.queryModelViewById(id);
         return BaseResponse.success(webVisitLimit);
     }
 

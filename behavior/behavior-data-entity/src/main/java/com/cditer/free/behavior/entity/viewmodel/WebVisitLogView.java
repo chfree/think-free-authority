@@ -5,4 +5,7 @@ import lombok.Data;
 
 @Data
 public class WebVisitLogView extends WebVisitLog {
+    private String userName;
+
+    private String roleName;
 }
