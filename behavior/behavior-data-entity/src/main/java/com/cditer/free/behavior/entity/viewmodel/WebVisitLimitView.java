@@ -5,4 +5,5 @@ import lombok.Data;
 
 @Data
 public class WebVisitLimitView extends WebVisitLimit {
+    private String matcherRuleName;
 }

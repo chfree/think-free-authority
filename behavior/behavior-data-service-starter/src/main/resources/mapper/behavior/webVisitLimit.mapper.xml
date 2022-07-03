@@ -32,33 +32,33 @@
     <sql id="whereSql">
         <where>
             <if test="search.id != null  and search.id != ''">
-                and id = #{search.id}
+                and webVisitLimit.id = #{search.id}
             </if>
             <if test="search.visitType != null  and search.visitType != ''">
-                and visit_type = #{search.visitType}
+                and webVisitLimit.visit_type = #{search.visitType}
             </if>
             <if test="search.limitType != null  and search.limitType != ''">
-                and limit_type = #{search.limitType}
+                and webVisitLimit.limit_type = #{search.limitType}
             </if>
             <if test="search.matcherType != null  and search.matcherType != ''">
-                and matcher_type = #{search.matcherType}
+                and webVisitLimit.matcher_type = #{search.matcherType}
             </if>
             <if test="search.matcherRule != null  and search.matcherRule != ''">
-                and matcher_rule = #{search.matcherRule}
+                and webVisitLimit.matcher_rule = #{search.matcherRule}
             </if>
             <if test="search.maxCount != null  and search.maxCount != ''">
-                and max_count = #{search.maxCount}
+                and webVisitLimit.max_count = #{search.maxCount}
             </if>
             <if test="search.status != null  and search.status != ''">
-                and status = #{search.status}
+                and webVisitLimit.status = #{search.status}
             </if>
             <if test="search.enableDt != null">
                 <![CDATA[
-                    and enable_dt <= #{search.enableDt}
+                    and webVisitLimit.enable_dt <= #{search.enableDt}
                 ]]>
             </if>
             <if test="search.matcherItems!=null and search.matcherItems.size > 0">
-                and (matcher_type, matcher_rule) in
+                and (webVisitLimit.matcher_type, webVisitLimit.matcher_rule) in
                 <foreach collection="search.matcherItems" index="index" item="item" open="("  separator="," close=")">
                     (#{item.type},#{item.rule})
                 </foreach>
@@ -67,17 +67,8 @@
     </sql>
 
     <resultMap id="webVisitLimitViewMap" extends="webVisitLimitMap" type="com.cditer.free.behavior.entity.viewmodel.WebVisitLimitView">
-
+        <result column="matcherRuleName" property="matcherRuleName" />
     </resultMap>
-
-    <select id="queryModelViewBySearch" resultMap="webVisitLimitMap">
-        select
-        <include refid="allColumns" />
-        from bhv_web_visit_limit webVisitLimit
-        <include refid="whereSql" />
-        order by priority
-        limit 0,1
-    </select>
 
     <select id="queryCountBySearch" resultType="java.lang.Integer">
         select
@@ -86,12 +77,25 @@
         <include refid="whereSql" />
     </select>
 
-    <select id="queryListViewBySearch" resultMap="webVisitLimitMap">
+    <sql id="viewSql">
         select
+        (case when webVisitLimit.matcher_type='userId' then atuser.`name` when webVisitLimit.matcher_type='roleId' then atrole.role_name else '' end) as matcherRuleName,
         <include refid="allColumns" />
         from bhv_web_visit_limit webVisitLimit
+        left join base_authority_role atrole on(webVisitLimit.matcher_rule=atrole.id)
+        left join base_authority_user atuser on(webVisitLimit.matcher_rule=atuser.id)
+    </sql>
+
+    <select id="queryModelViewBySearch" resultMap="webVisitLimitViewMap">
+        <include refid="viewSql" />
         <include refid="whereSql" />
-        order by priority
+        limit 0,1
+    </select>
+
+    <select id="queryListViewBySearch" resultMap="webVisitLimitViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+        order by visit_type,priority,enable_dt desc
         limit #{pager.currentSize},#{pager.pageSize}
     </select>
 </mapper>

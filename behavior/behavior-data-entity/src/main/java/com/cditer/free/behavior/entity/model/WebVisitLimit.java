@@ -1,6 +1,7 @@
 package com.cditer.free.behavior.entity.model;
 
 import com.cditer.free.core.message.data.ModelBase;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -66,6 +67,7 @@ public class WebVisitLimit extends ModelBase {
     /**
      * 启用日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @Column(name="enable_dt")
     private Date enableDt;
 
