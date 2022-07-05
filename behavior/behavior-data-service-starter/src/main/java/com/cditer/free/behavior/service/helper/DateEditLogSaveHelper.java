@@ -60,6 +60,9 @@ public class DateEditLogSaveHelper {
 
             dataEditLog.setUserName(loginModel.getName());
             dataEditLog.setUserId(loginModel.getId());
+            dataEditLog.setUserRoleId(loginModel.getRoleId());
+            dataEditLog.setUserDeptId(loginModel.getDeptId());
+
             dataEditLog.setBsnType(dataEditLogMark.bsnType());
             dataEditLog.setRecordDtl(dataEditLogMark.recordDtl());
             setBsnId(declaredFields, item, dataEditLog);

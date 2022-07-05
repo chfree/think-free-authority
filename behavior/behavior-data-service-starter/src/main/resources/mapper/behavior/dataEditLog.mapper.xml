@@ -95,6 +95,7 @@
     <select id="queryListViewBySearch" resultMap="dataEditLogViewMap">
         <include refid="viewSql" />
         <include refid="whereSql" />
+        order by dataEditLog.record_dt desc
         limit #{pager.currentSize},#{pager.pageSize}
     </select>
 
