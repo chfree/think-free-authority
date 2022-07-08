@@ -30,7 +30,7 @@ import javax.validation.constraints.NotBlank;
  * @comment     消息组
  */
 @RestController
-@RequestMapping(value = "/api/v1/xxxx/receiveGroup/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/message/receiveGroup/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="消息组管理",value ="消息组相关的操作")
 public class ReceiveGroupApi extends TokenApi {
     @Autowired

@@ -103,7 +103,7 @@
         ifnull(atuser.nick_name,atuser.`name`) as addUserName,
         <include refid="allColumns" />
         from base_message_info messageInfo
-        left join base_authority_user atuser on(messageTemplate.add_user_id = atuser.id)
+        left join base_authority_user atuser on(messageInfo.add_user_id = atuser.id)
     </sql>
 
     <select id="queryListViewBySearch" resultMap="messageInfoViewMap">
