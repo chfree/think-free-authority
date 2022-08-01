@@ -1,17 +1,14 @@
 package com.cditer.free.message.service.impl;
 
+import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
 import com.cditer.free.message.entity.model.MessageInfo;
 import com.cditer.free.message.entity.viewmodel.MessageInfoSearch;
 import com.cditer.free.message.entity.viewmodel.MessageInfoView;
 import com.cditer.free.message.mapper.IMessageInfoMapper;
 import com.cditer.free.message.service.IMessageInfoService;
-import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.cditer.free.core.util.PkIdUtils;
-import com.cditer.free.core.enums.ModelStatus;
-import com.cditer.free.core.message.data.PagerModel;
-import org.springframework.util.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
