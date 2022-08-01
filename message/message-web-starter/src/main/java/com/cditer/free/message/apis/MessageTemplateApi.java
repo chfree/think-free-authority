@@ -48,8 +48,8 @@ public class MessageTemplateApi extends TokenApi {
 
     @ApiOperation(value = "获取指定消息模板表")
     @GetMapping("get")
-    public BaseResponse<MessageTemplate> get(@Valid @NotBlank(message = "消息模板表id不能为空") String id){
-        MessageTemplate messageTemplate = messageTemplateService.queryModel(id);
+    public BaseResponse<MessageTemplateView> get(@Valid @NotBlank(message = "消息模板表id不能为空") String id){
+        MessageTemplateView messageTemplate = messageTemplateService.queryModelViewById(id);
 
         return BaseResponse.success(messageTemplate);
     }

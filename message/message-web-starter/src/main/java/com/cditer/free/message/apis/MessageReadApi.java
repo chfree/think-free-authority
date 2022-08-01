@@ -47,8 +47,8 @@ public class MessageReadApi extends TokenApi {
 
     @ApiOperation(value = "获取指定消息读记录")
     @GetMapping("get")
-    public BaseResponse<MessageRead> get(@Valid @NotBlank(message = "消息读记录id不能为空") String id){
-        MessageRead messageRead = messageReadService.queryModel(id);
+    public BaseResponse<MessageReadView> get(@Valid @NotBlank(message = "消息读记录id不能为空") String id){
+        MessageReadView messageRead = messageReadService.queryModelViewById(id);
         return BaseResponse.success(messageRead);
     }
 

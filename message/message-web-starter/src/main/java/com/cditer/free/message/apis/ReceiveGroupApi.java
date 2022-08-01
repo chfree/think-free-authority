@@ -47,8 +47,8 @@ public class ReceiveGroupApi extends TokenApi {
 
     @ApiOperation(value = "获取指定消息组")
     @GetMapping("get")
-    public BaseResponse<ReceiveGroup> get(@Valid @NotBlank(message = "消息组id不能为空") String id){
-        ReceiveGroup receiveGroup = receiveGroupService.queryModel(id);
+    public BaseResponse<ReceiveGroupView> get(@Valid @NotBlank(message = "消息组id不能为空") String id){
+        ReceiveGroupView receiveGroup = receiveGroupService.queryModelViewById(id);
         return BaseResponse.success(receiveGroup);
     }
 

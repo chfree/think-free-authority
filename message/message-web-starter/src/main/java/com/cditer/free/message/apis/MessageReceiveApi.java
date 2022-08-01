@@ -47,8 +47,8 @@ public class MessageReceiveApi extends TokenApi {
 
     @ApiOperation(value = "获取指定消息接收人")
     @GetMapping("get")
-    public BaseResponse<MessageReceive> get(@Valid @NotBlank(message = "消息接收人id不能为空") String id){
-        MessageReceive messageReceive = messageReceiveService.queryModel(id);
+    public BaseResponse<MessageReceiveView> get(@Valid @NotBlank(message = "消息接收人id不能为空") String id){
+        MessageReceiveView messageReceive = messageReceiveService.queryModelViewById(id);
         return BaseResponse.success(messageReceive);
     }
 
