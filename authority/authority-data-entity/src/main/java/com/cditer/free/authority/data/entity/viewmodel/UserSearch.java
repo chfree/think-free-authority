@@ -2,6 +2,8 @@ package com.cditer.free.authority.data.entity.viewmodel;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author chfree
  * @email chfree001@gmail.com
@@ -30,4 +32,6 @@ public class UserSearch {
     private String status;
 
     private String likeQuery;
+
+    private List<String> statusList;
 }

@@ -11,6 +11,7 @@ import com.cditer.free.data.dao.base.ISqlExpression;
 import com.cditer.free.data.dao.base.impl.SuperDao;
 import com.cditer.free.data.utils.SqlExpressionFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -135,6 +136,10 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
         if(StringUtils.hasText(search.getLikeQuery())){
             sqlExpression.andWhere("(name like concat('%',#{likeQuery},'%')) or (nick_name like concat('%',#{likeQuery},'%'))")
                     .setParam("likeQuery", search.getLikeQuery());
+        }
+
+        if(!CollectionUtils.isEmpty(search.getStatusList())){
+            sqlExpression.andWhereInString("status", search.getStatusList());
         }
     }
 }
