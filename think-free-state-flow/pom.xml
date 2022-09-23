@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
     <version>2.1.0</version>
     <modules>
-        <module>think-free-state-common</module>
+        <module>state-data-entity</module>
+        <module>state-data-service-starter</module>
     </modules>
 </project>
