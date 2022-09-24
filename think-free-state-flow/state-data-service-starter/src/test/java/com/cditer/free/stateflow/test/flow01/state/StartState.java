@@ -1,6 +1,7 @@
 package com.cditer.free.stateflow.test.flow01.state;
 
 import com.cditer.free.stateflow.core.IStateContext;
+import com.cditer.free.stateflow.core.impl.StartAbsState;
 import com.cditer.free.stateflow.test.flow01.Flow01State;
 
 /**
@@ -10,7 +11,7 @@ import com.cditer.free.stateflow.test.flow01.Flow01State;
  * @comment 简易的请假流程,纯状态机
  */
 
-public class UserStartState extends Flow01State {
+public class StartState extends StartAbsState {
     @Override
     public void doWork(IStateContext stateContext) {
         // 处理一些业务状态
@@ -20,5 +21,10 @@ public class UserStartState extends Flow01State {
 
         // 执行下一步状态
         super.doWork(stateContext);
+    }
+
+    @Override
+    public String getBsnType() {
+        return null;
     }
 }

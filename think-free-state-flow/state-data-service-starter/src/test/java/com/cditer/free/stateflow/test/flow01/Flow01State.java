@@ -9,5 +9,9 @@ import com.cditer.free.stateflow.core.impl.AbstractState;
  * @comment
  */
 
-public class Flow01State extends AbstractState {
+public abstract class Flow01State extends AbstractState {
+    @Override
+    public String getBsnType() {
+        return "flow01";
+    }
 }

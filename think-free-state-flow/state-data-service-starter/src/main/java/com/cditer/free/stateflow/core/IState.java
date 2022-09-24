@@ -9,4 +9,8 @@ package com.cditer.free.stateflow.core;
 
 public interface IState {
     void doWork(IStateContext stateContext);
+
+    String getBsnType();
+
+    String getBsnStatus();
 }

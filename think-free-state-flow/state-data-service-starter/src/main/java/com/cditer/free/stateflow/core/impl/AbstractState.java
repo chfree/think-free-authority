@@ -13,7 +13,8 @@ import com.cditer.free.stateflow.core.IStateContext;
 public abstract class AbstractState implements IState {
     @Override
     public void doWork(IStateContext stateContext) {
-
+        // 记录已办，
+        // 添加待办
         // 记录待办
         stateContext.doWork();
     }

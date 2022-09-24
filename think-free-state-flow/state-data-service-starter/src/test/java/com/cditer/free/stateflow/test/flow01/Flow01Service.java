@@ -1,6 +1,6 @@
 package com.cditer.free.stateflow.test.flow01;
 
-import com.cditer.free.stateflow.test.flow01.state.UserStartState;
+import com.cditer.free.stateflow.test.flow01.state.StartState;
 
 /**
  * @author C.H
@@ -13,6 +13,6 @@ public class Flow01Service {
     public static void startFlow(){
         FlowStateContext stateContext = new FlowStateContext();
 
-        new UserStartState().doWork(stateContext);
+        new StartState().doWork(stateContext);
     }
 }

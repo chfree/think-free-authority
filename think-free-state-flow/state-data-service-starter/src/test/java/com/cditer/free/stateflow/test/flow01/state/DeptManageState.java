@@ -10,4 +10,8 @@ import com.cditer.free.stateflow.test.flow01.Flow01State;
  */
 
 public class DeptManageState extends Flow01State {
+    @Override
+    public String getBsnStatus() {
+        return "deptManage";
+    }
 }
