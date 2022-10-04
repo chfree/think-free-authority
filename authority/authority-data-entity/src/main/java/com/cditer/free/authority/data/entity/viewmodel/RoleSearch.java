@@ -1,5 +1,6 @@
 package com.cditer.free.authority.data.entity.viewmodel;
 
+import com.cditer.free.authority.data.entity.model.Role;
 import lombok.Data;
 
 /**
@@ -10,11 +11,7 @@ import lombok.Data;
  */
 
 @Data
-public class RoleSearch {
-    private String id;
-
-    private String roleName;
-
+public class RoleSearch  extends Role {
     private String notId;
 
     private String likeRoleName;

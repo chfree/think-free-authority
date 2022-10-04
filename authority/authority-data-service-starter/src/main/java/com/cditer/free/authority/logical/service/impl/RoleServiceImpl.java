@@ -8,6 +8,7 @@ import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.impl.SuperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -42,5 +43,18 @@ public class RoleServiceImpl extends SuperService<Role> implements IRoleService 
     @Override
     public List<Role> queryListRoleByUserId(String userId) {
         return roleDao.queryListRoleByUserId(userId);
+    }
+
+    @Override
+    public Role queryModelByRoleMark(String roleMark) {
+        RoleSearch roleSearch = new RoleSearch();
+        roleSearch.setRoleMark(roleMark);
+
+        List<Role> roles = roleDao.queryListBySearch(roleSearch, new PagerModel(1, 1));
+        if(CollectionUtils.isEmpty(roles)){
+            return null;
+        }
+
+        return roles.get(0);
     }
 }

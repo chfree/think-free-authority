@@ -22,4 +22,7 @@ public interface IRoleService extends ISuperService<Role> {
     List<String> queryListByUserId(String userId);
 
     List<Role> queryListRoleByUserId(String userId);
+
+    Role queryModelByRoleMark(String roleMark);
+
 }

@@ -78,5 +78,7 @@ public class RoleDaoImpl extends SuperDao<Role> implements IRoleDao {
         sqlExpression.andNotEqNoEmpty("id", search.getNotId());
 
         sqlExpression.andRightLikeNoEmpty("role_name", search.getLikeRoleName());
+
+        sqlExpression.andEqNoEmpty(Role::getRoleMark, search.getRoleMark());
     }
 }
