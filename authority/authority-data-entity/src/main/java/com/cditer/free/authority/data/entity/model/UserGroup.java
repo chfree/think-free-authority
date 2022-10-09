@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
-@Builder
 @Entity
 @Table(name="base_authority_user_group")
 public class UserGroup extends ModelBase {

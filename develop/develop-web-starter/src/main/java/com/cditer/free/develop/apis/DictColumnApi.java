@@ -36,7 +36,7 @@ public class DictColumnApi extends TokenApi {
     @PostMapping("list")
     public BaseResponse list(@RequestBody @Valid DictColumnListReq listReq){
         DictColumnListResp resp = new DictColumnListResp();
-        PagerModel pagerModel =new PagerModel(200,1);
+        PagerModel pagerModel =new PagerModel(2000,1);
 
         resp.setDictColumns(dictColumnService.queryListBySearch(listReq.getSearch(),pagerModel));
 

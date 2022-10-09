@@ -11,7 +11,6 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Data
-@Builder
 @Entity
 @Table(name="base_authority_user_role")
 public class UserRole extends ModelBase {

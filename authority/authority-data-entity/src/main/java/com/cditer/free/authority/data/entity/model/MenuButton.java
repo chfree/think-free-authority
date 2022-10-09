@@ -17,7 +17,6 @@ import java.util.Date;
  */
 
 @Data
-@Builder
 @Entity
 @Table(name="base_authority_menu_button")
 public class MenuButton extends ModelBase {
@@ -75,4 +74,7 @@ public class MenuButton extends ModelBase {
     @Column(name="comments")
     private String comments;
 
+    public MenuButton() {
+
+    }
 }
