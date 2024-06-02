@@ -24,6 +24,18 @@ public class SaveUserReq extends User {
     private String account;
 
     /**
+     * 角色信息处理类型
+     * noChange 不处理
+     */
+    private String roleChangeType;
+
+    /**
+     * 分组信息处理类型
+     * noChange 不处理
+     */
+    private String groupChangeType;
+
+    /**
      * 角色集合
      */
     private List<String> roleIds;

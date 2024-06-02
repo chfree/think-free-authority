@@ -1,6 +1,7 @@
 package com.cditer.free.authority.data.entity.model;
 
 import com.cditer.free.core.message.data.ModelBase;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,8 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name="base_authority_user_group")
+@Builder
+@AllArgsConstructor
 public class UserGroup extends ModelBase {
     //主键
     @Id
@@ -26,4 +29,8 @@ public class UserGroup extends ModelBase {
     //用户组id
     @Column(name="group_id")
     private String groupId;
+
+    public UserGroup() {
+
+    }
 }

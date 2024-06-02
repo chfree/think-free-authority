@@ -1,8 +1,10 @@
 package com.cditer.free.authority.data.entity.model;
 
 import com.cditer.free.core.message.data.ModelBase;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name="base_authority_user_role")
+@Builder
+@AllArgsConstructor
 public class UserRole extends ModelBase {
     //主键
     @Id
@@ -26,4 +30,8 @@ public class UserRole extends ModelBase {
     //角色id
     @Column(name="role_id")
     private String roleId;
+
+    public UserRole() {
+
+    }
 }

@@ -73,11 +73,15 @@ public class UserServiceImpl extends SuperService<User> implements IUserService 
         if(!this.applyChange(userReq)) {
             return false;
         }
-        if(!saveUserGroup(userReq.getId(),userReq.getGroupIds())){
-            return false;
+        if(!"noChange".equals(userReq.getGroupChangeType())) {
+            if (!saveUserGroup(userReq.getId(), userReq.getGroupIds())) {
+                return false;
+            }
         }
-        if(!saveUserRole(userReq.getId(),userReq.getRoleIds())){
-            return false;
+        if(!"noChange".equals(userReq.getRoleChangeType())) {
+            if (!saveUserRole(userReq.getId(), userReq.getRoleIds())) {
+                return false;
+            }
         }
         return true;
     }
