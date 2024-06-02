@@ -83,6 +83,9 @@ public class User extends ModelBase {
     @Column(name="department_id")
     private String departmentId;
 
+    @Column(name="pass_date")
+    private Date passDate;
+
     @Override
     public void setModelStatus(ModelStatus modelStatus) {
         super.setModelStatus(modelStatus);

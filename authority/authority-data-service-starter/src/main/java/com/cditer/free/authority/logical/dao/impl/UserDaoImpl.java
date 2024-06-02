@@ -1,7 +1,9 @@
 package com.cditer.free.authority.logical.dao.impl;
 
 import com.cditer.free.authority.data.entity.model.Department;
+import com.cditer.free.authority.data.entity.model.Role;
 import com.cditer.free.authority.data.entity.model.User;
+import com.cditer.free.authority.data.entity.model.UserRole;
 import com.cditer.free.authority.data.entity.viewmodel.UserSearch;
 import com.cditer.free.authority.data.entity.viewmodel.UserView;
 import com.cditer.free.authority.logical.dao.IUserDao;
@@ -29,7 +31,12 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
     @Override
     public int queryCountBySearch(UserSearch search) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectCount().from(User.class);
+        sqlExpression.selectCount("distinct user.id").from(User.class, "user").setMainTableAlias("user");
+
+        if(!CollectionUtils.isEmpty(search.getRoleMarkList())){
+            sqlExpression.leftJoin(UserRole.class, "userRole").on("user.id","userRole.user_id");
+            sqlExpression.leftJoin(Role.class, "role").on("userRole.role_id","role.id");
+        }
 
         appendExpression(sqlExpression, search);
 
@@ -59,12 +66,17 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
     @Override
     public List<UserView> queryViewListBySearch(UserSearch search, PagerModel pagerModel) {
         ISqlExpression sqlExpression = SqlExpressionFactory.createExpression();
-        sqlExpression.selectAllFrom(User.class, "user")
+        sqlExpression.selectDistinctAllFrom(User.class, "user")
                 .setMainTableAlias("user")
                 .appendSelect("dept.full_name as departmentName")
                 .leftJoin(Department.class, "dept")
                 .on("user.department_id", "dept.id")
                 .addOrder("user.create_date", OrderEnum.DESC);
+
+        if(!CollectionUtils.isEmpty(search.getRoleMarkList())){
+            sqlExpression.leftJoin(UserRole.class, "userRole").on("user.id","userRole.user_id");
+            sqlExpression.leftJoin(Role.class, "role").on("userRole.role_id","role.id");
+        }
 
         appendExpression(sqlExpression, search);
 
@@ -114,7 +126,8 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
         return queryCount(sqlExpression);
     }
 
-    private void appendExpression(ISqlExpression sqlExpression, UserSearch search) {
+    @Override
+    public void appendExpression(ISqlExpression sqlExpression, UserSearch search) {
         sqlExpression.andEqNoEmpty("id", search.getId());
 
         sqlExpression.andEqNoEmpty("name", search.getName());
@@ -140,6 +153,10 @@ public class UserDaoImpl extends SuperDao<User> implements IUserDao {
 
         if(!CollectionUtils.isEmpty(search.getStatusList())){
             sqlExpression.andWhereInString("status", search.getStatusList());
+        }
+
+        if(!CollectionUtils.isEmpty(search.getRoleMarkList())){
+            sqlExpression.andWhereInString("role.role_mark", search.getRoleMarkList());
         }
     }
 }

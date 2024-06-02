@@ -15,5 +15,5 @@ import java.util.List;
 
 @Data
 public class UserListResp extends BasePagerResp {
-   private List<UserView> users;
+   private List<? extends UserView> users;
 }

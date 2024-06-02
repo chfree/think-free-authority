@@ -34,4 +34,6 @@ public class UserSearch {
     private String likeQuery;
 
     private List<String> statusList;
+
+    private List<String> roleMarkList;
 }
