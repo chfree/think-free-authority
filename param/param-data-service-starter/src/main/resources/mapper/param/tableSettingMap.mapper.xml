@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.param.logical.mapper.ITableSettingMapper">
+    <!-- 表信息配置Mapper -->
+    <sql id="tableName">base_param_table_setting tableSetting</sql>
+    <sql id="mainTableAlias"> tableSetting.</sql>
+
+    <sql id="allColumns">
+        tableSetting.id,
+        tableSetting.title,
+        tableSetting.table_name,
+        tableSetting.comment,
+        tableSetting.rmrk1,
+        tableSetting.rmrk2
+    </sql>
+
+    <resultMap type="com.cditer.free.param.data.entity.model.TableSetting" id="tableSettingMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="title" property="title"/>    <!-- 标题 -->
+        <result column="table_name" property="tableName"/>    <!-- 表名 -->
+        <result column="comment" property="comment"/>    <!-- 备注 -->
+        <result column="rmrk1" property="rmrk1"/>    <!-- 备注1 -->
+        <result column="rmrk2" property="rmrk2"/>    <!-- 备注2 -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and tableSetting.id = #{search.id}
+            </if>
+            <if test="search.title != null  and search.title != ''">
+                and tableSetting.title = #{search.title}
+            </if>
+            <if test="search.tableName != null  and search.tableName != ''">
+                and tableSetting.table_name = #{search.tableName}
+            </if>
+            <if test="search.comment != null  and search.comment != ''">
+                and tableSetting.comment = #{search.comment}
+            </if>
+            <if test="search.rmrk1 != null  and search.rmrk1 != ''">
+                and tableSetting.rmrk1 = #{search.rmrk1}
+            </if>
+            <if test="search.rmrk2 != null  and search.rmrk2 != ''">
+                and tableSetting.rmrk2 = #{search.rmrk2}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="tableSettingViewMap" extends="tableSettingMap" type="com.cditer.free.param.data.entity.viewmodel.TableSettingView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from base_param_table_setting tableSetting
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from base_param_table_setting tableSetting
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="tableSettingViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="tableSettingViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

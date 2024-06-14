@@ -20,7 +20,7 @@
 	<bean class="com.cditer.free.data.extend.config.MapperLocationBean">
 		<property name="mapperLocations">
 			<list>
-				<value>classpath*:mapper/authority/**/*.xml</value>
+				<value>classpath*:mapper/param/**/*.xml</value>
 			</list>
 		</property>
 	</bean>

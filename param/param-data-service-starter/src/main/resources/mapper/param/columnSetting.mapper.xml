@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cditer.free.param.logical.mapper.IColumnSettingMapper">
+    <!-- 列信息配置Mapper -->
+    <sql id="tableName">base_param_column_setting columnSetting</sql>
+    <sql id="mainTableAlias"> columnSetting.</sql>
+
+    <sql id="allColumns">
+        columnSetting.id,
+        columnSetting.table_setting_id,
+        columnSetting.title,
+        columnSetting.prop_name,
+        columnSetting.column_name,
+        columnSetting.wthr_key,
+        columnSetting.data_format,
+        columnSetting.wthr_query,
+        columnSetting.display_seq,
+        columnSetting.query_type,
+        columnSetting.order_type,
+        columnSetting.comment,
+        columnSetting.rmrk1,
+        columnSetting.rmrk2
+    </sql>
+
+    <resultMap type="com.cditer.free.param.data.entity.model.ColumnSetting" id="columnSettingMap">
+        <id column="id" property="id"/>    <!-- 主键 -->
+        <result column="table_setting_id" property="tableSettingId"/>    <!-- 表信息主键 -->
+        <result column="title" property="title"/>    <!-- 标题 -->
+        <result column="prop_name" property="propName"/>    <!-- 属性名 -->
+        <result column="column_name" property="columnName"/>    <!-- 列名 -->
+        <result column="wthr_key" property="wthrKey"/>    <!-- 是否主键 -->
+        <result column="data_format" property="dataFormat"/>    <!-- 数据格式 -->
+        <result column="wthr_query" property="wthrQuery"/>    <!-- 是否查询 -->
+        <result column="display_seq" property="displaySeq"/>    <!-- 显示顺序 -->
+        <result column="query_type" property="queryType"/>    <!-- 查询方式 -->
+        <result column="order_type" property="orderType"/>    <!-- 排序方式 -->
+        <result column="comment" property="comment"/>    <!-- 备注 -->
+        <result column="rmrk1" property="rmrk1"/>    <!-- 备注1 -->
+        <result column="rmrk2" property="rmrk2"/>    <!-- 备注2 -->
+    </resultMap>
+
+    <!-- where条件语句：当字段为String时，不为空并且不为空串才作为条件；否则不为空就作为条件-->
+    <sql id="whereSql">
+        <where>
+            <if test="search.id != null  and search.id != ''">
+                and columnSetting.id = #{search.id}
+            </if>
+            <if test="search.tableSettingId != null  and search.tableSettingId != ''">
+                and columnSetting.table_setting_id = #{search.tableSettingId}
+            </if>
+            <if test="search.title != null  and search.title != ''">
+                and columnSetting.title = #{search.title}
+            </if>
+            <if test="search.propName != null  and search.propName != ''">
+                and columnSetting.prop_name = #{search.propName}
+            </if>
+            <if test="search.columnName != null  and search.columnName != ''">
+                and columnSetting.column_name = #{search.columnName}
+            </if>
+            <if test="search.wthrKey != null  and search.wthrKey != ''">
+                and columnSetting.wthr_key = #{search.wthrKey}
+            </if>
+            <if test="search.dataFormat != null  and search.dataFormat != ''">
+                and columnSetting.data_format = #{search.dataFormat}
+            </if>
+            <if test="search.wthrQuery != null  and search.wthrQuery != ''">
+                and columnSetting.wthr_query = #{search.wthrQuery}
+            </if>
+            <if test="search.displaySeq != null  and search.displaySeq != ''">
+                and columnSetting.display_seq = #{search.displaySeq}
+            </if>
+            <if test="search.queryType != null  and search.queryType != ''">
+                and columnSetting.query_type = #{search.queryType}
+            </if>
+            <if test="search.orderType != null  and search.orderType != ''">
+                and columnSetting.order_type = #{search.orderType}
+            </if>
+            <if test="search.comment != null  and search.comment != ''">
+                and columnSetting.comment = #{search.comment}
+            </if>
+            <if test="search.rmrk1 != null  and search.rmrk1 != ''">
+                and columnSetting.rmrk1 = #{search.rmrk1}
+            </if>
+            <if test="search.rmrk2 != null  and search.rmrk2 != ''">
+                and columnSetting.rmrk2 = #{search.rmrk2}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="columnSettingViewMap" extends="columnSettingMap" type="com.cditer.free.param.data.entity.viewmodel.ColumnSettingView">
+
+    </resultMap>
+
+    <select id="queryCountBySearch" resultType="java.lang.Integer">
+        select
+        count(1)
+        from base_param_column_setting columnSetting
+        <include refid="whereSql" />
+    </select>
+
+    <sql id="viewSql">
+        select
+        <include refid="allColumns" />
+        from base_param_column_setting columnSetting
+    </sql>
+
+    <select id="queryListViewBySearch" resultMap="columnSettingViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+    <select id="queryModelViewBySearch" resultMap="columnSettingViewMap">
+        <include refid="viewSql" />
+        <include refid="whereSql" />
+    </select>
+
+</mapper>
