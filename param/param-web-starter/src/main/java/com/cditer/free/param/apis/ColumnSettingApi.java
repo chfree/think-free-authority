@@ -42,6 +42,10 @@ public class ColumnSettingApi extends TokenApi {
         int totalCount = columnSettingService.queryCountBySearch(req.getData());
         List<ColumnSettingView> list = columnSettingService.queryListViewBySearch(req.getData(), req.getPager());
 
+        for (ColumnSettingView dataColSettingView : list) {
+            dataColSettingView.setColumnName(null);
+        }
+
         return BasePagerResp.success(list, totalCount);
     }
 

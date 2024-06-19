@@ -42,6 +42,10 @@ public class TableSettingApi extends TokenApi {
         int totalCount = tableSettingService.queryCountBySearch(req.getData());
         List<TableSettingView> list = tableSettingService.queryListViewBySearch(req.getData(), req.getPager());
 
+        for (TableSettingView tableSetting : list) {
+            tableSetting.setTableName(null);
+        }
+
         return BasePagerResp.success(list, totalCount);
     }
 
@@ -77,4 +81,11 @@ public class TableSettingApi extends TokenApi {
         return BaseResponse.success(result);
     }
 
+    @PostMapping("queryDataList")
+    @ApiOperation(value = "queryDataList")
+    public BaseResponse<DataListQueryResp> queryDataList(@RequestBody BaseRequestWithPage<DataListKeyValView> request){
+        DataListQueryResp dataListQueryResp = dataColSettingService.queryDataList(request.getData(), request.getPager());
+
+        return BaseResponse.success(dataListQueryResp);
+    }
 }
