@@ -1,9 +1,11 @@
-package com.cditer.free.param.apis;
+package com.cditer.free.devops.web.apis;
 
-import com.cditer.free.param.data.entity.model.TableSetting;
-import com.cditer.free.param.data.entity.viewmodel.TableSettingSearch;
-import com.cditer.free.param.data.entity.viewmodel.TableSettingView;
-import com.cditer.free.param.logical.service.ITableSettingService;
+import com.cditer.free.dbdevops.data.model.TableSetting;
+import com.cditer.free.dbdevops.data.viewmodel.TableSettingSearch;
+import com.cditer.free.dbdevops.data.viewmodel.TableSettingView;
+import com.cditer.free.dbdevops.data.viewmodel.dtview.DataListKeyValView;
+import com.cditer.free.dbdevops.data.viewmodel.dtview.DataListQueryResp;
+import com.cditer.free.dbdevops.logical.service.ITableSettingService;
 import com.cditer.free.security.baseapi.TokenApi;
 import com.cditer.free.core.message.web.BasePagerReq;
 import com.cditer.free.core.message.web.BasePagerResp;
@@ -30,7 +32,7 @@ import javax.validation.constraints.NotBlank;
  * @comment     表信息配置
  */
 @RestController
-@RequestMapping(value = "/api/v1/param/tableSetting/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/dbDevops/tableSetting/",produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Api(tags="表信息配置管理",value ="表信息配置相关的操作")
 public class TableSettingApi extends TokenApi {
     @Autowired
@@ -83,8 +85,8 @@ public class TableSettingApi extends TokenApi {
 
     @PostMapping("queryDataList")
     @ApiOperation(value = "queryDataList")
-    public BaseResponse<DataListQueryResp> queryDataList(@RequestBody BaseRequestWithPage<DataListKeyValView> request){
-        DataListQueryResp dataListQueryResp = dataColSettingService.queryDataList(request.getData(), request.getPager());
+    public BaseResponse<DataListQueryResp> queryDataList(@RequestBody BasePagerReq<DataListKeyValView> request){
+        DataListQueryResp dataListQueryResp = tableSettingService.queryDataList(request.getData(), request.getPager());
 
         return BaseResponse.success(dataListQueryResp);
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cditer.free.param.logical.mapper.ITableSettingMapper">
+<mapper namespace="com.cditer.free.dbdevops.logical.mapper.ITableSettingMapper">
     <!-- 表信息配置Mapper -->
     <sql id="tableName">base_param_table_setting tableSetting</sql>
     <sql id="mainTableAlias"> tableSetting.</sql>
@@ -14,7 +14,7 @@
         tableSetting.rmrk2
     </sql>
 
-    <resultMap type="com.cditer.free.param.data.entity.model.TableSetting" id="tableSettingMap">
+    <resultMap type="com.cditer.free.dbdevops.data.model.TableSetting" id="tableSettingMap">
         <id column="id" property="id"/>    <!-- 主键 -->
         <result column="title" property="title"/>    <!-- 标题 -->
         <result column="table_name" property="tableName"/>    <!-- 表名 -->
@@ -47,7 +47,7 @@
         </where>
     </sql>
 
-    <resultMap id="tableSettingViewMap" extends="tableSettingMap" type="com.cditer.free.param.data.entity.viewmodel.TableSettingView">
+    <resultMap id="tableSettingViewMap" extends="tableSettingMap" type="com.cditer.free.dbdevops.data.viewmodel.TableSettingView">
 
     </resultMap>
 

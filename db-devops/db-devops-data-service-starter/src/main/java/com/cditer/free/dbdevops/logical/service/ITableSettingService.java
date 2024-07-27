@@ -1,10 +1,12 @@
-package com.cditer.free.param.logical.service;
+package com.cditer.free.dbdevops.logical.service;
 
 import com.cditer.free.data.dao.base.ISuperService;
 import com.cditer.free.core.message.data.PagerModel;
-import com.cditer.free.param.data.entity.model.TableSetting;
-import com.cditer.free.param.data.entity.viewmodel.TableSettingSearch;
-import com.cditer.free.param.data.entity.viewmodel.TableSettingView;
+import com.cditer.free.dbdevops.data.model.TableSetting;
+import com.cditer.free.dbdevops.data.viewmodel.TableSettingSearch;
+import com.cditer.free.dbdevops.data.viewmodel.TableSettingView;
+import com.cditer.free.dbdevops.data.viewmodel.dtview.DataListKeyValView;
+import com.cditer.free.dbdevops.data.viewmodel.dtview.DataListQueryResp;
 
 import java.util.List;
 
@@ -54,4 +56,5 @@ public interface ITableSettingService extends ISuperService<TableSetting>{
      */
     boolean saveTableSetting(TableSetting tableSetting);
 
+    DataListQueryResp queryDataList(DataListKeyValView data, PagerModel pager);
 }

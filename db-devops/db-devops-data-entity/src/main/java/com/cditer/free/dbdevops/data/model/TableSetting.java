@@ -1,4 +1,4 @@
-package com.cditer.free.param.data.entity.model;
+package com.cditer.free.dbdevops.data.model;
 
 import javax.persistence.Column;
 import javax.persistence.Id;

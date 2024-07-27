@@ -1,10 +1,10 @@
-package com.cditer.free.param.logical.mapper;
+package com.cditer.free.dbdevops.logical.mapper;
 
 import com.cditer.free.core.message.data.PagerModel;
 import com.cditer.free.data.dao.base.IMapper;
-import com.cditer.free.param.data.entity.model.TableSetting;
-import com.cditer.free.param.data.entity.viewmodel.TableSettingSearch;
-import com.cditer.free.param.data.entity.viewmodel.TableSettingView;
+import com.cditer.free.dbdevops.data.model.TableSetting;
+import com.cditer.free.dbdevops.data.viewmodel.TableSettingSearch;
+import com.cditer.free.dbdevops.data.viewmodel.TableSettingView;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
